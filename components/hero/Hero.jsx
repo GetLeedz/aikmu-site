@@ -33,10 +33,6 @@ const Hero = () => (
     <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
 
       <div className="w-10/12 sm:w-7/12 text-center m-auto">
-        {/* kleine Zeile oben */}
-        <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-200 mb-4">
-          GetLeedz · More Leads
-        </p>
 
         {/* Haupttitel */}
         <h1 className="heading-1 mt-3">
