@@ -1,0 +1,417 @@
+/* Font family */
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap");
+
+/* tailwind inport */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Variables */
+:root {
+  /* color  */
+  --color-primary: #322318;
+  --color-secondary: #7aff00;
+
+  --dark: #010220;
+
+  --pink: #f800ff;
+  --blue: #0900ff;
+
+  --border: #272646;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Chakra Petch";
+
+  background: var(--dark);
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+
+  color: white;
+
+  scroll-behavior: smooth;
+}
+
+/**================================================== *
+ * ==========  Custom components  ========== *
+ * ================================================== */
+@layer components {
+  .btn__primary {
+    @apply flex items-center justify-center font-[700] text-base xl:text-[18px] leading-[18px] xl:leading-[23px] text-white py-2 xl:py-[14px] px-3 xl:px-[30px] rounded-[10px];
+  }
+  .btn__social {
+    @apply w-8 2xl:w-[50px] h-8 2xl:h-[50px] flex items-center justify-center rounded-full transition duration-200 hover:scale-105;
+  }
+  .text-nav {
+    @apply text-white font-[700] text-[18px] leading-[23px];
+  }
+}
+/* =======  End of Custom components  ======= */
+
+/**================================================== *
+ * ==========  Gradient  ========== *
+ * ================================================== */
+.bg-gradient {
+  background: linear-gradient(
+    96.88deg,
+    rgba(248, 0, 255, 0.15) 0%,
+    rgba(9, 0, 255, 0.15) 124.4%
+  );
+}
+
+.btn-gradient {
+  background: linear-gradient(96.88deg, var(--pink) 0%, var(--blue) 124.4%);
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(96.88deg, var(--blue) 0%, var(--pink) 124.4%);
+  transition: all 0.4s ease-in-out;
+}
+
+.border-round-gradient {
+  border: 1px solid;
+
+  background: linear-gradient(0deg, var(--dark), var(--dark)) padding-box,
+    linear-gradient(94.29deg, #f800ff -19.75%, #3f01ff 118.22%) border-box;
+
+  border-color: transparent;
+}
+
+.card-bg-border {
+  border-radius: 10px;
+  border: 1px solid;
+
+  background: linear-gradient(0deg, #1d034e, #1d034e) padding-box,
+    linear-gradient(94.29deg, #f800ff -19.75%, #3f01ff 118.22%) border-box;
+
+  border-color: transparent;
+}
+
+.bg-and-border-gradient {
+  border: 1px solid;
+
+  background: linear-gradient(0deg, #1d034e, #1d034e) padding-box,
+    linear-gradient(94.29deg, #f800ff -19.75%, #3f01ff 118.22%) border-box;
+
+  border-color: transparent;
+}
+/* =======  End of Gradient  ======= */
+
+/**================================================== *
+ * ==========  Background Image  ========== *
+ * ================================================== */
+.header-bg {
+  background: url("./../public/images/bg-left.png"),
+    url("./../public/images/bg-right.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left top, right top;
+  background-size: contain, contain;
+}
+
+.community-bg {
+  background: url("./../public/images/community.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+/* @TODO: */
+@media (max-width: 767.98px) {
+  .community-bg {
+    background: none;
+  }
+}
+/* =======  End of Background Image  ======= */
+
+/**================================================== *
+ * ==========  Typography  ========== *
+ * ================================================== */
+.heading-1 {
+  font-weight: 700;
+  font-size: 76px;
+  line-height: 91px;
+}
+.heading-2,
+.count-heading {
+  font-weight: 700;
+  font-size: 57px;
+  line-height: 67px;
+}
+.heading-2 span {
+  color: var(--color-secondary);
+}
+.heading-3 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 46px;
+
+  background: linear-gradient(to right, var(--pink) 0%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.heading-4 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42px;
+}
+.heading-6 {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 32px;
+}
+.text-medium {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+}
+.text-fig {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+/* @TODO: */
+@media (max-width: 1279.98px) {
+  html,
+  body {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .heading-1 {
+    font-size: 57px;
+    line-height: 67px;
+  }
+  .heading-2,
+  .count-heading {
+    font-size: 36px;
+    line-height: 46px;
+  }
+  .heading-3 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  html,
+  body {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .heading-1 {
+    font-size: 38px;
+    line-height: 49px;
+  }
+  .heading-2,
+  .count-heading {
+    font-size: 32px;
+    line-height: 38px;
+  }
+  .heading-3 {
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .heading-4 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .heading-6 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+/* =======  End of Typography  ======= */
+
+/**================================================== *
+ * ==========  Hero section  ========== *
+ * ================================================== */
+.hero {
+  position: relative;
+}
+.hero-content {
+  background: url("./../public/images/bg-middle.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.hero-frame-1,
+.hero-frame-2,
+.hero-frame-3,
+.hero-frame-4,
+.hero-frame-5,
+.hero-frame-6 {
+  position: absolute;
+  overflow: hidden;
+}
+
+.hero-frame-1 {
+  width: 131.56px;
+  height: 150px;
+  border-radius: 10px;
+  transform: rotate(-23.92deg);
+  top: 16%;
+  left: 6.5%;
+}
+.hero-frame-2 {
+  width: 141px;
+  height: 141px;
+  border-radius: 50%;
+  top: 38%;
+  left: 9%;
+}
+.hero-frame-3 {
+  width: 214px;
+  height: 244px;
+  border-radius: 10px;
+  transform: rotate(-17.5deg);
+  top: 60.5%;
+  left: 3%;
+}
+.hero-frame-4 {
+  width: 192.19px;
+  height: 219.13px;
+  border-radius: 18px;
+  transform: rotate(19.2deg);
+  top: 14%;
+  right: 2.5%;
+}
+.hero-frame-5 {
+  width: 155.07px;
+  height: 176.8px;
+  border-radius: 15px;
+  transform: rotate(11.46deg);
+  top: 42%;
+  right: 9.5%;
+}
+.hero-frame-6 {
+  width: 219px;
+  height: 219px;
+  border-radius: 50%;
+  top: 70.5%;
+  right: 5.5%;
+}
+/* @TODO: */
+@media (max-width: 1140.98px) {
+  .hero-frame-1 {
+    width: 93.56px;
+    height: 104px;
+  }
+  .hero-frame-2 {
+    width: 100px;
+    height: 100px;
+    left: 5%;
+  }
+  .hero-frame-3 {
+    width: 128px;
+    height: 145px;
+  }
+  .hero-frame-4 {
+    width: 130.19px;
+    height: 147.13px;
+  }
+  .hero-frame-5 {
+    width: 107.07px;
+    height: 120.8px;
+    top: 42%;
+    right: 6.5%;
+  }
+  .hero-frame-6 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .hero-frame-1,
+  .hero-frame-2,
+  .hero-frame-3,
+  .hero-frame-4,
+  .hero-frame-5,
+  .hero-frame-6 {
+    width: 60px;
+    height: 60px;
+  }
+  .hero-frame-1 {
+    top: 14%;
+  }
+  .hero-frame-2,
+  .hero-frame-5 {
+    display: none;
+  }
+  .hero-frame-4 {
+    top: 16%;
+  }
+  .hero-frame-3 {
+    top: 46%;
+  }
+  .hero-frame-6 {
+    top: 66%;
+  }
+}
+/* =======  End of Hero section  ======= */
+
+/**================================================== *
+ * ==========  Welcome to NFTPO  ========== *
+ * ================================================== */
+.uniqueCard {
+  box-shadow: 0px 4px 40px rgba(194, 1, 255, 0.4);
+}
+
+.uniqueCard:hover .uniqueCard-avt {
+  transform: scale(1.1);
+  transition: all 0.3s;
+}
+
+.unique-cards > div:nth-child(1):hover,
+.unique-cards > div:nth-child(2):hover,
+.unique-cards > div:nth-child(3):hover {
+  z-index: 10;
+  transition: all 0.3s;
+}
+.unique-cards > div:nth-child(1) {
+  transform: matrix(0.92, -0.39, 0.39, 0.92, 0, 0);
+  z-index: 1;
+}
+.unique-cards > div:nth-child(2) {
+  transform: matrix(1, -0.03, 0.03, 1, 0, 0);
+}
+.unique-cards > div:nth-child(3) {
+  transform: matrix(0.98, 0.2, -0.2, 0.98, 0, 0);
+  z-index: 2;
+}
+
+/* @TODO: */
+@media (max-width: 400.98px) {
+  .unique-cards > div:nth-child(1) {
+    transform: matrix(0.92, -0.39, 0.3, 0.92, 0, 0);
+  }
+}
+/* =======  End of Welcome to NFTPO  ======= */
+
+/**================================================== *
+ * ==========  FAQ section  ========== *
+ * ================================================== */
+.faq-border {
+  border: 1px solid;
+  border-top: none;
+
+  background: linear-gradient(0deg, var(--dark), var(--dark)) padding-box,
+    linear-gradient(94.29deg, #3f01ff -19.75%, #f800ff 118.22%) border-box;
+
+  border-color: transparent;
+}
+
+.faq-bg-border {
+  border: 1px solid;
+
+  background: linear-gradient(90.53deg, #130a65 -23.97%, #5b119a 108.85%)
+      padding-box,
+    linear-gradient(94.29deg, #3f01ff -19.75%, #f800ff 118.22%) border-box;
+
+  border-color: transparent;
+}
+/* =======  End of FAQ section  ======= */
