@@ -30,30 +30,35 @@ const Footer = () => {
             Folge uns
           </span>
           <div className="flex gap-3 text-lg">
+            {/* Facebook */}
             <a
               href="https://facebook.com/getleedz"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GetLeedz auf Facebook"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition hover:bg-pink-500 hover:text-white"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition-all duration-300 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#ff00ff] hover:via-[#ff4dd8] hover:to-[#00f0ff] hover:shadow-[0_0_18px_rgba(255,0,255,0.7)]"
             >
               <FaFacebookF />
             </a>
+
+            {/* Instagram */}
             <a
               href="https://instagram.com/getleedz"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GetLeedz auf Instagram"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition hover:bg-pink-500 hover:text-white"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition-all duration-300 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#ff7a00] hover:via-[#ff00ff] hover:to-[#00f0ff] hover:shadow-[0_0_18px_rgba(255,122,0,0.8)]"
             >
               <FaInstagram />
             </a>
+
+            {/* YouTube */}
             <a
               href="https://www.youtube.com/channel/UCWdPkN8SUYylAkobLM3866w"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GetLeedz auf YouTube"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition hover:bg-pink-500 hover:text-white"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-200 transition-all duration-300 hover:scale-110 hover:text-white hover:bg-gradient-to-tr hover:from-[#ff0040] hover:via-[#ff00ff] hover:to-[#ffb300] hover:shadow-[0_0_18px_rgba(255,0,64,0.8)]"
             >
               <FaYoutube />
             </a>
