@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   const year = new Date().getFullYear();
 
@@ -11,6 +13,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-right">
+          {/* E-Mail bleibt normales <a> */}
           <a
             href="mailto:info@getleedz.com"
             className="hover:text-white transition-colors"
@@ -20,21 +23,16 @@ const Footer = () => {
 
           <span className="hidden md:inline-block text-slate-500">·</span>
 
-          <a
-            href="/impressum"
-            className="hover:text-white transition-colors"
-          >
-            Impressum
-          </a>
+          {/* Interne Links mit Next.js Link */}
+          <Link href="/impressum">
+            <a className="hover:text-white transition-colors">Impressum</a>
+          </Link>
 
           <span className="hidden md:inline-block text-slate-500">·</span>
 
-          <a
-            href="/datenschutz"
-            className="hover:text-white transition-colors"
-          >
-            Datenschutz
-          </a>
+          <Link href="/datenschutz">
+            <a className="hover:text-white transition-colors">Datenschutz</a>
+          </Link>
         </div>
       </div>
 
