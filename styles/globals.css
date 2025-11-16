@@ -414,4 +414,67 @@ body {
 
   border-color: transparent;
 }
+
+
+
+/* === Neon Gradient Button === */
+
+.neon-border {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px; /* full-rounded */
+  padding: 3px;          /* Rand-Dicke */
+  background: linear-gradient(
+    120deg,
+    #ec4899,
+    #a855f7,
+    #22d3ee,
+    #f97316,
+    #ec4899
+  );
+  background-size: 300% 300%;
+  animation: neonGradient 4s linear infinite;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.75);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.neon-border-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.8rem 2.6rem;
+  background: #050816;          /* innerer Button */
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: background 0.3s ease;
+}
+
+/* Hover-Effekt: mehr Glow, innerer Button etwas dunkler */
+.neon-border:hover {
+  box-shadow: 0 0 32px rgba(236, 72, 153, 1);
+  transform: translateY(-1px);
+}
+
+.neon-border:hover .neon-border-inner {
+  background: #000000;
+}
+
+/* Laufender Farbverlauf im Rand */
+@keyframes neonGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 /* =======  End of FAQ section  ======= */

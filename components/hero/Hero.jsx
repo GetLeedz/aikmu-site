@@ -51,37 +51,18 @@ const Hero = () => (
         </p>
 
         {/* CTA-Button mit Neon-Gradient-Border */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] sm:gap-[30px] mt-[35px]">
-          <Link href="/anfrage">
-            <a
-              className="
-                group inline-flex items-center justify-center
-                rounded-full
-                bg-gradient-to-r from-fuchsia-500 via-pink-500 to-orange-400
-                p-[3px]
-                shadow-[0_0_22px_rgba(236,72,153,0.75)]
-                transition-all duration-300
-                hover:shadow-[0_0_40px_rgba(236,72,153,1)]
-              "
-            >
-              <span
-                className="
-                  flex items-center gap-[10px]
-                  rounded-full
-                  bg-[#050816]
-                  px-8 py-3
-                  text-sm sm:text-base
-                  font-semibold tracking-wide text-white
-                  transition-colors duration-300
-                  group-hover:bg-black
-                "
-              >
-                Anfrage für Lead-Kampagne senden
-                <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-            </a>
-          </Link>
-        </div>
+{/* CTA-Button mit animiertem Neon-Gradient-Border */}
+<div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] sm:gap-[30px] mt-[35px]">
+  <Link href="/anfrage">
+    <a className="group neon-border">
+      <span className="neon-border-inner">
+        Anfrage für Lead-Kampagne senden
+        <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+      </span>
+    </a>
+  </Link>
+</div>
+
 
       </div>
     </div>
