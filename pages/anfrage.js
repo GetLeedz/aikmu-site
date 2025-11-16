@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
+import NavBar from "../components/navBar/NavBar";
+import Footer from "../components/footer/Footer";
 
 const initialState = {
   name: "",
@@ -46,7 +48,9 @@ const Anfrage = () => {
     } catch (err) {
       console.error(err);
       setStatus("error");
-      setErrorMsg("Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com.");
+      setErrorMsg(
+        "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
+      );
     } finally {
       setTimeout(() => {
         setStatus(null);
@@ -66,188 +70,201 @@ const Anfrage = () => {
         />
       </Head>
 
-      <section className="min-h-screen bg-[#020617] pt-[130px] pb-[80px]">
-        <div className="container m-auto max-w-3xl px-4">
-          <div className="mb-8 text-center">
-            <h1 className="text-2xl font-semibold text-white md:text-3xl">
-              Anfrage für Lead-Kampagne
-            </h1>
-            <p className="mt-3 text-sm text-slate-300 md:text-base">
-              Kurz ausfüllen – wir melden uns bei dir mit einer ehrlichen
-              Einschätzung, ob und wie wir dir mehr Leads bringen können.
-            </p>
-          </div>
+      {/* Fixes Logo / Navigation oben */}
+      <NavBar />
 
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6 rounded-2xl bg-black/40 p-5 shadow-[0_0_40px_rgba(15,23,42,0.9)] backdrop-blur"
-          >
-            {/* Name */}
-            <div>
-              <label className="neon-label" htmlFor="name">
-                Dein Name
-              </label>
-              <div className="neon-input-wrapper">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="neon-input"
-                  placeholder="Vor- und Nachname"
-                  value={formData.name}
-                  onChange={handleChange}
-                  disabled={disabled}
-                />
-              </div>
+      <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
+        <section>
+          <div className="container m-auto max-w-3xl px-4 text-slate-100">
+            <div className="mb-8 text-center">
+              <h1 className="text-2xl font-semibold text-white md:text-3xl">
+                Anfrage für Lead-Kampagne
+              </h1>
+              <p className="mt-3 text-sm md:text-base text-slate-200">
+                Kurz ausfüllen – wir melden uns bei dir mit einer ehrlichen
+                Einschätzung, ob und wie wir dir mehr Leads bringen können.
+              </p>
             </div>
 
-            {/* E-Mail */}
-            <div>
-              <label className="neon-label" htmlFor="email">
-                E-Mail
-              </label>
-              <div className="neon-input-wrapper">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="neon-input"
-                  placeholder="name@firma.ch"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={disabled}
-                />
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 rounded-2xl bg-black/40 p-5 shadow-[0_0_40px_rgba(15,23,42,0.9)] backdrop-blur"
+            >
+              {/* Name */}
+              <div>
+                <label className="neon-label" htmlFor="name">
+                  Dein Name
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="neon-input"
+                    placeholder="Vor- und Nachname"
+                    value={formData.name}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Firma */}
-            <div>
-              <label className="neon-label" htmlFor="company">
-                Firma
-              </label>
-              <div className="neon-input-wrapper">
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  required
-                  className="neon-input"
-                  placeholder="Firmenname"
-                  value={formData.company}
-                  onChange={handleChange}
-                  disabled={disabled}
-                />
+              {/* E-Mail */}
+              <div>
+                <label className="neon-label" htmlFor="email">
+                  E-Mail
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="neon-input"
+                    placeholder="name@firma.ch"
+                    value={formData.email}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Telefon */}
-            <div>
-              <label className="neon-label" htmlFor="phone">
-                Telefon
-              </label>
-              <div className="neon-input-wrapper">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  className="neon-input"
-                  placeholder="+41 ..."
-                  value={formData.phone}
-                  onChange={handleChange}
-                  disabled={disabled}
-                />
+              {/* Firma */}
+              <div>
+                <label className="neon-label" htmlFor="company">
+                  Firma
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    required
+                    className="neon-input"
+                    placeholder="Firmenname"
+                    value={formData.company}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Branche */}
-            <div>
-              <label className="neon-label" htmlFor="industry">
-                Branche
-              </label>
-              <div className="neon-input-wrapper">
-                <select
-                  id="industry"
-                  name="industry"
-                  className="neon-select"
-                  value={formData.industry}
-                  onChange={handleChange}
+              {/* Telefon */}
+              <div>
+                <label className="neon-label" htmlFor="phone">
+                  Telefon
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className="neon-input"
+                    placeholder="+41 ..."
+                    value={formData.phone}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Branche */}
+              <div>
+                <label className="neon-label" htmlFor="industry">
+                  Branche
+                </label>
+                <div className="neon-input-wrapper">
+                  <select
+                    id="industry"
+                    name="industry"
+                    className="neon-select"
+                    value={formData.industry}
+                    onChange={handleChange}
+                    disabled={disabled}
+                    required
+                  >
+                    <option value="">Bitte wählen ...</option>
+                    <option value="Gastronomie">
+                      Gastronomie / Restaurant
+                    </option>
+                    <option value="Fitness">Fitness / Gesundheit</option>
+                    <option value="Beauty">Beauty / Kosmetik</option>
+                    <option value="Dienstleistung">Dienstleistungen</option>
+                    <option value="Beratung">Beratung / Coaching</option>
+                    <option value="B2B">B2B / andere KMU</option>
+                    <option value="Andere">Andere Branche</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Nachricht */}
+              <div>
+                <label className="neon-label" htmlFor="message">
+                  Was ist deine grösste Challenge bei Leads?
+                </label>
+                <div className="neon-input-wrapper">
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="neon-textarea"
+                    placeholder="Kurz in 1–3 Sätzen beschreiben. Je konkreter, desto besser können wir dir antworten."
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Status-Meldungen */}
+              {status === "success" && (
+                <div className="badge-success">
+                  <span>✅</span>
+                  <span>
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
+                    melden uns so schnell wie möglich.
+                  </span>
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="badge-error">
+                  <span>⚠️</span>
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
+              {/* CTA-Button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
                   disabled={disabled}
-                  required
+                  className={`group neon-border ${
+                    disabled
+                      ? "opacity-60 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
                 >
-                  <option value="">Bitte wählen ...</option>
-                  <option value="Gastronomie">Gastronomie / Restaurant</option>
-                  <option value="Fitness">Fitness / Gesundheit</option>
-                  <option value="Beauty">Beauty / Kosmetik</option>
-                  <option value="Dienstleistung">Dienstleistungen</option>
-                  <option value="Beratung">Beratung / Coaching</option>
-                  <option value="B2B">B2B / andere KMU</option>
-                  <option value="Andere">Andere Branche</option>
-                </select>
+                  <span className="neon-border-inner">
+                    {status === "loading"
+                      ? "Wird gesendet..."
+                      : "Anfrage jetzt abschicken"}
+                  </span>
+                </button>
               </div>
-            </div>
 
-            {/* Nachricht (optional) */}
-            <div>
-              <label className="neon-label" htmlFor="message">
-                Was ist deine grösste Challenge bei Leads?
-              </label>
-              <div className="neon-input-wrapper">
-                <textarea
-                  id="message"
-                  name="message"
-                  className="neon-textarea"
-                  placeholder="Kurz in 1–3 Sätzen beschreiben. Je konkreter, desto besser können wir dir antworten."
-                  value={formData.message}
-                  onChange={handleChange}
-                  disabled={disabled}
-                />
-              </div>
-            </div>
+              {/* Hinweistext grösser */}
+              <p className="pt-2 text-[13px] leading-snug text-slate-300">
+                Deine Angaben werden vertraulich behandelt und nur verwendet, um
+                deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
+              </p>
+            </form>
+          </div>
+        </section>
+      </main>
 
-            {/* Status-Meldung */}
-            {status === "success" && (
-              <div className="badge-success">
-                <span>✅</span>
-                <span>
-                  Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir melden
-                  uns so schnell wie möglich.
-                </span>
-              </div>
-            )}
-
-            {status === "error" && (
-              <div className="badge-error">
-                <span>⚠️</span>
-                <span>{errorMsg}</span>
-              </div>
-            )}
-
-            {/* CTA-Button – Neon wie auf der Startseite */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={disabled}
-                className={`group neon-border ${
-                  disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
-                }`}
-              >
-                <span className="neon-border-inner">
-                  {status === "loading"
-                    ? "Wird gesendet..."
-                    : "Anfrage jetzt abschicken"}
-                </span>
-              </button>
-            </div>
-
-            <p className="pt-1 text-[11px] text-slate-500">
-              Deine Angaben werden vertraulich behandelt und nur verwendet, um
-              deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
-            </p>
-          </form>
-        </div>
-      </section>
+      {/* Footer unten */}
+      <Footer />
     </>
   );
 };
