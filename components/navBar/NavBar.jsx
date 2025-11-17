@@ -5,12 +5,11 @@ import Logo from "../../public/images/getleedz-logo.png";
 
 const NavBar = () => {
   return (
-    // Fixierter Header oben, voller Viewport
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
-      {/* Innenbereich: Logo links, sonst nichts */}
-      <div className="flex items-center h-16 sm:h-20 px-4">
-        <Link href="/">
-          <a className="block relative w-[146px] h-[40px] sm:h-[48px]">
+    // leicht nach unten versetzt, zentriert
+    <nav className="fixed inset-x-0 top-6 z-50">
+      <div className="flex justify-center">
+        <Link href="/" legacyBehavior>
+          <a className="block relative w-[200px] h-[60px] sm:w-[240px] sm:h-[72px] lg:w-[260px] lg:h-[80px]">
             <Image
               src={Logo}
               alt="GetLeedz Logo"
