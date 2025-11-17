@@ -8,14 +8,15 @@ const Footer = () => {
       <div className="max-w-5xl mx-auto px-4 flex flex-col items-center gap-6">
         {/* Links: Impressum / Datenschutz */}
         <div className="flex flex-wrap justify-center gap-6 text-sm sm:text-base font-medium">
-          <Link href="/impressum" className="neon-link">
-            Impressum
+          <Link href="/impressum" legacyBehavior>
+            <a className="neon-link">Impressum</a>
           </Link>
           <span className="text-gray-500">·</span>
-          <Link href="/datenschutz" className="neon-link">
-            Datenschutz
+          <Link href="/datenschutz" legacyBehavior>
+            <a className="neon-link">Datenschutz</a>
           </Link>
         </div>
+
 
         {/* Copyright */}
         <p className="text-xs sm:text-sm text-gray-400 text-center">
