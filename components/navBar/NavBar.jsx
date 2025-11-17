@@ -15,7 +15,7 @@ const NavBar = () => {
       <div className="px-4 xl:mx-[55px] 2xl:mx-[120px] flex flex-row tablet:flex-col items-start tablet:items-start gap-7 xl:gap-[45px] 2xl:gap-[84px] relative">
         
         {/* Logo – auf Mobile kleiner */}
-        <div className="relative w-[128px] h-[32px] sm:w-[190px] sm:h-[48px] lg:w-[220px] lg:h-[55px]">
+        <div className="relative w-[160px] h-[40px] sm:w-[190px] sm:h-[48px] lg:w-[220px] lg:h-[55px]">
           <Link href="/">
             <Image
               src={Logo}
