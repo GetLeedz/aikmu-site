@@ -1,4 +1,8 @@
-// ... (Importe bleiben gleich)
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import Logo from "../../public/images/getleedz-logo.png"; // Pfad überprüfen
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -7,12 +11,9 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xl">
       <div className="flex items-center justify-between h-16 sm:h-20 px-3 sm:px-5 lg:px-10">
         {/* Logo links */}
-        {/* Hier wurden die negativen Margins für die Links-Bündigkeit beibehalten */}
         <div className="relative block w-[150px] h-[40px] sm:w-[190px] sm:h-[52px] -ml-3 sm:-ml-5 lg:-ml-10">
-          {/* *** HIER IST DIE KORREKTUR ***
-             1. passHref hinzugefügt.
-             2. Das umschließende <a>-Tag entfernt. 
-          */}
+          
+          {/* KORRIGIERTER LINK-BLOCK */}
           <Link href="/" passHref> 
             <Image
                 src={Logo}
