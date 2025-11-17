@@ -10,11 +10,10 @@ const NavBar = () => {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-transparent">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
-        {/* Höhe des Headers -> sorgt dafür, dass Logo vertikal mittig ist */}
-        <div className="flex h-16 sm:h-18 lg:h-20 items-center justify-between">
-          
-          {/* Logo: Mobile grösser, links bündig */}
-          <div className="relative h-9 w-[170px] sm:h-10 sm:w-[200px] lg:h-12 lg:w-[240px]">
+        {/* Header-Höhe etwas höher, damit Logo Luft hat */}
+        <div className="flex h-20 sm:h-20 lg:h-24 items-center justify-between">
+          {/* Logo – MOBILE bewusst grösser */}
+          <div className="relative h-12 w-[220px] sm:h-14 sm:w-[240px] lg:h-16 lg:w-[260px]">
             <Link href="/">
               <a>
                 <Image
@@ -28,14 +27,14 @@ const NavBar = () => {
             </Link>
           </div>
 
-          {/* Burger-Icon (kann später fürs Menü genutzt werden) */}
+          {/* Burger-Icon rechts */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
             className="flex items-center justify-center border-round-gradient rounded p-2 text-white md:hidden"
             aria-label="Menü öffnen"
           >
-            <FaBars className="text-xl" />
+            <FaBars className="text-2xl" />
           </button>
         </div>
       </div>
