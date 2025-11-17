@@ -15,10 +15,9 @@ const NavBar = () => {
         {/* LOGO – linksbündig */}
         <Link href="/" legacyBehavior>
           <a className="flex items-center">
-{/* ✅ NEU (mit negativen Margins, um das Padding des Elternelements auszugleichen) */}
-<div className="relative w-[170px] h-[46px] sm:w-[210px] sm:h-[56px] lg:w-[240px] lg:h-[64px] -ml-3 sm:-ml-5 lg:-ml-10">
-  {/* Inhalt Button o.ä. */}
-</div>
+              {/* ✅ NEU (mit negativen Margins, um das Padding des Elternelements auszugleichen) */}
+              <div className="relative w-[170px] h-[46px] sm:w-[210px] sm:h-[56px] lg:w-[240px] lg:h-[64px] -ml-3 sm:-ml-5 lg:-ml-10">
+
 
               <Image
                 src={Logo}
