@@ -4,8 +4,6 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Logo from "../../public/images/getleedz-logo.png";
 
-// ... (Importe bleiben gleich)
-
 const NavBar = () => {
   const [open, setOpen] = useState(false);
 
@@ -15,9 +13,8 @@ const NavBar = () => {
         {/* Row: Logo + Burger */}
         <div className="flex h-20 sm:h-20 lg:h-24 items-center justify-start">
           
-          {/* LOGO – NEUE KLASSE für perfekte Bündigkeit */}
+          {/* LOGO – MIT MINIMALER ANPASSUNG FÜR LINKS-BÜNDIGKEIT */}
           <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px] -ml-3 sm:-ml-4 lg:-ml-10">
-            
             <Link href="/" passHref>
               <Image
                   src={Logo}
@@ -29,7 +26,7 @@ const NavBar = () => {
             </Link>
           </div>
 
-          {/* Burger-Icon ganz rechts - braucht hier keine Anpassung mehr */}
+          {/* Burger-Icon ganz rechts */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
@@ -43,6 +40,5 @@ const NavBar = () => {
     </nav>
   );
 };
-
 
 export default NavBar;
