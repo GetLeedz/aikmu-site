@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Logo from "../../public/images/getleedz-logo.png";
-
+// import NavItems from "../navItems/NavItems";
+import Social from "../social/Social";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
