@@ -11,14 +11,11 @@ const NavBar = () => {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 bg-transparent backdrop-blur-xl">
       {/* Innenleiste: Logo links, rechts Platz für Burger / Desktop-Menü */}
-      <div className="flex items-center h-16 sm:h-20 px-3 sm:px-5 lg:px-10">
-        {/* LOGO – linksbündig */}
+      <div className="flex items-center h-16 sm:h-20 pl-0 pr-3 sm:pr-5 lg:pr-10">
+        {/* LOGO – linksbündig, mittig in der Höhe */}
         <Link href="/" legacyBehavior>
           <a className="flex items-center">
-            {/* ✅ NEU (mit negativen Margins, um das Padding des Elternelements auszugleichen) */}
-            <div className="relative w-[170px] h-[46px] sm:w-[210px] sm:h-[56px] lg:w-[240px] lg:h-[64px] -ml-4 sm:-ml-6 lg:-ml-11">
-
-
+            <div className="relative w-[170px] h-[46px] sm:w-[210px] sm:h-[56px] lg:w-[240px] lg:h-[64px]">
               <Image
                 src={Logo}
                 alt="GetLeedz Logo"
@@ -30,17 +27,17 @@ const NavBar = () => {
           </a>
         </Link>
 
-        {/* Burger-Icon – mit ml-auto ganz nach rechts geschoben, nur Mobile */}
+        {/* Burger-Icon – mit ml-auto ganz nach rechts, vertikal mittig */}
         <button
           type="button"
           aria-label="Menü öffnen"
           onClick={() => setOpen(!open)}
           className="ml-auto flex sm:hidden items-center justify-center border-round-gradient rounded-md p-2 text-white"
         >
-          <FaBars className="text-xl" />
+          <FaBars className="text-xl leading-none" />
         </button>
 
-        {/* Desktop-Bereich rechts (momentan leer, später für Links/CTA) */}
+        {/* Desktop-Bereich rechts */}
         <div className="hidden sm:flex ml-auto items-center gap-6">
           {/* hier kannst du später Menülinks oder einen Button einfügen */}
         </div>
