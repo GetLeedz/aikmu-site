@@ -8,13 +8,13 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="nav-safe fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-transparent">
-      {/* Volle Breite, Logo links, Burger rechts */}
-      <div className="flex items-center justify-between w-full px-1 sm:px-5 lg:px-10 py-3 sm:py-4">
-        {/* Logo linksbündig */}
-        <Link href="/">
-          <a className="flex items-center">
-            <div className="relative h-[64px] w-[260px] sm:h-[70px] sm:w-[280px] lg:h-[80px] lg:w-[320px]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xl">
+      {/* INNEN-LEISTE: Logo links, Burger rechts */}
+      <div className="flex items-center justify-between h-16 sm:h-20 px-3 sm:px-5 lg:px-10">
+        {/* Logo – linksbündig, auf Mobile schön gross */}
+        <div className="relative block w-[150px] h-[40px] sm:w-[190px] sm:h-[52px]">
+          <Link href="/">
+            <a>
               <Image
                 src={Logo}
                 alt="GetLeedz Logo"
@@ -22,19 +22,24 @@ const NavBar = () => {
                 objectFit="contain"
                 priority
               />
-            </div>
-          </a>
-        </Link>
+            </a>
+          </Link>
+        </div>
 
-        {/* Burger rechts */}
+        {/* Burger-Icon rechts, mit etwas Abstand vom Rand */}
         <button
           type="button"
-          onClick={() => setOpen(!open)}
-          className="ml-auto flex items-center justify-center border-round-gradient rounded p-2 text-white md:hidden"
           aria-label="Menü öffnen"
+          onClick={() => setOpen(!open)}
+          className="flex sm:hidden items-center justify-center border-round-gradient rounded-md p-2 text-white"
         >
-          <FaBars className="text-2xl" />
+          <FaBars className="text-xl" />
         </button>
+
+        {/* Rechte Seite für Desktop (später für Menüpunkte/CTA, aktuell leer) */}
+        <div className="hidden sm:flex items-center gap-6">
+          {/* hier kannst du später Links / Button einfügen */}
+        </div>
       </div>
     </nav>
   );
