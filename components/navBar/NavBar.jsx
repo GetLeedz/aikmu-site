@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <nav className="nav-safe fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-transparent">
       {/* Volle Breite, Logo links, Burger rechts */}
-      <div className="flex items-center justify-between w-full px-4 sm:px-5 lg:px-10 py-3 sm:py-4">
+      <div className="flex items-center justify-between w-full px-1 sm:px-5 lg:px-10 py-3 sm:py-4">
         {/* Logo linksbündig */}
         <Link href="/">
           <a className="flex items-center">
