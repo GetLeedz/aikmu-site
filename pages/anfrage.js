@@ -77,10 +77,11 @@ const Anfrage = () => {
         <section>
           <div className="container m-auto max-w-3xl px-4 text-slate-100">
             <div className="mb-8 text-center">
-              <h1 className="text-2xl font-semibold text-white md:text-3xl">
+              <h1 className="text-2xl md:text-3xl font-semibold text-white">
                 Anfrage für Lead-Kampagne
               </h1>
-              <p className="mt-3 text-sm md:text-base text-slate-200">
+              {/* 👉 Text heller & grösser */}
+              <p className="mt-4 text-base md:text-lg text-slate-200 leading-relaxed">
                 Kurz ausfüllen – wir melden uns bei dir mit einer ehrlichen
                 Einschätzung, ob und wie wir dir mehr Leads bringen können.
               </p>
@@ -169,7 +170,7 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Branche */}
+              {/* Branche – erweitert & sortiert */}
               <div>
                 <label className="neon-label" htmlFor="industry">
                   Branche
@@ -185,15 +186,46 @@ const Anfrage = () => {
                     required
                   >
                     <option value="">Bitte wählen ...</option>
-                    <option value="Gastronomie">
+                    <option value="Gastronomie / Restaurant">
                       Gastronomie / Restaurant
                     </option>
-                    <option value="Fitness">Fitness / Gesundheit</option>
-                    <option value="Beauty">Beauty / Kosmetik</option>
-                    <option value="Dienstleistung">Dienstleistungen</option>
-                    <option value="Beratung">Beratung / Coaching</option>
-                    <option value="B2B">B2B / andere KMU</option>
-                    <option value="Andere">Andere Branche</option>
+                    <option value="Detailhandel / Retail">
+                      Detailhandel / Retail
+                    </option>
+                    <option value="Versicherung / Finanzdienstleister">
+                      Versicherung / Finanzdienstleister
+                    </option>
+                    <option value="Immobilien / Makler / Verwaltung">
+                      Immobilien / Makler / Verwaltung
+                    </option>
+                    <option value="Fitness / Gesundheit">
+                      Fitness / Gesundheit
+                    </option>
+                    <option value="Beauty / Kosmetik">
+                      Beauty / Kosmetik
+                    </option>
+                    <option value="Agentur / Marketing">
+                      Agentur / Marketing
+                    </option>
+                    <option value="Beratung / Coaching">
+                      Beratung / Coaching
+                    </option>
+                    <option value="IT / Software / SaaS">
+                      IT / Software / SaaS
+                    </option>
+                    <option value="Industrie / Produktion">
+                      Industrie / Produktion
+                    </option>
+                    <option value="Dienstleistungen (allgemein)">
+                      Dienstleistungen (allgemein)
+                    </option>
+                    <option value="Öffentliche Hand / Bildung">
+                      Öffentliche Hand / Bildung
+                    </option>
+                    <option value="B2B / andere KMU">
+                      B2B / andere KMU
+                    </option>
+                    <option value="Andere Branche">Andere Branche</option>
                   </select>
                 </div>
               </div>
@@ -253,8 +285,8 @@ const Anfrage = () => {
                 </button>
               </div>
 
-              {/* Hinweistext grösser */}
-              <p className="pt-2 text-[13px] leading-snug text-slate-300">
+              {/* Hinweistext – deutlich grösser & heller */}
+              <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
               </p>

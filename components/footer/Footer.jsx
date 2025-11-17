@@ -19,7 +19,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-sm sm:text-sm text-gray-400 text-center">
-          © 2025 GetLeedz. Alle Rechte vorbehalten.
+          © 2026 GetLeedz. Alle Rechte vorbehalten.
         </p>
 
         {/* Social: Überschrift + Icons */}
