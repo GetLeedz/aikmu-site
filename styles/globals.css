@@ -236,6 +236,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  padding-top: 6.5rem; /* Abstand nach oben (Desktop & Tablet) */
 }
 
 .hero-frame-1,
@@ -325,7 +326,12 @@ body {
   }
 }
 
+/* ===== Mobile: Icons weiter runter + mehr Platz unter dem Logo ===== */
 @media (max-width: 639.98px) {
+  .hero-content {
+    padding-top: 7.5rem; /* mehr Luft unter dem Header/Logo */
+  }
+
   .hero-frame-1,
   .hero-frame-2,
   .hero-frame-3,
@@ -335,21 +341,26 @@ body {
     width: 60px;
     height: 60px;
   }
+
   .hero-frame-1 {
-    top: 14%;
+    top: 20%;
   }
+
   .hero-frame-2,
   .hero-frame-5 {
     display: none;
   }
+
   .hero-frame-4 {
-    top: 16%;
+    top: 24%;
   }
+
   .hero-frame-3 {
-    top: 46%;
+    top: 55%;
   }
+
   .hero-frame-6 {
-    top: 66%;
+    top: 78%;
   }
 }
 /* =======  End of Hero section  ======= */
@@ -415,15 +426,13 @@ body {
   border-color: transparent;
 }
 
-
-
 /* === Neon Gradient Button (fetter Rand) === */
 
 .neon-border {
   position: relative;
   display: inline-flex;
-  border-radius: 9999px; 
-  padding: 6px;                /* vorher 3px → jetzt doppelt so fett */
+  border-radius: 9999px;
+  padding: 6px; /* fetter Outer-Rand */
   background: linear-gradient(
     120deg,
     #ec4899,
@@ -434,9 +443,8 @@ body {
   );
   background-size: 300% 300%;
   animation: neonGradient 4s linear infinite;
-  box-shadow:
-    0 0 12px rgba(236, 72, 153, 0.9),
-    0 0 28px rgba(168, 85, 247, 0.7); /* mehr Glow */
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.9),
+    0 0 28px rgba(168, 85, 247, 0.7);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -445,7 +453,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  padding: 0.9rem 2.8rem;      /* minimal mehr, damit das Verhältnis stimmt */
+  padding: 0.9rem 2.8rem;
   background: #050816;
   color: #ffffff;
   font-weight: 600;
@@ -456,8 +464,7 @@ body {
 }
 
 .neon-border:hover {
-  box-shadow:
-    0 0 18px rgba(236, 72, 153, 1),
+  box-shadow: 0 0 18px rgba(236, 72, 153, 1),
     0 0 36px rgba(168, 85, 247, 0.9);
   transform: translateY(-1px);
 }
@@ -467,9 +474,15 @@ body {
 }
 
 @keyframes neonGradient {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* === Neon Inputs für /anfrage === */
@@ -497,7 +510,7 @@ body {
   border-radius: 0.8rem;
   background: #050816;
   border: none;
-  color: #f9fafb;
+  color: #f9fafb; /* Text im Feld: weiss */
   padding: 0.8rem 1rem;
   font-size: 0.9rem;
   outline: none;
@@ -538,7 +551,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: #e5e7eb; /* fast weiss, guter Kontrast */
 }
 
 /* Status-Badges */
@@ -566,6 +579,5 @@ body {
   color: #fecaca;
   border: 1px solid rgba(248, 113, 113, 0.7);
 }
-
 
 /* =======  End of FAQ section  ======= */
