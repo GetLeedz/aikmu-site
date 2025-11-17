@@ -43,19 +43,7 @@ body {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-.neon-link {
-  position: relative;
-  display: inline-block;
-  color: #e5e7eb; /* hellgrau */
-  transition: color 0.25s ease, background 0.25s ease;
-}
 
-.neon-link:hover {
-  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
 
 
 /**================================================== *
@@ -573,6 +561,20 @@ body {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #e5e7eb; /* fast weiss, guter Kontrast */
+}
+
+.neon-link {
+  position: relative;
+  display: inline-block;
+  color: #e5e7eb; /* hellgrau */
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.neon-link:hover {
+  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Status-Badges */
