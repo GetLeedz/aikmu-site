@@ -11,7 +11,7 @@ const NavBar = () => {
     <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-transparent">
       <div className="w-full px-3 sm:px-4 lg:px-10">
         {/* Row: Logo + Burger */}
-        <div className="flex h-20 sm:h-20 lg:h-24 justify-start">
+        <div className="flex h-20 sm:h-20 lg:h-24 items-center justify-start">
           
           {/* LOGO – deutlich grösser + wirklich linksbündig */}
           <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px]">
