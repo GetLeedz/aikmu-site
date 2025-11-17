@@ -56,7 +56,7 @@ const Hero = () => (
   <Link href="/anfrage">
     <a className="group neon-border">
       <span className="neon-border-inner">
-        Anfrage für Lead-Kampagne senden
+        Anfrage für Lead-Kampagne
         <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
       </span>
     </a>
