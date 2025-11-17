@@ -2,47 +2,45 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import Logo from "../../public/images/getleedz-logo.png"; // Pfad überprüfen
+import Logo from "../../public/images/getleedz-logo.png";
 
 const NavBar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xl">
-      <div className="flex items-center justify-between h-16 sm:h-20 px-3 sm:px-5 lg:px-10">
-        {/* Logo links */}
-        <div className="relative block w-[150px] h-[40px] sm:w-[190px] sm:h-[52px] -ml-3 sm:-ml-5 lg:-ml-10">
-          
-          {/* KORRIGIERTER LINK-BLOCK */}
-          <Link href="/" passHref> 
-            <Image
-                src={Logo}
-                alt="GetLeedz Logo"
-                layout="fill"
-                objectFit="contain"
-                priority
-            />
-          </Link>
-        </div>
+  return (
+    <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-transparent">
+      <div className="w-full px-3 sm:px-4 lg:px-10">
+        {/* Row: Logo + Burger */}
+        <div className="flex h-20 sm:h-20 lg:h-24 items-center justify-start">
+          
+          {/* LOGO – deutlich grösser + wirklich linksbündig */}
+          <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px]">
+            <Link href="/">
+              <a>
+                <Image
+                  src={Logo}
+                  alt="GetLeedz Logo"
+                  layout="fill"
+                  objectFit="contain"
+                  priority
+                />
+              </a>
+            </Link>
+          </div>
 
-        {/* Burger rechts */}
-        <button
-          type="button"
-          aria-label="Menü öffnen"
-          onClick={() => setOpen(!open)}
-          className="flex sm:hidden items-center justify-center border-round-gradient rounded-md p-2 text-white -mr-3 sm:-mr-5 lg:-mr-10"
-        >
-          <FaBars className="text-xl" />
-        </button>
-
-        {/* Desktop-Bereich */}
-        <div className="hidden sm:flex items-center gap-6">
-          {/* hier kommen später Links/Buttons hin */}
-        </div>
-      </div>
-    </nav>
-
-  );
+          {/* Burger-Icon ganz rechts */}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="ml-auto flex items-center justify-center border-round-gradient rounded p-2 text-white md:hidden"
+            aria-label="Menü öffnen"
+          >
+            <FaBars className="text-2xl" />
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default NavBar;
