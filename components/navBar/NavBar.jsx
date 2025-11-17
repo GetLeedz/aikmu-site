@@ -8,13 +8,13 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-transparent">
-      {/* WIRKLICH volle Breite, kein zentrierender Container */}
-      <div className="flex items-center justify-between w-full px-2 sm:px-4 lg:px-8">
-        {/* Logo links */}
+    <nav className="nav-safe fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-transparent">
+      {/* Volle Breite, Logo links, Burger rechts */}
+      <div className="flex items-center justify-between w-full px-4 sm:px-5 lg:px-10 py-3 sm:py-4">
+        {/* Logo linksbündig */}
         <Link href="/">
           <a className="flex items-center">
-            <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px]">
+            <div className="relative h-[64px] w-[260px] sm:h-[70px] sm:w-[280px] lg:h-[80px] lg:w-[320px]">
               <Image
                 src={Logo}
                 alt="GetLeedz Logo"

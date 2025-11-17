@@ -37,6 +37,13 @@ body {
   scroll-behavior: smooth;
 }
 
+/* === Safe-Area für iOS Notch & Navbar-Abstand === */
+.nav-safe {
+  padding-top: constant(safe-area-inset-top, 0px);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+
 /**================================================== *
  * ==========  Custom components  ========== *
  * ================================================== */
