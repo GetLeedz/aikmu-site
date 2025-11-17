@@ -9,13 +9,12 @@ const NavBar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-transparent">
-      {/* Eine Ebene, kaum Padding → Logo klebt links */}
-      <div className="flex items-center h-20 sm:h-20 lg:h-24 px-2 sm:px-4 lg:px-8">
-
-        {/* LOGO – gleiche Grösse, aber wirklich linksbündig */}
-        <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px]">
-          <Link href="/">
-            <a>
+      {/* WIRKLICH volle Breite, kein zentrierender Container */}
+      <div className="flex items-center justify-between w-full px-2 sm:px-4 lg:px-8">
+        {/* Logo links */}
+        <Link href="/">
+          <a className="flex items-center">
+            <div className="relative h-[58px] w-[250px] sm:h-[64px] sm:w-[270px] lg:h-[72px] lg:w-[300px]">
               <Image
                 src={Logo}
                 alt="GetLeedz Logo"
@@ -23,11 +22,11 @@ const NavBar = () => {
                 objectFit="contain"
                 priority
               />
-            </a>
-          </Link>
-        </div>
+            </div>
+          </a>
+        </Link>
 
-        {/* Burger-Icon ganz rechts */}
+        {/* Burger rechts */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
@@ -36,7 +35,6 @@ const NavBar = () => {
         >
           <FaBars className="text-2xl" />
         </button>
-
       </div>
     </nav>
   );
