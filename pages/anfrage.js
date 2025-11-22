@@ -2,6 +2,8 @@ import { useState } from "react";
 import Head from "next/head";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
+import * as fbq from "../components/lib/fbpixel";
+
 
 const initialState = {
   name: "",
@@ -39,12 +41,23 @@ const Anfrage = () => {
         body: JSON.stringify(formData),
       });
 
+
+
       if (!res.ok) {
         throw new Error("Fehler beim Absenden der Anfrage.");
       }
 
       setStatus("success");
       setFormData(initialState);
+
+      // Meta Lead-Event feuern
+      fbq.lead({
+        form: "Lead-Kampagne-Anfrage",
+      });
+
+
+
+
     } catch (err) {
       console.error(err);
       setStatus("error");
