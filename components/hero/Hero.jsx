@@ -35,12 +35,15 @@ const Hero = () => (
       <div className="w-10/12 sm:w-7/12 text-center m-auto">
 
         {/* Haupttitel */}
-        <h1 className="heading-1 mt-3">
-          <span className="block">GetLeedz. More Leads.</span>
-          <span className="block text-[color:var(--color-secondary)]">
-            Leadgenerierung, die neue Anfragen bringt.
-          </span>
-        </h1>
+          <h1 className="text-center md:text-left text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+            <span className="block text-white">
+              Leadgenerierung.
+            </span>
+            <span className="mt-2 block text-[#7CFF00]">
+              die neue Anfragen bringt.
+            </span>
+          </h1>
+
 
         {/* Untertitel */}
         <p className="mt-5">
