@@ -37,7 +37,7 @@ const Hero = () => (
         {/* Haupttitel */}
           <h1 className="text-center md:text-left text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
             <span className="block text-white">
-              Leadgenerierung.
+              Leadgenerierung,
             </span>
             <span className="mt-2 block text-[#7CFF00]">
               die neue Anfragen bringt.
