@@ -5,7 +5,7 @@ import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
-// Turnstile nur im Browser laden (sonst "window is not defined" bei Next.js)
+// Turnstile nur im Browser laden (kein SSR)
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
@@ -35,7 +35,7 @@ const Anfrage = () => {
     e.preventDefault();
     setErrorMsg("");
 
-    // Falls Turnstile mal nicht geladen hat
+    // Captcha nicht bestätigt
     if (!cfToken) {
       setStatus("error");
       setErrorMsg(
@@ -54,7 +54,7 @@ const Anfrage = () => {
         },
         body: JSON.stringify({
           ...formData,
-          cfToken, // wichtig: an API schicken
+          cfToken, // wird an API gesendet (kannst du serverseitig später prüfen)
         }),
       });
 
@@ -279,10 +279,11 @@ const Anfrage = () => {
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
                 </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center min-h-[80px] items-center">
                   <Turnstile
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
                     onVerify={(token) => {
+                      console.log("Turnstile token:", token); // Debug im Browser
                       setCfToken(token);
                     }}
                   />
