@@ -1,13 +1,13 @@
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
-// Turnstile korrekt laden
+// Turnstile nur im Browser laden (kein SSR)
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
-
 
 const initialState = {
   name: "",
@@ -35,42 +35,57 @@ const Anfrage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+
+    // Captcha nicht ausgefüllt?
+    if (!cfToken) {
+      setStatus("error");
+      setErrorMsg(
+        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
+      );
+      return;
+    }
+
     setStatus("loading");
 
     try {
-      const payload = {
-        ...formData,
-      };
-
-      // Token nur mitsenden, wenn vorhanden
-      if (cfToken) {
-        payload.cfToken = cfToken;
-      }
-
       const res = await fetch("/api/anfrage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...formData,
+          cfToken, // Token an API schicken
+        }),
       });
 
-      const data = await res.json().catch(() => ({}));
-
       if (!res.ok) {
-        throw new Error(
-          data.error || "Fehler beim Absenden der Anfrage."
-        );
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
       }
 
+      // Erfolgreich
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
 
-      // Meta Lead-Event feuern
-      fbq.lead({
-        form: "Lead-Kampagne-Anfrage",
-      });
+      // Meta Lead-Event feuern – aber nur, wenn vorhanden
+      try {
+        if (fbq && typeof fbq.lead === "function") {
+          fbq.lead({
+            form: "Lead-Kampagne-Anfrage",
+          });
+        } else if (
+          typeof window !== "undefined" &&
+          typeof window.fbq === "function"
+        ) {
+          // Fallback: klassisches fbq-Tracking
+          window.fbq("track", "Lead");
+        }
+      } catch (trackErr) {
+        // Kein Hard-Error, nur loggen
+        console.warn("Konnte fbq Lead-Event nicht feuern:", trackErr);
+      }
     } catch (err) {
       console.error(err);
       setStatus("error");
@@ -79,6 +94,7 @@ const Anfrage = () => {
           "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
       );
     } finally {
+      // Status nach ein paar Sekunden wieder ausblenden
       setTimeout(() => {
         setStatus(null);
       }, 6000);
@@ -97,6 +113,7 @@ const Anfrage = () => {
         />
       </Head>
 
+      {/* Fixes Logo / Navigation oben */}
       <NavBar />
 
       <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
@@ -273,7 +290,7 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Turnstile Captcha (optional) */}
+              {/* Turnstile Captcha */}
               <div className="pt-2">
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
@@ -284,6 +301,7 @@ const Anfrage = () => {
                     onVerify={(token) => {
                       setCfToken(token);
                     }}
+                    options={{ theme: "dark" }}
                   />
                 </div>
               </div>
@@ -335,6 +353,7 @@ const Anfrage = () => {
         </section>
       </main>
 
+      {/* Footer unten */}
       <Footer />
     </>
   );
