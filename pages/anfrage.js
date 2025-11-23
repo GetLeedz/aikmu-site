@@ -281,10 +281,8 @@ const Anfrage = () => {
                 <div className="flex justify-center">
                   <Turnstile
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                    onVerify={(token) => {
-                      console.log("Turnstile token:", token);
-                      setCfToken(token);
-                    }}
+                    onVerify={(token) => setCfToken(token)
+                    }
                     onError={(err) => {
                       console.error("Turnstile error:", err);
                       setErrorMsg(
