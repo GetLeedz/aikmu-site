@@ -1,10 +1,15 @@
-// pages/anfrage.js
 import { useState } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
-import { Turnstile } from "@marsidev/react-turnstile"; // ✅ richtige Library
+
+// Turnstile nur im Browser laden (sonst "window is not defined" bei Next.js)
+const Turnstile = dynamic(() => import("react-turnstile"), {
+  ssr: false,
+});
+
 
 const initialState = {
   name: "",
