@@ -1,12 +1,10 @@
+// pages/anfrage.js
 import { useState } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
-
-// Turnstile nur im Browser laden (kein SSR)
-const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
+import { Turnstile } from "@marsidev/react-turnstile"; // ✅ richtige Library
 
 const initialState = {
   name: "",
@@ -35,7 +33,7 @@ const Anfrage = () => {
     e.preventDefault();
     setErrorMsg("");
 
-    // Captcha nicht bestätigt
+    // Falls Turnstile noch nicht erfolgreich war
     if (!cfToken) {
       setStatus("error");
       setErrorMsg(
@@ -54,7 +52,7 @@ const Anfrage = () => {
         },
         body: JSON.stringify({
           ...formData,
-          cfToken, // wird an API gesendet (kannst du serverseitig später prüfen)
+          cfToken, // wichtig: an API schicken
         }),
       });
 
@@ -97,7 +95,6 @@ const Anfrage = () => {
         />
       </Head>
 
-      {/* Fixes Logo / Navigation oben */}
       <NavBar />
 
       <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
@@ -279,12 +276,15 @@ const Anfrage = () => {
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
                 </p>
-                <div className="flex justify-center min-h-[80px] items-center">
+                <div className="flex justify-center">
                   <Turnstile
-                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                    onVerify={(token) => {
-                      console.log("Turnstile token:", token); // Debug im Browser
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} // ✅ richtiges Prop
+                    onSuccess={(token) => {
+                      // ✅ richtiges Event
                       setCfToken(token);
+                    }}
+                    options={{
+                      theme: "dark",
                     }}
                   />
                 </div>
@@ -327,7 +327,6 @@ const Anfrage = () => {
                 </button>
               </div>
 
-              {/* Hinweistext */}
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
