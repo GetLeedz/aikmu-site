@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
+// Turnstile nur im Browser laden (sonst "window is not defined" bei Next.js)
+const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
   name: "",
@@ -18,6 +21,7 @@ const Anfrage = () => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
+  const [cfToken, setCfToken] = useState(""); // Turnstile-Token
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,8 +33,18 @@ const Anfrage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("loading");
     setErrorMsg("");
+
+    // Falls Turnstile mal nicht geladen hat
+    if (!cfToken) {
+      setStatus("error");
+      setErrorMsg(
+        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
+      );
+      return;
+    }
+
+    setStatus("loading");
 
     try {
       const res = await fetch("/api/anfrage", {
@@ -38,31 +52,31 @@ const Anfrage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          cfToken, // wichtig: an API schicken
+        }),
       });
 
-
-
       if (!res.ok) {
-        throw new Error("Fehler beim Absenden der Anfrage.");
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
       }
 
       setStatus("success");
       setFormData(initialState);
+      setCfToken("");
 
       // Meta Lead-Event feuern
       fbq.lead({
         form: "Lead-Kampagne-Anfrage",
       });
-
-
-
-
     } catch (err) {
       console.error(err);
       setStatus("error");
       setErrorMsg(
-        "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
+        err.message ||
+          "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
       );
     } finally {
       setTimeout(() => {
@@ -93,7 +107,6 @@ const Anfrage = () => {
               <h1 className="text-2xl md:text-3xl font-semibold text-white">
                 Anfrage für Lead-Kampagne
               </h1>
-              {/* 👉 Text heller & grösser */}
               <p className="mt-4 text-base md:text-lg text-slate-200 leading-relaxed">
                 Kurz ausfüllen – wir melden uns bei dir mit einer ehrlichen
                 Einschätzung, ob und wie wir dir mehr Leads bringen können.
@@ -183,7 +196,7 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Branche – erweitert & sortiert */}
+              {/* Branche */}
               <div>
                 <label className="neon-label" htmlFor="industry">
                   Branche
@@ -261,6 +274,21 @@ const Anfrage = () => {
                 </div>
               </div>
 
+              {/* Turnstile Captcha */}
+              <div className="pt-2">
+                <p className="mb-2 text-xs sm:text-sm text-slate-300">
+                  Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
+                </p>
+                <div className="flex justify-center">
+                  <Turnstile
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    onVerify={(token) => {
+                      setCfToken(token);
+                    }}
+                  />
+                </div>
+              </div>
+
               {/* Status-Meldungen */}
               {status === "success" && (
                 <div className="badge-success">
@@ -298,7 +326,7 @@ const Anfrage = () => {
                 </button>
               </div>
 
-              {/* Hinweistext – deutlich grösser & heller */}
+              {/* Hinweistext */}
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
@@ -308,7 +336,6 @@ const Anfrage = () => {
         </section>
       </main>
 
-      {/* Footer unten */}
       <Footer />
     </>
   );
