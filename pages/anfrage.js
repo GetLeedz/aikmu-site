@@ -5,8 +5,9 @@ import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
-// Turnstile nur im Browser laden (kein "window is not defined" bei SSR)
+// Turnstile korrekt laden
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
+
 
 const initialState = {
   name: "",
@@ -34,45 +35,44 @@ const Anfrage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
-
-    // Turnstile muss einen Token liefern, sonst abbrechen
-    if (!cfToken) {
-      setStatus("error");
-      setErrorMsg(
-        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
-      );
-      return;
-    }
-
     setStatus("loading");
 
     try {
+      const payload = {
+        ...formData,
+      };
+
+      // Token nur mitsenden, wenn vorhanden
+      if (cfToken) {
+        payload.cfToken = cfToken;
+      }
+
       const res = await fetch("/api/anfrage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          cfToken, // an API schicken (kannst du später serverseitig verifizieren)
-        }),
+        body: JSON.stringify(payload),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
+        throw new Error(
+          data.error || "Fehler beim Absenden der Anfrage."
+        );
       }
 
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
 
-      // Meta Lead-Event
+      // Meta Lead-Event feuern
       fbq.lead({
         form: "Lead-Kampagne-Anfrage",
       });
     } catch (err) {
-      console.error("Fehler beim Senden der Anfrage:", err);
+      console.error(err);
       setStatus("error");
       setErrorMsg(
         err.message ||
@@ -273,7 +273,7 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Turnstile Captcha */}
+              {/* Turnstile Captcha (optional) */}
               <div className="pt-2">
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
@@ -281,13 +281,8 @@ const Anfrage = () => {
                 <div className="flex justify-center">
                   <Turnstile
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                    onVerify={(token) => setCfToken(token)
-                    }
-                    onError={(err) => {
-                      console.error("Turnstile error:", err);
-                      setErrorMsg(
-                        "Die Sicherheitsprüfung konnte nicht geladen werden. Bitte lade die Seite neu und versuch es nochmals."
-                      );
+                    onVerify={(token) => {
+                      setCfToken(token);
                     }}
                   />
                 </div>
@@ -298,8 +293,8 @@ const Anfrage = () => {
                 <div className="badge-success">
                   <span>✅</span>
                   <span>
-                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir melden
-                    uns so schnell wie möglich.
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
+                    melden uns so schnell wie möglich.
                   </span>
                 </div>
               )}
