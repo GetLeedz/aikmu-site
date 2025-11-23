@@ -12,71 +12,67 @@ export default async function handler(req, res) {
     phone,
     industry,
     message,
-    website, // Honeypot
-    cfToken, // Turnstile-Token vom Frontend
+    website,   // Honeypot (falls du es im Formular mal einbaust)
+    cfToken,   // Turnstile-Token (optional)
   } = req.body || {};
 
-  // 1) Honeypot
+  // Honeypot
   if (website) {
-    console.log("Honeypot ausgelöst – Bot blockiert");
+    console.log("Honeypot ausgelöst, Anfrage ignoriert");
     return res.status(200).json({ ok: true });
   }
 
-  // 2) Pflichtfelder
   if (!name || !email || !message) {
     console.log("Pflichtfelder fehlen", { name, email, message });
     return res.status(400).json({ error: "Pflichtfelder fehlen." });
   }
 
-  // 3) Turnstile-Sicherheitsprüfung
-  if (!cfToken) {
-    console.log("Turnstile Security Token fehlt");
-    return res.status(400).json({ error: "Security token fehlt." });
+  console.log("Neue Anfrage erhalten:", { name, email, company, phone, industry });
+
+  // Turnstile-Serverprüfung (nur wenn Secret + Token vorhanden)
+  const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
+
+  if (TURNSTILE_SECRET_KEY && cfToken) {
+    try {
+      const formData = new URLSearchParams();
+      formData.append("secret", TURNSTILE_SECRET_KEY);
+      formData.append("response", cfToken);
+
+      const ip =
+        req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+        req.socket?.remoteAddress;
+      if (ip) {
+        formData.append("remoteip", ip);
+      }
+
+      const verifyRes = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        console.warn("Turnstile-Verifizierung fehlgeschlagen:", verifyData);
+        return res
+          .status(400)
+          .json({ error: "Captcha-Verifizierung fehlgeschlagen." });
+      }
+
+      console.log("Turnstile-Verifizierung erfolgreich.");
+    } catch (err) {
+      console.error("Fehler bei Turnstile-Check:", err);
+      // Im Zweifel lieber durchlassen, nur loggen
+    }
+  } else {
+    console.log(
+      "Turnstile nicht aktiv oder kein Token vorhanden – Anfrage wird ohne Captcha akzeptiert."
+    );
   }
 
-  try {
-    const secret = process.env.TURNSTILE_SECRET_KEY;
-
-    if (!secret) {
-      console.error("TURNSTILE_SECRET_KEY fehlt in ENV!");
-      return res.status(500).json({ error: "Server Config Error" });
-    }
-
-    const verifyURL =
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-
-    const formData = new URLSearchParams();
-    formData.append("secret", secret);
-    formData.append("response", cfToken);
-
-    const verifyRes = await fetch(verifyURL, {
-      method: "POST",
-      body: formData,
-    });
-
-    const verifyJSON = await verifyRes.json();
-
-    if (!verifyJSON.success) {
-      console.error("Turnstile Sicherheitscheck fehlgeschlagen:", verifyJSON);
-      return res.status(400).json({
-        error:
-          "Sicherheitsprüfung fehlgeschlagen. Bitte versuch es nochmals.",
-      });
-    }
-  } catch (err) {
-    console.error("Fehler bei Turnstile:", err);
-    return res.status(500).json({ error: "Security Server Error" });
-  }
-
-  console.log("Neue Anfrage erhalten:", {
-    name,
-    email,
-    company,
-    phone,
-    industry,
-  });
-
-  // 4) Mail-ENV prüfen
+  // Mail-ENV-Variablen
   const {
     MAIL_HOST,
     MAIL_PORT,
@@ -94,7 +90,6 @@ export default async function handler(req, res) {
       .json({ error: "Mail-Konfiguration ist unvollständig." });
   }
 
-  // 5) Mail versenden
   try {
     const transporter = nodemailer.createTransport({
       host: MAIL_HOST,
@@ -106,22 +101,25 @@ export default async function handler(req, res) {
       },
     });
 
-    // Kein Backtick, nur normaler String + \n
-    let textBody = "";
-    textBody += "Neue Lead-Kampagnen-Anfrage über getleedz.com\n\n";
-    textBody += "Name:    " + name + "\n";
-    textBody += "Firma:   " + (company || "-") + "\n";
-    textBody += "E-Mail:  " + email + "\n";
-    textBody += "Telefon: " + (phone || "-") + "\n\n";
-    textBody += "Branche / Zielkunden:\n";
-    textBody += (industry || "-") + "\n\n";
-    textBody += "Nachricht:\n";
-    textBody += message + "\n";
+    const textBody = `
+Neue Lead-Kampagnen-Anfrage über getleedz.com
+
+Name:    ${name}
+Firma:   ${company || "-"}
+E-Mail:  ${email}
+Telefon: ${phone || "-"}
+
+Branche / Zielkunden:
+${industry || "-"}
+
+Nachricht:
+${message}
+`;
 
     const info = await transporter.sendMail({
       from: MAIL_FROM,
       to: MAIL_TO,
-      subject: "Neue Lead-Anfrage von " + name,
+      subject: `Neue Lead-Anfrage von ${name}`,
       text: textBody,
       html: textBody.replace(/\n/g, "<br />"),
     });
