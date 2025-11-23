@@ -5,11 +5,8 @@ import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
-// Turnstile nur im Browser laden (sonst "window is not defined" bei Next.js)
-const Turnstile = dynamic(() => import("react-turnstile"), {
-  ssr: false,
-});
-
+// Turnstile nur im Browser laden (kein "window is not defined" bei SSR)
+const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
   name: "",
@@ -38,7 +35,7 @@ const Anfrage = () => {
     e.preventDefault();
     setErrorMsg("");
 
-    // Falls Turnstile noch nicht erfolgreich war
+    // Turnstile muss einen Token liefern, sonst abbrechen
     if (!cfToken) {
       setStatus("error");
       setErrorMsg(
@@ -57,7 +54,7 @@ const Anfrage = () => {
         },
         body: JSON.stringify({
           ...formData,
-          cfToken, // wichtig: an API schicken
+          cfToken, // an API schicken (kannst du später serverseitig verifizieren)
         }),
       });
 
@@ -70,12 +67,12 @@ const Anfrage = () => {
       setFormData(initialState);
       setCfToken("");
 
-      // Meta Lead-Event feuern
+      // Meta Lead-Event
       fbq.lead({
         form: "Lead-Kampagne-Anfrage",
       });
     } catch (err) {
-      console.error(err);
+      console.error("Fehler beim Senden der Anfrage:", err);
       setStatus("error");
       setErrorMsg(
         err.message ||
@@ -283,13 +280,16 @@ const Anfrage = () => {
                 </p>
                 <div className="flex justify-center">
                   <Turnstile
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} // ✅ richtiges Prop
-                    onSuccess={(token) => {
-                      // ✅ richtiges Event
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    onVerify={(token) => {
+                      console.log("Turnstile token:", token);
                       setCfToken(token);
                     }}
-                    options={{
-                      theme: "dark",
+                    onError={(err) => {
+                      console.error("Turnstile error:", err);
+                      setErrorMsg(
+                        "Die Sicherheitsprüfung konnte nicht geladen werden. Bitte lade die Seite neu und versuch es nochmals."
+                      );
                     }}
                   />
                 </div>
@@ -300,8 +300,8 @@ const Anfrage = () => {
                 <div className="badge-success">
                   <span>✅</span>
                   <span>
-                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
-                    melden uns so schnell wie möglich.
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir melden
+                    uns so schnell wie möglich.
                   </span>
                 </div>
               )}
@@ -332,6 +332,7 @@ const Anfrage = () => {
                 </button>
               </div>
 
+              {/* Hinweistext */}
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
