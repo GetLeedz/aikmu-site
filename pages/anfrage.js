@@ -1,13 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
-
-// Turnstile nur im Browser laden (kein SSR)
-const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
+import Turnstile from "react-turnstile"; // optional sichtbar, blockiert aber NICHT
 
 const initialState = {
   name: "",
@@ -22,7 +18,6 @@ const Anfrage = () => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
-  const [cfToken, setCfToken] = useState(""); // Turnstile-Token
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,16 +30,6 @@ const Anfrage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
-
-    // Captcha nicht ausgefüllt?
-    if (!cfToken) {
-      setStatus("error");
-      setErrorMsg(
-        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
-      );
-      return;
-    }
-
     setStatus("loading");
 
     try {
@@ -53,10 +38,7 @@ const Anfrage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          cfToken, // Token an API schicken
-        }),
+        body: JSON.stringify(formData), // kein cfToken für heute
       });
 
       if (!res.ok) {
@@ -64,27 +46,14 @@ const Anfrage = () => {
         throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
       }
 
-      // Erfolgreich
       setStatus("success");
       setFormData(initialState);
-      setCfToken("");
 
-      // Meta Lead-Event feuern – aber nur, wenn vorhanden
-      try {
-        if (fbq && typeof fbq.lead === "function") {
-          fbq.lead({
-            form: "Lead-Kampagne-Anfrage",
-          });
-        } else if (
-          typeof window !== "undefined" &&
-          typeof window.fbq === "function"
-        ) {
-          // Fallback: klassisches fbq-Tracking
-          window.fbq("track", "Lead");
-        }
-      } catch (trackErr) {
-        // Kein Hard-Error, nur loggen
-        console.warn("Konnte fbq Lead-Event nicht feuern:", trackErr);
+      // Lead-Event nur feuern, wenn Funktion existiert
+      if (fbq && typeof fbq.lead === "function") {
+        fbq.lead({
+          form: "Lead-Kampagne-Anfrage",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -94,7 +63,6 @@ const Anfrage = () => {
           "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
       );
     } finally {
-      // Status nach ein paar Sekunden wieder ausblenden
       setTimeout(() => {
         setStatus(null);
       }, 6000);
@@ -113,7 +81,6 @@ const Anfrage = () => {
         />
       </Head>
 
-      {/* Fixes Logo / Navigation oben */}
       <NavBar />
 
       <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
@@ -290,7 +257,7 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Turnstile Captcha */}
+              {/* Turnstile – NICHT Pflicht */}
               <div className="pt-2">
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
@@ -298,10 +265,7 @@ const Anfrage = () => {
                 <div className="flex justify-center">
                   <Turnstile
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                    onVerify={(token) => {
-                      setCfToken(token);
-                    }}
-                    options={{ theme: "dark" }}
+                    theme="dark"
                   />
                 </div>
               </div>
@@ -343,7 +307,6 @@ const Anfrage = () => {
                 </button>
               </div>
 
-              {/* Hinweistext */}
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
@@ -353,7 +316,6 @@ const Anfrage = () => {
         </section>
       </main>
 
-      {/* Footer unten */}
       <Footer />
     </>
   );
