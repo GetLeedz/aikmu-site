@@ -1,6 +1,9 @@
 // pages/anfrage.js
 import { useState } from "react";
-import Turnstile from "react-turnstile";
+import dynamic from "next/dynamic";
+
+// Turnstile nur im Browser laden (wichtig!)
+const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 export default function AnfragePage() {
   const [formData, setFormData] = useState({
@@ -10,7 +13,7 @@ export default function AnfragePage() {
     phone: "",
     industry: "",
     message: "",
-    website: "", // Honeypot (muss leer bleiben)
+    website: "", // Honeypot
   });
 
   const [token, setToken] = useState(null);
@@ -24,10 +27,8 @@ export default function AnfragePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setStatus(null);
 
-    // Optional: Sicherstellen, dass ein Token vorhanden ist
     if (!token) {
       setStatus({
         type: "error",
@@ -71,7 +72,7 @@ export default function AnfragePage() {
         message: "",
         website: "",
       });
-      setToken(null); // optional, je nach Turnstile-Mode
+      setToken(null);
     } catch (err) {
       console.error(err);
       setStatus({
@@ -84,86 +85,94 @@ export default function AnfragePage() {
   };
 
   return (
-    <main className="anfrage-page">
-      <h1>Lead-Kampagnen-Anfrage</h1>
+    <main style={{ padding: "2rem", color: "#fff", background: "#050525", minHeight: "100vh" }}>
+      <h1 style={{ marginBottom: "1.5rem", fontSize: "1.8rem", fontWeight: "bold" }}>
+        Lead-Kampagnen-Anfrage
+      </h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
+      <form onSubmit={handleSubmit} style={{ maxWidth: 480 }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             Name*
-            <input
-              type="text"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-            />
           </label>
+          <input
+            type="text"
+            name="name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        <div>
-          <label>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             Firma
-            <input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-            />
           </label>
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        <div>
-          <label>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             E-Mail*
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-            />
           </label>
+          <input
+            type="email"
+            name="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        <div>
-          <label>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             Telefon
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-            />
           </label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        <div>
-          <label>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             Branche / Zielkunden
-            <input
-              type="text"
-              name="industry"
-              value={formData.industry}
-              onChange={handleChange}
-            />
           </label>
+          <input
+            type="text"
+            name="industry"
+            value={formData.industry}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        <div>
-          <label>
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", marginBottom: "0.25rem" }}>
             Nachricht*
-            <textarea
-              name="message"
-              required
-              rows={4}
-              value={formData.message}
-              onChange={handleChange}
-            />
           </label>
+          <textarea
+            name="message"
+            required
+            rows={4}
+            value={formData.message}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "0.5rem" }}
+          />
         </div>
 
-        {/* Honeypot-Feld – unsichtbar per CSS */}
+        {/* Honeypot (versteckt) */}
         <div style={{ display: "none" }}>
           <label>
             Website
@@ -177,25 +186,28 @@ export default function AnfragePage() {
           </label>
         </div>
 
-        {/* Turnstile-Widget */}
+        {/* Turnstile */}
         <div style={{ margin: "1rem 0" }}>
           <Turnstile
             sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-            onSuccess={(newToken) => {
-              setToken(newToken);
-            }}
-            onExpire={() => {
-              setToken(null);
-            }}
-            onError={() => {
-              setToken(null);
-            }}
-
-
+            onSuccess={(newToken) => setToken(newToken)}
+            onExpire={() => setToken(null)}
+            onError={() => setToken(null)}
           />
         </div>
 
-        <button type="submit" disabled={isSubmitting}>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          style={{
+            padding: "0.6rem 1.4rem",
+            background: "#ff007f",
+            border: "none",
+            color: "#fff",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
           {isSubmitting ? "Wird gesendet..." : "Anfrage senden"}
         </button>
 
@@ -203,7 +215,7 @@ export default function AnfragePage() {
           <p
             style={{
               marginTop: "1rem",
-              color: status.type === "ok" ? "green" : "red",
+              color: status.type === "ok" ? "lightgreen" : "#ff8080",
             }}
           >
             {status.message}
