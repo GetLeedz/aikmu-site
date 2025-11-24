@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
-import Turnstile from "react-turnstile"; // optional sichtbar, blockiert aber NICHT
+
+// Turnstile nur im Browser laden
+const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
   name: "",
@@ -18,6 +21,7 @@ const Anfrage = () => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
+  const [cfToken, setCfToken] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +34,20 @@ const Anfrage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+
+    // 👉 vorübergehend AUSKOMMENTIEREN, damit Anfragen trotz Turnstile-Problem durchgehen
+    // if (!cfToken) {
+    //   setStatus("error");
+    //   setErrorMsg(
+    //     "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
+    //   );
+    //   return;
+    // }
+
     setStatus("loading");
+    ...
+  };
+
 
     try {
       const res = await fetch("/api/anfrage", {
@@ -38,7 +55,10 @@ const Anfrage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData), // kein cfToken für heute
+        body: JSON.stringify({
+          ...formData,
+          cfToken,
+        }),
       });
 
       if (!res.ok) {
@@ -48,9 +68,10 @@ const Anfrage = () => {
 
       setStatus("success");
       setFormData(initialState);
+      setCfToken("");
 
-      // Lead-Event nur feuern, wenn Funktion existiert
-      if (fbq && typeof fbq.lead === "function") {
+      // Nur feuern, wenn fbq.lead existiert
+      if (typeof fbq.lead === "function") {
         fbq.lead({
           form: "Lead-Kampagne-Anfrage",
         });
@@ -257,7 +278,9 @@ const Anfrage = () => {
                 </div>
               </div>
 
-              {/* Turnstile – NICHT Pflicht */}
+
+
+              {/* Turnstile Captcha */}
               <div className="pt-2">
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
                   Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
@@ -265,10 +288,11 @@ const Anfrage = () => {
                 <div className="flex justify-center">
                   <Turnstile
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                    theme="dark"
+                    onVerify={(token) => setCfToken(token)}
                   />
                 </div>
               </div>
+
 
               {/* Status-Meldungen */}
               {status === "success" && (
