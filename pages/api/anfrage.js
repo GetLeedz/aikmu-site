@@ -1,4 +1,4 @@
-// api/anfrage.js
+// pages/api/anfrage.js
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
@@ -14,10 +14,10 @@ export default async function handler(req, res) {
     industry,
     message,
     website, // Honeypot
-    token,   // Cloudflare Turnstile Token
+    cfToken, // Turnstile Token
   } = req.body || {};
 
-  // Honeypot-Schutz
+  // Honeypot
   if (website) {
     console.log("Honeypot ausgelöst, Anfrage ignoriert");
     return res.status(200).json({ ok: true });
@@ -28,68 +28,52 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Pflichtfelder fehlen." });
   }
 
-  console.log("Neue Anfrage erhalten:", {
-    name,
-    email,
-    company,
-    phone,
-    industry,
-  });
-
-
-
-// ALT:
-// const TURNSTILE_SECRET_KEY = process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY;
-
-// NEU:
-const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
-
-
-
-
-  if (TURNSTILE_SECRET_KEY && token) {
-    try {
-      const formData = new URLSearchParams();
-      formData.append("secret", TURNSTILE_SECRET_KEY);
-      formData.append("response", token);
-
-      const ip =
-        req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
-        req.socket?.remoteAddress;
-
-      if (ip) {
-        formData.append("remoteip", ip);
-      }
-
-      const verifyRes = await fetch(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const verifyData = await verifyRes.json();
-
-      if (!verifyData.success) {
-        console.warn("Turnstile-Verifizierung fehlgeschlagen:", verifyData);
-        return res
-          .status(400)
-          .json({ error: "Captcha-Verifizierung fehlgeschlagen." });
-      }
-
-      console.log("Turnstile-Verifizierung erfolgreich.");
-    } catch (err) {
-      console.error("Fehler bei Turnstile-Check:", err);
-      // Fail-open: nur loggen, Anfrage trotzdem weiterlaufen lassen
-    }
-  } else {
-    console.log(
-      "Turnstile nicht aktiv oder kein Token vorhanden – Anfrage wird ohne Captcha akzeptiert."
-    );
+  // Turnstile prüfen
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.error("TURNSTILE_SECRET_KEY fehlt in den ENV Variablen.");
+    return res
+      .status(500)
+      .json({ error: "Sicherheitskonfiguration ist unvollständig." });
   }
 
-  // Mail-ENV-Variablen
+  try {
+    const ip =
+      req.headers["x-forwarded-for"] ||
+      req.socket?.remoteAddress ||
+      "";
+
+    const verifyRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${encodeURIComponent(
+          secret
+        )}&response=${encodeURIComponent(
+          cfToken || ""
+        )}&remoteip=${encodeURIComponent(ip)}`,
+      }
+    );
+
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      console.error("Turnstile verification failed:", verifyData);
+      return res
+        .status(400)
+        .json({ error: "Sicherheitsprüfung fehlgeschlagen." });
+    }
+  } catch (e) {
+    console.error("Turnstile request error:", e);
+    return res
+      .status(500)
+      .json({ error: "Sicherheitsprüfung momentan nicht verfügbar." });
+  }
+
+  console.log("Neue Anfrage erhalten:", { name, email, company, phone, industry });
+
   const {
     MAIL_HOST,
     MAIL_PORT,
@@ -110,7 +94,7 @@ const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
   try {
     const transporter = nodemailer.createTransport({
       host: MAIL_HOST,
-      port: MAIL_PORT ? Number(MAIL_PORT) : 465,
+      port: Number(MAIL_PORT || 465),
       secure: MAIL_SECURE === "true" || MAIL_SECURE === true,
       auth: {
         user: MAIL_USER,
@@ -131,7 +115,7 @@ ${industry || "-"}
 
 Nachricht:
 ${message}
-`.trim();
+`;
 
     const info = await transporter.sendMail({
       from: MAIL_FROM,
@@ -142,12 +126,9 @@ ${message}
     });
 
     console.log("Mail erfolgreich übergeben:", info.messageId);
-
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error("Mail Fehler:", error);
-    return res
-      .status(500)
-      .json({ error: "Mail konnte nicht gesendet werden." });
+    return res.status(500).json({ error: "Mail konnte nicht gesendet werden." });
   }
 }
