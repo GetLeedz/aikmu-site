@@ -1,3 +1,4 @@
+// pages/anfrage.js
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -5,7 +6,7 @@ import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 import * as fbq from "../components/lib/fbpixel";
 
-// Turnstile nur im Browser laden
+// Turnstile nur im Browser laden (kein "window is not defined" bei SSR)
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
@@ -21,7 +22,7 @@ const Anfrage = () => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
-  const [cfToken, setCfToken] = useState("");
+  const [cfToken, setCfToken] = useState(""); // Turnstile-Token
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,19 +36,16 @@ const Anfrage = () => {
     e.preventDefault();
     setErrorMsg("");
 
-    // 👉 vorübergehend AUSKOMMENTIEREN, damit Anfragen trotz Turnstile-Problem durchgehen
-    // if (!cfToken) {
-    //   setStatus("error");
-    //   setErrorMsg(
-    //     "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
-    //   );
-    //   return;
-    // }
+    // 👉 Turnstile-Schutz: ohne Token wird nicht gesendet
+    if (!cfToken) {
+      setStatus("error");
+      setErrorMsg(
+        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen) und versuch es dann nochmals."
+      );
+      return;
+    }
 
     setStatus("loading");
-    ...
-  };
-
 
     try {
       const res = await fetch("/api/anfrage", {
@@ -57,7 +55,7 @@ const Anfrage = () => {
         },
         body: JSON.stringify({
           ...formData,
-          cfToken,
+          cfToken, // wird aktuell zwar noch nicht serverseitig geprüft, schadet aber nicht
         }),
       });
 
@@ -70,7 +68,7 @@ const Anfrage = () => {
       setFormData(initialState);
       setCfToken("");
 
-      // Nur feuern, wenn fbq.lead existiert
+      // Meta Lead-Event feuern, falls Pixel geladen
       if (typeof fbq.lead === "function") {
         fbq.lead({
           form: "Lead-Kampagne-Anfrage",
@@ -102,6 +100,7 @@ const Anfrage = () => {
         />
       </Head>
 
+      {/* Fixes Logo / Navigation oben */}
       <NavBar />
 
       <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
@@ -278,8 +277,6 @@ const Anfrage = () => {
                 </div>
               </div>
 
-
-
               {/* Turnstile Captcha */}
               <div className="pt-2">
                 <p className="mb-2 text-xs sm:text-sm text-slate-300">
@@ -292,7 +289,6 @@ const Anfrage = () => {
                   />
                 </div>
               </div>
-
 
               {/* Status-Meldungen */}
               {status === "success" && (
@@ -331,6 +327,7 @@ const Anfrage = () => {
                 </button>
               </div>
 
+              {/* Hinweistext */}
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
                 deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
