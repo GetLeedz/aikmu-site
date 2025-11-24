@@ -1,208 +1,324 @@
-// pages/anfrage.js
 import { useState } from "react";
-import dynamic from "next/dynamic";
+import Head from "next/head";
+import NavBar from "../components/navBar/NavBar";
+import Footer from "../components/footer/Footer";
+import * as fbq from "../components/lib/fbpixel";
+import Turnstile from "react-turnstile"; // optional sichtbar, blockiert aber NICHT
 
-// Turnstile nur im Browser laden
-const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
+const initialState = {
+  name: "",
+  email: "",
+  company: "",
+  phone: "",
+  industry: "",
+  message: "",
+};
 
-export default function AnfragePage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    industry: "",
-    message: "",
-    website: "", // Honeypot
-  });
-
-  const [token, setToken] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // { type: "ok" | "error", message }
+const Anfrage = () => {
+  const [formData, setFormData] = useState(initialState);
+  const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus(null);
-
-    if (!token) {
-      setStatus({
-        type: "error",
-        message: "Bitte das Captcha bestätigen.",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
+    setErrorMsg("");
+    setStatus("loading");
 
     try {
       const res = await fetch("/api/anfrage", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          token, // Turnstile-Token ans Backend schicken
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // kein cfToken für heute
       });
-
-      const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Fehler beim Senden der Anfrage.");
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
       }
 
-      setStatus({
-        type: "ok",
-        message: "Danke! Deine Anfrage wurde erfolgreich gesendet.",
-      });
+      setStatus("success");
+      setFormData(initialState);
 
-      // Formular leeren
-      setFormData({
-        name: "",
-        company: "",
-        email: "",
-        phone: "",
-        industry: "",
-        message: "",
-        website: "",
-      });
-      setToken(null);
+      // Lead-Event nur feuern, wenn Funktion existiert
+      if (fbq && typeof fbq.lead === "function") {
+        fbq.lead({
+          form: "Lead-Kampagne-Anfrage",
+        });
+      }
     } catch (err) {
       console.error(err);
-      setStatus({
-        type: "error",
-        message: err.message || "Es ist ein Fehler aufgetreten.",
-      });
+      setStatus("error");
+      setErrorMsg(
+        err.message ||
+          "Irgendwas hat nicht geklappt. Bitte versuch es später nochmals oder schreib direkt an info@getleedz.com."
+      );
     } finally {
-      setIsSubmitting(false);
+      setTimeout(() => {
+        setStatus(null);
+      }, 6000);
     }
   };
 
+  const disabled = status === "loading";
+
   return (
-    <main className="page page--anfrage">
-      <section className="section section--anfrage">
-        <div className="container">
-          <h1 className="section-title">Lead-Kampagnen-Anfrage</h1>
+    <>
+      <Head>
+        <title>Anfrage für Lead-Kampagne | GetLeedz</title>
+        <meta
+          name="description"
+          content="Schick uns deine Challenge – wir prüfen, wie viele Leads für dein Schweizer KMU drinliegen."
+        />
+      </Head>
 
-          <form className="form form--anfrage" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name*</label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
+      <NavBar />
 
-            <div className="form-group">
-              <label htmlFor="company">Firma</label>
-              <input
-                id="company"
-                type="text"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">E-Mail*</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone">Telefon</label>
-              <input
-                id="phone"
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="industry">Branche / Zielkunden</label>
-              <input
-                id="industry"
-                type="text"
-                name="industry"
-                value={formData.industry}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Nachricht*</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                value={formData.message}
-                onChange={handleChange}
-              />
-            </div>
-
-            {/* Honeypot (versteckt) */}
-            <div className="form-group form-group--hidden">
-              <label htmlFor="website">Website</label>
-              <input
-                id="website"
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleChange}
-                autoComplete="off"
-              />
-            </div>
-
-            {/* Turnstile-Captcha */}
-            <div className="form-group form-group--captcha">
-              <Turnstile
-                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                onSuccess={(newToken) => setToken(newToken)}
-                onExpire={() => setToken(null)}
-                onError={() => setToken(null)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Wird gesendet..." : "Anfrage senden"}
-            </button>
-
-            {status && (
-              <p
-                className={
-                  status.type === "ok"
-                    ? "form-status form-status--ok"
-                    : "form-status form-status--error"
-                }
-              >
-                {status.message}
+      <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
+        <section>
+          <div className="container m-auto max-w-3xl px-4 text-slate-100">
+            <div className="mb-8 text-center">
+              <h1 className="text-2xl md:text-3xl font-semibold text-white">
+                Anfrage für Lead-Kampagne
+              </h1>
+              <p className="mt-4 text-base md:text-lg text-slate-200 leading-relaxed">
+                Kurz ausfüllen – wir melden uns bei dir mit einer ehrlichen
+                Einschätzung, ob und wie wir dir mehr Leads bringen können.
               </p>
-            )}
-          </form>
-        </div>
-      </section>
-    </main>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 rounded-2xl bg-black/40 p-5 shadow-[0_0_40px_rgba(15,23,42,0.9)] backdrop-blur"
+            >
+              {/* Name */}
+              <div>
+                <label className="neon-label" htmlFor="name">
+                  Dein Name
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="neon-input"
+                    placeholder="Vor- und Nachname"
+                    value={formData.name}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* E-Mail */}
+              <div>
+                <label className="neon-label" htmlFor="email">
+                  E-Mail
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="neon-input"
+                    placeholder="name@firma.ch"
+                    value={formData.email}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Firma */}
+              <div>
+                <label className="neon-label" htmlFor="company">
+                  Firma
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    required
+                    className="neon-input"
+                    placeholder="Firmenname"
+                    value={formData.company}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Telefon */}
+              <div>
+                <label className="neon-label" htmlFor="phone">
+                  Telefon
+                </label>
+                <div className="neon-input-wrapper">
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className="neon-input"
+                    placeholder="+41 ..."
+                    value={formData.phone}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Branche */}
+              <div>
+                <label className="neon-label" htmlFor="industry">
+                  Branche
+                </label>
+                <div className="neon-input-wrapper">
+                  <select
+                    id="industry"
+                    name="industry"
+                    className="neon-select"
+                    value={formData.industry}
+                    onChange={handleChange}
+                    disabled={disabled}
+                    required
+                  >
+                    <option value="">Bitte wählen ...</option>
+                    <option value="Gastronomie / Restaurant">
+                      Gastronomie / Restaurant
+                    </option>
+                    <option value="Detailhandel / Retail">
+                      Detailhandel / Retail
+                    </option>
+                    <option value="Versicherung / Finanzdienstleister">
+                      Versicherung / Finanzdienstleister
+                    </option>
+                    <option value="Immobilien / Makler / Verwaltung">
+                      Immobilien / Makler / Verwaltung
+                    </option>
+                    <option value="Fitness / Gesundheit">
+                      Fitness / Gesundheit
+                    </option>
+                    <option value="Beauty / Kosmetik">
+                      Beauty / Kosmetik
+                    </option>
+                    <option value="Agentur / Marketing">
+                      Agentur / Marketing
+                    </option>
+                    <option value="Beratung / Coaching">
+                      Beratung / Coaching
+                    </option>
+                    <option value="IT / Software / SaaS">
+                      IT / Software / SaaS
+                    </option>
+                    <option value="Industrie / Produktion">
+                      Industrie / Produktion
+                    </option>
+                    <option value="Dienstleistungen (allgemein)">
+                      Dienstleistungen (allgemein)
+                    </option>
+                    <option value="Öffentliche Hand / Bildung">
+                      Öffentliche Hand / Bildung
+                    </option>
+                    <option value="B2B / andere KMU">
+                      B2B / andere KMU
+                    </option>
+                    <option value="Andere Branche">Andere Branche</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Nachricht */}
+              <div>
+                <label className="neon-label" htmlFor="message">
+                  Was ist deine grösste Challenge bei Leads?
+                </label>
+                <div className="neon-input-wrapper">
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="neon-textarea"
+                    placeholder="Kurz in 1–3 Sätzen beschreiben. Je konkreter, desto besser können wir dir antworten."
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={disabled}
+                  />
+                </div>
+              </div>
+
+              {/* Turnstile – NICHT Pflicht */}
+              <div className="pt-2">
+                <p className="mb-2 text-xs sm:text-sm text-slate-300">
+                  Kurze Sicherheitsprüfung, damit Bots draussen bleiben:
+                </p>
+                <div className="flex justify-center">
+                  <Turnstile
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    theme="dark"
+                  />
+                </div>
+              </div>
+
+              {/* Status-Meldungen */}
+              {status === "success" && (
+                <div className="badge-success">
+                  <span>✅</span>
+                  <span>
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
+                    melden uns so schnell wie möglich.
+                  </span>
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="badge-error">
+                  <span>⚠️</span>
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
+              {/* CTA-Button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={disabled}
+                  className={`group neon-border ${
+                    disabled
+                      ? "opacity-60 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
+                >
+                  <span className="neon-border-inner">
+                    {status === "loading"
+                      ? "Wird gesendet..."
+                      : "Anfrage jetzt abschicken"}
+                  </span>
+                </button>
+              </div>
+
+              <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
+                Deine Angaben werden vertraulich behandelt und nur verwendet, um
+                deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
+              </p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
   );
-}
+};
+
+export default Anfrage;
