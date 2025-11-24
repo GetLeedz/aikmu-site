@@ -1,3 +1,4 @@
+// api/anfrage.js
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
@@ -12,11 +13,11 @@ export default async function handler(req, res) {
     phone,
     industry,
     message,
-    website,   // Honeypot (falls du es im Formular mal einbaust)
-    cfToken,   // Turnstile-Token (optional)
+    website, // Honeypot
+    token,   // Cloudflare Turnstile Token
   } = req.body || {};
 
-  // Honeypot
+  // Honeypot-Schutz
   if (website) {
     console.log("Honeypot ausgelöst, Anfrage ignoriert");
     return res.status(200).json({ ok: true });
@@ -27,20 +28,34 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Pflichtfelder fehlen." });
   }
 
-  console.log("Neue Anfrage erhalten:", { name, email, company, phone, industry });
+  console.log("Neue Anfrage erhalten:", {
+    name,
+    email,
+    company,
+    phone,
+    industry,
+  });
 
-  // Turnstile-Serverprüfung (nur wenn Secret + Token vorhanden)
-  const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
-  if (TURNSTILE_SECRET_KEY && cfToken) {
+
+// ALT:
+// const TURNSTILE_SECRET_KEY = process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY;
+
+// NEU:
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
+
+
+
+  if (TURNSTILE_SECRET_KEY && token) {
     try {
       const formData = new URLSearchParams();
       formData.append("secret", TURNSTILE_SECRET_KEY);
-      formData.append("response", cfToken);
+      formData.append("response", token);
 
       const ip =
         req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
         req.socket?.remoteAddress;
+
       if (ip) {
         formData.append("remoteip", ip);
       }
@@ -54,6 +69,7 @@ export default async function handler(req, res) {
       );
 
       const verifyData = await verifyRes.json();
+
       if (!verifyData.success) {
         console.warn("Turnstile-Verifizierung fehlgeschlagen:", verifyData);
         return res
@@ -64,7 +80,7 @@ export default async function handler(req, res) {
       console.log("Turnstile-Verifizierung erfolgreich.");
     } catch (err) {
       console.error("Fehler bei Turnstile-Check:", err);
-      // Im Zweifel lieber durchlassen, nur loggen
+      // Fail-open: nur loggen, Anfrage trotzdem weiterlaufen lassen
     }
   } else {
     console.log(
@@ -93,7 +109,7 @@ export default async function handler(req, res) {
   try {
     const transporter = nodemailer.createTransport({
       host: MAIL_HOST,
-      port: Number(MAIL_PORT || 465),
+      port: MAIL_PORT ? Number(MAIL_PORT) : 465,
       secure: MAIL_SECURE === "true" || MAIL_SECURE === true,
       auth: {
         user: MAIL_USER,
@@ -114,7 +130,7 @@ ${industry || "-"}
 
 Nachricht:
 ${message}
-`;
+`.trim();
 
     const info = await transporter.sendMail({
       from: MAIL_FROM,
