@@ -61,27 +61,28 @@ const Hero = () => {
           <div className="flex flex-col items-center justify-center gap-4 mt-[42px]">
             {/* Primärer CTA */}
             <Link href="/anfrage">
-<a className="group neon-border w-full max-w-[420px]">
-  <span className="neon-border-inner flex items-center justify-center gap-2">
-    Anfrage für Lead-Kampagne
-    <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-  </span>
-</a>
+            <a className="group neon-border w-full max-w-[420px]">
+              <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
 
-            </Link>
+                Anfrage für Lead-Kampagne
+                <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </a>
+          </Link>
 
-            {/* Sekundärer CTA */}
-<a
-  href={calendlyUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group neon-border w-full max-w-[420px]"
->
-  <span className="neon-border-inner flex items-center justify-center gap-2">
-    Rückruf direkt buchen
-    <FaCalendarAlt className="transition-transform duration-300 group-hover:translate-x-1 opacity-80" />
-  </span>
-</a>
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group neon-border w-full max-w-[420px]"
+          >
+            <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
+
+              Rückruf direkt buchen
+              <FaCalendarAlt className="ml-2 opacity-80" />
+            </span>
+          </a>
+
 
           </div>
         </div>
