@@ -1,4 +1,4 @@
-import Image from "next/image"; 
+import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -9,32 +9,36 @@ import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
 import hero6 from "../../public/images/hero/hero6.png";
 
-const Hero = () => (
-  <section className="hero" id="hero">
-    {/* schräg, pulsierende Frames */}
-    <div className="hero-frame-1 animate-pulse">
-      <Image src={hero1} objectFit="fill" alt="hero one" />
-    </div>
-    <div className="hero-frame-2 animate-pulse">
-      <Image src={hero2} objectFit="fill" alt="hero two" />
-    </div>
-    <div className="hero-frame-3 animate-pulse">
-      <Image src={hero3} objectFit="fill" alt="hero three" />
-    </div>
-    <div className="hero-frame-4 animate-pulse">
-      <Image src={hero4} objectFit="fill" alt="hero four" />
-    </div>
-    <div className="hero-frame-5 animate-pulse">
-      <Image src={hero5} objectFit="fill" alt="hero five" />
-    </div>
-    <div className="hero-frame-6 animate-pulse">
-      <Image src={hero6} objectFit="fill" alt="hero six" />
-    </div>
+const Hero = () => {
+  const calendlyUrl =
+    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
 
-    <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
-      <div className="w-10/12 sm:w-7/12 text-center m-auto">
+  return (
+    <section className="hero" id="hero">
+      {/* schräg, pulsierende Frames */}
+      <div className="hero-frame-1 animate-pulse">
+        <Image src={hero1} objectFit="fill" alt="hero one" />
+      </div>
+      <div className="hero-frame-2 animate-pulse">
+        <Image src={hero2} objectFit="fill" alt="hero two" />
+      </div>
+      <div className="hero-frame-3 animate-pulse">
+        <Image src={hero3} objectFit="fill" alt="hero three" />
+      </div>
+      <div className="hero-frame-4 animate-pulse">
+        <Image src={hero4} objectFit="fill" alt="hero four" />
+      </div>
+      <div className="hero-frame-5 animate-pulse">
+        <Image src={hero5} objectFit="fill" alt="hero five" />
+      </div>
+      <div className="hero-frame-6 animate-pulse">
+        <Image src={hero6} objectFit="fill" alt="hero six" />
+      </div>
 
-        {/* Haupttitel */}
+      <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
+        <div className="w-10/12 sm:w-7/12 text-center m-auto">
+
+          {/* Haupttitel */}
           <h1 className="text-center md:text-left text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
             <span className="block text-white">
               Leadgenerierung,
@@ -44,32 +48,44 @@ const Hero = () => (
             </span>
           </h1>
 
+          {/* Untertitel */}
+          <p className="mt-5">
+            GetLeedz entwickelt für dein KMU starke Creatives und
+            Performance-Kampagnen auf Meta, LinkedIn und Google – damit dein
+            Vertrieb mit den richtigen Menschen spricht, statt dem Algorithmus
+            hinterherzurennen.
+          </p>
 
-        {/* Untertitel */}
-        <p className="mt-5">
-          GetLeedz entwickelt für dein KMU starke Creatives und
-          Performance-Kampagnen auf Meta, LinkedIn und Google – damit dein
-          Vertrieb mit den richtigen Menschen spricht, statt dem Algorithmus
-          hinterherzurennen.
-        </p>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-[12px] sm:gap-[30px] mt-[35px]">
 
-        {/* CTA-Button mit Neon-Gradient-Border */}
-{/* CTA-Button mit animiertem Neon-Gradient-Border */}
-<div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] sm:gap-[30px] mt-[35px]">
-  <Link href="/anfrage">
-    <a className="group neon-border">
-      <span className="neon-border-inner">
-        Anfrage für Lead-Kampagne
-        <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-      </span>
-    </a>
-  </Link>
-</div>
+            {/* Haupt-CTA */}
+            <Link href="/anfrage">
+              <a className="group neon-border">
+                <span className="neon-border-inner">
+                  Anfrage für Lead-Kampagne
+                  <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </a>
+            </Link>
 
+            {/* Secondary CTA – Calendly */}
+            <a
+              href={calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full px-6 py-3 font-semibold text-white
+                         bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff]
+                         hover:scale-105 transition"
+            >
+              📅 Rückruf direkt buchen
+            </a>
 
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Hero;
