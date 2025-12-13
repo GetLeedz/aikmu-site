@@ -58,7 +58,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons untereinander, gleich gross */}
-          <div className="flex flex-col items-center justify-center gap-4 mt-[40px]">
+          <div className="flex flex-col items-center justify-center gap-4 mt-[42px]">
             {/* Primärer CTA */}
             <Link href="/anfrage">
 <a className="group neon-border w-full max-w-[420px]">
