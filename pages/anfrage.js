@@ -89,6 +89,9 @@ const Anfrage = () => {
   };
 
   const disabled = status === "loading";
+  const calendlyUrl =
+  process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
+
 
   return (
     <>
@@ -300,6 +303,23 @@ const Anfrage = () => {
                   </span>
                 </div>
               )}
+
+             {status === "success" && (
+                <div className="pt-4 text-center">
+                  <a
+                    href={calendlyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group neon-border inline-block"
+                  >
+                    <span className="neon-border-inner">Rückruf direkt buchen</span>
+                  </a>
+                  <p className="mt-3 text-sm text-slate-300">
+                    Wenn du es schnell willst: Termin fixieren – ich rufe dich zur gebuchten Zeit an.
+                  </p>
+                </div>
+              )}
+ 
 
               {status === "error" && (
                 <div className="badge-error">
