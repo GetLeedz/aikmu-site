@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 
 import hero1 from "../../public/images/hero/hero1.png";
 import hero2 from "../../public/images/hero/hero2.png";
@@ -37,12 +37,9 @@ const Hero = () => {
 
       <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
         <div className="w-10/12 sm:w-7/12 text-center m-auto">
-
           {/* Haupttitel */}
           <h1 className="text-center md:text-left text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-            <span className="block text-white">
-              Leadgenerierung,
-            </span>
+            <span className="block text-white">Leadgenerierung,</span>
             <span className="mt-2 block text-[#7CFF00]">
               die neue Anfragen bringt.
             </span>
@@ -56,31 +53,30 @@ const Hero = () => {
             hinterherzurennen.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-[12px] sm:gap-[30px] mt-[35px]">
-
-            {/* Haupt-CTA */}
+          {/* CTA Buttons untereinander, gleich gross */}
+          <div className="flex flex-col items-center justify-center gap-4 mt-[40px]">
+            {/* Primärer CTA */}
             <Link href="/anfrage">
-              <a className="group neon-border">
-                <span className="neon-border-inner">
+              <a className="group neon-border w-full max-w-[420px]">
+                <span className="neon-border-inner flex items-center justify-center">
                   Anfrage für Lead-Kampagne
                   <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </a>
             </Link>
 
-            {/* Secondary CTA – Calendly */}
+            {/* Sekundärer CTA */}
             <a
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full px-6 py-3 font-semibold text-white
-                         bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff]
-                         hover:scale-105 transition"
+              className="group neon-border w-full max-w-[420px]"
             >
-              📅 Rückruf direkt buchen
+              <span className="neon-border-inner flex items-center justify-center">
+                Rückruf direkt buchen
+                <FaCalendarAlt className="ml-2 opacity-80" />
+              </span>
             </a>
-
           </div>
         </div>
       </div>
