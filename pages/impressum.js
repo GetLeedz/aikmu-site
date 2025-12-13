@@ -13,8 +13,7 @@ const Impressum = () => {
         />
       </Head>
 
-
-      <main className="min-h-screen bg-[color:var(--bg-primary)] text-white">
+      <main className="min-h-screen bg-transparent text-white">
         <NavBar />
 
         <section className="container m-auto px-4 pt-[160px] pb-16 max-w-3xl">

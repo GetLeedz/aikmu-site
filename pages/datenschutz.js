@@ -13,8 +13,7 @@ const Datenschutz = () => {
         />
       </Head>
 
-
-      <main className="min-h-screen bg-[color:var(--bg-primary)] text-white">
+      <main className="min-h-screen bg-transparent text-white">
         <NavBar />
 
         <section className="container m-auto px-4 pt-[160px] pb-16 max-w-3xl">
@@ -50,9 +49,7 @@ const Datenschutz = () => {
             </div>
 
             <div>
-              <h2 className="font-semibold mb-1">
-                2. Hosting und Server-Logs
-              </h2>
+              <h2 className="font-semibold mb-1">2. Hosting und Server-Logs</h2>
               <p>
                 Unsere Website wird bei einem Provider in der Schweiz
                 betrieben. Beim Aufruf der Seiten werden automatisch technische
@@ -65,9 +62,7 @@ const Datenschutz = () => {
             </div>
 
             <div>
-              <h2 className="font-semibold mb-1">
-                3. Kontakt- und Anfrageformular
-              </h2>
+              <h2 className="font-semibold mb-1">3. Kontakt- und Anfrageformular</h2>
               <p>
                 Wenn Sie über das Anfrageformular eine Lead-Kampagne anfragen,
                 erfassen wir die von Ihnen eingegebenen Angaben (z.&nbsp;B.
@@ -87,9 +82,7 @@ const Datenschutz = () => {
             </div>
 
             <div>
-              <h2 className="font-semibold mb-1">
-                4. Cookies und Tracking
-              </h2>
+              <h2 className="font-semibold mb-1">4. Cookies und Tracking</h2>
               <p>
                 Aktuell setzen wir auf dieser Website keine
                 personenbezogenen Tracking-Tools (wie Google Analytics) ein.
@@ -102,9 +95,7 @@ const Datenschutz = () => {
             </div>
 
             <div>
-              <h2 className="font-semibold mb-1">
-                5. Aufbewahrung und Löschung
-              </h2>
+              <h2 className="font-semibold mb-1">5. Aufbewahrung und Löschung</h2>
               <p>
                 Wir speichern personenbezogene Daten nur so lange, wie dies für
                 die genannten Zwecke erforderlich ist oder wir gesetzlich dazu

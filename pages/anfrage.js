@@ -89,7 +89,7 @@ const Anfrage = () => {
 
       <NavBar />
 
-      <main className="bg-[#020617] min-h-screen pt-[160px] pb-[80px]">
+      <main className="bg-transparent min-h-screen pt-[160px] pb-[80px]">
         <section>
           <div className="container m-auto max-w-3xl px-4 text-slate-100">
             <div className="mb-8 text-center">
