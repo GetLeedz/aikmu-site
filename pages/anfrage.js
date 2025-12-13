@@ -319,6 +319,22 @@ const Anfrage = () => {
                   </p>
                 </div>
               )}
+
+              {status === "success" && (
+                <div className="mt-4 text-center">
+                  <a
+                    href={process.env.NEXT_PUBLIC_CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-3 rounded-full px-6 py-3 font-semibold text-white
+                              bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff]
+                              hover:scale-105 transition"
+                  >
+                    📅 Rückruf / Termin direkt buchen
+                  </a>
+                </div>
+              )}
+
  
 
               {status === "error" && (
