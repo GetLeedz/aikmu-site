@@ -480,9 +480,9 @@ body {
 .neon-border {
   position: relative;
   display: inline-flex;
-  align-items: stretch;   /* WICHTIG */
+  align-items: stretch; /* wichtig */
   border-radius: 9999px;
-  padding: 6px; /* fetter Outer-Rand */
+  padding: 6px;
 
   background: linear-gradient(
     120deg,
@@ -495,27 +495,68 @@ body {
   background-size: 300% 300%;
   animation: neonGradient 4s linear infinite;
 
-  box-shadow: 0 0 12px rgba(236, 72, 153, 0.9),
-              0 0 28px rgba(168, 85, 247, 0.7);
+  box-shadow:
+    0 0 12px rgba(236, 72, 153, 0.9),
+    0 0 28px rgba(168, 85, 247, 0.7);
 
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 
+
 .neon-border-inner {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  min-width: 340px;   /* Desktop */
+  padding: 0.95rem 2.8rem;
+
   border-radius: 9999px;
-  padding: 0.9rem 2.8rem;
   background: #050816;
+
   color: #ffffff;
   font-weight: 600;
   letter-spacing: 0.03em;
   font-size: 0.95rem;
   white-space: nowrap;
+
   transition: background 0.3s ease;
 }
+
+/* ✅ Mobile Fix: Buttons nicht zu breit, Text darf umbrechen */
+@media (max-width: 640px) {
+  .neon-border {
+    width: 100%;
+  }
+
+  .neon-border-inner {
+    min-width: 0;              /* wichtig: min-width aufheben */
+    width: 100%;               /* Button füllt Container */
+    max-width: 100%;
+    padding: 0.95rem 1.4rem;   /* weniger padding für mobile */
+    white-space: normal;       /* darf umbrechen */
+    text-align: center;
+  }
+}
+
+/* ✅ Bonus: Button-Stack für mehrere CTAs untereinander */
+.neon-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.neon-stack .neon-border {
+  width: 100%;
+  max-width: 420px; /* gleich wie dein Hero */
+}
+
+
 
 .neon-border:hover {
   box-shadow: 0 0 18px rgba(236, 72, 153, 1),
