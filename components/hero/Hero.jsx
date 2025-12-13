@@ -38,12 +38,16 @@ const Hero = () => {
       <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
         <div className="w-10/12 sm:w-7/12 text-center m-auto">
           {/* Haupttitel */}
-          <h1 className="text-center md:text-left text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-            <span className="block text-white">Leadgenerierung,</span>
-            <span className="mt-2 block text-[#7CFF00]">
-              die neue Anfragen bringt.
-            </span>
-          </h1>
+<h1 className="mx-auto max-w-[900px] text-center text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+
+  <span className="block text-white">
+    Leadgenerierung,
+  </span>
+  <span className="mt-2 block text-[#7CFF00]">
+    die neue Anfragen bringt.
+  </span>
+</h1>
+
 
           {/* Untertitel */}
           <p className="mt-5">
@@ -57,26 +61,28 @@ const Hero = () => {
           <div className="flex flex-col items-center justify-center gap-4 mt-[40px]">
             {/* Primärer CTA */}
             <Link href="/anfrage">
-              <a className="group neon-border w-full max-w-[420px]">
-                <span className="neon-border-inner flex items-center justify-center">
-                  Anfrage für Lead-Kampagne
-                  <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </a>
+<a className="group neon-border w-full max-w-[420px]">
+  <span className="neon-border-inner flex items-center justify-center gap-2">
+    Anfrage für Lead-Kampagne
+    <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+  </span>
+</a>
+
             </Link>
 
             {/* Sekundärer CTA */}
-            <a
-              href={calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group neon-border w-full max-w-[420px]"
-            >
-              <span className="neon-border-inner flex items-center justify-center">
-                Rückruf direkt buchen
-                <FaCalendarAlt className="ml-2 opacity-80" />
-              </span>
-            </a>
+<a
+  href={calendlyUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group neon-border w-full max-w-[420px]"
+>
+  <span className="neon-border-inner flex items-center justify-center gap-2">
+    Rückruf direkt buchen
+    <FaCalendarAlt className="transition-transform duration-300 group-hover:translate-x-1 opacity-80" />
+  </span>
+</a>
+
           </div>
         </div>
       </div>
