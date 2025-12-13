@@ -22,6 +22,7 @@ const Anfrage = () => {
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
   const [cfToken, setCfToken] = useState("");
+  const [tsKey, setTsKey] = useState(0); // optional: Turnstile nach Erfolg resetten
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +58,7 @@ const Anfrage = () => {
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
+      setTsKey((k) => k + 1); // Turnstile Widget neu mounten (sauberer Reset)
 
       if (typeof fbq.lead === "function") {
         fbq.lead({ form: "Lead-Kampagne-Anfrage" });
@@ -194,18 +196,40 @@ const Anfrage = () => {
                     required
                   >
                     <option value="">Bitte wählen ...</option>
-                    <option value="Gastronomie / Restaurant">Gastronomie / Restaurant</option>
-                    <option value="Detailhandel / Retail">Detailhandel / Retail</option>
-                    <option value="Versicherung / Finanzdienstleister">Versicherung / Finanzdienstleister</option>
-                    <option value="Immobilien / Makler / Verwaltung">Immobilien / Makler / Verwaltung</option>
-                    <option value="Fitness / Gesundheit">Fitness / Gesundheit</option>
+                    <option value="Gastronomie / Restaurant">
+                      Gastronomie / Restaurant
+                    </option>
+                    <option value="Detailhandel / Retail">
+                      Detailhandel / Retail
+                    </option>
+                    <option value="Versicherung / Finanzdienstleister">
+                      Versicherung / Finanzdienstleister
+                    </option>
+                    <option value="Immobilien / Makler / Verwaltung">
+                      Immobilien / Makler / Verwaltung
+                    </option>
+                    <option value="Fitness / Gesundheit">
+                      Fitness / Gesundheit
+                    </option>
                     <option value="Beauty / Kosmetik">Beauty / Kosmetik</option>
-                    <option value="Agentur / Marketing">Agentur / Marketing</option>
-                    <option value="Beratung / Coaching">Beratung / Coaching</option>
-                    <option value="IT / Software / SaaS">IT / Software / SaaS</option>
-                    <option value="Industrie / Produktion">Industrie / Produktion</option>
-                    <option value="Dienstleistungen (allgemein)">Dienstleistungen (allgemein)</option>
-                    <option value="Öffentliche Hand / Bildung">Öffentliche Hand / Bildung</option>
+                    <option value="Agentur / Marketing">
+                      Agentur / Marketing
+                    </option>
+                    <option value="Beratung / Coaching">
+                      Beratung / Coaching
+                    </option>
+                    <option value="IT / Software / SaaS">
+                      IT / Software / SaaS
+                    </option>
+                    <option value="Industrie / Produktion">
+                      Industrie / Produktion
+                    </option>
+                    <option value="Dienstleistungen (allgemein)">
+                      Dienstleistungen (allgemein)
+                    </option>
+                    <option value="Öffentliche Hand / Bildung">
+                      Öffentliche Hand / Bildung
+                    </option>
                     <option value="B2B / andere KMU">B2B / andere KMU</option>
                     <option value="Andere Branche">Andere Branche</option>
                   </select>
@@ -225,6 +249,7 @@ const Anfrage = () => {
                     value={formData.message}
                     onChange={handleChange}
                     disabled={disabled}
+                    required
                   />
                 </div>
               </div>
@@ -235,6 +260,7 @@ const Anfrage = () => {
                 </p>
                 <div className="flex justify-center">
                   <Turnstile
+                    key={tsKey}
                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
                     onVerify={(token) => setCfToken(token)}
                   />
@@ -244,7 +270,10 @@ const Anfrage = () => {
               {status === "success" && (
                 <div className="badge-success">
                   <span>✅</span>
-                  <span>Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir melden uns so schnell wie möglich.</span>
+                  <span>
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
+                    melden uns so schnell wie möglich.
+                  </span>
                 </div>
               )}
 
@@ -259,16 +288,21 @@ const Anfrage = () => {
                 <button
                   type="submit"
                   disabled={disabled}
-                  className={`group neon-border ${disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
+                  className={`group neon-border ${
+                    disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
+                  }`}
                 >
                   <span className="neon-border-inner">
-                    {status === "loading" ? "Wird gesendet..." : "Anfrage jetzt abschicken"}
+                    {status === "loading"
+                      ? "Wird gesendet..."
+                      : "Anfrage jetzt abschicken"}
                   </span>
                 </button>
               </div>
 
               <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
-                Deine Angaben werden vertraulich behandelt und nur verwendet, um deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
+                Deine Angaben werden vertraulich behandelt und nur verwendet, um
+                deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
               </p>
             </form>
           </div>
