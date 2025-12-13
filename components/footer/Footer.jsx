@@ -17,6 +17,14 @@ const Footer = () => {
           </Link>
         </div>
 
+        {/* Adresse / Kontakt */}
+        <div className="text-center text-sm sm:text-base text-slate-300 leading-relaxed">
+          <div>4102 Binningen, Schweiz</div>
+          <a href="tel:+41615251810" className="neon-link">
+            Tel: +41 61 525 18 10
+          </a>
+        </div>
+
         {/* Copyright */}
         <p className="text-sm sm:text-sm text-gray-400 text-center">
           © 2026 GetLeedz. Alle Rechte vorbehalten.
@@ -29,7 +37,7 @@ const Footer = () => {
           </span>
           <div className="flex gap-5 sm:gap-6">
             <a
-              href="https://instagram.com"
+              href="http://instagram.com/getleedz"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 rounded-full bg-[#020617] border border-[#292848] hover:border-transparent hover:bg-gradient-to-r hover:from-[#ff00ff] hover:via-[#7aff00] hover:to-[#00e5ff] text-white text-xl sm:text-xl transition-all duration-200 hover:scale-110"
@@ -37,7 +45,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/getleedz"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 rounded-full bg-[#020617] border border-[#292848] hover:border-transparent hover:bg-gradient-to-r hover:from-[#ff00ff] hover:via-[#7aff00] hover:to-[#00e5ff] text-white text-xl sm:text-xl transition-all duration-200 hover:scale-110"
@@ -45,7 +53,7 @@ const Footer = () => {
               <FaFacebookF />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/getleedz/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 rounded-full bg-[#020617] border border-[#292848] hover:border-transparent hover:bg-gradient-to-r hover:from-[#ff00ff] hover:via-[#7aff00] hover:to-[#00e5ff] text-white text-xl sm:text-xl transition-all duration-200 hover:scale-110"
