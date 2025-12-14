@@ -1,21 +1,23 @@
-// components/lib/fbpixel.jsx
+import { hasMarketingConsent } from "../cookie/consent";
 
-// Deine Pixel ID
-export const FB_PIXEL_ID = "1285613311599646";
+const FB_PIXEL_ID = "1285613311599646";
 
-// PageView tracken
+// Schweiz-Check
+const isSwissUser = () => {
+  if (typeof window === "undefined") return false;
+  return Intl.DateTimeFormat().resolvedOptions().timeZone === "Europe/Zurich";
+};
+
+const canTrack = () => {
+  return hasMarketingConsent() && isSwissUser() && typeof window.fbq === "function";
+};
+
 export const pageview = () => {
-  if (typeof window === "undefined" || !window.fbq) return;
+  if (!canTrack()) return;
   window.fbq("track", "PageView");
 };
 
-// Generische Event-Funktion
-export const event = (name, options = {}) => {
-  if (typeof window === "undefined" || !window.fbq) return;
-  window.fbq("track", name, options);
-};
-
-// Komfortfunktion für Leads
-export const lead = (options = {}) => {
-  event("Lead", options);
+export const lead = (params = {}) => {
+  if (!canTrack()) return;
+  window.fbq("track", "Lead", params);
 };

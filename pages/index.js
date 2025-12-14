@@ -37,6 +37,21 @@ const Home = () => (
       <meta name="twitter:image" content="https://www.getleedz.com/og-getleedz.jpg" />
     </Head>
 
+      {/* Calendly CTA */}
+      <section className="bg-[#020617] py-10">
+        <div className="max-w-5xl mx-auto px-6 flex justify-center">
+          <a
+            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group neon-border cursor-pointer"
+          >
+            <span className="neon-border-inner">
+              📅 Rückruf / Termin buchen
+            </span>
+          </a>
+        </div>
+      </section>
 
 
     <main>
