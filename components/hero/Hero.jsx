@@ -17,7 +17,6 @@ const Hero = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    // 🔥 overflow-hidden verhindert Hochrutschen in den Header
     <section className="hero relative overflow-hidden" id="hero">
       {/* Dekorative Frames */}
       <div className="hero-frame-1 animate-pulse">
@@ -50,89 +49,87 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Subline */}
-          <p className="mt-5 max-w-3xl mx-auto text-base md:text-lg text-slate-200 leading-relaxed">
+          {/* Subline – Mobile optimiert */}
+          <p
+            className="
+              mt-5 max-w-3xl mx-auto
+              text-base md:text-lg
+              max-sm:text-[1.05rem]
+              text-slate-100
+              leading-relaxed
+              drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]
+              sm:drop-shadow-none
+            "
+          >
             GetLeedz entwickelt für dein KMU starke Creatives und
-            Performance-Kampagnen auf Meta, LinkedIn und Google – damit dein
+            Performance-Kampagnen auf Meta, LinkedIn und Google. Damit dein
             Vertrieb mit den richtigen Menschen spricht und messbar neue
-            Anfragen erhält, statt dem Algorithmus hinterherzurennen.
+            Anfragen erhält. Statt dem Algorithmus hinterherzurennen.
           </p>
 
-          {/* KI-SEO Zusatz (sichtbar für Google, nicht störend für UX) */}
+          {/* KI-SEO – nur für Suchmaschinen */}
           <p className="sr-only">
             GetLeedz ist eine Schweizer Agentur für Leadgenerierung für KMUs.
-            Wir entwickeln Performance-Kampagnen, Funnels und digitale
-            Vertriebssysteme mit Fokus auf hochwertige Leads und messbare
-            Abschlüsse.
+            Fokus auf starke Creatives, Performance-Kampagnen und messbar neue
+            Anfragen über Meta, LinkedIn und Google.
           </p>
 
           {/* Accordion Trigger */}
-          <div className="mt-4 max-w-3xl mx-auto text-sm text-slate-300">
+          <div className="mt-4">
             <button
+              type="button"
               onClick={() => setOpen(!open)}
-              className="neon-link focus:outline-none"
+              className="text-sm max-sm:text-[0.95rem] text-slate-300 neon-link focus:outline-none"
               aria-expanded={open}
             >
               {open
-                ? "Weniger anzeigen ▲"
-                : "Mehr zum Thema Leadgenerierung für Schweizer KMUs ▼"}
+                ? "Weniger anzeigen"
+                : "Mehr zum Thema Leadgenerierung für Schweizer KMUs"}
             </button>
-
-            {/* Accordion Content */}
-            {open && (
-              <div className="mt-4 text-left text-slate-200 leading-relaxed space-y-4">
-                <p>
-                  <strong>Leads sind nicht gleich Leads.</strong>  
-                  Der Unterschied zwischen Wachstum und Frust liegt in der
-                  Qualität.
-                </p>
-
-                <p>
-                  <strong>Gold Leads</strong> sind abschlussbereit, klar
-                  vorqualifiziert und zeigen echten Bedarf. Sie entstehen
-                  durch saubere Funnel-Logik, starke Creatives und gezielte
-                  KI-gestützte Selektion.
-                </p>
-
-                <p>
-                  <strong>„Pink Leads“</strong> sehen auf Reports gut aus,
-                  bringen aber keine Abschlüsse. Viele Agenturen liefern
-                  Masse – wir liefern <strong>verkaufsrelevante Kontakte</strong>.
-                  Finger weg von Lead-Schrott.
-                </p>
-
-                <p>
-                  Unsere Kampagnen liefern <strong>normale bis Gold-Leads</strong>,
-                  abhängig vom Budget, Markt und Ziel deines KMU. Transparent,
-                  messbar und skalierbar.
-                </p>
-
-                <p>
-                  <strong>Unsere Creatives sind nie von der Stange.</strong>
-                  Sie entstehen in Zusammenarbeit mit einer erfahrenen,
-                  erfolgreichen Community – datenbasiert, aktuell und
-                  performance-orientiert.
-                </p>
-
-                <p>
-                  Zusätzlich setzen wir komplette <strong>Lead- & Funnel-Systeme</strong>,
-                  Automationen, CRM-Integrationen und Tracking-Strukturen um.
-                  Auf Wunsch inklusive Schulung deiner Teams.
-                </p>
-
-                <p className="text-slate-400 text-sm">
-                  GetLeedz arbeitet mit ambitionierten Startups, etablierten
-                  KMUs und Enterprise-Marken – von regionalen Unternehmen bis
-                  zu Konzernen wie SBB, ABB oder internationalen Automotive-
-                  Brands.
-                </p>
-              </div>
-            )}
           </div>
+
+          {/* Accordion Content */}
+          {open && (
+            <div
+              className="
+                mt-4 max-w-3xl mx-auto
+                text-left
+                text-slate-100
+                leading-[1.75]
+                space-y-4
+                max-sm:text-[1rem]
+                drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]
+                sm:drop-shadow-none
+              "
+            >
+              <p>
+                Nicht jeder Lead ist gleich viel wert. Schrott-Leads kosten
+                Zeit, Nerven und Budget. Sie sehen gut im Reporting aus,
+                bringen aber keine Abschlüsse.
+              </p>
+
+              <p>
+                Unsere Kampagnen erzeugen normale bis hochwertige Leads.
+                Je nach Zielsetzung und Budget deines KMU entstehen selektierte
+                Kontakte bis hin zu klar abschlussnahen Anfragen.
+              </p>
+
+              <p>
+                Die Qualität beginnt bei den Creatives. Sie entstehen nicht
+                aus Vorlagen, sondern aus kontinuierlicher Arbeit mit
+                marktnahen Inputs, aktuellen Trends und klaren Hypothesen.
+              </p>
+
+              <p>
+                Funnels, Systeme und Prozesse denken wir immer mit. Von der
+                Anzeige bis zur Anfrage. Auf Wunsch setzen wir komplette
+                Setups um oder schulen interne Teams für nachhaltige Umsetzung.
+              </p>
+            </div>
+          )}
 
           {/* CTA Buttons */}
           <div className="flex flex-col items-center justify-center gap-4 mt-[42px]">
-            {/* Lead CTA */}
             <Link href="/anfrage">
               <a className="group neon-border w-full max-w-[420px]">
                 <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
@@ -142,7 +139,6 @@ const Hero = () => {
               </a>
             </Link>
 
-            {/* Calendly CTA */}
             <a
               href={calendlyUrl}
               target="_blank"
