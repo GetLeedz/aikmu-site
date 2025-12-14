@@ -4,7 +4,10 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
-import * as fbq from "../components/lib/fbpixel";
+
+// 👉 einheitliches Tracking + Consent
+import { track } from "../components/lib/fbpixel";
+import { hasMarketingConsent } from "../components/lib/consent";
 
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
@@ -22,7 +25,7 @@ const Anfrage = () => {
   const [status, setStatus] = useState(null); // "loading" | "success" | "error" | null
   const [errorMsg, setErrorMsg] = useState("");
   const [cfToken, setCfToken] = useState("");
-  const [tsKey, setTsKey] = useState(0); // optional: Turnstile nach Erfolg resetten
+  const [tsKey, setTsKey] = useState(0); // Turnstile Reset nach Erfolg
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,13 +58,17 @@ const Anfrage = () => {
         throw new Error(data.error || "Fehler beim Absenden der Anfrage.");
       }
 
+      // ✅ ERFOLG
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
-      setTsKey((k) => k + 1); // Turnstile Widget neu mounten (sauberer Reset)
+      setTsKey((k) => k + 1); // Turnstile sauber resetten
 
-      if (typeof fbq.lead === "function") {
-        fbq.lead({ form: "Lead-Kampagne-Anfrage" });
+      // 🎯 META LEAD – NUR HIER, NUR BEI ERFOLG, NUR MIT CONSENT
+      if (hasMarketingConsent()) {
+        track("Lead", {
+          form: "Lead-Kampagne-Anfrage",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -245,7 +252,7 @@ const Anfrage = () => {
                     id="message"
                     name="message"
                     className="neon-textarea"
-                    placeholder="Kurz in 1–3 Sätzen beschreiben. Je konkreter, desto besser können wir dir antworten."
+                    placeholder="Kurz in 1–3 Sätzen beschreiben."
                     value={formData.message}
                     onChange={handleChange}
                     disabled={disabled}
@@ -271,8 +278,8 @@ const Anfrage = () => {
                 <div className="badge-success">
                   <span>✅</span>
                   <span>
-                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir
-                    melden uns so schnell wie möglich.
+                    Danke dir! Deine Anfrage ist bei uns eingetroffen. Wir melden
+                    uns so schnell wie möglich.
                   </span>
                 </div>
               )}
@@ -300,9 +307,9 @@ const Anfrage = () => {
                 </button>
               </div>
 
-              <p className="pt-3 text-base md:text-base leading-relaxed text-slate-200">
+              <p className="pt-3 text-base leading-relaxed text-slate-200">
                 Deine Angaben werden vertraulich behandelt und nur verwendet, um
-                deine Anfrage zu beantworten. Keine Newsletter, kein Spam.
+                deine Anfrage zu beantworten. Kein Spam.
               </p>
             </form>
           </div>
