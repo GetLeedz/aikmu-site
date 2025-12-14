@@ -1,4 +1,3 @@
-// pages/_app.js
 import "../styles/globals.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -11,12 +10,10 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Initial PageView (nur wenn Consent schon existiert)
     if (hasMarketingConsent()) {
       initFacebookPixel();
     }
 
-    // PageView bei jeder Route
     const handleRouteChange = () => {
       if (hasMarketingConsent()) {
         track("PageView");
@@ -24,7 +21,6 @@ function MyApp({ Component, pageProps }) {
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
-
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
@@ -32,8 +28,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Component {...pageProps} />
-      <CookieBanner />
+      {/* 🔒 App Root – KEINE Filter, KEINE Transforms */}
+      <div id="app-root">
+        <Component {...pageProps} />
+      </div>
+
+      {/* 🔒 Fixed Layer – komplett entkoppelt */}
+      <div id="fixed-layer">
+        <CookieBanner />
+      </div>
     </>
   );
 }

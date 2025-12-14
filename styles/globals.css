@@ -190,3 +190,23 @@ body {
     text-align: center;
   }
 }
+
+/* ================= FIXED LAYERS ================= */
+
+/* Normaler App-Content */
+#app-root {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Eigener Layer für fixed Elemente */
+#fixed-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#fixed-layer > * {
+  pointer-events: auto;
+}
