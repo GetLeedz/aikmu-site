@@ -49,7 +49,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Subline – Mobile optimiert */}
+          {/* Subline */}
           <p
             className="
               mt-5 max-w-3xl mx-auto
@@ -67,7 +67,7 @@ const Hero = () => {
             Anfragen erhält. Statt dem Algorithmus hinterherzurennen.
           </p>
 
-          {/* KI-SEO – nur für Suchmaschinen */}
+          {/* KI-SEO (unsichtbar) */}
           <p className="sr-only">
             GetLeedz ist eine Schweizer Agentur für Leadgenerierung für KMUs.
             Fokus auf starke Creatives, Performance-Kampagnen und messbar neue
@@ -84,7 +84,7 @@ const Hero = () => {
             >
               {open
                 ? "Weniger anzeigen"
-                : "Mehr zum Thema Leadgenerierung für Schweizer KMUs"}
+                : "Mehr zum Thema Leadqualität und Leadgenerierung"}
             </button>
           </div>
 
@@ -103,27 +103,43 @@ const Hero = () => {
               "
             >
               <p>
-                Nicht jeder Lead ist gleich viel wert. Schrott-Leads kosten
-                Zeit, Nerven und Budget. Sie sehen gut im Reporting aus,
-                bringen aber keine Abschlüsse.
+                Nicht jeder Lead ist gleich viel wert. In der Praxis sehen wir
+                drei Kategorien. Schrott-Leads erzeugen Klicks, aber keine
+                Gespräche. Sie sind nicht vorbereitet, nicht passend oder nicht
+                entscheidungsfähig.
               </p>
 
               <p>
-                Unsere Kampagnen erzeugen normale bis hochwertige Leads.
-                Je nach Zielsetzung und Budget deines KMU entstehen selektierte
-                Kontakte bis hin zu klar abschlussnahen Anfragen.
+                Normale Leads sind interessiert, vergleichen Angebote und
+                benötigen saubere Kommunikation im Vertrieb. Sie entstehen
+                bei klarer Zielgruppenansprache und soliden Kampagnen.
               </p>
 
               <p>
-                Die Qualität beginnt bei den Creatives. Sie entstehen nicht
-                aus Vorlagen, sondern aus kontinuierlicher Arbeit mit
-                marktnahen Inputs, aktuellen Trends und klaren Hypothesen.
+                Gold Leads sind abschlussnah. Sie wissen, was sie wollen,
+                haben ein konkretes Bedürfnis und treffen zeitnah
+                Entscheidungen. Diese Leads entstehen nicht zufällig, sondern
+                durch saubere Selektion, klare Botschaften und präzise Funnels.
               </p>
 
               <p>
-                Funnels, Systeme und Prozesse denken wir immer mit. Von der
-                Anzeige bis zur Anfrage. Auf Wunsch setzen wir komplette
-                Setups um oder schulen interne Teams für nachhaltige Umsetzung.
+                Je nach Zielsetzung und Budget deines KMU bewegen wir uns
+                bewusst zwischen normalen Leads und hochwertigen,
+                selektierten Anfragen. Qualität wird gesteuert, nicht
+                versprochen.
+              </p>
+
+              <p>
+                Die Creatives sind dabei der Schlüssel. Sie entstehen nicht
+                von der Stange, sondern aus kontinuierlicher Arbeit mit
+                aktuellen Marktimpulsen, echten Reaktionen und laufender
+                Optimierung. Funnels und Systeme denken wir immer mit.
+              </p>
+
+              <p>
+                Auf Wunsch setzen wir komplette Lead-Systeme um oder schulen
+                Teams, damit Leadgenerierung intern verstanden, kontrolliert
+                und weiterentwickelt werden kann.
               </p>
             </div>
           )}
