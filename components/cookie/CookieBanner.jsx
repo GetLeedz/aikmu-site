@@ -1,22 +1,35 @@
-// components/CookieBanner.jsx
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { setMarketingConsent } from "../lib/consent";
 
 const CookieBanner = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const consent = window.localStorage.getItem("cookie-consent");
+
+    const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
       setVisible(true);
     }
   }, []);
 
   const handleChoice = (value) => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("cookie-consent", value);
+    if (typeof window === "undefined") return;
+
+    // UI-Consent speichern
+    localStorage.setItem("cookie-consent", value);
+
+    // Marketing-Consent explizit setzen
+    if (value === "accepted") {
+      setMarketingConsent(true);
+    } else {
+      setMarketingConsent(false);
     }
+
+    // 🔥 WICHTIG: Event feuern, damit _app.js sofort reagiert
+    window.dispatchEvent(new Event("getleedz:consent-updated"));
+
     setVisible(false);
   };
 
@@ -24,9 +37,7 @@ const CookieBanner = () => {
 
   return (
     <div className="fixed inset-x-0 bottom-4 z-[60] flex justify-center px-4 pointer-events-none">
-      {/* Neon-Rahmen */}
       <div className="pointer-events-auto max-w-2xl w-full bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff] p-[1px] rounded-2xl shadow-[0_0_40px_rgba(122,255,0,0.35)]">
-        {/* Inhalt */}
         <div className="rounded-2xl bg-[#020617]/95 backdrop-blur-xl px-4 py-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1 text-sm sm:text-base">
             <p className="font-semibold text-white">
@@ -52,6 +63,7 @@ const CookieBanner = () => {
             >
               Nur notwendige
             </button>
+
             <button
               type="button"
               onClick={() => handleChoice("accepted")}
