@@ -1,5 +1,4 @@
 // components/lib/consent.js
-
 export const CONSENT_KEY = "getleedz_consent_marketing";
 
 export const hasMarketingConsent = () => {
