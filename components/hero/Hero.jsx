@@ -14,42 +14,40 @@ const Hero = () => {
     process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
 
   return (
-    <section className="hero" id="hero">
-      {/* schräg, pulsierende Frames */}
+    // 🔥 WICHTIG: overflow-hidden verhindert Hochrutschen in den Header
+    <section className="hero relative overflow-hidden" id="hero">
+      {/* schräg, pulsierende Frames (rein dekorativ) */}
       <div className="hero-frame-1 animate-pulse">
-        <Image src={hero1} objectFit="fill" alt="hero one" />
+        <Image src={hero1} alt="hero one" />
       </div>
       <div className="hero-frame-2 animate-pulse">
-        <Image src={hero2} objectFit="fill" alt="hero two" />
+        <Image src={hero2} alt="hero two" />
       </div>
       <div className="hero-frame-3 animate-pulse">
-        <Image src={hero3} objectFit="fill" alt="hero three" />
+        <Image src={hero3} alt="hero three" />
       </div>
       <div className="hero-frame-4 animate-pulse">
-        <Image src={hero4} objectFit="fill" alt="hero four" />
+        <Image src={hero4} alt="hero four" />
       </div>
       <div className="hero-frame-5 animate-pulse">
-        <Image src={hero5} objectFit="fill" alt="hero five" />
+        <Image src={hero5} alt="hero five" />
       </div>
       <div className="hero-frame-6 animate-pulse">
-        <Image src={hero6} objectFit="fill" alt="hero six" />
+        <Image src={hero6} alt="hero six" />
       </div>
 
-      <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] z-[1] relative hero-content">
+      {/* Content */}
+      <div className="container m-auto pt-[120px] pb-[40px] md:pt-[150px] md:pb-[80px] lg:pt-[190px] lg:pb-[120px] xl:pt-[230px] xl:pb-[180px] relative z-[1] hero-content">
         <div className="w-10/12 sm:w-7/12 text-center m-auto">
-          {/* Haupttitel */}
-<h1 className="mx-auto max-w-[900px] text-center text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+          {/* Headline */}
+          <h1 className="mx-auto max-w-[900px] text-center text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
+            <span className="block text-white">Leadgenerierung,</span>
+            <span className="mt-2 block text-[#7CFF00]">
+              die neue Anfragen bringt.
+            </span>
+          </h1>
 
-  <span className="block text-white">
-    Leadgenerierung,
-  </span>
-  <span className="mt-2 block text-[#7CFF00]">
-    die neue Anfragen bringt.
-  </span>
-</h1>
-
-
-          {/* Untertitel */}
+          {/* Subline */}
           <p className="mt-5">
             GetLeedz entwickelt für dein KMU starke Creatives und
             Performance-Kampagnen auf Meta, LinkedIn und Google – damit dein
@@ -57,33 +55,30 @@ const Hero = () => {
             hinterherzurennen.
           </p>
 
-          {/* CTA Buttons untereinander, gleich gross */}
+          {/* CTA Buttons */}
           <div className="flex flex-col items-center justify-center gap-4 mt-[42px]">
-            {/* Primärer CTA */}
+            {/* Lead CTA */}
             <Link href="/anfrage">
-            <a className="group neon-border w-full max-w-[420px]">
-              <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
+              <a className="group neon-border w-full max-w-[420px]">
+                <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
+                  Anfrage für Lead-Kampagne
+                  <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </a>
+            </Link>
 
-                Anfrage für Lead-Kampagne
-                <FaArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+            {/* Calendly CTA */}
+            <a
+              href={calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group neon-border w-full max-w-[420px]"
+            >
+              <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
+                Rückruf direkt buchen
+                <FaCalendarAlt className="ml-2 opacity-80" />
               </span>
             </a>
-          </Link>
-
-          <a
-            href={calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group neon-border w-full max-w-[420px]"
-          >
-            <span className="neon-border-inner w-full flex items-center justify-center px-8 py-4">
-
-              Rückruf direkt buchen
-              <FaCalendarAlt className="ml-2 opacity-80" />
-            </span>
-          </a>
-
-
           </div>
         </div>
       </div>
