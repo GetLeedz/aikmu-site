@@ -38,7 +38,7 @@ body {
 /* ================= HERO ================= */
 .hero {
   position: relative;
-  isolation: isolate; /* 🔒 trennt Rendering sauber */
+  isolation: isolate;
 }
 
 .hero-content {
@@ -70,7 +70,7 @@ body {
   z-index: 0;
 }
 
-.hero-frame-1 { width: 131px; height:150px; border-radius:10px; transform:rotate(-24deg); top:16%; left:6.5%; }
+.hero-frame-1 { width:131px; height:150px; border-radius:10px; transform:rotate(-24deg); top:16%; left:6.5%; }
 .hero-frame-2 { width:141px; height:141px; border-radius:50%; top:38%; left:9%; }
 .hero-frame-3 { width:214px; height:244px; border-radius:10px; transform:rotate(-18deg); top:60.5%; left:3%; }
 .hero-frame-4 { width:192px; height:219px; border-radius:18px; transform:rotate(19deg); top:14%; right:2.5%; }
@@ -81,6 +81,7 @@ body {
 .neon-border {
   position: relative;
   display: inline-flex;
+  align-items: stretch;
   border-radius: 9999px;
   padding: 6px;
 
@@ -91,21 +92,26 @@ body {
   box-shadow:
     0 0 12px rgba(236,72,153,.9),
     0 0 28px rgba(168,85,247,.7);
+
+  transition: box-shadow .3s ease, transform .3s ease;
 }
 
 .neon-border-inner {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   min-width: 340px;
   padding: .95rem 2.8rem;
+
   border-radius: 9999px;
   background: #050816;
   color: white;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-/* ================= NEON INPUTS (FIXED) ================= */
+/* ================= NEON INPUTS ================= */
 .neon-input-wrapper {
   position: relative;
   z-index: 0;
@@ -113,7 +119,14 @@ body {
   border-radius: .9rem;
   overflow: hidden;
 
-  background: linear-gradient(120deg,#ec4899,#a855f7,#22d3ee,#f97316,#ec4899);
+  background: linear-gradient(
+    120deg,
+    #ec4899,
+    #a855f7,
+    #22d3ee,
+    #f97316,
+    #ec4899
+  );
   background-size: 300% 300%;
   animation: neonGradient 6s linear infinite;
 }
@@ -124,13 +137,23 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
+  box-sizing: border-box;
+
   border-radius: .8rem;
   background: #050816;
   border: none;
   color: #f9fafb;
-  padding: .8rem 1rem;
   font-size: .9rem;
+  line-height: 1.45;
+
+  padding: .85rem 1rem;
   outline: none;
+}
+
+.neon-textarea {
+  min-height: 140px;
+  resize: vertical;
+  display: block;
 }
 
 .neon-input:focus,
@@ -142,15 +165,12 @@ body {
     0 0 18px rgba(168,85,247,.75);
 }
 
-/* ================= ANIMATIONS ================= */
-@keyframes neonGradient {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-  100% { background-position:0% 50%; }
-}
-
 /* ================= MOBILE ================= */
 @media (max-width: 640px) {
+  .neon-border {
+    width: 100%;
+  }
+
   .neon-border-inner {
     min-width: 0;
     width: 100%;
@@ -160,21 +180,18 @@ body {
   }
 }
 
-/* =====================================================
-   GLOBAL NEON HOVER EFFECTS (LINKS & BUTTONS)
-   ===================================================== */
+/* ================= GLOBAL NEON HOVER ================= */
 
-/* ---------- TEXT LINKS ---------- */
+/* Text Links */
 a:not(.neon-border):not(.neon-link) {
   position: relative;
-  transition: color 0.25s ease;
+  transition: color .25s ease;
 }
 
 a:not(.neon-border):not(.neon-link):hover {
   color: #7aff00;
 }
 
-/* subtiler Neon-Unterstrich */
 a:not(.neon-border):not(.neon-link)::after {
   content: "";
   position: absolute;
@@ -182,10 +199,10 @@ a:not(.neon-border):not(.neon-link)::after {
   bottom: -2px;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
+  background: linear-gradient(90deg,#ff00ff,#7aff00,#00e5ff);
   opacity: 0;
-  transform: scaleX(0.6);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: scaleX(.6);
+  transition: opacity .25s ease, transform .25s ease;
 }
 
 a:not(.neon-border):not(.neon-link):hover::after {
@@ -193,37 +210,44 @@ a:not(.neon-border):not(.neon-link):hover::after {
   transform: scaleX(1);
 }
 
-/* ---------- BUTTONS (generisch) ---------- */
+/* Generic Buttons */
 button:not(.neon-border),
 input[type="submit"]:not(.neon-border) {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
 button:not(.neon-border):hover,
 input[type="submit"]:not(.neon-border):hover {
   transform: translateY(-1px);
   box-shadow:
-    0 0 12px rgba(255, 0, 255, 0.35),
-    0 0 20px rgba(122, 255, 0, 0.25);
+    0 0 12px rgba(255,0,255,.35),
+    0 0 20px rgba(122,255,0,.25);
 }
 
-/* ---------- NEON BORDER BUTTONS (INTENSIVER) ---------- */
+/* Neon Border Hover */
 .neon-border:hover {
   box-shadow:
-    0 0 18px rgba(236, 72, 153, 1),
-    0 0 36px rgba(168, 85, 247, 0.9),
-    0 0 48px rgba(0, 229, 255, 0.6);
+    0 0 18px rgba(236,72,153,1),
+    0 0 36px rgba(168,85,247,.9),
+    0 0 48px rgba(0,229,255,.6);
   transform: translateY(-1px);
 }
 
 .neon-border:hover .neon-border-inner {
-  background: #000000;
+  background: #000;
 }
 
-/* ---------- NEON LINK (bereits bestehend, verstärkt) ---------- */
+/* Neon Link */
 .neon-link:hover {
-  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
+  background: linear-gradient(90deg,#ff00ff,#7aff00,#00e5ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes neonGradient {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
 }
