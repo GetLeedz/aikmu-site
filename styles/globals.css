@@ -159,3 +159,71 @@ body {
     text-align: center;
   }
 }
+
+/* =====================================================
+   GLOBAL NEON HOVER EFFECTS (LINKS & BUTTONS)
+   ===================================================== */
+
+/* ---------- TEXT LINKS ---------- */
+a:not(.neon-border):not(.neon-link) {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+a:not(.neon-border):not(.neon-link):hover {
+  color: #7aff00;
+}
+
+/* subtiler Neon-Unterstrich */
+a:not(.neon-border):not(.neon-link)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+a:not(.neon-border):not(.neon-link):hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ---------- BUTTONS (generisch) ---------- */
+button:not(.neon-border),
+input[type="submit"]:not(.neon-border) {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:not(.neon-border):hover,
+input[type="submit"]:not(.neon-border):hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 12px rgba(255, 0, 255, 0.35),
+    0 0 20px rgba(122, 255, 0, 0.25);
+}
+
+/* ---------- NEON BORDER BUTTONS (INTENSIVER) ---------- */
+.neon-border:hover {
+  box-shadow:
+    0 0 18px rgba(236, 72, 153, 1),
+    0 0 36px rgba(168, 85, 247, 0.9),
+    0 0 48px rgba(0, 229, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.neon-border:hover .neon-border-inner {
+  background: #000000;
+}
+
+/* ---------- NEON LINK (bereits bestehend, verstärkt) ---------- */
+.neon-link:hover {
+  background: linear-gradient(90deg, #ff00ff, #7aff00, #00e5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
