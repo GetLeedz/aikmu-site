@@ -1,6 +1,7 @@
+// components/cookie/CookieBanner.jsx
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CONSENT_KEY, setMarketingConsent } from "../lib/consent";
+import { setMarketingConsent } from "../lib/consent";
 import { initFacebookPixel } from "../lib/fbpixel";
 
 const CookieBanner = () => {
@@ -8,58 +9,48 @@ const CookieBanner = () => {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const consent = localStorage.getItem(CONSENT_KEY);
-
-    // Banner nur zeigen, wenn noch keine Wahl getroffen wurde
-    if (consent === null) setVisible(true);
-
-    // Wenn früher schon akzeptiert: Pixel laden
-    if (consent === "true") initFacebookPixel();
+    const consent = localStorage.getItem("getleedz_consent_marketing");
+    if (!consent) setVisible(true);
   }, []);
 
-  const handleChoice = (accepted) => {
-    setMarketingConsent(accepted);
+  const acceptAll = () => {
+    setMarketingConsent(true);
+    initFacebookPixel(); // 🔥 HIER wird Pixel NACH Consent geladen
+    setVisible(false);
+  };
 
-    // sofort laden, wenn akzeptiert
-    if (accepted) initFacebookPixel();
-
+  const decline = () => {
+    setMarketingConsent(false);
     setVisible(false);
   };
 
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-[60] flex justify-center px-4 pointer-events-none">
-      <div className="pointer-events-auto max-w-2xl w-full bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff] p-[1px] rounded-2xl shadow-[0_0_40px_rgba(122,255,0,0.35)]">
-        <div className="rounded-2xl bg-[#020617]/95 backdrop-blur-xl px-4 py-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1 text-sm sm:text-base">
-            <p className="font-semibold text-white">Cookies für mehr Performance.</p>
-            <p className="text-xs sm:text-sm text-gray-300">
-              Wir verwenden Cookies, um deine Nutzungserfahrung zu verbessern und unsere Kampagnen auszuwerten. Mehr Infos in unserer{" "}
-              <Link href="/datenschutz" legacyBehavior>
-                <a className="neon-link underline-offset-2">Datenschutzerklärung</a>
-              </Link>
-              .
-            </p>
-          </div>
+    <div className="fixed bottom-4 inset-x-0 z-[999] flex justify-center px-4">
+      <div className="max-w-2xl w-full rounded-2xl bg-[#020617]/95 p-4 border border-[#7aff00]">
+        <p className="text-white font-semibold">Cookies & Tracking</p>
+        <p className="text-gray-300 text-sm mt-1">
+          Wir verwenden Marketing-Cookies (z.B. Meta Pixel).
+          Details in der{" "}
+          <Link href="/datenschutz">
+            <a className="underline">Datenschutzerklärung</a>
+          </Link>
+        </p>
 
-          <div className="flex flex-wrap gap-2 sm:gap-3 justify-end">
-            <button
-              type="button"
-              onClick={() => handleChoice(false)}
-              className="px-3 sm:px-4 py-2 rounded-full border border-slate-500 text-xs sm:text-sm text-gray-200 hover:border-[#7aff00] hover:text-white transition-colors"
-            >
-              Nur notwendige
-            </button>
-            <button
-              type="button"
-              onClick={() => handleChoice(true)}
-              className="px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff] shadow-[0_0_20px_rgba(255,0,255,0.45)] hover:shadow-[0_0_28px_rgba(122,255,0,0.6)] transition-shadow"
-            >
-              Alle akzeptieren
-            </button>
-          </div>
+        <div className="flex gap-3 mt-4 justify-end">
+          <button
+            onClick={decline}
+            className="px-4 py-2 rounded-full border text-gray-300"
+          >
+            Nur notwendig
+          </button>
+          <button
+            onClick={acceptAll}
+            className="px-5 py-2 rounded-full bg-[#7aff00] text-black font-semibold"
+          >
+            Alle akzeptieren
+          </button>
         </div>
       </div>
     </div>

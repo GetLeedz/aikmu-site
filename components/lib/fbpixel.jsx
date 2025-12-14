@@ -1,6 +1,7 @@
+// components/lib/fbpixel.jsx
 import { hasMarketingConsent } from "./consent";
 
-const FB_PIXEL_ID = "1285613311599646";
+export const FB_PIXEL_ID = "1285613311599646";
 
 export const initFacebookPixel = () => {
   if (typeof window === "undefined") return;
@@ -25,4 +26,10 @@ export const initFacebookPixel = () => {
   })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
 
   window.fbq("init", FB_PIXEL_ID);
+  window.fbq("track", "PageView");
+};
+
+export const trackPageView = () => {
+  if (!window.fbq || !hasMarketingConsent()) return;
+  window.fbq("track", "PageView");
 };

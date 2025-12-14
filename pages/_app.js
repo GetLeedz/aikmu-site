@@ -1,35 +1,28 @@
 // pages/_app.js
 import "../styles/globals.css";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import CookieBanner from "../components/cookie/CookieBanner";
+import { initFacebookPixel, trackPageView } from "../components/lib/fbpixel";
 import { hasMarketingConsent } from "../components/lib/consent";
-import * as fbq from "../components/lib/fbpixel";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
-    const track = () => {
-      if (!hasMarketingConsent()) return;
-      fbq.pageview();
+    if (hasMarketingConsent()) {
+      initFacebookPixel();
+    }
+
+    const handleRouteChange = () => {
+      trackPageView();
     };
 
-    // initial
-    track();
-
-    // route changes
-    router.events.on("routeChangeComplete", track);
-
-    // wenn User im Banner akzeptiert/ablehnt
-    const onConsentChanged = () => track();
-    window.addEventListener("marketing-consent-changed", onConsentChanged);
-
+    router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
-      router.events.off("routeChangeComplete", track);
-      window.removeEventListener("marketing-consent-changed", onConsentChanged);
+      router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router.events]);
+  }, []);
 
   return (
     <>
