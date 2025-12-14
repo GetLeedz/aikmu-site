@@ -1,13 +1,12 @@
-/* Font family */
+/* ================= FONT ================= */
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap");
 
-/* tailwind import */
+/* ================= TAILWIND ================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ================= GLOBAL ================= */
-
+/* ================= ROOT ================= */
 :root {
   --color-primary: #322318;
   --color-secondary: #7aff00;
@@ -17,6 +16,7 @@
   --border: #272646;
 }
 
+/* ================= HTML / BODY ================= */
 html,
 body {
   padding: 0;
@@ -36,15 +36,14 @@ body {
 }
 
 /* ================= HERO ================= */
-
 .hero {
   position: relative;
-  isolation: isolate; /* 🔥 FIX: eigener Stacking Context */
+  isolation: isolate; /* 🔒 trennt Rendering sauber */
 }
 
 .hero-content {
   position: relative;
-  z-index: 10; /* 🔥 Content immer über Frames */
+  z-index: 10;
 
   background:
     radial-gradient(800px circle at 50% 40%, rgba(255, 140, 60, 0.22), transparent 60%),
@@ -58,8 +57,7 @@ body {
   padding-top: 6.5rem;
 }
 
-/* ===== HERO FRAMES (rein dekorativ, entkoppelt) ===== */
-
+/* ================= HERO FRAMES ================= */
 .hero-frame-1,
 .hero-frame-2,
 .hero-frame-3,
@@ -68,145 +66,96 @@ body {
 .hero-frame-6 {
   position: absolute;
   overflow: hidden;
-  pointer-events: none; /* 🔥 FIX */
-  z-index: 0;           /* 🔥 unter Content */
+  pointer-events: none;
+  z-index: 0;
 }
 
-.hero-frame-1 {
-  width: 131.56px;
-  height: 150px;
-  border-radius: 10px;
-  transform: rotate(-23.92deg);
-  top: 16%;
-  left: 6.5%;
-}
-.hero-frame-2 {
-  width: 141px;
-  height: 141px;
-  border-radius: 50%;
-  top: 38%;
-  left: 9%;
-}
-.hero-frame-3 {
-  width: 214px;
-  height: 244px;
-  border-radius: 10px;
-  transform: rotate(-17.5deg);
-  top: 60.5%;
-  left: 3%;
-}
-.hero-frame-4 {
-  width: 192.19px;
-  height: 219.13px;
-  border-radius: 18px;
-  transform: rotate(19.2deg);
-  top: 14%;
-  right: 2.5%;
-}
-.hero-frame-5 {
-  width: 155.07px;
-  height: 176.8px;
-  border-radius: 15px;
-  transform: rotate(11.46deg);
-  top: 42%;
-  right: 9.5%;
-}
-.hero-frame-6 {
-  width: 219px;
-  height: 219px;
-  border-radius: 50%;
-  top: 70.5%;
-  right: 5.5%;
-}
+.hero-frame-1 { width: 131px; height:150px; border-radius:10px; transform:rotate(-24deg); top:16%; left:6.5%; }
+.hero-frame-2 { width:141px; height:141px; border-radius:50%; top:38%; left:9%; }
+.hero-frame-3 { width:214px; height:244px; border-radius:10px; transform:rotate(-18deg); top:60.5%; left:3%; }
+.hero-frame-4 { width:192px; height:219px; border-radius:18px; transform:rotate(19deg); top:14%; right:2.5%; }
+.hero-frame-5 { width:155px; height:176px; border-radius:15px; transform:rotate(11deg); top:42%; right:9.5%; }
+.hero-frame-6 { width:219px; height:219px; border-radius:50%; top:70.5%; right:5.5%; }
 
 /* ================= NEON BUTTONS ================= */
-
 .neon-border {
   position: relative;
   display: inline-flex;
-  align-items: stretch;
   border-radius: 9999px;
   padding: 6px;
 
-  background: linear-gradient(
-    120deg,
-    #ec4899,
-    #a855f7,
-    #22d3ee,
-    #f97316,
-    #ec4899
-  );
+  background: linear-gradient(120deg,#ec4899,#a855f7,#22d3ee,#f97316,#ec4899);
   background-size: 300% 300%;
   animation: neonGradient 4s linear infinite;
 
   box-shadow:
-    0 0 12px rgba(236, 72, 153, 0.9),
-    0 0 28px rgba(168, 85, 247, 0.7);
-
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+    0 0 12px rgba(236,72,153,.9),
+    0 0 28px rgba(168,85,247,.7);
 }
 
 .neon-border-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   min-width: 340px;
-  padding: 0.95rem 2.8rem;
+  padding: .95rem 2.8rem;
   border-radius: 9999px;
   background: #050816;
-  color: #ffffff;
+  color: white;
   font-weight: 600;
-  font-size: 0.95rem;
-  white-space: nowrap;
 }
 
-/* Hover bleibt erlaubt, kein Layout-Effekt */
-.neon-border:hover {
+/* ================= NEON INPUTS (FIXED) ================= */
+.neon-input-wrapper {
+  position: relative;
+  z-index: 0;
+  padding: 3px;
+  border-radius: .9rem;
+  overflow: hidden;
+
+  background: linear-gradient(120deg,#ec4899,#a855f7,#22d3ee,#f97316,#ec4899);
+  background-size: 300% 300%;
+  animation: neonGradient 6s linear infinite;
+}
+
+.neon-input,
+.neon-textarea,
+.neon-select {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: .8rem;
+  background: #050816;
+  border: none;
+  color: #f9fafb;
+  padding: .8rem 1rem;
+  font-size: .9rem;
+  outline: none;
+}
+
+.neon-input:focus,
+.neon-textarea:focus,
+.neon-select:focus {
+  background: #020617;
   box-shadow:
-    0 0 18px rgba(236, 72, 153, 1),
-    0 0 36px rgba(168, 85, 247, 0.9);
-  transform: translateY(-1px);
+    0 0 0 1px rgba(168,85,247,.7),
+    0 0 18px rgba(168,85,247,.75);
 }
 
+/* ================= ANIMATIONS ================= */
 @keyframes neonGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
 }
 
 /* ================= MOBILE ================= */
-
 @media (max-width: 640px) {
-  .neon-border {
-    width: 100%;
-  }
-
   .neon-border-inner {
     min-width: 0;
     width: 100%;
-    padding: 0.95rem 1.4rem;
+    padding: .95rem 1.4rem;
     white-space: normal;
     text-align: center;
   }
-}
-
-/* ================= FIXED LAYERS ================= */
-
-/* Normaler App-Content */
-#app-root {
-  position: relative;
-  isolation: isolate;
-}
-
-/* Eigener Layer für fixed Elemente */
-#fixed-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-#fixed-layer > * {
-  pointer-events: auto;
 }
