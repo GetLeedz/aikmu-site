@@ -14,26 +14,26 @@ const Hero = () => {
     process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
 
   return (
-    // 🔥 WICHTIG: overflow-hidden verhindert Hochrutschen in den Header
+    // 🔥 overflow-hidden verhindert Hochrutschen in den Header
     <section className="hero relative overflow-hidden" id="hero">
-      {/* schräg, pulsierende Frames (rein dekorativ) */}
+      {/* Dekorative Frames */}
       <div className="hero-frame-1 animate-pulse">
-        <Image src={hero1} alt="hero one" />
+        <Image src={hero1} alt="Decorative creative example" />
       </div>
       <div className="hero-frame-2 animate-pulse">
-        <Image src={hero2} alt="hero two" />
+        <Image src={hero2} alt="Decorative creative example" />
       </div>
       <div className="hero-frame-3 animate-pulse">
-        <Image src={hero3} alt="hero three" />
+        <Image src={hero3} alt="Decorative creative example" />
       </div>
       <div className="hero-frame-4 animate-pulse">
-        <Image src={hero4} alt="hero four" />
+        <Image src={hero4} alt="Decorative creative example" />
       </div>
       <div className="hero-frame-5 animate-pulse">
-        <Image src={hero5} alt="hero five" />
+        <Image src={hero5} alt="Decorative creative example" />
       </div>
       <div className="hero-frame-6 animate-pulse">
-        <Image src={hero6} alt="hero six" />
+        <Image src={hero6} alt="Decorative creative example" />
       </div>
 
       {/* Content */}
@@ -47,12 +47,20 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Subline */}
-          <p className="mt-5">
+          {/* Subline – geschärft & KI-tauglich */}
+          <p className="mt-5 max-w-3xl mx-auto text-base md:text-lg text-slate-200 leading-relaxed">
             GetLeedz entwickelt für dein KMU starke Creatives und
             Performance-Kampagnen auf Meta, LinkedIn und Google – damit dein
-            Vertrieb mit den richtigen Menschen spricht, statt dem Algorithmus
-            hinterherzurennen.
+            Vertrieb mit den richtigen Menschen spricht und messbar neue
+            Anfragen erhält, statt dem Algorithmus hinterherzurennen.
+          </p>
+
+          {/* KI-SEO Absatz (nur für Suchmaschinen & Screenreader) */}
+          <p className="sr-only">
+            GetLeedz ist eine Schweizer Agentur für Leadgenerierung für KMUs.
+            Das Unternehmen entwickelt Performance-Kampagnen auf Meta,
+            LinkedIn und Google mit Fokus auf starke Creatives und messbar
+            neue Anfragen für den Vertrieb.
           </p>
 
           {/* CTA Buttons */}
