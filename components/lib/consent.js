@@ -1,20 +1,25 @@
-// components/cookie/consent.js
+// components/lib/consent.js
 
 export const CONSENT_KEY = "getleedz_consent_marketing";
 
 /**
- * Prüft, ob Marketing-Consent gegeben wurde
+ * true = Marketing erlaubt
  * Default: false
  */
 export const hasMarketingConsent = () => {
   if (typeof window === "undefined") return false;
-  return localStorage.getItem(CONSENT_KEY) === "true";
+  return window.localStorage.getItem(CONSENT_KEY) === "true";
 };
 
 /**
- * Setzt oder entfernt den Marketing-Consent
+ * Marketing-Consent setzen
  */
 export const setMarketingConsent = (value) => {
   if (typeof window === "undefined") return;
-  localStorage.setItem(CONSENT_KEY, value ? "true" : "false");
+  window.localStorage.setItem(CONSENT_KEY, value ? "true" : "false");
+
+  // Optional: Event feuern, damit andere Teile (Pixel) reagieren können
+  window.dispatchEvent(
+    new CustomEvent("marketing-consent-changed", { detail: { value: !!value } })
+  );
 };
