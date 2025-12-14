@@ -10,17 +10,19 @@ const CookieBanner = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Wenn noch nie entschieden wurde -> Banner zeigen
+    // Wenn noch keine Entscheidung existiert → Banner zeigen
     const existing = localStorage.getItem("getleedz_consent_marketing");
     if (existing === null) setVisible(true);
 
-    // Falls bereits akzeptiert, Pixel sicher initialisieren (z.B. nach Deploy)
-    if (hasMarketingConsent()) initFacebookPixel();
+    // Falls bereits akzeptiert, Pixel sicher initialisieren
+    if (hasMarketingConsent()) {
+      initFacebookPixel();
+    }
   }, []);
 
   const acceptAll = () => {
     setMarketingConsent(true);
-    initFacebookPixel(); // <- wichtig: sofort feuern ohne Refresh
+    initFacebookPixel(); // sofort feuern, kein Reload nötig
     setVisible(false);
   };
 
@@ -32,16 +34,21 @@ const CookieBanner = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-[60] flex justify-center px-4 pointer-events-none">
-      <div className="pointer-events-auto max-w-2xl w-full bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff] p-[1px] rounded-2xl shadow-[0_0_40px_rgba(122,255,0,0.35)]">
+    // ❗ KEIN pointer-events-none mehr
+    <div className="fixed inset-x-0 bottom-4 z-[60] flex justify-center px-4">
+      <div className="max-w-2xl w-full bg-gradient-to-r from-[#ff00ff] via-[#7aff00] to-[#00e5ff] p-[1px] rounded-2xl shadow-[0_0_40px_rgba(122,255,0,0.35)]">
         <div className="rounded-2xl bg-[#020617]/95 backdrop-blur-xl px-4 py-4 sm:px-6 sm:py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1 text-sm sm:text-base">
-            <p className="font-semibold text-white">Cookies für mehr Performance.</p>
+            <p className="font-semibold text-white">
+              Cookies für mehr Performance.
+            </p>
             <p className="text-xs sm:text-sm text-gray-300">
-              Wir verwenden Cookies, um deine Nutzungserfahrung zu verbessern und unsere Kampagnen auszuwerten.
-              Mehr Infos in unserer{" "}
+              Wir verwenden Cookies, um deine Nutzungserfahrung zu verbessern und
+              unsere Kampagnen auszuwerten. Mehr Infos in unserer{" "}
               <Link href="/datenschutz" legacyBehavior>
-                <a className="neon-link underline-offset-2">Datenschutzerklärung</a>
+                <a className="neon-link underline-offset-2">
+                  Datenschutzerklärung
+                </a>
               </Link>
               .
             </p>
@@ -55,6 +62,7 @@ const CookieBanner = () => {
             >
               Nur notwendige
             </button>
+
             <button
               type="button"
               onClick={acceptAll}
