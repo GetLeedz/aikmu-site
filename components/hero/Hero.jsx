@@ -63,6 +63,13 @@ const Hero = () => {
             neue Anfragen für den Vertrieb.
           </p>
 
+          <p className="mt-3 text-sm text-slate-300">
+            Mehr zum Thema{" "}
+            <Link href="/leadgenerierung-schweiz">
+              <a className="neon-link">Leadgenerierung für Schweizer KMUs</a>
+            </Link>
+          </p>
+
           {/* CTA Buttons */}
           <div className="flex flex-col items-center justify-center gap-4 mt-[42px]">
             {/* Lead CTA */}
