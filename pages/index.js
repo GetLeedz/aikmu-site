@@ -14,7 +14,7 @@ const Home = () => (
 
       <link rel="icon" href="/favicon.ico" />
 
-      {/* Open Graph / Facebook / LinkedIn */}
+      {/* Open Graph */}
       <meta property="og:title" content="GetLeedz · More Leads für Schweizer KMUs" />
       <meta
         property="og:description"
@@ -27,7 +27,7 @@ const Home = () => (
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="GetLeedz" />
 
-      {/* Twitter Card */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="GetLeedz · More Leads für Schweizer KMUs" />
       <meta
@@ -37,28 +37,11 @@ const Home = () => (
       <meta name="twitter:image" content="https://www.getleedz.com/og-getleedz.jpg" />
     </Head>
 
-      {/* Calendly CTA */}
-      <section className="bg-[#020617] py-10">
-        <div className="max-w-5xl mx-auto px-6 flex justify-center">
-          <a
-            href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz/"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group neon-border cursor-pointer"
-          >
-            <span className="neon-border-inner">
-              📅 Rückruf / Termin buchen
-            </span>
-          </a>
-        </div>
-      </section>
-
-
     <main>
-      {/* Oben: Hero mit deinem Header */}
+      {/* Hero + Header */}
       <Header />
 
-      {/* Unten: Footer bleibt bestehen */}
+      {/* Footer */}
       <Footer />
     </main>
   </div>
