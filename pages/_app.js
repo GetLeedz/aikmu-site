@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import CookieBanner from "../components/cookie/CookieBanner";
 import * as fbq from "../components/lib/fbpixel";
-import { hasMarketingConsent } from "../components/cookie/consent";
+import { hasMarketingConsent } from "../components/lib/consent";
+
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

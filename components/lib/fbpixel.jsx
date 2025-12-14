@@ -1,4 +1,5 @@
-import { hasMarketingConsent } from "../cookie/consent";
+import { hasMarketingConsent } from "./consent";
+
 
 const FB_PIXEL_ID = "1285613311599646";
 
