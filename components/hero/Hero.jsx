@@ -47,12 +47,7 @@ const Hero = () => {
             nicht Klicks, sondern echte Gespräche.
           </p>
 
-          {/* LEAD-QUALITÄTEN – EINLEITUNG */}
-          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
-            Wir unterscheiden bewusst zwischen Lead-Qualitäten.
-            Von Cold-Leads bis zu abschlussbereiten Gold-Leads.
-            Die Selektion erfolgt daten- und KI-gestützt.
-          </p>
+
 
           {/* CTA */}
           <div className="flex flex-col items-center gap-4 mt-10">
@@ -78,9 +73,11 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* FRAGE VOR ACCORDION */}
-          <p className="mt-14 mb-4 text-base sm:text-lg text-white text-center drop-shadow">
-            Wie unterscheiden sich Lead-Arten und wie werden sie übergeben?
+          {/* LEAD-QUALITÄTEN – EINLEITUNG */}
+          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
+            Wir unterscheiden bewusst zwischen Lead-Qualitäten.
+            Von Cold-Leads bis zu abschlussbereiten Gold-Leads.
+            Die Selektion erfolgt daten- und KI-gestützt.
           </p>
 
           {/* ACCORDION */}
