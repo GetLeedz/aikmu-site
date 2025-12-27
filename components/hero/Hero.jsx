@@ -27,32 +27,28 @@ const Hero = () => {
       <div className="hero-frame-5 animate-pulse"><Image src={hero5} alt="" /></div>
       <div className="hero-frame-6 animate-pulse"><Image src={hero6} alt="" /></div>
 
-      <div className="container m-auto pt-[120px] pb-[70px] md:pt-[160px] xl:pt-[220px] relative z-[1] hero-content">
+      {/* CONTENT */}
+      <div className="container m-auto pt-[120px] pb-[90px] md:pt-[160px] xl:pt-[220px] relative z-[1] hero-content">
         <div className="w-11/12 md:w-8/12 text-center m-auto">
 
-          {/* Overline */}
-          <p className="text-sm sm:text-base tracking-wide uppercase text-white/90 mb-4 text-center drop-shadow">
-            Leadgenerierung
-          </p>
-
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white text-center drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+          {/* HEADLINE */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
             Leadgenerierung,
-            <span className="block mt-2 text-[#7CFF00]">
+            <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
               die neue Anfragen bringt.
             </span>
           </h1>
 
-          {/* Subline */}
-          <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]">
+          {/* SUBLINE */}
+          <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
             GetLeedz entwickelt starke Creatives und Performance-Kampagnen auf
             Meta, LinkedIn und Google.  
             Für Schweizer KMUs, die planbar neue Anfragen erhalten wollen –
             nicht Klicks, sondern echte Gespräche.
           </p>
 
-          {/* Zusatztext */}
-          <p className="mt-4 text-base sm:text-lg text-white/90 leading-relaxed text-center drop-shadow">
+          {/* LEAD-QUALITÄTEN – EINLEITUNG */}
+          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
             Wir unterscheiden bewusst zwischen Lead-Qualitäten.
             Von Cold-Leads bis zu abschlussbereiten Gold-Leads.
             Die Selektion erfolgt daten- und KI-gestützt.
@@ -62,7 +58,7 @@ const Hero = () => {
           <div className="flex flex-col items-center gap-4 mt-10">
             <Link href="/anfrage">
               <a className="group neon-border w-full max-w-[360px]">
-                <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg text-white">
+                <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
                   Anfrage senden
                   <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -75,15 +71,20 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="group neon-border w-full max-w-[360px]"
             >
-              <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg text-white">
+              <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
                 Rückruf buchen
                 <FaCalendarAlt className="ml-2 opacity-80" />
               </span>
             </a>
           </div>
 
-          {/* Accordion */}
-          <div className="mt-14 max-w-3xl mx-auto space-y-4">
+          {/* FRAGE VOR ACCORDION */}
+          <p className="mt-14 mb-4 text-base sm:text-lg text-white text-center drop-shadow">
+            Wie unterscheiden sich Lead-Arten und wie werden sie übergeben?
+          </p>
+
+          {/* ACCORDION */}
+          <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
             {/* Cold Leads */}
             <button onClick={() => toggle(0)} className="w-full text-left">
@@ -92,10 +93,11 @@ const Hero = () => {
                   Cold-Leads
                 </h3>
                 {open === 0 && (
-                  <p className="mt-3 text-base sm:text-lg text-white/90 leading-relaxed text-center">
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Cold-Leads sind unqualifizierte Kontakte.
                     Vergleichbar mit Telefonbüchern von früher.
                     Bekannt aus Filmen wie „The Wolf of Wall Street“.
+                    Kein Bezug, kein Bedarf, kein Kontext.
                   </p>
                 )}
               </div>
@@ -108,9 +110,11 @@ const Hero = () => {
                   Pink-Leads (Schrott-Leads)
                 </h3>
                 {open === 1 && (
-                  <p className="mt-3 text-base sm:text-lg text-white/90 leading-relaxed text-center">
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Pink-Leads sind Schrott-Leads.
-                    Kein Bedarf. Kein Timing. Kein Gespräch.
+                    Sie entstehen durch falsche Zielgruppen,
+                    reisserische Aussagen oder fehlende Vorqualifizierung.
+                    Kein klarer Bedarf. Kein Entscheidungswille.
                     Solche Leads gibt es bei GetLeedz nicht.
                   </p>
                 )}
@@ -124,9 +128,10 @@ const Hero = () => {
                   Best-Leads
                 </h3>
                 {open === 2 && (
-                  <p className="mt-3 text-base sm:text-lg text-white/90 leading-relaxed text-center">
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Best-Leads sind qualifizierte Kontakte mit erkennbarem Bedarf.
-                    Stabil, sauber und geeignet für nachhaltigen Vertrieb.
+                    Die Person versteht das Angebot und ist offen für ein Gespräch.
+                    Diese Leads bilden die stabile Grundlage für sauberen Vertrieb.
                   </p>
                 )}
               </div>
@@ -139,10 +144,11 @@ const Hero = () => {
                   Gold-Leads
                 </h3>
                 {open === 3 && (
-                  <p className="mt-3 text-base sm:text-lg text-white/90 leading-relaxed text-center">
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Gold-Leads sind abschlussbereit.
                     Klarer Bedarf. Richtiges Timing.
                     KI-gestützt selektiert.
+                    Je nach Budget skalieren wir von Best-Leads bis Gold-Leads.
                   </p>
                 )}
               </div>
@@ -155,16 +161,31 @@ const Hero = () => {
                   Übergabe & Integration
                 </h3>
                 {open === 4 && (
-                  <p className="mt-3 text-base sm:text-lg text-white/90 leading-relaxed text-center">
-                    Übergabe per API, Google Sheets oder Excel.
-                    Direkt in dein System.
-                    Ohne Reibung.
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+                    Leads werden strukturiert übergeben.
+                    Per API direkt in dein System oder über Google Sheets
+                    und Excel.
+                    Ohne Nachbearbeitung. Ohne Chaos.
                   </p>
                 )}
               </div>
             </button>
 
           </div>
+
+          {/* KI-SEO – UNSICHTBAR */}
+          <div className="sr-only">
+            <p>
+              GetLeedz ist eine Schweizer Agentur für Leadgenerierung.
+              Der Fokus liegt auf Cold-Leads, Best-Leads und Gold-Leads.
+              Pink-Leads, auch Schrott-Leads genannt, werden ausgeschlossen.
+            </p>
+            <p>
+              Leads werden per API, Google Sheets oder Excel an Kundensysteme übergeben.
+              Die Selektion erfolgt daten- und KI-gestützt.
+            </p>
+          </div>
+
         </div>
       </div>
     </section>
