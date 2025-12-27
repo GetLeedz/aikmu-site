@@ -9,7 +9,7 @@ const Home = () => (
       <title>GetLeedz · More Leads für Schweizer KMUs</title>
       <meta
         name="description"
-        content="GetLeedz ist eine Schweizer Agentur für Leadgenerierung. Wir entwickeln starke Creatives und Performance-Kampagnen auf Meta, LinkedIn und Google für messbar neue Anfragen."
+        content="GetLeedz entwickelt starke Creatives und Performance-Kampagnen auf Meta, LinkedIn und Google für messbar neue Anfragen."
       />
       <link rel="icon" href="/favicon.ico" />
 
@@ -17,11 +17,14 @@ const Home = () => (
       <meta property="og:title" content="GetLeedz · More Leads für Schweizer KMUs" />
       <meta
         property="og:description"
-        content="Leadgenerierung, die neue Anfragen bringt – mit starken Creatives und Performance-Kampagnen für Schweizer KMUs."
+        content="Leadgenerierung, die neue Anfragen bringt – mit starken Creatives und Performance-Kampagnen."
       />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://www.getleedz.com/" />
-      <meta property="og:image" content="https://www.getleedz.com/og-getleedz.jpg" />
+      <meta property="og:url" content="https://de.getleedz.com/" />
+      <meta
+        property="og:image"
+        content="https://de.getleedz.com/images/og-getleedz.jpg"
+      />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="GetLeedz" />
@@ -31,9 +34,12 @@ const Home = () => (
       <meta name="twitter:title" content="GetLeedz · More Leads für Schweizer KMUs" />
       <meta
         name="twitter:description"
-        content="GetLeedz entwickelt für Schweizer KMUs starke Creatives und Performance-Kampagnen auf Meta, LinkedIn & Google – mit Fokus auf messbare Anfragen."
+        content="Starke Creatives, saubere Lead-Qualität und Performance-Kampagnen für Schweizer KMUs."
       />
-      <meta name="twitter:image" content="https://www.getleedz.com/og-getleedz.jpg" />
+      <meta
+        name="twitter:image"
+        content="https://de.getleedz.com/images/og-getleedz.jpg"
+      />
 
       {/* ================= SCHEMA.ORG – ORGANIZATION ================= */}
       <script
@@ -43,11 +49,11 @@ const Home = () => (
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "GetLeedz GmbH",
-            "url": "https://www.getleedz.com",
-            "logo": "https://www.getleedz.com/images/getleedz-logo.png",
-            "image": "https://www.getleedz.com/og-getleedz.jpg",
+            "url": "https://de.getleedz.com",
+            "logo": "https://de.getleedz.com/images/getleedz-logo.png",
+            "image": "https://de.getleedz.com/images/og-getleedz.jpg",
             "description":
-              "GetLeedz ist eine Schweizer Agentur für Leadgenerierung. Das Unternehmen entwickelt starke Creatives, Performance-Kampagnen und Lead-Systeme für messbar neue Anfragen.",
+              "GetLeedz entwickelt starke Creatives, Performance-Kampagnen und Lead-Systeme für messbar neue Anfragen.",
             "areaServed": {
               "@type": "Country",
               "name": "Schweiz"
@@ -69,7 +75,7 @@ const Home = () => (
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "GetLeedz",
-            "url": "https://www.getleedz.com",
+            "url": "https://de.getleedz.com",
             "inLanguage": "de-CH",
             "publisher": {
               "@type": "Organization",
@@ -87,9 +93,9 @@ const Home = () => (
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "GetLeedz GmbH",
-            "url": "https://www.getleedz.com",
+            "url": "https://de.getleedz.com",
             "telephone": "+41 61 525 18 10",
-            "image": "https://www.getleedz.com/og-getleedz.jpg",
+            "image": "https://de.getleedz.com/images/og-getleedz.jpg",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Binningen",
@@ -107,7 +113,7 @@ const Home = () => (
                 "name": "Leadgenerierung für Schweizer KMUs",
                 "serviceType": "Performance-Marketing & Leadgenerierung",
                 "description":
-                  "Strategische Leadgenerierung für Schweizer KMUs mit starken Creatives, Performance-Kampagnen, Funnels, KI-gestützter Lead-Qualifizierung und optionalen Schulungen."
+                  "Leadgenerierung mit starken Creatives, Funnels, KI-gestützter Lead-Qualifizierung und sauberer Übergabe."
               }
             }
           })
@@ -124,47 +130,20 @@ const Home = () => (
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "Was ist Leadgenerierung?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Leadgenerierung ist der gezielte Prozess, potenzielle Kundinnen und Kunden über digitale Kanäle wie Meta, LinkedIn oder Google zu gewinnen und als qualifizierte Anfragen an den Vertrieb zu übergeben."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Was unterscheidet GetLeedz von klassischen Lead-Agenturen?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "GetLeedz fokussiert sich auf Lead-Qualität statt Lead-Menge. Ziel sind messbare Anfragen und vertriebsrelevante Gespräche – nicht Klicks oder billige Leads."
-                }
-              },
-              {
-                "@type": "Question",
                 "name": "Was sind Gold Leads?",
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text":
-                    "Gold Leads sind abschlussbereite Kontakte mit klarem Bedarf, Budget und Entscheidungsreife. Sie werden durch KI-gestützte Systeme und Funnel-Logik vorqualifiziert."
+                    "Gold Leads sind abschlussbereite Kontakte mit klarem Bedarf. Die Selektion erfolgt daten- und KI-gestützt."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Sind die Creatives von GetLeedz vorgefertigte Templates?",
+                "name": "Wie werden Leads übergeben?",
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text":
-                    "Nein. Alle Creatives entstehen individuell in Zusammenarbeit mit einer erfahrenen Marketing-Community und sind stets aktuell – nichts von der Stange."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Bietet GetLeedz auch komplette Systeme und Schulungen an?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text":
-                    "Ja. GetLeedz entwickelt komplette Lead- und Funnel-Systeme und bietet Schulungen für Marketing- und Vertriebsteams an."
+                    "Leads werden per API, Google Sheets oder Excel strukturiert an bestehende Systeme übergeben."
                 }
               }
             ]
@@ -174,10 +153,7 @@ const Home = () => (
     </Head>
 
     <main>
-      {/* Hero / Header */}
       <Header />
-
-      {/* Footer */}
       <Footer />
     </main>
   </div>

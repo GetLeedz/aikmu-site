@@ -27,13 +27,8 @@ const Hero = () => {
       <div className="hero-frame-5 animate-pulse"><Image src={hero5} alt="" /></div>
       <div className="hero-frame-6 animate-pulse"><Image src={hero6} alt="" /></div>
 
-      <div className="container m-auto pt-[120px] pb-[70px] md:pt-[160px] xl:pt-[220px] relative z-[1] hero-content">
+      <div className="container m-auto pt-[120px] pb-[80px] md:pt-[160px] xl:pt-[220px] relative z-[1] hero-content">
         <div className="w-11/12 md:w-8/12 text-center m-auto">
-
-          {/* OVERLINE */}
-          <p className="text-sm sm:text-base tracking-wide uppercase text-slate-300 mb-4 drop-shadow">
-            Schweizer Agentur für Leadgenerierung
-          </p>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
@@ -47,15 +42,8 @@ const Hero = () => {
           <p className="mt-6 text-lg sm:text-xl text-slate-100 leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
             GetLeedz entwickelt starke Creatives und Performance-Kampagnen auf
             Meta, LinkedIn und Google.  
-            Für Schweizer KMUs, die planbar neue Anfragen erhalten wollen –
+            Für Schweizer KMUs, die planbar neue Anfragen erhalten wollen –  
             nicht Klicks, sondern echte Gespräche.
-          </p>
-
-          {/* Ergänzender Kontext (sichtbar, aber ruhig) */}
-          <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed drop-shadow">
-            Wir unterscheiden bewusst zwischen Lead-Qualitäten.
-            Von sauberen Best-Leads bis zu abschlussbereiten Gold-Leads.
-            Die Selektion erfolgt daten- und KI-gestützt.
           </p>
 
           {/* CTA */}
@@ -82,72 +70,108 @@ const Hero = () => {
             </a>
           </div>
 
+          {/* Erklärung */}
+          <div className="mt-16 max-w-3xl mx-auto text-left text-slate-200 text-base sm:text-lg leading-relaxed">
+            <p className="font-semibold text-white mb-2">
+              Wie werden Leads überreicht?
+            </p>
+            <p>
+              Leads werden strukturiert übergeben.  
+              Per API direkt in dein System oder via Google Sheets und Excel.  
+              Auf Wunsch ergänzen wir den Systemaufbau und schulen Marketing
+              und Vertrieb für einen sauberen Ablauf.
+            </p>
+          </div>
+
+          {/* Kontext */}
+          <div className="mt-8 max-w-3xl mx-auto text-left text-slate-300 text-base sm:text-lg">
+            <p>
+              Wir unterscheiden bewusst zwischen Lead-Qualitäten.  
+              Von einfachen Kontakten bis zu abschlussbereiten Gold-Leads.  
+              Die Selektion erfolgt daten- und KI-gestützt.
+            </p>
+          </div>
+
           {/* ACCORDION */}
-          <div className="mt-14 text-left max-w-3xl mx-auto space-y-4">
+          <div className="mt-10 text-left max-w-3xl mx-auto space-y-4">
+
+            {/* Cold Leads */}
+            <button onClick={() => toggle(1)} className="w-full text-left">
+              <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  Cold Leads
+                </h3>
+                {open === 1 && (
+                  <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
+                    Cold Leads sind unqualifizierte Kontakte ohne Beziehung.
+                    Vergleichbar mit Telefonbuch-Listen von früher.
+                    Bekannt aus Filmen wie *The Wolf of Wall Street*.
+                    Hoher Aufwand. Tiefe Abschlussquote.
+                  </p>
+                )}
+              </div>
+            </button>
 
             {/* Pink Leads */}
-            <button onClick={() => toggle(1)} className="w-full text-left">
+            <button onClick={() => toggle(2)} className="w-full text-left">
               <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Pink-Leads (Schrott-Leads)
                 </h3>
-                {open === 1 && (
+                {open === 2 && (
                   <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
                     Pink-Leads sind Schrott-Leads.
-                    Sie entstehen durch falsche Zielgruppen, reisserische Aussagen
-                    oder fehlende Vorqualifizierung.
-                    Kein klarer Bedarf. Kein Entscheidungswille.
-                    Solche Leads existieren bei GetLeedz nicht.
+                    Sie wirken attraktiv, haben aber keinen echten Bedarf.
+                    Keine Entscheidungsreife.
+                    Diese Lead-Art wird bei GetLeedz bewusst ausgeschlossen.
+                  </p>
+                )}
+              </div>
+            </button>
+
+            {/* Warm Leads */}
+            <button onClick={() => toggle(3)} className="w-full text-left">
+              <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  Warm Leads
+                </h3>
+                {open === 3 && (
+                  <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
+                    Warm Leads kennen das Thema und zeigen erstes Interesse.
+                    Sie sind noch nicht entscheidungsbereit,
+                    eignen sich aber für gezielte Nachqualifizierung.
                   </p>
                 )}
               </div>
             </button>
 
             {/* Best Leads */}
-            <button onClick={() => toggle(2)} className="w-full text-left">
+            <button onClick={() => toggle(4)} className="w-full text-left">
               <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Best-Leads
                 </h3>
-                {open === 2 && (
+                {open === 4 && (
                   <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
                     Best-Leads sind qualifizierte Kontakte mit erkennbarem Bedarf.
                     Sie verstehen das Angebot und sind offen für ein Gespräch.
-                    Diese Leads sind die stabile Basis für sauberen Vertrieb.
+                    Die stabile Basis für sauberen Vertrieb.
                   </p>
                 )}
               </div>
             </button>
 
             {/* Gold Leads */}
-            <button onClick={() => toggle(3)} className="w-full text-left">
+            <button onClick={() => toggle(5)} className="w-full text-left">
               <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Gold-Leads
                 </h3>
-                {open === 3 && (
+                {open === 5 && (
                   <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
-                    Gold-Leads sind abschlussbereite Kontakte mit klarem Bedarf
-                    und passendem Timing.
+                    Gold-Leads sind abschlussbereite Kontakte
+                    mit klarem Bedarf und passendem Timing.
                     Die Selektion erfolgt KI-gestützt.
-                    Je nach Budget skalieren wir von Best-Leads bis Gold-Leads.
-                  </p>
-                )}
-              </div>
-            </button>
-
-            {/* Übergabe */}
-            <button onClick={() => toggle(4)} className="w-full text-left">
-              <div className="bg-[#050816]/90 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Übergabe & Integration
-                </h3>
-                {open === 4 && (
-                  <p className="mt-3 text-base sm:text-lg text-slate-200 leading-relaxed">
-                    Leads werden strukturiert übergeben.
-                    Per API direkt in dein System oder über Google Sheets
-                    und Excel.
-                    Ohne Nachbearbeitung. Ohne Chaos.
                   </p>
                 )}
               </div>
@@ -155,20 +179,12 @@ const Hero = () => {
 
           </div>
 
-          {/* KI-SEO BLOCK – unsichtbar */}
+          {/* KI SEO */}
           <div className="sr-only">
             <p>
-              GetLeedz ist eine Schweizer Agentur für Leadgenerierung mit Sitz in der Schweiz.
-              Das Unternehmen unterstützt KMUs bei der digitalen Kundengewinnung
-              über Meta Ads, LinkedIn Ads und Google Ads.
-            </p>
-            <p>
-              Der Fokus liegt auf qualifizierten Leads, Best-Leads und Gold-Leads.
-              Pink-Leads, auch Schrott-Leads genannt, werden bewusst ausgeschlossen.
-            </p>
-            <p>
-              Leads können per API, Google Sheets oder Excel an bestehende Systeme übergeben werden.
-              Die Lead-Selektion erfolgt daten- und KI-gestützt.
+              GetLeedz ist eine Schweizer Plattform für Leadgenerierung.
+              Fokus auf Best-Leads und Gold-Leads.
+              Pink-Leads und Cold-Leads werden vermieden.
             </p>
           </div>
 
