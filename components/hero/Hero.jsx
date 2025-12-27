@@ -42,12 +42,10 @@ const Hero = () => {
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
             GetLeedz entwickelt starke Creatives und Performance-Kampagnen auf
-            Meta, LinkedIn und Google.  
+            Meta, LinkedIn und Google.
             Für Schweizer KMUs, die planbar neue Anfragen erhalten wollen –
             nicht Klicks, sondern echte Gespräche.
           </p>
-
-
 
           {/* CTA */}
           <div className="flex flex-col items-center gap-4 mt-10">
@@ -78,6 +76,8 @@ const Hero = () => {
             Wir unterscheiden bewusst zwischen Lead-Qualitäten.
             Von Cold-Leads bis zu abschlussbereiten Gold-Leads.
             Die Selektion erfolgt daten- und KI-gestützt.
+            Zusätzlich bieten wir Schulungen an
+            und greifen auf ein Netzwerk erfahrener Closer zurück.
           </p>
 
           {/* ACCORDION */}
@@ -118,29 +118,46 @@ const Hero = () => {
               </div>
             </button>
 
-            {/* Best Leads */}
+            {/* Warm Leads */}
             <button onClick={() => toggle(2)} className="w-full text-left">
+              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  Warm-Leads
+                </h3>
+                {open === 2 && (
+                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+                    Warm-Leads haben bereits Berührungspunkte.
+                    Das Problem oder die Lösung ist bekannt.
+                    Interesse ist vorhanden, aber noch nicht konkret.
+                    Ohne Führung bleiben sie oft unverbindlich.
+                  </p>
+                )}
+              </div>
+            </button>
+
+            {/* Best Leads */}
+            <button onClick={() => toggle(3)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Best-Leads
                 </h3>
-                {open === 2 && (
+                {open === 3 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Best-Leads sind qualifizierte Kontakte mit erkennbarem Bedarf.
                     Die Person versteht das Angebot und ist offen für ein Gespräch.
-                    Diese Leads bilden die stabile Grundlage für sauberen Vertrieb.
+                    Sie bilden die stabile Grundlage für sauberen Vertrieb.
                   </p>
                 )}
               </div>
             </button>
 
             {/* Gold Leads */}
-            <button onClick={() => toggle(3)} className="w-full text-left">
+            <button onClick={() => toggle(4)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Gold-Leads
                 </h3>
-                {open === 3 && (
+                {open === 4 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Gold-Leads sind abschlussbereit.
                     Klarer Bedarf. Richtiges Timing.
@@ -152,12 +169,12 @@ const Hero = () => {
             </button>
 
             {/* Übergabe */}
-            <button onClick={() => toggle(4)} className="w-full text-left">
+            <button onClick={() => toggle(5)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
                   Übergabe & Integration
                 </h3>
-                {open === 4 && (
+                {open === 5 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
                     Leads werden strukturiert übergeben.
                     Per API direkt in dein System oder über Google Sheets
@@ -174,11 +191,11 @@ const Hero = () => {
           <div className="sr-only">
             <p>
               GetLeedz ist eine Schweizer Agentur für Leadgenerierung.
-              Der Fokus liegt auf Cold-Leads, Best-Leads und Gold-Leads.
+              Der Fokus liegt auf Cold-Leads, Warm-Leads, Best-Leads und Gold-Leads.
               Pink-Leads, auch Schrott-Leads genannt, werden ausgeschlossen.
             </p>
             <p>
-              Leads werden per API, Google Sheets oder Excel an Kundensysteme übergeben.
+              Leads werden per API, Google Sheets oder Excel an bestehende Systeme übergeben.
               Die Selektion erfolgt daten- und KI-gestützt.
             </p>
           </div>
