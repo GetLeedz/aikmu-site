@@ -10,10 +10,13 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
+    // 🔐 Initialisierung nur bei Marketing-Consent
     if (hasMarketingConsent()) {
       initFacebookPixel();
+      track("PageView");
     }
 
+    // 🔁 PageView bei echten Seitenwechseln
     const handleRouteChange = () => {
       if (hasMarketingConsent()) {
         track("PageView");
@@ -21,6 +24,7 @@ function MyApp({ Component, pageProps }) {
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
+
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
@@ -28,7 +32,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* 🔒 App Root – KEINE Filter, KEINE Transforms */}
+      {/* 🔒 App Root – KEINE CSS-Transforms, KEINE Filter */}
       <div id="app-root">
         <Component {...pageProps} />
       </div>
