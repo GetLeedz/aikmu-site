@@ -33,10 +33,10 @@ const Hero = () => {
 
           {/* HEADLINE */}
 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
-  AiKMU macht Künstliche Intelligenz
+  AiKMU macht Ihre KMU mit verantwortungsvoller KI
   <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
-    für Schweizer KMUs produktiv, sicher und verantwortbar.
-  </span>
+    zukunftsfähig
+  </span>.
 </h1>
 
 
