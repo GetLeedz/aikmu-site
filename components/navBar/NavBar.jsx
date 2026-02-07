@@ -1,7 +1,8 @@
 // components/navBar/NavBar.jsx
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../public/images/getleedz-logo.png";
+const Logo = "/images/logo-aikmu-transparent_white_transparent.png";
+
 
 const NavBar = () => {
   return (
@@ -16,13 +17,14 @@ const NavBar = () => {
               aria-label="GetLeedz Home"
               className="relative block w-[200px] h-[60px] sm:w-[240px] sm:h-[72px] lg:w-[260px] lg:h-[80px]"
             >
-              <Image
-                src={Logo}
-                alt="GetLeedz Logo"
-                layout="fill"
-                objectFit="contain"
-                priority
-              />
+<Image
+  src={Logo}
+  alt="AIKMU Logo"
+  fill
+  className="object-contain"
+  priority
+/>
+
             </a>
           </Link>
         </div>
