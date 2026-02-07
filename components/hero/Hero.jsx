@@ -32,12 +32,13 @@ const Hero = () => {
         <div className="w-11/12 md:w-8/12 text-center m-auto">
 
           {/* HEADLINE */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
-            Leadgenerierung,
-            <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
-              die neue Anfragen bringt.
-            </span>
-          </h1>
+<h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
+  AiKMU macht Künstliche Intelligenz
+  <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
+    für Schweizer KMUs produktiv, sicher und verantwortbar.
+  </span>
+</h1>
+
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
