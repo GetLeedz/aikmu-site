@@ -36,16 +36,14 @@ const Hero = () => {
   AiKMU macht Ihre KMU mit verantwortungsvoller KI
   <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
     zukunftsfähig
-  </span>.
+  </span>
 </h1>
 
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
-            GetLeedz entwickelt starke Creatives und Performance-Kampagnen auf
-            Meta, LinkedIn und Google.
-            Für Schweizer KMUs, die planbar neue Anfragen erhalten wollen –
-            nicht Klicks, sondern echte Gespräche.
+Corporate-konforme KI-Projekte für Schweizer KMUs –
+inkl. Datenschutz, klarer Governance und voller Kontrolle.
           </p>
 
           {/* CTA */}
@@ -73,120 +71,99 @@ const Hero = () => {
           </div>
 
           {/* LEAD-QUALITÄTEN – EINLEITUNG */}
-          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
-            Wir unterscheiden bewusst zwischen Lead-Qualitäten.
-            Von Cold-Leads bis zu abschlussbereiten Gold-Leads.
-            Die Selektion erfolgt daten- und KI-gestützt.
-            Zusätzlich bieten wir Schulungen an
-            und greifen auf ein Netzwerk erfahrener Closer zurück.
-          </p>
+{/* KI – EINLEITUNG */}
+<p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
+  Wo Künstliche Intelligenz in Schweizer KMUs konkret unterstützt
+</p>
 
-          {/* ACCORDION */}
-          <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
+{/* ACCORDION */}
+<div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
-            {/* Cold Leads */}
-            <button onClick={() => toggle(0)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Cold-Leads
-                </h3>
-                {open === 0 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Cold-Leads sind unqualifizierte Kontakte.
-                    Vergleichbar mit Telefonbüchern von früher.
-                    Bekannt aus Filmen wie „The Wolf of Wall Street“.
-                    Kein Bezug, kein Bedarf, kein Kontext.
-                  </p>
-                )}
-              </div>
-            </button>
+  {/* KI Agent */}
+  <button onClick={() => toggle(0)} className="w-full text-left">
+    <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
+        KI Agent
+      </h3>
+      {open === 0 && (
+        <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+          KI Agenten übernehmen klar definierte Aufgaben selbstständig.
+          Sie analysieren Informationen, führen Prozesse aus und treffen vorbereitete Entscheidungen
+          nach festen Regeln. Ziel ist es, wiederkehrende Arbeit zuverlässig zu delegieren
+          und Teams nachhaltig zu entlasten.
+        </p>
+      )}
+    </div>
+  </button>
 
-            {/* Pink Leads */}
-            <button onClick={() => toggle(1)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Pink-Leads (Schrott-Leads)
-                </h3>
-                {open === 1 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Pink-Leads sind Schrott-Leads.
-                    Sie entstehen durch falsche Zielgruppen,
-                    reisserische Aussagen oder fehlende Vorqualifizierung.
-                    Kein klarer Bedarf. Kein Entscheidungswille.
-                    Solche Leads gibt es bei GetLeedz nicht.
-                  </p>
-                )}
-              </div>
-            </button>
+  {/* KI Assistenten */}
+  <button onClick={() => toggle(1)} className="w-full text-left">
+    <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
+        KI Assistenten
+      </h3>
+      {open === 1 && (
+        <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+          KI Assistenten unterstützen Mitarbeitende im Tagesgeschäft.
+          Beim Schreiben, Strukturieren, Zusammenfassen oder Vorbereiten von Entscheidungen.
+          Die Kontrolle bleibt beim Menschen – die KI beschleunigt.
+        </p>
+      )}
+    </div>
+  </button>
 
-            {/* Warm Leads */}
-            <button onClick={() => toggle(2)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Warm-Leads
-                </h3>
-                {open === 2 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Warm-Leads haben bereits Berührungspunkte.
-                    Das Problem oder die Lösung ist bekannt.
-                    Interesse ist vorhanden, aber noch nicht konkret.
-                    Ohne Führung bleiben sie oft unverbindlich.
-                  </p>
-                )}
-              </div>
-            </button>
+  {/* KI Bots */}
+  <button onClick={() => toggle(2)} className="w-full text-left">
+    <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
+        KI Bots
+      </h3>
+      {open === 2 && (
+        <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+          KI Bots sind auf Kommunikation spezialisiert.
+          Sie beantworten Fragen, strukturieren Informationen oder unterstützen interne
+          und externe Dialoge – konsistent, skalierbar und jederzeit verfügbar.
+        </p>
+      )}
+    </div>
+  </button>
 
-            {/* Best Leads */}
-            <button onClick={() => toggle(3)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Best-Leads
-                </h3>
-                {open === 3 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Best-Leads sind qualifizierte Kontakte mit erkennbarem Bedarf.
-                    Die Person versteht das Angebot und ist offen für ein Gespräch.
-                    Sie bilden die stabile Grundlage für sauberen Vertrieb.
-                  </p>
-                )}
-              </div>
-            </button>
+  {/* KI Automatisierung */}
+  <button onClick={() => toggle(3)} className="w-full text-left">
+    <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
+        KI Automatisierung
+      </h3>
+      {open === 3 && (
+        <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+          KI Automatisierung verbindet Systeme, Daten und Abläufe.
+          Wiederkehrende Prozesse werden intelligent verknüpft –
+          über Abteilungen hinweg. Das reduziert Fehler,
+          spart Zeit und schafft messbare Effizienz.
+        </p>
+      )}
+    </div>
+  </button>
 
-            {/* Gold Leads */}
-            <button onClick={() => toggle(4)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Gold-Leads
-                </h3>
-                {open === 4 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Gold-Leads sind abschlussbereit.
-                    Klarer Bedarf. Richtiges Timing.
-                    KI-gestützt selektiert.
-                    Je nach Budget skalieren wir von Best-Leads bis Gold-Leads.
-                  </p>
-                )}
-              </div>
-            </button>
+  {/* KI Corporate Conform */}
+  <button onClick={() => toggle(4)} className="w-full text-left">
+    <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+      <h3 className="text-lg sm:text-xl font-semibold text-white">
+        KI Corporate Conform
+      </h3>
+      {open === 4 && (
+        <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+          Corporate-konforme KI bedeutet volle Kontrolle.
+          Auf Wunsch laufen alle KI-Systeme intern auf Ihren eigenen Servern
+          oder in klar abgegrenzten Umgebungen.
+          Datenschutz, Zugriffsrechte und Governance sind von Anfang an integriert.
+        </p>
+      )}
+    </div>
+  </button>
 
-            {/* Übergabe */}
-            <button onClick={() => toggle(5)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Übergabe & Integration
-                </h3>
-                {open === 5 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Leads werden strukturiert übergeben.
-                    Per API direkt in dein System oder über Google Sheets
-                    und Excel.
-                    Ohne Nachbearbeitung. Ohne Chaos.
-                  </p>
-                )}
-              </div>
-            </button>
+</div>
 
-          </div>
 
           {/* KI-SEO – UNSICHTBAR */}
           <div className="sr-only">
