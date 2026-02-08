@@ -45,7 +45,7 @@ const Hero = () => {
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed">
             Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten,
             KI dort einzusetzen, wo Zeit verloren geht,
-            Umsatz liegen bleibt oder Kontrolle fehlt –
+            Umsatz liegen bleibt oder Kontrolle fehlt &ndash;
             strategisch geführt, professionell umgesetzt.
           </p>
 
@@ -82,108 +82,114 @@ const Hero = () => {
           {/* ACCORDION */}
           <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
+            {/* 0 – Recruiting */}
             <button onClick={() => toggle(0)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Strategisches Recruiting & Wissensmanagement
+                  1. Recruiting & Instant Onboarding
                 </h3>
                 {open === 0 && (
                   <div className="mt-3 text-white leading-relaxed">
-                    <p>
-                      Der Fachkräftemangel ist oft ein administratives Problem: Wertvolle Management-Zeit fliesst in die Sichtung unpassender Dossiers, während Top-Talente bereits woanders unterschreiben.
-                    </p>
-                    <br />
-                    <strong>Ihr operativer Vorsprung durch KI:</strong>
-                    <ul className="list-disc ml-5 mt-2 space-y-2">
-                      <li><strong>Automatisierte CV-Analyse:</strong> Die KI filtert Bewerbungen nicht nur nach Keywords, sondern versteht Qualifikationen und sortiert Dossiers präzise nach Ihrer strategischen Anforderung vor.</li>
-                      <li><strong>KI-gestütztes Erstscreening:</strong> Standardisierte Erstgespräche und Qualifizierungen werden durch KI-Agenten übernommen. Sie erhalten eine glasklare Shortlist statt eines Stapels Papier.</li>
-                      <li><strong>Instant Onboarding:</strong> Sobald das Talent an Bord ist, übernimmt die KI die Wissensvermittlung. Interaktives Coaching zu Prozessen und Richtlinien entlastet die Geschäftsleitung sofort von repetitiven Erklärungen.</li>
-                    </ul>
-                    <p className="mt-3 text-blue-400 font-medium italic">
-                      &quot;KI übernimmt nicht Ihre Entscheidung &ndash; sie schafft Ihnen den Freiraum, um die richtige Entscheidung zu treffen.&quot;
-                    </p>
+                    <p>Wertvolle Management-Zeit fliesst oft in die Sichtung unpassender Dossiers. KI filtert CVs nach echtem Match und übernimmt das Onboarding neuer Talente per interaktivem Wissens-Chat.</p>
                   </div>
                 )}
               </div>
             </button>
 
-            {/* 3 – E-Mail */}
+            {/* 1 – E-Mail */}
+            <button onClick={() => toggle(1)} className="w-full text-left">
+              <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  2. E-Mail-Management & Führungs-Fokus
+                </h3>
+                {open === 1 && (
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Gewinnen Sie bis zu 5 Stunden pro Woche zurück. KI priorisiert Ihren Posteingang nach strategischer Relevanz und formuliert komplexe Antwortentwürfe vor.</p>
+                  </div>
+                )}
+              </div>
+            </button>
+
+            {/* 2 – Marketing */}
             <button onClick={() => toggle(2)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Die E-Mail-Flut raubt Ihnen Führungszeit
+                  3. Marketing & KI-gestützte Lead-Gen
                 </h3>
                 {open === 2 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    Wichtige Themen gehen unter,
-                    Entscheidungen verzögern sich.
-                    <br />
-                    <strong>Ihr Nutzen:</strong> KI priorisiert,
-                    formuliert Entwürfe und organisiert Termine –
-                    Sie gewinnen wöchentlich mehrere Stunden zurück.
-                  </p>
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Schluss mit vagen Kampagnen. KI identifiziert High-Value-Leads und skaliert personalisierten Content, der Ihre Zielgruppe dort abholt, wo der Schmerz sitzt.</p>
+                  </div>
                 )}
               </div>
             </button>
 
-            {/* 4 – Marketing */}
+            {/* 3 – Finanzen */}
             <button onClick={() => toggle(3)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Marketing kostet Geld – bringt aber zu wenig Resultate
+                  4. Finanzen & Echtzeit-Controlling
                 </h3>
                 {open === 3 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    Kampagnen laufen, aber ohne Klarheit,
-                    Konsistenz oder saubere Auswertung.
-                    <br />
-                    <strong>Ihr Nutzen:</strong> KI analysiert Zielgruppen,
-                    optimiert Inhalte und unterstützt bei Kampagnen –
-                    mehr qualifizierte Anfragen,
-                    bessere Budget-Nutzung,
-                    klare Entscheidungsgrundlagen.
-                  </p>
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Verwandeln Sie trockene Zahlen in strategische Insights. KI liefert Prognosen, erkennt Anomalien in der Buchhaltung und erstellt Berichte für den Verwaltungsrat auf Knopfdruck.</p>
+                  </div>
                 )}
               </div>
             </button>
 
-            {/* 5 – Finanzen */}
+            {/* 4 – Support */}
             <button onClick={() => toggle(4)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Buchhaltung & Finanzen sind da – aber nicht transparent genug
+                  5. Kundenservice & Experten-Entlastung
                 </h3>
                 {open === 4 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    Zahlen kommen verspätet,
-                    Auswertungen sind schwer verständlich.
-                    <br />
-                    <strong>Ihr Nutzen:</strong> KI unterstützt Treuhand,
-                    Finance und Management mit verständlichen Auswertungen,
-                    Prognosen und Frühwarnsignalen –
-                    bessere Entscheidungen, weniger Überraschungen.
-                  </p>
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Ihre teuersten Experten sollten nicht 80% ihrer Zeit Standardfragen beantworten. KI-Agenten lösen Kundenanfragen sofort und mit dem Wissen Ihres gesamten Unternehmens.</p>
+                  </div>
                 )}
               </div>
             </button>
 
-            {/* 6 – Governance (1:1 dein Inhalt) */}
+            {/* 5 – Offerten */}
             <button onClick={() => toggle(5)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI mit Governance, Kontrolle und Verantwortung
+                  6. Offertstellung & Sales-Backoffice
                 </h3>
                 {open === 5 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    KI entfaltet nur dann nachhaltig Wirkung, wenn sie
-                    sauber in Organisation, Prozesse und Verantwortung eingebettet ist.
-                    <br />
-                    <strong>Ihr Nutzen:</strong> klare Governance,
-                    definierte Zugriffsrechte, Datenschutz und
-                    auf Wunsch KI-Lösungen auf eigener Infrastruktur –
-                    Sicherheit und Vertrauen für Geschäftsleitung
-                    und Verwaltungsrat.
-                  </p>
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Wer schneller antwortet, gewinnt. KI erstellt präzise Offerten und technische Dokumentationen basierend auf Ihren Daten &ndash; in Minuten statt Tagen.</p>
+                  </div>
+                )}
+              </div>
+            </button>
+
+            {/* 6 – Prozesse */}
+            <button onClick={() => toggle(6)} className="w-full text-left">
+              <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  7. Prozess-Automatisierung & Skalierung
+                </h3>
+                {open === 6 && (
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Skalieren Sie Ihren Umsatz, ohne die Fixkosten durch Personal linear zu steigern. Wir automatisieren repetitive Workflows direkt in Ihren bestehenden Systemen.</p>
+                  </div>
+                )}
+              </div>
+            </button>
+
+            {/* 7 – Governance */}
+            <button onClick={() => toggle(7)} className="w-full text-left">
+              <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
+                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  8. Governance, Sicherheit & Datenschutz
+                </h3>
+                {open === 7 && (
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>Schützen Sie Ihr geistiges Eigentum. Wir implementieren sichere KI-Frameworks, die Compliance-Anforderungen (CH/EU) erfüllen und Wildwuchs im Team verhindern.</p>
+                  </div>
                 )}
               </div>
             </button>
@@ -203,7 +209,7 @@ const Hero = () => {
             </div>
 
             <blockquote className="mt-6 max-w-2xl text-lg sm:text-xl text-white leading-relaxed italic">
-              „In 4 Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
+              &bdquo;In 4 Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.&ldquo;
             </blockquote>
 
             <p className="mt-4 text-base text-white font-semibold">
@@ -218,8 +224,6 @@ const Hero = () => {
               Fokus auf Governance, Effizienz, Sicherheit und messbaren Nutzen.
             </p>
           </div>
-
-
 
         </div>
       </div>
