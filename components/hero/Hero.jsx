@@ -35,17 +35,15 @@ const Hero = () => {
 
           {/* HEADLINE */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white">
-            Corporate KI für KMU
+            Wir integrieren Corporate KI in Ihr KMU
             <span className="block mt-2 text-[#7CFF00]">
-              professionell · sicher · messbar
+              professionell, sicher und messbar
             </span>
           </h1>
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed">
-            Wir integrieren KI dort, wo heute Zeit verloren geht,
-            Entscheidungen verzögern oder Kontrolle fehlt –
-            strategisch geführt, professionell umgesetzt.
+            Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liegen bleibt oder Kontrolle fehlt.
           </p>
 
           {/* CTA */}
@@ -143,9 +141,7 @@ const Hero = () => {
             </div>
 
             <blockquote className="mt-6 max-w-2xl text-lg sm:text-xl text-white leading-relaxed italic">
-              „In vier Jahren gibt es zwei Arten von KMU:  
-              Diejenigen, die als Architekten ihre KI steuern und kontrollieren –  
-              und diejenigen, deren Team für die KI arbeitet.“
+              „IIn vier Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
             </blockquote>
 
             <p className="mt-4 text-base text-white font-semibold">
