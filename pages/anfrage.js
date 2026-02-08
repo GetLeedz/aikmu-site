@@ -21,9 +21,9 @@ const initialState = {
   website: "", // Honeypot
 };
 
-const Anfrage = () => {
+export default function Anfrage() {
   const [formData, setFormData] = useState(initialState);
-  const [status, setStatus] = useState(null); // loading | success | error | null
+  const [status, setStatus] = useState(null); // loading | success | error
   const [errorMsg, setErrorMsg] = useState("");
   const [cfToken, setCfToken] = useState("");
   const [tsKey, setTsKey] = useState(0);
@@ -42,7 +42,7 @@ const Anfrage = () => {
     if (!cfToken) {
       setStatus("error");
       setErrorMsg(
-        "Bitte kurz bestätigen, dass du kein Bot bist (Captcha unten ausfüllen)."
+        "Bitte bestätigen Sie kurz die Sicherheitsprüfung, damit wir Ihre Anfrage bearbeiten können."
       );
       return;
     }
@@ -61,17 +61,15 @@ const Anfrage = () => {
         throw new Error(data.error || "Fehler beim Absenden.");
       }
 
-      // ✅ Erfolg
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
       setTsKey((k) => k + 1);
 
-      // 🎯 Meta Lead Event (nur mit Consent)
       if (hasMarketingConsent()) {
         track("Lead", {
-          content_name: "Lead-Kampagne Anfrage",
-          content_category: "Leadgenerierung",
+          content_name: "AiKMU Anfrage",
+          content_category: "KI-Beratung",
           value: 1,
           currency: "CHF",
         });
@@ -80,7 +78,7 @@ const Anfrage = () => {
       setStatus("error");
       setErrorMsg(
         err.message ||
-          "Irgendwas ist schiefgelaufen. Bitte versuch es später nochmals."
+          "Es ist ein technischer Fehler aufgetreten. Bitte versuchen Sie es später erneut."
       );
     } finally {
       setTimeout(() => setStatus(null), 6000);
@@ -90,10 +88,10 @@ const Anfrage = () => {
   return (
     <>
       <Head>
-        <title>Anfrage für Lead-Kampagne | GetLeedz</title>
+        <title>Anfrage | AiKMU</title>
         <meta
           name="description"
-          content="Schick uns deine Challenge – wir prüfen ehrlich, ob und wie wir dir mehr Leads bringen können."
+          content="Besprechen Sie Ihr KI-Potenzial mit AiKMU – ehrlich, strukturiert und auf Schweizer Qualitätsniveau."
         />
       </Head>
 
@@ -101,19 +99,21 @@ const Anfrage = () => {
 
       <main className="min-h-screen pt-[160px] pb-[80px]">
         <section>
-          <div className="container m-auto max-w-3xl px-4 text-slate-100">
-            <div className="mb-8 text-center">
-              <h1 className="text-2xl md:text-3xl font-semibold text-white">
-                Anfrage für Lead-Kampagne
+          <div className="container m-auto max-w-3xl px-4 text-white">
+            <div className="mb-10 text-center">
+              <h1 className="text-3xl md:text-4xl font-semibold">
+                Anfrage für ein unverbindliches Gespräch
               </h1>
-              <p className="mt-4 text-base md:text-lg text-slate-200">
-                Kurz ausfüllen – wir melden uns mit einer ehrlichen Einschätzung.
+              <p className="mt-4 text-lg text-slate-200">
+                Bitte schildern Sie kurz Ihre Situation.  
+                Wir melden uns mit einer ehrlichen Einschätzung, ob und wie KI in
+                Ihrem Unternehmen sinnvoll eingesetzt werden kann.
               </p>
             </div>
 
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 rounded-2xl bg-black/40 p-6 backdrop-blur shadow-[0_0_40px_rgba(15,23,42,0.9)]"
+              className="space-y-6 rounded-2xl bg-black/40 p-6 backdrop-blur"
             >
               {/* Honeypot */}
               <input
@@ -126,65 +126,27 @@ const Anfrage = () => {
                 autoComplete="off"
               />
 
-              {/* Name */}
-              <div>
-                <label className="neon-label">Dein Name</label>
-                <div className="neon-input-wrapper">
-                  <input
-                    name="name"
-                    required
-                    className="neon-input"
-                    value={formData.name}
-                    onChange={handleChange}
-                    disabled={disabled}
-                  />
+              {[
+                ["name", "Ihr Name"],
+                ["email", "E-Mail-Adresse", "email"],
+                ["company", "Unternehmen"],
+                ["phone", "Telefonnummer"],
+              ].map(([name, label, type]) => (
+                <div key={name}>
+                  <label className="neon-label">{label}</label>
+                  <div className="neon-input-wrapper">
+                    <input
+                      name={name}
+                      type={type || "text"}
+                      required={name !== "phone"}
+                      className="neon-input"
+                      value={formData[name]}
+                      onChange={handleChange}
+                      disabled={disabled}
+                    />
+                  </div>
                 </div>
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="neon-label">E-Mail</label>
-                <div className="neon-input-wrapper">
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    className="neon-input"
-                    value={formData.email}
-                    onChange={handleChange}
-                    disabled={disabled}
-                  />
-                </div>
-              </div>
-
-              {/* Firma */}
-              <div>
-                <label className="neon-label">Firma</label>
-                <div className="neon-input-wrapper">
-                  <input
-                    name="company"
-                    required
-                    className="neon-input"
-                    value={formData.company}
-                    onChange={handleChange}
-                    disabled={disabled}
-                  />
-                </div>
-              </div>
-
-              {/* Telefon */}
-              <div>
-                <label className="neon-label">Telefon</label>
-                <div className="neon-input-wrapper">
-                  <input
-                    name="phone"
-                    className="neon-input"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={disabled}
-                  />
-                </div>
-              </div>
+              ))}
 
               {/* Branche */}
               <div>
@@ -198,29 +160,23 @@ const Anfrage = () => {
                     onChange={handleChange}
                     disabled={disabled}
                   >
-                    <option value="">Bitte wählen ...</option>
-                    <option>Gastronomie / Restaurant</option>
-                    <option>Detailhandel / Retail</option>
-                    <option>Versicherung / Finanzdienstleister</option>
-                    <option>Immobilien / Makler / Verwaltung</option>
-                    <option>Fitness / Gesundheit</option>
-                    <option>Beauty / Kosmetik</option>
-                    <option>Agentur / Marketing</option>
-                    <option>Beratung / Coaching</option>
-                    <option>IT / Software / SaaS</option>
+                    <option value="">Bitte auswählen …</option>
+                    <option>Handwerk / Bau</option>
+                    <option>Treuhand / Finanzen</option>
+                    <option>Immobilien</option>
+                    <option>Gesundheit</option>
+                    <option>Beratung / Dienstleistung</option>
                     <option>Industrie / Produktion</option>
-                    <option>Dienstleistungen (allgemein)</option>
-                    <option>Öffentliche Hand / Bildung</option>
-                    <option>B2B / andere KMU</option>
+                    <option>IT / Software</option>
                     <option>Andere Branche</option>
                   </select>
                 </div>
               </div>
 
-              {/* Message */}
+              {/* Nachricht */}
               <div>
                 <label className="neon-label">
-                  Was ist deine grösste Challenge bei Leads?
+                  Was ist aktuell Ihre grösste Herausforderung?
                 </label>
                 <div className="neon-input-wrapper">
                   <textarea
@@ -235,7 +191,7 @@ const Anfrage = () => {
               </div>
 
               {/* Turnstile */}
-              <div className="pt-2 text-center">
+              <div className="pt-4 text-center">
                 <p className="text-sm text-slate-300 mb-2">
                   Kurze Sicherheitsprüfung:
                 </p>
@@ -246,34 +202,33 @@ const Anfrage = () => {
                 />
               </div>
 
-              {/* Status */}
               {status === "success" && (
-                <div className="badge-success">
-                  ✅ Anfrage erfolgreich gesendet.
+                <div className="badge-success text-center">
+                  ✅ Vielen Dank. Ihre Anfrage wurde erfolgreich übermittelt.
                 </div>
               )}
 
               {status === "error" && (
-                <div className="badge-error">⚠️ {errorMsg}</div>
+                <div className="badge-error text-center">
+                  ⚠️ {errorMsg}
+                </div>
               )}
 
               {/* Submit */}
               <button
                 type="submit"
                 disabled={disabled}
-                className={`neon-border ${
-                  disabled ? "opacity-60 cursor-not-allowed" : ""
-                }`}
+                className="neon-border w-full mt-2"
               >
                 <span className="neon-border-inner">
                   {status === "loading"
-                    ? "Wird gesendet..."
-                    : "Anfrage jetzt abschicken"}
+                    ? "Wird gesendet …"
+                    : "Gespräch anfragen"}
                 </span>
               </button>
 
-              <p className="text-sm text-slate-300">
-                Deine Daten werden vertraulich behandelt. Kein Spam.
+              <p className="text-sm text-slate-300 text-center">
+                Ihre Angaben werden vertraulich behandelt. Kein Spam.
               </p>
             </form>
           </div>
@@ -283,6 +238,4 @@ const Anfrage = () => {
       <Footer />
     </>
   );
-};
-
-export default Anfrage;
+}
