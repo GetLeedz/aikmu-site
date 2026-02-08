@@ -223,7 +223,7 @@ const Hero = () => {
 
 
             <blockquote className="max-w-2xl text-[1.05rem] sm:text-[1.15rem] text-white leading-[1.7] opacity-95">
-              „In vier Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren – und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
+              „In vier Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
             </blockquote>
             <p className="mt-2 text-sm sm:text-base text-white opacity-90">
   Arthur Ergen, CEO
