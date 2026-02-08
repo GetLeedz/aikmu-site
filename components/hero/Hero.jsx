@@ -8,7 +8,6 @@ import hero2 from "../../public/images/hero/hero2.png";
 import hero3 from "../../public/images/hero/hero3.png";
 import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
-import hero6 from "../../public/images/hero/hero6.png";
 
 import arthurImg from "../../public/images/arthurergen_square_tiny.png";
 
@@ -22,30 +21,29 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="hero relative overflow-hidden min-h-screen flex items-center pt-[90px] md:pt-[110px]"
+      className="hero relative min-h-screen flex items-center pt-[90px] md:pt-[110px]"
     >
-      {/* BACKGROUND FRAMES */}
-      {[hero1, hero2, hero3].map((img, i) => (
-        <div
-          key={i}
-          className={`hero-frame-${i + 1} absolute z-0 pointer-events-none animate-pulse`}
-        >
-          <Image src={img} alt="" />
-        </div>
-      ))}
+      {/* BACKGROUND FRAMES (dürfen clippen) */}
+      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        {[hero1, hero2].map((img, i) => (
+          <div key={i} className={`hero-frame-${i + 1}`}>
+            <Image src={img} alt="" />
+          </div>
+        ))}
+      </div>
 
-      {/* FLOATING ICONS – GetLeedz-Pattern mit vorhandenen Assets */}
+      {/* FLOATING HERO ICONS – dürfen rausstehen */}
       <div className="hero-icons">
         <div className="hero-icon hero-icon-left">
-          <Image src={hero4} alt="" width={140} height={140} />
+          <Image src={hero4} alt="" width={150} height={150} />
         </div>
 
         <div className="hero-icon hero-icon-right">
-          <Image src={hero6} alt="" width={140} height={140} />
+          <Image src={hero3} alt="" width={150} height={150} />
         </div>
 
         <div className="hero-icon hero-icon-bottom">
-          <Image src={hero5} alt="" width={120} height={120} />
+          <Image src={hero5} alt="" width={130} height={130} />
         </div>
       </div>
 
@@ -167,8 +165,8 @@ const Hero = () => {
             </div>
 
             <blockquote className="max-w-2xl text-xl sm:text-2xl text-white italic font-light leading-snug opacity-95">
-              „In vier Jahren gibt es zwei Arten von KMU:  
-              Diejenigen, die ihre KI steuern –  
+              „In vier Jahren gibt es zwei Arten von KMU:
+              Diejenigen, die ihre KI steuern –
               und diejenigen, die von ihr gesteuert werden.“
             </blockquote>
 
