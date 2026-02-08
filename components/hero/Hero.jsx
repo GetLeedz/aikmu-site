@@ -10,6 +10,8 @@ import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
 import hero6 from "../../public/images/hero/hero6.png";
 
+import arthurImg from "../../public/images/arthurergen_square_tiny.png";
+
 const Hero = () => {
   const calendlyUrl =
     process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
@@ -36,7 +38,7 @@ const Hero = () => {
             className="text-[2.1rem] sm:text-5xl lg:text-6xl font-semibold text-white"
             style={{ lineHeight: 1.2 }}
           >
-            AiKMU integriert Corporate KI 
+            AiKMU integriert Corporate KI
             <span className="block">in Ihr KMU</span>
             <span className="block mt-1 text-[#7CFF00]">
               professionell, sicher und messbar
@@ -45,7 +47,9 @@ const Hero = () => {
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed">
-Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liegen bleibt oder Kontrolle fehlt. Strategisch geführt, professionell umgesetzt.
+            Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht,
+            Umsatz liegen bleibt oder Kontrolle fehlt. Strategisch geführt,
+            professionell umgesetzt.
           </p>
 
           {/* CTA */}
@@ -152,7 +156,7 @@ Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liege
                     Konsistenz oder saubere Auswertung.
                     <br />
                     <strong>Ihr Nutzen:</strong> KI analysiert Zielgruppen,
-                    optimiert Inhalte und unterstützt bei Kampagnen –
+                    optimiert Inhalte und Kampagnen –
                     mehr qualifizierte Anfragen,
                     bessere Budget-Nutzung,
                     klare Entscheidungsgrundlagen.
@@ -181,7 +185,7 @@ Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liege
               </div>
             </button>
 
-            {/* Governance & Compliance */}
+            {/* Governance */}
             <button onClick={() => toggle(5)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
@@ -190,11 +194,12 @@ Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liege
                 {open === 5 && (
                   <p className="mt-3 text-white leading-relaxed">
                     KI entfaltet nur dann nachhaltig Wirkung, wenn sie
-                    sauber in Organisation, Prozesse und Verantwortung eingebettet ist.
+                    sauber in Organisation, Prozesse und Verantwortung
+                    eingebettet ist.
                     <br />
                     <strong>Ihr Nutzen:</strong> klare Governance,
                     definierte Zugriffsrechte, Datenschutz und
-                    auf Wunsch KI-Lösungen auf eigener Infrastruktur –
+                    auf Wunsch KI auf eigener Infrastruktur –
                     Sicherheit und Vertrauen für Geschäftsleitung
                     und Verwaltungsrat.
                   </p>
@@ -202,7 +207,25 @@ Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liege
               </div>
             </button>
 
+          </div>
 
+          {/* FOTO + ZITAT */}
+          <div className="mt-14 flex flex-col items-center gap-6 text-center">
+            <div className="w-24 h-24 rounded-full overflow-hidden border border-white/20">
+              <Image
+                src={arthurImg}
+                alt="Arthur Ergen"
+                width={96}
+                height={96}
+              />
+            </div>
+
+            <blockquote className="max-w-2xl text-base sm:text-lg text-white leading-relaxed opacity-90">
+              „In vier Jahren gibt es zwei Arten von KMU:  
+              Diejenigen, die als Architekten ihre KI steuern und kontrollieren –  
+              und diejenigen, deren Team für die KI arbeitet und seinen Lohn
+              direkt von ihr bezieht.“
+            </blockquote>
           </div>
 
         </div>
