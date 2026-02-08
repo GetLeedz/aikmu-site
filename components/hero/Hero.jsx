@@ -83,21 +83,27 @@ const Hero = () => {
           <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
             {/* 1 – Onboarding */}
-            <button onClick={() => toggle(0)} className="w-full text-left">
+<button onClick={() => toggle(0)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Fachkräftemangel & Onboarding bremsen Ihr Wachstum
+                  Intelligentes Recruiting: Vom Admin-Overhead zur Talent-Pipeline
                 </h3>
-                {open === 0 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    Wissen steckt in Köpfen, neue Mitarbeitende brauchen Monate,
-                    Führungskräfte erklären immer wieder dasselbe.
+                {open === 1 && (
+                  <div className="mt-3 text-white leading-relaxed">
+                    <p>
+                      Die Sichtung von hunderten CVs und das Führen von unqualifizierten Erstgesprächen verbrennen wertvolle Management-Ressourcen. In der Zeit, in der Sie unpassende Dossiers lesen, unterschreiben Top-Talente bereits bei der Konkurrenz.
+                    </p>
                     <br />
-                    <strong>Ihr Nutzen:</strong> KI-Onboarding erklärt Prozesse,
-                    Richtlinien und Wissen per Chat –
-                    Mitarbeitende werden schneller produktiv,
-                    Führung wird entlastet.
-                  </p>
+                    <strong>Die KI-gestützte HR-Revolution:</strong>
+                    <ul className="list-disc ml-5 mt-2 space-y-2">
+                      <li><strong>Automatisierte Vorselektion:</strong> Unsere KI analysiert CVs nicht nur nach Keywords, sondern nach echtem Kompetenz-Matching mit Ihrem Anforderungsprofil – neutral, objektiv und in Sekunden.</li>
+                      <li><strong>KI-Erstinterview (Screening):</strong> Ein KI-Agent führt die ersten qualifizierenden Fragen durch. Sie erhalten nur noch eine handverlesene Shortlist mit den Top-Kandidaten, inklusive einer Zusammenfassung der kulturellen Passung.</li>
+                      <li><strong>Effizienz-Boost:</strong> Reduzieren Sie die "Time-to-Hire" um bis zu 60%. Während die Konkurrenz noch sichtet, sitzen Sie bereits mit den besten Talenten am Tisch.</li>
+                    </ul>
+                    <p className="mt-3 text-blue-400 font-medium italic">
+                      "KI übernimmt nicht die Entscheidung – sie schafft Ihnen die Zeit, um die richtige Entscheidung zu treffen."
+                    </p>
+                  </div>
                 )}
               </div>
             </button>
@@ -234,11 +240,7 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Swiss Promoted */}
-          <div className="mt-10 flex justify-center items-center gap-2 text-sm text-white/80">
-            <span className="swiss-flag" />
-            <span>Swiss Promoted</span>
-          </div>
+
 
         </div>
       </div>
