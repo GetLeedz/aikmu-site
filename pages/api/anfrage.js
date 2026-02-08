@@ -31,16 +31,40 @@ export default async function handler(req, res) {
   }
 
   // 2. Mail-Versand
+// 2. Mail-Versand
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
-      port: Number(process.env.MAIL_PORT || 465),
-      secure: process.env.MAIL_SECURE === "true",
+      port: Number(process.env.MAIL_PORT || 587),
+      // Für Port 587 muss secure FALSE sein. 
+      // Wir prüfen, ob der String in der Variable "true" ist:
+      secure: process.env.MAIL_SECURE === "true", 
       auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS, // Wichtig: In .env.local Passwort in "" setzen
+        pass: process.env.MAIL_PASS,
       },
+      // TLS-Optionen hinzufügen für stabilere Verbindung bei Hostpoint
+      tls: {
+        rejectUnauthorized: false
+      }
     });
+
+    const text = `Neue Anfrage von ${name}\nFirma: ${company}\nE-Mail: ${email}\nTelefon: ${phone}\nBranche: ${industry}\n\nNachricht:\n${message}`;
+
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM,
+      to: process.env.MAIL_TO,
+      subject: `Neue Anfrage von ${name}`,
+      text,
+      html: text.replace(/\n/g, "<br/>"),
+    });
+
+    return res.status(200).json({ ok: true });
+  } catch (err) {
+    // Wichtig: Logge den Fehler in Vercel, damit wir ihn lesen können!
+    console.error("SMTP Fehler:", err); 
+    return res.status(500).json({ error: "Mail-Server Fehler: " + err.message });
+  }
 
     const text = `Neue Anfrage von ${name}\nFirma: ${company}\nE-Mail: ${email}\nBranche: ${industry}\n\nNachricht:\n${message}`;
 
