@@ -8,31 +8,30 @@
 
 /* ================= ROOT ================= */
 :root {
-  --color-primary: #322318;
-  --color-secondary: #7aff00;
-  --dark: #010220;
-  --pink: #f800ff;
-  --blue: #0900ff;
-  --border: #272646;
+  --dark: #020617;
+  --dark-soft: #050816;
 }
 
 /* ================= HTML / BODY ================= */
 html,
 body {
-  padding: 0;
   margin: 0;
-  font-family: "Chakra Petch", system-ui, sans-serif;
+  padding: 0;
+  font-family: "Chakra Petch", system-ui, -apple-system, BlinkMacSystemFont;
+  color: #ffffff;
 
   background:
-    radial-gradient(1100px circle at 25% 25%, rgba(255, 140, 60, 0.22), transparent 60%),
-    radial-gradient(1000px circle at 65% 35%, rgba(248, 0, 255, 0.16), transparent 62%),
-    radial-gradient(900px circle at 75% 70%, rgba(0, 229, 255, 0.12), transparent 65%),
-    linear-gradient(180deg, #020617 0%, #040a1a 55%, #020617 100%);
+    radial-gradient(1100px circle at 25% 25%, rgba(255,140,60,0.18), transparent 60%),
+    radial-gradient(1000px circle at 70% 35%, rgba(248,0,255,0.14), transparent 60%),
+    radial-gradient(900px circle at 60% 75%, rgba(0,229,255,0.12), transparent 65%),
+    linear-gradient(180deg, #020617 0%, #040a1a 60%, #020617 100%);
 
-  font-size: 19px;
-  line-height: 1.7;
-  color: #ffffff;
   scroll-behavior: smooth;
+}
+
+/* ================= CONTAINER FIX ================= */
+.container {
+  width: 100%;
 }
 
 /* ================= HERO ================= */
@@ -41,44 +40,25 @@ body {
   isolation: isolate;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 10;
-  background:
-    radial-gradient(800px circle at 50% 40%, rgba(255, 140, 60, 0.22), transparent 60%),
-    radial-gradient(900px circle at 70% 55%, rgba(255, 0, 170, 0.18), transparent 65%),
-    radial-gradient(900px circle at 30% 60%, rgba(0, 229, 255, 0.12), transparent 70%);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  padding-top: 6.5rem;
-}
-
-/* ================= LABEL ================= */
+/* ================= FORM LABEL ================= */
 .neon-label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #e5e7eb;
 }
 
 /* ================= INPUT WRAPPER ================= */
 .neon-input-wrapper {
-  position: relative;
-  padding: 3px;
-  border-radius: 1rem;
+  padding: 2px;
+  border-radius: 14px;
   background: linear-gradient(
     120deg,
     #ec4899,
     #a855f7,
     #22d3ee,
-    #f97316,
-    #ec4899
+    #f97316
   );
-  background-size: 300% 300%;
-  animation: neonGradient 6s linear infinite;
 }
 
 /* ================= INPUTS ================= */
@@ -86,78 +66,82 @@ body {
 .neon-select,
 .neon-textarea {
   width: 100%;
-  border-radius: 0.85rem;
-  background: #050816;
+  border-radius: 12px;
   border: none;
+  background: var(--dark-soft);
   color: #ffffff;
-  font-size: 1.05rem;
-  padding: 1.1rem 1.25rem;
-  line-height: 1.5;
+  padding: 14px 16px;
+  font-size: 1rem;
   outline: none;
+  box-shadow: none;
+}
+
+/* Safari / iOS Fix */
+input,
+textarea,
+select {
   -webkit-appearance: none;
-}
-
-.neon-input::placeholder,
-.neon-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.neon-input:focus,
-.neon-select:focus,
-.neon-textarea:focus {
-  background: #020617;
-  box-shadow:
-    0 0 0 1px rgba(168, 85, 247, 0.7),
-    0 0 18px rgba(168, 85, 247, 0.75);
+  appearance: none;
 }
 
 /* ================= SELECT ================= */
 .neon-select {
-  height: 56px;
+  height: 52px;
   cursor: pointer;
 }
 
 /* ================= TEXTAREA ================= */
 .neon-textarea {
-  min-height: 160px;
+  min-height: 130px;
   resize: vertical;
+}
+
+/* ❗ KEIN zusätzlicher Focus-Rand (wichtig!) */
+.neon-input:focus,
+.neon-select:focus,
+.neon-textarea:focus {
+  background: #020617;
 }
 
 /* ================= BUTTON ================= */
 .neon-border {
-  width: 100%;
-  display: inline-flex;
+  margin-top: 12px;
+  display: inline-block;
+  padding: 3px;
   border-radius: 9999px;
-  padding: 5px;
   background: linear-gradient(
     120deg,
     #ec4899,
     #a855f7,
     #22d3ee,
-    #f97316,
-    #ec4899
+    #f97316
   );
-  background-size: 300% 300%;
-  animation: neonGradient 4s linear infinite;
 }
 
 .neon-border-inner {
-  width: 100%;
-  padding: 1.1rem 2rem;
+  display: block;
+  padding: 14px 30px;
   border-radius: 9999px;
-  background: #050816;
+  background: var(--dark-soft);
   color: #ffffff;
   font-weight: 600;
   text-align: center;
+  white-space: nowrap;
 }
 
-/* ================= TURNSTILE ================= */
-.turnstile-wrapper {
-  min-height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 12px;
+/* ================= STATUS MESSAGES ================= */
+.badge-error {
+  margin-top: 10px;
+  text-align: center;
+  color: #fca5a5;
+  font-size: 0.95rem;
+}
+
+.badge-success {
+  margin-top: 10px;
+  text-align: center;
+  color: #86efac;
+  font-size: 0.95rem;
 }
 
 /* ================= FOOTER ================= */
@@ -166,19 +150,18 @@ footer {
 }
 
 .footer-text {
-  font-size: 1.1rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .footer-copy {
-  font-size: 1rem;
-  opacity: 0.85;
+  font-size: 0.9rem;
   text-align: center;
+  opacity: 0.8;
 }
 
-/* ================= ANIMATIONS ================= */
-@keyframes neonGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ================= SAFETY ================= */
+/* verhindert Mobile-Viewport-Clipping */
+main {
+  overflow-x: hidden;
 }
