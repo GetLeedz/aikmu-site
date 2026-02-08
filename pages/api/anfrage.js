@@ -1,4 +1,3 @@
-// pages/api/anfrage.js
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
@@ -6,112 +5,48 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const {
-    name,
-    company,
-    email,
-    phone,
-    industry,
-    message,
-    website, // Honeypot
-    cfToken, // Turnstile Token
-  } = req.body || {};
+  const { name, company, email, phone, industry, message, website, cfToken } = req.body || {};
 
-  // 🛑 Honeypot (stille Annahme)
-  if (website) {
-    return res.status(200).json({ ok: true });
-  }
+  if (website) return res.status(200).json({ ok: true });
 
-  // 🧾 Pflichtfelder
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Pflichtfelder fehlen." });
   }
 
-  // 🔐 Turnstile prüfen
+  // 1. Turnstile Validierung
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    return res.status(500).json({ error: "Turnstile nicht konfiguriert." });
-  }
-
   try {
-    const ip =
-      req.headers["x-forwarded-for"] ||
-      req.socket?.remoteAddress ||
-      "";
-
-    const verifyRes = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${encodeURIComponent(secret)}
-&response=${encodeURIComponent(cfToken || "")}
-&remoteip=${encodeURIComponent(ip)}`,
-      }
-    );
+    const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(cfToken || "")}`,
+    });
 
     const verifyData = await verifyRes.json();
-
     if (!verifyData.success) {
-      return res
-        .status(400)
-        .json({ error: "Sicherheitsprüfung fehlgeschlagen." });
+      return res.status(400).json({ error: "Sicherheitsprüfung fehlgeschlagen." });
     }
   } catch (err) {
-    return res.status(500).json({ error: "Turnstile Fehler." });
+    return res.status(500).json({ error: "Sicherheits-Service nicht erreichbar." });
   }
 
-  // 📬 Mail-ENV prüfen
-  const {
-    MAIL_HOST,
-    MAIL_PORT,
-    MAIL_SECURE,
-    MAIL_USER,
-    MAIL_PASS,
-    MAIL_FROM,
-    MAIL_TO,
-  } = process.env;
-
-  if (
-    !MAIL_HOST ||
-    !MAIL_USER ||
-    !MAIL_PASS ||
-    !MAIL_FROM ||
-    !MAIL_TO
-  ) {
-    return res
-      .status(500)
-      .json({ error: "Mail-Konfiguration unvollständig." });
-  }
-
-  // ✉️ Mail senden
+  // 2. Mail-Versand
   try {
     const transporter = nodemailer.createTransport({
-      host: MAIL_HOST,
-      port: Number(MAIL_PORT || 465),
-      secure: MAIL_SECURE === "true",
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT || 465),
+      secure: process.env.MAIL_SECURE === "true",
       auth: {
-        user: MAIL_USER,
-        pass: MAIL_PASS,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS, // Wichtig: In .env.local Passwort in "" setzen
       },
     });
 
-    const text = `
-Neue Anfrage über aikmu.ch
-
-Name: ${name}
-Firma: ${company || "-"}
-E-Mail: ${email}
-Telefon: ${phone || "-"}
-Branche: ${industry || "-"}
-
-Nachricht:
-${message}
-`;
+    const text = `Neue Anfrage von ${name}\nFirma: ${company}\nE-Mail: ${email}\nBranche: ${industry}\n\nNachricht:\n${message}`;
 
     await transporter.sendMail({
-      from: MAIL_FROM,
-      to: MAIL_TO,
+      from: process.env.MAIL_FROM,
+      to: process.env.MAIL_TO,
       subject: `Neue Anfrage von ${name}`,
       text,
       html: text.replace(/\n/g, "<br/>"),
@@ -119,8 +54,6 @@ ${message}
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    return res
-      .status(500)
-      .json({ error: "E-Mail konnte nicht gesendet werden." });
+    return res.status(500).json({ error: "Mail-Server Fehler." });
   }
 }
