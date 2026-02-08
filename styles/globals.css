@@ -55,6 +55,49 @@ body {
   z-index: 10;
 }
 
+/* ================= HERO ICONS ================= */
+.hero-icons {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-icon {
+  position: absolute;
+  opacity: 0.85;
+  filter: saturate(1.2);
+}
+
+/* links unten */
+.hero-icon-left {
+  left: 4%;
+  bottom: 8%;
+  transform: rotate(-8deg);
+}
+
+/* rechts oben */
+.hero-icon-right {
+  right: 6%;
+  top: 18%;
+  transform: rotate(8deg);
+}
+
+/* Mobile Feintuning */
+@media (max-width: 768px) {
+  .hero-icon-left {
+    left: -10px;
+    bottom: 6%;
+    transform: scale(0.85) rotate(-6deg);
+  }
+
+  .hero-icon-right {
+    right: -12px;
+    top: 14%;
+    transform: scale(0.85) rotate(6deg);
+  }
+}
+
 /* ================= FORM LABEL ================= */
 .neon-label {
   display: block;

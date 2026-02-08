@@ -11,6 +11,8 @@ import hero5 from "../../public/images/hero/hero5.png";
 import hero6 from "../../public/images/hero/hero6.png";
 
 import arthurImg from "../../public/images/arthurergen_square_tiny.png";
+import chatgptIcon from "../../public/images/icons/chatgpt.png";
+import linkedinIcon from "../../public/images/icons/linkedin.png";
 
 const Hero = () => {
   const calendlyUrl =
@@ -22,9 +24,9 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="hero relative overflow-hidden min-h-screen flex items-center"
+      className="hero relative overflow-hidden min-h-screen flex items-center pt-[90px] md:pt-[110px]"
     >
-      {/* Decorative Frames (immer HINTER Content) */}
+      {/* Decorative Frames */}
       {[hero1, hero2, hero3, hero4, hero5, hero6].map((img, i) => (
         <div
           key={i}
@@ -34,11 +36,20 @@ const Hero = () => {
         </div>
       ))}
 
-      {/* CONTENT */}
-      <div className="container mx-auto px-6 pt-[80px] pb-[80px] relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
+      {/* Floating Icons */}
+      <div className="hero-icons pointer-events-none">
+        <div className="hero-icon hero-icon-left">
+          <Image src={chatgptIcon} alt="" width={120} height={120} />
+        </div>
+        <div className="hero-icon hero-icon-right">
+          <Image src={linkedinIcon} alt="" width={120} height={120} />
+        </div>
+      </div>
 
-          {/* HEADLINE */}
+      {/* CONTENT */}
+      <div className="container mx-auto px-6 pt-[40px] pb-[80px] relative z-10 hero-content">
+        <div className="max-w-4xl mx-auto text-center">
+
           <h1 className="text-[2.4rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
             Corporate KI für KMU
             <span className="block mt-3 text-[#7CFF00]">
@@ -46,14 +57,12 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* SUBLINE */}
           <p className="mt-8 text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
             Wir integrieren KI dort, wo heute Zeit verloren geht,
             Entscheidungen verzögern oder Kontrolle fehlt – strategisch geführt,
             professionell umgesetzt.
           </p>
 
-          {/* CTA BUTTONS */}
           <div className="flex flex-col items-center gap-5 mt-12">
             <Link href="/anfrage">
               <a className="group neon-border w-full max-w-[400px] transition-transform hover:scale-[1.02]">
@@ -77,43 +86,41 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* EINLEITUNG */}
           <p className="mt-16 text-sm sm:text-base text-white/70 uppercase tracking-widest font-medium">
             Wirtschaftliche Hebel für KMUs
           </p>
 
-          {/* ACCORDION – erst ab md sichtbar */}
           <div className="mt-8 max-w-3xl mx-auto space-y-4 text-left hidden md:block">
             {[
               {
                 title: "Fachkräftemangel & langsames Onboarding",
                 content:
-                  "KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat. Neue Mitarbeitende werden schneller produktiv, Führung wird entlastet.",
+                  "KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat. Neue Mitarbeitende werden schneller produktiv.",
               },
               {
                 title: "Offerten & Ausschreibungen kosten Zeit",
                 content:
-                  "KI erstellt strukturierte Offerten direkt aus Notizen oder E-Mails – schneller reagieren, mehr Abschlüsse.",
+                  "KI erstellt strukturierte Offerten direkt aus Notizen oder E-Mails.",
               },
               {
                 title: "E-Mail-Flut blockiert Führungszeit",
                 content:
-                  "KI priorisiert, formuliert Entwürfe und organisiert Termine – mehrere Stunden pro Woche zurückgewinnen.",
+                  "KI priorisiert, formuliert Entwürfe und organisiert Termine.",
               },
               {
                 title: "Marketing ohne klare Resultate",
                 content:
-                  "KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen – bessere Entscheidungen, mehr qualifizierte Anfragen.",
+                  "KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen.",
               },
               {
                 title: "Finanzen ohne Transparenz",
                 content:
-                  "KI unterstützt Finance & Management mit verständlichen Auswertungen, Prognosen und Frühwarnsignalen.",
+                  "KI liefert verständliche Auswertungen und Prognosen.",
               },
               {
                 title: "Governance & Datenschutz",
                 content:
-                  "Saubere KI-Governance mit klaren Rechten, optional auf eigener Infrastruktur – Sicherheit für VR & GL.",
+                  "Saubere KI-Governance, optional auf eigener Infrastruktur.",
               },
             ].map((item, index) => (
               <div
@@ -145,7 +152,6 @@ const Hero = () => {
             ))}
           </div>
 
-          {/* FOTO + ZITAT */}
           <div className="mt-20 flex flex-col items-center gap-6 text-center">
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[#7CFF00]/30 shadow-2xl">
               <Image
