@@ -82,48 +82,27 @@ const Hero = () => {
           {/* ACCORDION */}
           <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
-            {/* 1 – Onboarding */}
-<button onClick={() => toggle(0)} className="w-full text-left">
+            <button onClick={() => toggle(0)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Intelligentes Recruiting: Vom Admin-Overhead zur Talent-Pipeline
+                  Strategisches Recruiting & Wissensmanagement
                 </h3>
-                {open === 1 && (
+                {open === 0 && (
                   <div className="mt-3 text-white leading-relaxed">
                     <p>
-                      Die Sichtung von hunderten CVs und das Führen von unqualifizierten Erstgesprächen verbrennen wertvolle Management-Ressourcen. In der Zeit, in der Sie unpassende Dossiers lesen, unterschreiben Top-Talente bereits bei der Konkurrenz.
+                      Der Fachkräftemangel ist oft ein administratives Problem: Wertvolle Management-Zeit fliesst in die Sichtung unpassender Dossiers, während Top-Talente bereits woanders unterschreiben.
                     </p>
                     <br />
-                    <strong>Die KI-gestützte HR-Revolution:</strong>
+                    <strong>Ihr operativer Vorsprung durch KI:</strong>
                     <ul className="list-disc ml-5 mt-2 space-y-2">
-                      <li><strong>Automatisierte Vorselektion:</strong> Unsere KI analysiert CVs nicht nur nach Keywords, sondern nach echtem Kompetenz-Matching mit Ihrem Anforderungsprofil – neutral, objektiv und in Sekunden.</li>
-                      <li><strong>KI-Erstinterview (Screening):</strong> Ein KI-Agent führt die ersten qualifizierenden Fragen durch. Sie erhalten nur noch eine handverlesene Shortlist mit den Top-Kandidaten, inklusive einer Zusammenfassung der kulturellen Passung.</li>
-                      <li><strong>Effizienz-Boost:</strong> Reduzieren Sie die "Time-to-Hire" um bis zu 60%. Während die Konkurrenz noch sichtet, sitzen Sie bereits mit den besten Talenten am Tisch.</li>
+                      <li><strong>Automatisierte CV-Analyse:</strong> Die KI filtert Bewerbungen nicht nur nach Keywords, sondern versteht Qualifikationen und sortiert Dossiers präzise nach Ihrer strategischen Anforderung vor.</li>
+                      <li><strong>KI-gestütztes Erstscreening:</strong> Standardisierte Erstgespräche und Qualifizierungen werden durch KI-Agenten übernommen. Sie erhalten eine glasklare Shortlist statt eines Stapels Papier.</li>
+                      <li><strong>Instant Onboarding:</strong> Sobald das Talent an Bord ist, übernimmt die KI die Wissensvermittlung. Interaktives Coaching zu Prozessen und Richtlinien entlastet die Geschäftsleitung sofort von repetitiven Erklärungen.</li>
                     </ul>
                     <p className="mt-3 text-blue-400 font-medium italic">
-                      "KI übernimmt nicht die Entscheidung – sie schafft Ihnen die Zeit, um die richtige Entscheidung zu treffen."
+                      &quot;KI übernimmt nicht Ihre Entscheidung &ndash; sie schafft Ihnen den Freiraum, um die richtige Entscheidung zu treffen.&quot;
                     </p>
                   </div>
-                )}
-              </div>
-            </button>
-
-            {/* 2 – Offerten */}
-            <button onClick={() => toggle(1)} className="w-full text-left">
-              <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Offerten & Ausschreibungen kosten Zeit und Umsatz
-                </h3>
-                {open === 1 && (
-                  <p className="mt-3 text-white leading-relaxed">
-                    Angebote entstehen manuell aus Notizen,
-                    Skizzen oder E-Mails.
-                    <br />
-                    <strong>Ihr Nutzen:</strong> KI erstellt strukturierte
-                    Offerten direkt für ERP/CRM –
-                    schneller reagieren, mehr Abschlüsse,
-                    weniger Stress im Team.
-                  </p>
                 )}
               </div>
             </button>
