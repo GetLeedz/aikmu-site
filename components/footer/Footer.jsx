@@ -20,11 +20,13 @@ const Footer = () => {
         </div>
 
         {/* Positionierung */}
-        <div className="text-center text-sm sm:text-base text-slate-300 leading-relaxed">
+        <div className="text-center text-sm sm:text-base text-white leading-relaxed">
           KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau –<br />
-          klar geführt, verantwortungsvoll umgesetzt. 🇨🇭<br />
+          klar geführt, verantwortungsvoll umgesetzt.{" "}
+          <span className="inline-block align-middle ml-1">🇨🇭</span><br />
           <span className="opacity-80">Swiss prompted.</span>
         </div>
+
 
 
         {/* Adresse & Kontakt */}
