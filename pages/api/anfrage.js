@@ -1,134 +1,250 @@
-// pages/api/anfrage.js
-import nodemailer from "nodemailer";
+import { useState } from "react";
+import Head from "next/head";
+import dynamic from "next/dynamic";
+import NavBar from "../components/navBar/NavBar";
+import Footer from "../components/footer/Footer";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
-  const {
-    name,
-    company,
-    email,
-    phone,
-    industry,
-    message,
-    website, // Honeypot
-    cfToken, // Turnstile Token
-  } = req.body || {};
+const initialState = {
+  name: "",
+  email: "",
+  company: "",
+  phone: "",
+  industry: "",
+  message: "",
+  website: "",
+};
 
-  // Honeypot
-  if (website) {
-    console.log("Honeypot ausgelöst, Anfrage ignoriert");
-    return res.status(200).json({ ok: true });
-  }
+const Anfrage = () => {
+  const [formData, setFormData] = useState(initialState);
+  const [status, setStatus] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [cfToken, setCfToken] = useState("");
+  const [tsKey, setTsKey] = useState(0);
 
-  if (!name || !email || !message) {
-    console.log("Pflichtfelder fehlen", { name, email, message });
-    return res.status(400).json({ error: "Pflichtfelder fehlen." });
-  }
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Turnstile prüfen
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    console.error("TURNSTILE_SECRET_KEY fehlt in den ENV Variablen.");
-    return res
-      .status(500)
-      .json({ error: "Sicherheitskonfiguration ist unvollständig." });
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const ip =
-      req.headers["x-forwarded-for"] ||
-      req.socket?.remoteAddress ||
-      "";
-
-    const verifyRes = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `secret=${encodeURIComponent(
-          secret
-        )}&response=${encodeURIComponent(
-          cfToken || ""
-        )}&remoteip=${encodeURIComponent(ip)}`,
-      }
-    );
-
-    const verifyData = await verifyRes.json();
-    if (!verifyData.success) {
-      console.error("Turnstile verification failed:", verifyData);
-      return res
-        .status(400)
-        .json({ error: "Sicherheitsprüfung fehlgeschlagen." });
+    if (!cfToken) {
+      setStatus("error");
+      setErrorMsg(
+        "Bitte bestätigen Sie kurz die Sicherheitsprüfung, um fortzufahren."
+      );
+      return;
     }
-  } catch (e) {
-    console.error("Turnstile request error:", e);
-    return res
-      .status(500)
-      .json({ error: "Sicherheitsprüfung momentan nicht verfügbar." });
-  }
 
-  console.log("Neue Anfrage erhalten:", { name, email, company, phone, industry });
+    setStatus("loading");
 
-  const {
-    MAIL_HOST,
-    MAIL_PORT,
-    MAIL_SECURE,
-    MAIL_USER,
-    MAIL_PASS,
-    MAIL_FROM,
-    MAIL_TO,
-  } = process.env;
+    try {
+      const res = await fetch("/api/anfrage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, cfToken }),
+      });
 
-  if (!MAIL_HOST || !MAIL_USER || !MAIL_PASS || !MAIL_FROM || !MAIL_TO) {
-    console.error("Mail-ENV-Variablen fehlen.");
-    return res
-      .status(500)
-      .json({ error: "Mail-Konfiguration ist unvollständig." });
-  }
+      if (!res.ok) {
+        throw new Error(
+          "Ihre Anfrage konnte momentan nicht übermittelt werden."
+        );
+      }
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: MAIL_HOST,
-      port: Number(MAIL_PORT || 465),
-      secure: MAIL_SECURE === "true" || MAIL_SECURE === true,
-      auth: {
-        user: MAIL_USER,
-        pass: MAIL_PASS,
-      },
-    });
+      setStatus("success");
+      setFormData(initialState);
+      setCfToken("");
+      setTsKey((k) => k + 1);
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err.message);
+    }
+  };
 
-    const textBody = `
-Neue Lead-Kampagnen-Anfrage über getleedz.com
+  return (
+    <>
+      <Head>
+        <title>Anfrage | AiKMU – KI-Beratung für Schweizer KMU</title>
+        <meta
+          name="description"
+          content="Besprechen Sie Ihr KI-Potenzial mit AiKMU. Wir analysieren ehrlich, ob und wie KI Ihre Organisation entlastet, strukturiert und messbar voranbringt."
+        />
+      </Head>
 
-Name:    ${name}
-Firma:   ${company || "-"}
-E-Mail:  ${email}
-Telefon: ${phone || "-"}
+      <NavBar />
 
-Branche / Zielkunden:
-${industry || "-"}
+      <main className="min-h-screen pt-[160px] pb-[90px]">
+        <section>
+          <div className="container m-auto max-w-3xl px-4 text-white">
+            {/* Header */}
+            <div className="mb-12 text-center">
+              <h1 className="text-3xl md:text-4xl font-semibold">
+                Anfrage für ein KI-Projekt
+              </h1>
+              <p className="mt-5 text-lg md:text-xl opacity-90 leading-relaxed">
+                Schildern Sie uns Ihre Situation.
+                <br />
+                Wir prüfen strukturiert, ob und wo KI Ihrem Unternehmen
+                <br className="hidden sm:block" />
+                einen echten wirtschaftlichen Mehrwert bringt.
+              </p>
+            </div>
 
-Nachricht:
-${message}
-`;
+            {/* Form */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 rounded-2xl bg-black/40 p-8 md:p-10 backdrop-blur
+                         shadow-[0_0_40px_rgba(15,23,42,0.9)]"
+            >
+              {/* Honeypot */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                className="hidden"
+                tabIndex="-1"
+                autoComplete="off"
+              />
 
-    const info = await transporter.sendMail({
-      from: MAIL_FROM,
-      to: MAIL_TO,
-      subject: `Neue Lead-Anfrage von ${name}`,
-      text: textBody,
-      html: textBody.replace(/\n/g, "<br />"),
-    });
+              {/* Name */}
+              <div>
+                <label className="neon-label">Ihr Name</label>
+                <div className="neon-input-wrapper">
+                  <input
+                    name="name"
+                    required
+                    className="neon-input"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
 
-    console.log("Mail erfolgreich übergeben:", info.messageId);
-    return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error("Mail Fehler:", error);
-    return res.status(500).json({ error: "Mail konnte nicht gesendet werden." });
-  }
-}
+              {/* Email */}
+              <div>
+                <label className="neon-label">E-Mail-Adresse</label>
+                <div className="neon-input-wrapper">
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    className="neon-input"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Company */}
+              <div>
+                <label className="neon-label">Unternehmen</label>
+                <div className="neon-input-wrapper">
+                  <input
+                    name="company"
+                    required
+                    className="neon-input"
+                    value={formData.company}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label className="neon-label">Telefon (optional)</label>
+                <div className="neon-input-wrapper">
+                  <input
+                    name="phone"
+                    className="neon-input"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Industry */}
+              <div>
+                <label className="neon-label">Branche</label>
+                <div className="neon-input-wrapper">
+                  <select
+                    name="industry"
+                    required
+                    className="neon-select"
+                    value={formData.industry}
+                    onChange={handleChange}
+                  >
+                    <option value="">Bitte auswählen …</option>
+                    <option>Beratung / Treuhand / Kanzlei</option>
+                    <option>Handwerk / Bau / Planung</option>
+                    <option>Industrie / Produktion</option>
+                    <option>IT / Software / SaaS</option>
+                    <option>Gesundheit / Dienstleistungen</option>
+                    <option>Andere Branche</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="neon-label">
+                  Wo sehen Sie aktuell den grössten Handlungsbedarf?
+                </label>
+                <div className="neon-input-wrapper">
+                  <textarea
+                    name="message"
+                    required
+                    className="neon-textarea"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="z. B. Prozesse, Führung, Wissenstransfer, Effizienz, Kosten, Wachstum, Kontrolle …"
+                  />
+                </div>
+              </div>
+
+              {/* Turnstile */}
+              <div className="pt-2 text-center">
+                <Turnstile
+                  key={tsKey}
+                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                  onVerify={(token) => setCfToken(token)}
+                />
+              </div>
+
+              {/* Status */}
+              {status === "success" && (
+                <div className="text-green-400 text-center font-medium">
+                  ✅ Vielen Dank. Ihre Anfrage wurde erfolgreich übermittelt.
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="text-red-400 text-center font-medium">
+                  {errorMsg}
+                </div>
+              )}
+
+              {/* Submit */}
+              <button type="submit" className="neon-border w-full">
+                <span className="neon-border-inner">
+                  Anfrage vertraulich übermitteln
+                </span>
+              </button>
+
+              <p className="text-sm text-center opacity-80 leading-relaxed">
+                Ihre Angaben werden vertraulich behandelt.
+                <br />
+                Keine Massenmails. Keine automatisierten Verkaufsgespräche.
+              </p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
+};
+
+export default Anfrage;
