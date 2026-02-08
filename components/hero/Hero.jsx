@@ -184,25 +184,27 @@ const Hero = () => {
               </div>
             </button>
 
-            {/* Governance */}
+            {/* Governance & Compliance */}
             <button onClick={() => toggle(5)} className="w-full text-left">
               <div className="bg-[#020617]/95 p-5 rounded-xl border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI darf kein Risiko für Unternehmen & Verwaltungsrat sein
+                  KI mit Governance, Kontrolle und Verantwortung
                 </h3>
                 {open === 5 && (
                   <p className="mt-3 text-white leading-relaxed">
-                    Datenschutz, Haftung und Kontrolle sind entscheidend.
+                    KI entfaltet nur dann nachhaltig Wirkung, wenn sie
+                    sauber in Organisation, Prozesse und Verantwortung eingebettet ist.
                     <br />
-                    <strong>Ihr Nutzen:</strong> Corporate-konforme KI
-                    mit klarer Governance,
-                    Rollen, Zugriffsrechten
-                    und optional eigener Infrastruktur –
-                    Sicherheit für GL und VR.
+                    <strong>Ihr Nutzen:</strong> klare Governance,
+                    definierte Zugriffsrechte, Datenschutz und
+                    auf Wunsch KI-Lösungen auf eigener Infrastruktur –
+                    Sicherheit und Vertrauen für Geschäftsleitung
+                    und Verwaltungsrat.
                   </p>
                 )}
               </div>
             </button>
+
 
           </div>
 
