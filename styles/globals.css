@@ -27,17 +27,32 @@ body {
     linear-gradient(180deg, #020617 0%, #040a1a 60%, #020617 100%);
 
   scroll-behavior: smooth;
-}
-
-/* ================= CONTAINER FIX ================= */
-.container {
-  width: 100%;
+  overflow-x: hidden;
 }
 
 /* ================= HERO ================= */
 .hero {
   position: relative;
   isolation: isolate;
+  width: 100%;
+}
+
+/* ================= HERO FRAMES ================= */
+.hero-frame-1,
+.hero-frame-2,
+.hero-frame-3,
+.hero-frame-4,
+.hero-frame-5,
+.hero-frame-6 {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================= HERO CONTENT ================= */
+.hero-content {
+  position: relative;
+  z-index: 10;
 }
 
 /* ================= FORM LABEL ================= */
@@ -96,7 +111,7 @@ select {
   resize: vertical;
 }
 
-/* ❗ KEIN zusätzlicher Focus-Rand (wichtig!) */
+/* ================= FOCUS ================= */
 .neon-input:focus,
 .neon-select:focus,
 .neon-textarea:focus {
@@ -161,7 +176,6 @@ footer {
 }
 
 /* ================= SAFETY ================= */
-/* verhindert Mobile-Viewport-Clipping */
 main {
   overflow-x: hidden;
 }

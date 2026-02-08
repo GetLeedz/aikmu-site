@@ -20,39 +20,40 @@ const Hero = () => {
   const toggle = (id) => setOpen(open === id ? null : id);
 
   return (
-    <section className="hero relative overflow-hidden min-h-screen flex flex-col justify-center" id="hero">
-      {/* Decorative Frames */}
-      <div className="hero-frame-1 animate-pulse"><Image src={hero1} alt="" /></div>
-      <div className="hero-frame-2 animate-pulse"><Image src={hero2} alt="" /></div>
-      <div className="hero-frame-3 animate-pulse"><Image src={hero3} alt="" /></div>
-      <div className="hero-frame-4 animate-pulse"><Image src={hero4} alt="" /></div>
-      <div className="hero-frame-5 animate-pulse"><Image src={hero5} alt="" /></div>
-      <div className="hero-frame-6 animate-pulse"><Image src={hero6} alt="" /></div>
+    <section
+      id="hero"
+      className="hero relative overflow-hidden min-h-screen flex items-center"
+    >
+      {/* Decorative Frames (immer HINTER Content) */}
+      {[hero1, hero2, hero3, hero4, hero5, hero6].map((img, i) => (
+        <div
+          key={i}
+          className={`hero-frame-${i + 1} absolute z-0 pointer-events-none animate-pulse`}
+        >
+          <Image src={img} alt="" />
+        </div>
+      ))}
 
       {/* CONTENT */}
-      <div className="container m-auto pt-[140px] pb-[80px] relative z-[1] hero-content">
-        <div className="w-11/12 md:w-10/12 lg:w-8/12 text-center m-auto">
+      <div className="container mx-auto px-6 pt-[80px] pb-[80px] relative z-10">
+        <div className="max-w-5xl mx-auto text-center">
 
           {/* HEADLINE */}
-          <h1
-            className="text-[2.3rem] sm:text-5xl lg:text-7xl font-bold text-white tracking-tight"
-            style={{ lineHeight: 1.1 }}
-          >
-            AiKMU integriert Corporate KI
-            <span className="block mt-1">in Ihr KMU</span>
-            <span className="block mt-2 text-[#7CFF00]">
-              professionell, sicher und messbar
+          <h1 className="text-[2.4rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            Corporate KI für KMU
+            <span className="block mt-3 text-[#7CFF00]">
+              professionell · sicher · messbar
             </span>
           </h1>
 
           {/* SUBLINE */}
           <p className="mt-8 text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
-            Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht,
-            Umsatz liegen bleibt oder Kontrolle fehlt. Strategisch geführt,
+            Wir integrieren KI dort, wo heute Zeit verloren geht,
+            Entscheidungen verzögern oder Kontrolle fehlt – strategisch geführt,
             professionell umgesetzt.
           </p>
 
-          {/* CTA - Button-Layout wie GetLeedz */}
+          {/* CTA BUTTONS */}
           <div className="flex flex-col items-center gap-5 mt-12">
             <Link href="/anfrage">
               <a className="group neon-border w-full max-w-[400px] transition-transform hover:scale-[1.02]">
@@ -77,52 +78,66 @@ const Hero = () => {
           </div>
 
           {/* EINLEITUNG */}
-          <p className="mt-16 text-base sm:text-lg text-white/70 text-center uppercase tracking-widest font-medium">
-            Wirtschaftliche Hebel für KMUs:
+          <p className="mt-16 text-sm sm:text-base text-white/70 uppercase tracking-widest font-medium">
+            Wirtschaftliche Hebel für KMUs
           </p>
 
-          {/* ACCORDION */}
-          <div className="mt-8 max-w-3xl mx-auto space-y-4 text-left">
+          {/* ACCORDION – erst ab md sichtbar */}
+          <div className="mt-8 max-w-3xl mx-auto space-y-4 text-left hidden md:block">
             {[
               {
-                title: "Fachkräftemangel & Onboarding bremsen Ihr Wachstum",
-                content: "Wissen steckt in Köpfen, neue Mitarbeitende brauchen Monate, Führungskräfte erklären immer wieder dasselbe. Ihr Nutzen: KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat – Mitarbeitende werden schneller produktiv, Führung wird entlastet."
+                title: "Fachkräftemangel & langsames Onboarding",
+                content:
+                  "KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat. Neue Mitarbeitende werden schneller produktiv, Führung wird entlastet.",
               },
               {
-                title: "Offerten & Ausschreibungen kosten Zeit und Umsatz",
-                content: "Angebote entstehen manuell aus Notizen, Skizzen oder E-Mails. Ihr Nutzen: KI erstellt strukturierte Offerten direkt für ERP/CRM – schneller reagieren, mehr Abschlüsse, weniger Stress im Team."
+                title: "Offerten & Ausschreibungen kosten Zeit",
+                content:
+                  "KI erstellt strukturierte Offerten direkt aus Notizen oder E-Mails – schneller reagieren, mehr Abschlüsse.",
               },
               {
-                title: "Die E-Mail-Flut raubt Ihnen Führungszeit",
-                content: "Wichtige Themen gehen unter, Entscheidungen verzögern sich. Ihr Nutzen: KI priorisiert, formuliert Entwürfe und organisiert Termine – Sie gewinnen wöchentlich mehrere Stunden zurück."
+                title: "E-Mail-Flut blockiert Führungszeit",
+                content:
+                  "KI priorisiert, formuliert Entwürfe und organisiert Termine – mehrere Stunden pro Woche zurückgewinnen.",
               },
               {
-                title: "Marketing kostet Geld – bringt aber zu wenig Resultate",
-                content: "Kampagnen laufen, aber ohne Klarheit, Konsistenz oder saubere Auswertung. Ihr Nutzen: KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen – mehr qualifizierte Anfragen, klare Entscheidungsgrundlagen."
+                title: "Marketing ohne klare Resultate",
+                content:
+                  "KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen – bessere Entscheidungen, mehr qualifizierte Anfragen.",
               },
               {
-                title: "Buchhaltung & Finanzen: Fehlende Transparenz",
-                content: "Zahlen kommen verspätet, Auswertungen sind schwer verständlich. Ihr Nutzen: KI unterstützt Treuhand, Finance und Management mit verständlichen Auswertungen, Prognosen und Frühwarnsignalen."
+                title: "Finanzen ohne Transparenz",
+                content:
+                  "KI unterstützt Finance & Management mit verständlichen Auswertungen, Prognosen und Frühwarnsignalen.",
               },
               {
-                title: "KI mit Governance und Datenschutz",
-                content: "KI entfaltet nur dann nachhaltig Wirkung, wenn sie sauber eingebettet ist. Ihr Nutzen: klare Governance, definierte Zugriffsrechte und auf Wunsch KI auf eigener Infrastruktur – Sicherheit für VR und GL."
-              }
+                title: "Governance & Datenschutz",
+                content:
+                  "Saubere KI-Governance mit klaren Rechten, optional auf eigener Infrastruktur – Sicherheit für VR & GL.",
+              },
             ].map((item, index) => (
-              <div key={index} className="bg-[#020617]/80 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
-                <button 
-                  onClick={() => toggle(index)} 
+              <div
+                key={index}
+                className="bg-[#020617]/80 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
+              >
+                <button
+                  onClick={() => toggle(index)}
                   className="w-full p-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors"
                 >
                   <h3 className="text-lg font-semibold text-white pr-4">
                     {item.title}
                   </h3>
-                  <span className={`transform transition-transform ${open === index ? 'rotate-180' : ''}`}>
+                  <span
+                    className={`transform transition-transform ${
+                      open === index ? "rotate-180" : ""
+                    }`}
+                  >
                     ▼
                   </span>
                 </button>
+
                 {open === index && (
-                  <div className="px-5 pb-5 text-white/80 leading-relaxed border-t border-white/5 pt-4">
+                  <div className="px-5 pb-5 pt-4 text-white/80 leading-relaxed border-t border-white/5">
                     {item.content}
                   </div>
                 )}
@@ -143,11 +158,16 @@ const Hero = () => {
             </div>
 
             <blockquote className="max-w-2xl text-xl sm:text-2xl text-white italic font-light leading-snug opacity-95">
-              „In vier Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren – und diejenigen, deren Team Befehle der KI ausführt.“
+              „In vier Jahren gibt es zwei Arten von KMU:  
+              Diejenigen, die ihre KI steuern –  
+              und diejenigen, die von ihr gesteuert werden.“
             </blockquote>
-            <div className="mt-2">
+
+            <div>
               <p className="text-lg font-bold text-white">Arthur Ergen</p>
-              <p className="text-sm uppercase tracking-widest text-[#7CFF00] font-semibold">CEO GetLeedz GmbH</p>
+              <p className="text-sm uppercase tracking-widest text-[#7CFF00] font-semibold">
+                CEO GetLeedz GmbH
+              </p>
             </div>
           </div>
 
