@@ -3,51 +3,59 @@ import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#020617] pt-12 pb-14 mt-16">
-      <div className="max-w-5xl mx-auto px-6 flex flex-col items-center gap-10">
+    <footer className="bg-[#020617] pt-14 pb-16 mt-20 border-t border-white/5">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col items-center gap-12">
 
         {/* Rechtliches */}
         <div className="flex flex-wrap justify-center gap-8 text-base font-medium">
-          <Link href="/impressum" legacyBehavior>
-            <a className="neon-link">Impressum</a>
+          <Link href="/impressum" className="footer-link">
+            Impressum
           </Link>
-
-          <span className="opacity-60">·</span>
-
-          <Link href="/datenschutz" legacyBehavior>
-            <a className="neon-link">Datenschutz</a>
+          <span className="opacity-40">·</span>
+          <Link href="/datenschutz" className="footer-link">
+            Datenschutz
           </Link>
         </div>
 
         {/* Positionierung */}
-        <div className="text-center footer-text">
+        <div className="text-center footer-text max-w-xl">
           KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau –<br />
           klar geführt, verantwortungsvoll umgesetzt.
-          <span className="swiss-flag" aria-label="Schweiz" />
           <br />
-          <span className="opacity-90">Swiss prompted.</span>
+          <span className="opacity-80 mt-1 inline-block">Swiss prompted.</span>
         </div>
 
         {/* Adresse & Kontakt */}
-        <div className="text-center footer-text">
+        <div className="text-center footer-text flex flex-col gap-2">
           <div>4102 Binningen, Schweiz</div>
-          <a href="tel:+41615251810" className="footer-link-block">
+
+          <a
+            href="tel:+41615251810"
+            className="footer-contact"
+          >
             Tel. +41&nbsp;61&nbsp;525&nbsp;18&nbsp;10
           </a>
-          <a href="mailto:info@aikmu.ch" className="footer-link-block">
+
+          <a
+            href="mailto:info@aikmu.ch"
+            className="footer-contact"
+          >
             info@aikmu.ch
           </a>
         </div>
 
         {/* Copyright */}
-        <p className="footer-copy">
+        <p className="text-sm opacity-60">
           © 2026 AiKMU. Alle Rechte vorbehalten.
         </p>
 
         {/* Social */}
-        <div className="flex flex-col items-center gap-4 mt-2">
-          <span className="footer-follow">FOLGEN SIE UNS</span>
-          <div className="flex gap-6">
+        <div className="flex flex-col items-center gap-4 pt-4">
+          <span className="text-sm tracking-widest opacity-70">
+            FOLGEN SIE UNS
+          </span>
+
+          <div className="flex gap-8">
             <a
               href="https://www.instagram.com/aikmu.ch"
               target="_blank"
@@ -56,6 +64,7 @@ const Footer = () => {
             >
               <FaInstagram />
             </a>
+
             <a
               href="https://www.facebook.com/profile.php?id=61587440278928"
               target="_blank"
@@ -64,6 +73,7 @@ const Footer = () => {
             >
               <FaFacebookF />
             </a>
+
             <a
               href="https://www.linkedin.com/company/aikmu/"
               target="_blank"
