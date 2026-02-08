@@ -141,23 +141,18 @@ const Hero = () => {
             </div>
 
             <blockquote className="mt-6 max-w-2xl text-lg sm:text-xl text-white leading-relaxed italic">
-              „IIn vier Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
+              „In 4 Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt und von ihr Lohn erhält.“
             </blockquote>
 
             <p className="mt-4 text-base text-white font-semibold">
               Arthur Ergen, CEO
-            </p>
-
-            <p className="mt-2 text-sm text-white/80 flex items-center gap-2">
-              Swiss-promoted
-              <span className="swiss-flag" />
             </p>
           </div>
 
           {/* SEO */}
           <div className="sr-only">
             <p>
-              AiKMU integriert Corporate KI für Schweizer KMUs.
+              AiKMU integriert Corporate KI für KMUs.
               Fokus auf Governance, Effizienz, Sicherheit und messbaren Nutzen.
             </p>
           </div>
