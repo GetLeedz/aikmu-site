@@ -36,18 +36,19 @@ const Hero = () => {
             className="text-[2.1rem] sm:text-5xl lg:text-6xl font-semibold text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]"
             style={{ lineHeight: 1.2 }}
           >
-            AiKMU begleitet Ihr Unternehmen
-            <span className="block">mit verantwortungsvoller KI</span>
-            <span className="block mt-1 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
-              sicher in die Zukunft
+            AiKMU macht KI
+            <span className="block">für Entscheider sofort nutzbar</span>
+            <span className="block mt-1 text-[#7CFF00]">
+              messbar, sicher, wirksam
             </span>
           </h1>
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
-            Strategische KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau –  
-            für effizientere Prozesse, bessere Entscheidungen und messbare Entlastung
-            von Management und Teams.
+            Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten,
+            KI dort einzusetzen, wo Zeit verloren geht, Kosten entstehen
+            oder Wachstum gebremst wird – strategisch begleitet,
+            sauber umgesetzt.
           </p>
 
           {/* CTA */}
@@ -55,7 +56,7 @@ const Hero = () => {
             <Link href="/anfrage">
               <a className="group neon-border w-full max-w-[360px]">
                 <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
-                  Beratung anfragen
+                  KI-Potenzial besprechen
                   <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
@@ -68,7 +69,7 @@ const Hero = () => {
               className="group neon-border w-full max-w-[360px]"
             >
               <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
-                Gespräch vereinbaren
+                Direktes Gespräch buchen
                 <FaCalendarAlt className="ml-2 opacity-80" />
               </span>
             </a>
@@ -76,100 +77,98 @@ const Hero = () => {
 
           {/* EINLEITUNG */}
           <p className="mt-6 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
-            Wo AiKMU Sie konkret unterstützt – beratend, umsetzend oder begleitend.
-            Immer mit dem Ziel, Ihr Unternehmen messbar besser aufzustellen.
+            Typische Situationen, in denen KI für KMUs heute den grössten
+            wirtschaftlichen Hebel bringt:
           </p>
 
-          {/* ACCORDION */}
+          {/* ACCORDION – ERGEBNISORIENTIERT */}
           <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
 
-            {/* KI Agenten */}
+            {/* Fachkräftemangel / Onboarding */}
             <button onClick={() => toggle(0)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI Agenten für operative Entlastung
+                  Neue Mitarbeitende kosten Sie zu viel Zeit
                 </h3>
                 {open === 0 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    KI Agenten übernehmen wiederkehrende Aufgaben selbstständig.
+                    Neue Mitarbeitende stellen immer wieder dieselben Fragen,
+                    Prozesse werden mündlich erklärt, Wissen geht verloren.
                     <br />
-                    <strong>Ihr Vorteil:</strong> weniger operative Arbeit,
-                    schnellere Abläufe und spürbare Zeitgewinne für Führungskräfte
-                    und Schlüsselpersonen.
+                    <strong>AiKMU-Lösung:</strong> Ein KI-Onboarding-System,
+                    das interne Dokumente, Abläufe und Regeln per Chat erklärt.
+                    <br />
+                    <strong>Ihr Vorteil:</strong> Schnellere Einarbeitung,
+                    weniger Abhängigkeit vom Chef,
+                    produktive Mitarbeitende ab Woche eins.
                   </p>
                 )}
               </div>
             </button>
 
-            {/* KI Assistenten */}
+            {/* Offerten & Ausschreibungen */}
             <button onClick={() => toggle(1)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI Assistenten für Management & Teams
+                  Offerten dauern zu lange und blockieren Umsatz
                 </h3>
                 {open === 1 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    KI Assistenten unterstützen beim Denken, Strukturieren
-                    und Entscheiden.
+                    Skizzen, Protokolle oder E-Mails müssen manuell
+                    in Offerten übersetzt werden.
                     <br />
-                    <strong>Ihr Vorteil:</strong> bessere Entscheidungen in kürzerer Zeit,
-                    weniger Überlastung und klarere Kommunikation im Team.
+                    <strong>AiKMU-Lösung:</strong> KI-Systeme, die aus Fotos,
+                    Texten oder Notizen automatisch strukturierte Offerten
+                    für ERP oder CRM vorbereiten.
+                    <br />
+                    <strong>Ihr Vorteil:</strong> Offerten in Minuten statt Stunden,
+                    höhere Abschlussquote, weniger Stress im Team.
                   </p>
                 )}
               </div>
             </button>
 
-            {/* KI Bots */}
+            {/* E-Mail-Flut */}
             <button onClick={() => toggle(2)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI Bots für Kommunikation & Service
+                  Die E-Mail-Flut frisst Ihre Führungszeit
                 </h3>
                 {open === 2 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    KI Bots übernehmen strukturierte Kommunikation intern
-                    und extern.
+                    Wichtige Mails gehen unter, Termine werden hin- und hergeschoben,
+                    Entscheidungen verzögern sich.
                     <br />
-                    <strong>Ihr Vorteil:</strong> konstante Erreichbarkeit,
-                    weniger Rückfragen und eine deutlich höhere Servicequalität
-                    ohne zusätzliches Personal.
+                    <strong>AiKMU-Lösung:</strong> Intelligente KI-Postfächer,
+                    die priorisieren, Entwürfe vorbereiten
+                    und Termine vorschlagen.
+                    <br />
+                    <strong>Ihr Vorteil:</strong> Mehr Fokus auf Führung,
+                    weniger operative Ablenkung,
+                    5–10 Stunden Zeitgewinn pro Woche.
                   </p>
                 )}
               </div>
             </button>
 
-            {/* KI Automatisierung */}
+            {/* Governance */}
             <button onClick={() => toggle(3)} className="w-full text-left">
               <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
                 <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  KI-gestützte Automatisierung von Prozessen
+                  KI soll helfen – aber nicht zum Risiko werden
                 </h3>
                 {open === 3 && (
                   <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    Wir automatisieren Abläufe, die Zeit, Geld und Energie kosten.
+                    Verwaltungsräte und Geschäftsleitungen sorgen sich
+                    um Datenschutz, Kontrolle und Haftung.
                     <br />
-                    <strong>Ihr Vorteil:</strong> geringere Kosten,
-                    weniger Fehler und eine Organisation,
-                    die stabil wächst statt zu bremsen.
-                  </p>
-                )}
-              </div>
-            </button>
-
-            {/* KI Corporate Conform */}
-            <button onClick={() => toggle(4)} className="w-full text-left">
-              <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
-                  Corporate-konforme KI & Governance
-                </h3>
-                {open === 4 && (
-                  <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
-                    KI wird sauber in Ihre Organisation eingebettet –
-                    mit klaren Regeln und Verantwortung.
+                    <strong>AiKMU-Lösung:</strong> Corporate-konforme KI
+                    mit klarer Governance, Zugriffsrechten
+                    und auf Wunsch eigener Infrastruktur.
                     <br />
-                    <strong>Ihr Vorteil:</strong> volle Kontrolle,
-                    Rechtssicherheit und Vertrauen bei
-                    Verwaltungsrat, Management und Mitarbeitenden.
+                    <strong>Ihr Vorteil:</strong> Rechtssicherheit,
+                    Vertrauen im Management,
+                    nachhaltige KI-Nutzung ohne Bauchschmerzen.
                   </p>
                 )}
               </div>
