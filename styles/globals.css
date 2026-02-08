@@ -55,7 +55,7 @@ body {
   z-index: 10;
 }
 
-/* ================= HERO ICONS ================= */
+/* ================= HERO ICONS (GetLeedz-Pattern) ================= */
 .hero-icons {
   position: absolute;
   inset: 0;
@@ -66,99 +66,49 @@ body {
 .hero-icon {
   position: absolute;
   opacity: 0.85;
-  filter: saturate(1.2);
+  filter: saturate(1.15);
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 /* links unten */
 .hero-icon-left {
-  left: 4%;
-  bottom: 8%;
-  transform: rotate(-8deg);
+  left: 3%;
+  bottom: 6%;
+  transform: rotate(-10deg) scale(1);
 }
 
 /* rechts oben */
 .hero-icon-right {
-  right: 6%;
-  top: 18%;
-  transform: rotate(8deg);
+  right: 5%;
+  top: 16%;
+  transform: rotate(10deg) scale(1);
 }
 
-/* Mobile Feintuning */
+/* rechts unten (optional) */
+.hero-icon-bottom {
+  right: 6%;
+  bottom: 8%;
+  transform: rotate(-6deg) scale(0.95);
+  opacity: 0.75;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .hero-icon-left {
-    left: -10px;
-    bottom: 6%;
-    transform: scale(0.85) rotate(-6deg);
+    left: -14px;
+    bottom: 4%;
+    transform: rotate(-8deg) scale(0.8);
   }
 
   .hero-icon-right {
-    right: -12px;
+    right: -16px;
     top: 14%;
-    transform: scale(0.85) rotate(6deg);
+    transform: rotate(8deg) scale(0.8);
   }
-}
 
-/* ================= FORM LABEL ================= */
-.neon-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 1rem;
-  color: #e5e7eb;
-}
-
-/* ================= INPUT WRAPPER ================= */
-.neon-input-wrapper {
-  padding: 2px;
-  border-radius: 14px;
-  background: linear-gradient(
-    120deg,
-    #ec4899,
-    #a855f7,
-    #22d3ee,
-    #f97316
-  );
-}
-
-/* ================= INPUTS ================= */
-.neon-input,
-.neon-select,
-.neon-textarea {
-  width: 100%;
-  border-radius: 12px;
-  border: none;
-  background: var(--dark-soft);
-  color: #ffffff;
-  padding: 14px 16px;
-  font-size: 1rem;
-  outline: none;
-  box-shadow: none;
-}
-
-/* Safari / iOS Fix */
-input,
-textarea,
-select {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* ================= SELECT ================= */
-.neon-select {
-  height: 52px;
-  cursor: pointer;
-}
-
-/* ================= TEXTAREA ================= */
-.neon-textarea {
-  min-height: 130px;
-  resize: vertical;
-}
-
-/* ================= FOCUS ================= */
-.neon-input:focus,
-.neon-select:focus,
-.neon-textarea:focus {
-  background: #020617;
+  .hero-icon-bottom {
+    display: none;
+  }
 }
 
 /* ================= BUTTON ================= */
@@ -167,13 +117,7 @@ select {
   display: inline-block;
   padding: 3px;
   border-radius: 9999px;
-  background: linear-gradient(
-    120deg,
-    #ec4899,
-    #a855f7,
-    #22d3ee,
-    #f97316
-  );
+  background: linear-gradient(120deg,#ec4899,#a855f7,#22d3ee,#f97316);
 }
 
 .neon-border-inner {
@@ -185,37 +129,6 @@ select {
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
-}
-
-/* ================= STATUS MESSAGES ================= */
-.badge-error {
-  margin-top: 10px;
-  text-align: center;
-  color: #fca5a5;
-  font-size: 0.95rem;
-}
-
-.badge-success {
-  margin-top: 10px;
-  text-align: center;
-  color: #86efac;
-  font-size: 0.95rem;
-}
-
-/* ================= FOOTER ================= */
-footer {
-  color: #ffffff;
-}
-
-.footer-text {
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.footer-copy {
-  font-size: 0.9rem;
-  text-align: center;
-  opacity: 0.8;
 }
 
 /* ================= SAFETY ================= */

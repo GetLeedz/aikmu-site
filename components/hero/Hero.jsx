@@ -34,14 +34,18 @@ const Hero = () => {
         </div>
       ))}
 
-      {/* FLOATING ICONS (aus hero-assets) */}
-      <div className="hero-icons pointer-events-none">
+      {/* FLOATING ICONS – GetLeedz-Pattern mit vorhandenen Assets */}
+      <div className="hero-icons">
         <div className="hero-icon hero-icon-left">
-          <Image src={hero4} alt="" width={120} height={120} />
+          <Image src={hero4} alt="" width={140} height={140} />
         </div>
 
         <div className="hero-icon hero-icon-right">
-          <Image src={hero6} alt="" width={120} height={120} />
+          <Image src={hero6} alt="" width={140} height={140} />
+        </div>
+
+        <div className="hero-icon hero-icon-bottom">
+          <Image src={hero5} alt="" width={120} height={120} />
         </div>
       </div>
 
