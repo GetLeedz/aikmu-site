@@ -99,7 +99,7 @@ export default function Anfrage() {
 
         <div className="container mx-auto max-w-3xl px-4 relative z-10 text-white">
           <div className="mb-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Anfrage für ein Gespräch</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Anfrage für ein unverbindliches Gespräch</h1>
             <p className="mt-4 text-white/60 text-lg">Lassen Sie uns gemeinsam prüfen, wie KI Ihr Unternehmen voranbringt.</p>
           </div>
 
