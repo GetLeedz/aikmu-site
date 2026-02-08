@@ -11,8 +11,6 @@ import hero5 from "../../public/images/hero/hero5.png";
 import hero6 from "../../public/images/hero/hero6.png";
 
 import arthurImg from "../../public/images/arthurergen_square_tiny.png";
-import chatgptIcon from "../../public/images/icons/chatgpt.png";
-import linkedinIcon from "../../public/images/icons/linkedin.png";
 
 const Hero = () => {
   const calendlyUrl =
@@ -26,8 +24,8 @@ const Hero = () => {
       id="hero"
       className="hero relative overflow-hidden min-h-screen flex items-center pt-[90px] md:pt-[110px]"
     >
-      {/* Decorative Frames */}
-      {[hero1, hero2, hero3, hero4, hero5, hero6].map((img, i) => (
+      {/* BACKGROUND FRAMES */}
+      {[hero1, hero2, hero3].map((img, i) => (
         <div
           key={i}
           className={`hero-frame-${i + 1} absolute z-0 pointer-events-none animate-pulse`}
@@ -36,13 +34,14 @@ const Hero = () => {
         </div>
       ))}
 
-      {/* Floating Icons */}
+      {/* FLOATING ICONS (aus hero-assets) */}
       <div className="hero-icons pointer-events-none">
         <div className="hero-icon hero-icon-left">
-          <Image src={chatgptIcon} alt="" width={120} height={120} />
+          <Image src={hero4} alt="" width={120} height={120} />
         </div>
+
         <div className="hero-icon hero-icon-right">
-          <Image src={linkedinIcon} alt="" width={120} height={120} />
+          <Image src={hero6} alt="" width={120} height={120} />
         </div>
       </div>
 
