@@ -228,6 +228,10 @@ const Hero = () => {
               und diejenigen, deren Team für die KI arbeitet und seinen Lohn
               direkt von ihr bezieht.“
             </blockquote>
+            <p className="mt-2 text-sm sm:text-base text-white opacity-80">
+  Arthur Ergen, CEO
+</p>
+
           </div>
 
         </div>
