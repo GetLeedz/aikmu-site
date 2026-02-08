@@ -36,19 +36,16 @@ const Hero = () => {
             className="text-[2.1rem] sm:text-5xl lg:text-6xl font-semibold text-white"
             style={{ lineHeight: 1.2 }}
           >
-            AiKMU macht KI
-            <span className="block">für Entscheider sofort nutzbar</span>
+            AiKMU integriert Corporate KI 
+            <span className="block">in Ihr KMU</span>
             <span className="block mt-1 text-[#7CFF00]">
-              messbar, sicher, wirksam
+              professionell, sicher und messbar
             </span>
           </h1>
 
           {/* SUBLINE */}
           <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed">
-            Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten,
-            KI dort einzusetzen, wo Zeit verloren geht,
-            Umsatz liegen bleibt oder Kontrolle fehlt –
-            strategisch geführt, professionell umgesetzt.
+Wir helfen Ihnen, KI dort einzusetzen, wo heute Zeit verloren geht, Umsatz liegen bleibt oder Kontrolle fehlt. Strategisch geführt, professionell umgesetzt.
           </p>
 
           {/* CTA */}
