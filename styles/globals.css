@@ -53,7 +53,7 @@ body {
   background-size: cover;
 }
 
-/* ================= BACKGROUND ICONS (HOME) ================= */
+/* ================= BACKGROUND ICONS (HOME & ANFRAGE) ================= */
 .hero-frame-1, .hero-frame-2, .hero-frame-3, .hero-frame-4, .hero-frame-5, .hero-frame-6 {
   position: absolute;
   pointer-events: none;
@@ -102,14 +102,15 @@ body {
   font-weight: 600;
 }
 
-/* ================= ANFRAGE FORMULAR (VORSICHTIG ERGÄNZT) ================= */
+/* ================= ANFRAGE FORMULAR (DYNAMIC NEON) ================= */
 
-/* Die Box um das Formular */
 form.space-y-6 {
   background: rgba(5, 8, 22, 0.7) !important;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
 }
 
 .neon-label {
@@ -122,29 +123,47 @@ form.space-y-6 {
   letter-spacing: 1.5px;
 }
 
-.neon-input-wrapper {
+/* Dynamic Wrapper für den rotierenden Rand */
+.dynamic-neon-wrapper {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
   transition: all 0.3s ease;
 }
 
-.neon-input-wrapper:focus-within {
-  border-color: #7CFF00;
-  background: rgba(124, 255, 0, 0.05);
-  box-shadow: 0 0 20px rgba(124, 255, 0, 0.1);
+.dynamic-neon-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, #7CFF00, #00e5ff, #f800ff, transparent 35%);
+  animation: rotateNeon 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.dynamic-neon-wrapper:focus-within::before,
+.dynamic-neon-wrapper:hover::before {
+  opacity: 1;
 }
 
 .neon-input, .neon-select, .neon-textarea {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  background: transparent !important;
+  background: #050816 !important;
   border: none !important;
   outline: none !important;
   color: white !important;
   padding: 14px 18px;
   font-family: "Chakra Petch", sans-serif;
   font-size: 1rem;
+  border-radius: 11px;
 }
 
 .neon-textarea {
@@ -165,6 +184,7 @@ form.space-y-6 {
   border-radius: 12px;
   font-weight: 600;
   animation: fadeIn 0.5s ease-in;
+  margin-top: 10px;
 }
 
 .badge-error {
@@ -173,6 +193,7 @@ form.space-y-6 {
   color: #ff4444;
   padding: 16px;
   border-radius: 12px;
+  margin-top: 10px;
 }
 
 /* ================= MOBILE OPTIMIERUNG ================= */
@@ -188,7 +209,7 @@ form.space-y-6 {
     font-size: 0.9rem;
   }
   main {
-    padding-top: 100px; /* Weniger Abstand oben auf Mobile */
+    padding-top: 100px;
   }
 }
 
@@ -197,6 +218,11 @@ form.space-y-6 {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes rotateNeon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes fadeIn {
