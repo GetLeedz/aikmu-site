@@ -8,8 +8,7 @@ import hero2 from "../../public/images/hero/hero2.png";
 import hero3 from "../../public/images/hero/hero3.png";
 import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
-
-import arthurImg from "../../public/images/arthurergen_square_tiny.png";
+import hero6 from "../../public/images/hero/hero6.png";
 
 const Hero = () => {
   const calendlyUrl =
@@ -19,57 +18,53 @@ const Hero = () => {
   const toggle = (id) => setOpen(open === id ? null : id);
 
   return (
-    <section
-      id="hero"
-      className="hero relative min-h-screen flex items-center pt-[90px] md:pt-[110px]"
-    >
-      {/* BACKGROUND FRAMES (dürfen clippen) */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        {[hero1, hero2].map((img, i) => (
-          <div key={i} className={`hero-frame-${i + 1}`}>
-            <Image src={img} alt="" />
-          </div>
-        ))}
+    <section className="hero relative overflow-hidden" id="hero">
+      {/* === DECORATIVE FRAMES (HINTERGRUND) === */}
+      <div className="hero-frame-1 animate-pulse">
+        <Image src={hero1} alt="" />
+      </div>
+      <div className="hero-frame-2 animate-pulse">
+        <Image src={hero2} alt="" />
+      </div>
+      <div className="hero-frame-3 animate-pulse">
+        <Image src={hero3} alt="" />
+      </div>
+      <div className="hero-frame-4 animate-pulse">
+        <Image src={hero4} alt="" />
+      </div>
+      <div className="hero-frame-5 animate-pulse">
+        <Image src={hero5} alt="" />
+      </div>
+      <div className="hero-frame-6 animate-pulse">
+        <Image src={hero6} alt="" />
       </div>
 
-      {/* FLOATING HERO ICONS – dürfen rausstehen */}
-      <div className="hero-icons">
-        <div className="hero-icon hero-icon-left">
-          <Image src={hero4} alt="" width={150} height={150} />
-        </div>
+      {/* === CONTENT (ZENTRIERT, IM VORDERGRUND) === */}
+      <div className="container m-auto pt-[120px] pb-[90px] md:pt-[160px] xl:pt-[220px] relative z-[1] hero-content">
+        <div className="w-11/12 md:w-8/12 text-center m-auto">
 
-        <div className="hero-icon hero-icon-right">
-          <Image src={hero3} alt="" width={150} height={150} />
-        </div>
-
-        <div className="hero-icon hero-icon-bottom">
-          <Image src={hero5} alt="" width={130} height={130} />
-        </div>
-      </div>
-
-      {/* CONTENT */}
-      <div className="container mx-auto px-6 pt-[40px] pb-[80px] relative z-10 hero-content">
-        <div className="max-w-4xl mx-auto text-center">
-
-          <h1 className="text-[2.4rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+          {/* HEADLINE */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
             Corporate KI für KMU
-            <span className="block mt-3 text-[#7CFF00]">
+            <span className="block mt-2 text-[#7CFF00] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]">
               professionell · sicher · messbar
             </span>
           </h1>
 
-          <p className="mt-8 text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto font-light">
+          {/* SUBLINE */}
+          <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
             Wir integrieren KI dort, wo heute Zeit verloren geht,
-            Entscheidungen verzögern oder Kontrolle fehlt – strategisch geführt,
-            professionell umgesetzt.
+            Entscheidungen verzögern oder Kontrolle fehlt –
+            strategisch geführt, professionell umgesetzt.
           </p>
 
-          <div className="flex flex-col items-center gap-5 mt-12">
+          {/* CTA */}
+          <div className="flex flex-col items-center gap-4 mt-10">
             <Link href="/anfrage">
-              <a className="group neon-border w-full max-w-[400px] transition-transform hover:scale-[1.02]">
-                <span className="neon-border-inner flex justify-center items-center py-4 text-lg font-semibold tracking-wide">
+              <a className="group neon-border w-full max-w-[360px]">
+                <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
                   KI-Potenzial besprechen
-                  <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
             </Link>
@@ -78,104 +73,77 @@ const Hero = () => {
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group neon-border w-full max-w-[400px] transition-transform hover:scale-[1.02]"
+              className="group neon-border w-full max-w-[360px]"
             >
-              <span className="neon-border-inner flex justify-center items-center py-4 text-lg font-semibold tracking-wide bg-black/20">
+              <span className="neon-border-inner flex justify-center items-center py-3 text-base sm:text-lg">
                 Direktes Gespräch buchen
-                <FaCalendarAlt className="ml-3 opacity-80" />
+                <FaCalendarAlt className="ml-2 opacity-80" />
               </span>
             </a>
           </div>
 
-          <p className="mt-16 text-sm sm:text-base text-white/70 uppercase tracking-widest font-medium">
-            Wirtschaftliche Hebel für KMUs
+          {/* EINLEITUNG */}
+          <p className="mt-10 text-base sm:text-lg text-white leading-relaxed drop-shadow text-center">
+            Wirtschaftliche Hebel für KMUs:
           </p>
 
-          <div className="mt-8 max-w-3xl mx-auto space-y-4 text-left hidden md:block">
+          {/* ACCORDION */}
+          <div className="mt-4 max-w-3xl mx-auto space-y-4 text-left">
+
             {[
               {
                 title: "Fachkräftemangel & langsames Onboarding",
                 content:
-                  "KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat. Neue Mitarbeitende werden schneller produktiv.",
+                  "Wissen steckt in Köpfen. KI-Onboarding erklärt Prozesse, Richtlinien und Wissen per Chat – neue Mitarbeitende werden schneller produktiv."
               },
               {
                 title: "Offerten & Ausschreibungen kosten Zeit",
                 content:
-                  "KI erstellt strukturierte Offerten direkt aus Notizen oder E-Mails.",
+                  "KI erstellt strukturierte Offerten direkt aus E-Mails, Notizen oder Skizzen – schneller reagieren, mehr Abschlüsse."
               },
               {
                 title: "E-Mail-Flut blockiert Führungszeit",
                 content:
-                  "KI priorisiert, formuliert Entwürfe und organisiert Termine.",
+                  "KI priorisiert, formuliert Entwürfe und organisiert Termine – mehrere Stunden Zeitgewinn pro Woche."
               },
               {
                 title: "Marketing ohne klare Resultate",
                 content:
-                  "KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen.",
+                  "KI analysiert Zielgruppen, optimiert Inhalte und Kampagnen – messbar bessere Entscheidungen."
               },
               {
                 title: "Finanzen ohne Transparenz",
                 content:
-                  "KI liefert verständliche Auswertungen und Prognosen.",
+                  "KI unterstützt Auswertungen, Prognosen und Frühwarnsysteme für Geschäftsleitung & VR."
               },
               {
                 title: "Governance & Datenschutz",
                 content:
-                  "Saubere KI-Governance, optional auf eigener Infrastruktur.",
-              },
+                  "Saubere KI-Governance, definierte Zugriffsrechte und optional KI auf eigener Infrastruktur."
+              }
             ].map((item, index) => (
-              <div
-                key={index}
-                className="bg-[#020617]/80 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
-              >
-                <button
-                  onClick={() => toggle(index)}
-                  className="w-full p-5 text-left flex justify-between items-center hover:bg-white/5 transition-colors"
-                >
-                  <h3 className="text-lg font-semibold text-white pr-4">
+              <button key={index} onClick={() => toggle(index)} className="w-full text-left">
+                <div className="bg-[#020617]/95 rounded-xl p-5 border border-white/10">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white">
                     {item.title}
                   </h3>
-                  <span
-                    className={`transform transition-transform ${
-                      open === index ? "rotate-180" : ""
-                    }`}
-                  >
-                    ▼
-                  </span>
-                </button>
-
-                {open === index && (
-                  <div className="px-5 pb-5 pt-4 text-white/80 leading-relaxed border-t border-white/5">
-                    {item.content}
-                  </div>
-                )}
-              </div>
+                  {open === index && (
+                    <p className="mt-3 text-base sm:text-lg text-white leading-relaxed">
+                      {item.content}
+                    </p>
+                  )}
+                </div>
+              </button>
             ))}
+
           </div>
 
-          <div className="mt-20 flex flex-col items-center gap-6 text-center">
-            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[#7CFF00]/30 shadow-2xl">
-              <Image
-                src={arthurImg}
-                alt="Arthur Ergen"
-                width={112}
-                height={112}
-                className="object-cover"
-              />
-            </div>
-
-            <blockquote className="max-w-2xl text-xl sm:text-2xl text-white italic font-light leading-snug opacity-95">
-              „In vier Jahren gibt es zwei Arten von KMU:
-              Diejenigen, die ihre KI steuern –
-              und diejenigen, die von ihr gesteuert werden.“
-            </blockquote>
-
-            <div>
-              <p className="text-lg font-bold text-white">Arthur Ergen</p>
-              <p className="text-sm uppercase tracking-widest text-[#7CFF00] font-semibold">
-                CEO GetLeedz GmbH
-              </p>
-            </div>
+          {/* SEO / KI */}
+          <div className="sr-only">
+            <p>
+              AiKMU integriert Corporate KI für Schweizer KMUs.
+              Fokus auf Governance, Effizienz, Sicherheit und messbaren Nutzen.
+            </p>
           </div>
 
         </div>
