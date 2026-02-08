@@ -3,10 +3,15 @@ import Head from "next/head";
 import { Turnstile } from "@marsidev/react-turnstile";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
+import Image from "next/image";
 
-// optional: Tracking (falls vorhanden)
-import { track } from "../components/lib/fbpixel";
-import { hasMarketingConsent } from "../components/lib/consent";
+// Icons für den Hintergrund
+import hero1 from "../public/images/hero/hero1.png";
+import hero2 from "../public/images/hero/hero2.png";
+import hero3 from "../public/images/hero/hero3.png";
+import hero4 from "../public/images/hero/hero4.png";
+import hero5 from "../public/images/hero/hero5.png";
+import hero6 from "../public/images/hero/hero6.png";
 
 const initialState = {
   name: "",
@@ -25,7 +30,6 @@ export default function Anfrage() {
   const [cfToken, setCfToken] = useState("");
   const [isClient, setIsClient] = useState(false);
 
-  // Fix für Hydration Error: Erst im Browser auf true setzen
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -65,10 +69,6 @@ export default function Anfrage() {
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
-
-      if (typeof hasMarketingConsent === 'function' && hasMarketingConsent()) {
-        track("Lead", { value: 1, currency: "CHF" });
-      }
     } catch (err) {
       setStatus("error");
       setErrorMsg(err.message || "Ein technischer Fehler ist aufgetreten.");
@@ -85,13 +85,26 @@ export default function Anfrage() {
 
       <NavBar />
 
-      <main className="min-h-screen pt-[160px] pb-[80px]">
-        <div className="container mx-auto max-w-3xl px-4 text-white">
+      <main className="relative min-h-screen pt-[160px] pb-[80px] overflow-hidden">
+        
+        {/* HINTERGRUND ICONS */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="hero-frame-1 animate-pulse"><Image src={hero1} alt="" /></div>
+          <div className="hero-frame-2 animate-pulse"><Image src={hero2} alt="" /></div>
+          <div className="hero-frame-3 animate-pulse"><Image src={hero3} alt="" /></div>
+          <div className="hero-frame-4 animate-pulse"><Image src={hero4} alt="" /></div>
+          <div className="hero-frame-5 animate-pulse"><Image src={hero5} alt="" /></div>
+          <div className="hero-frame-6 animate-pulse"><Image src={hero6} alt="" /></div>
+        </div>
+
+        <div className="container mx-auto max-w-3xl px-4 relative z-10 text-white">
           <div className="mb-10 text-center">
-            <h1 className="text-3xl md:text-4xl font-semibold">Anfrage für ein Gespräch</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Anfrage für ein Gespräch</h1>
+            <p className="mt-4 text-white/60 text-lg">Lassen Sie uns gemeinsam prüfen, wie KI Ihr Unternehmen voranbringt.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl bg-black/40 p-6 backdrop-blur">
+          <form onSubmit={handleSubmit} className="space-y-6 rounded-3xl bg-black/60 p-8 backdrop-blur-xl border border-white/10 shadow-2xl">
+            {/* Honeypot */}
             <input type="text" name="website" value={formData.website} onChange={handleChange} className="hidden" tabIndex="-1" />
 
             {[
@@ -102,7 +115,7 @@ export default function Anfrage() {
             ].map(([name, label, type]) => (
               <div key={name}>
                 <label className="neon-label">{label}</label>
-                <div className="neon-input-wrapper">
+                <div className="dynamic-neon-wrapper">
                   <input
                     name={name}
                     type={type || "text"}
@@ -118,31 +131,52 @@ export default function Anfrage() {
 
             <div>
               <label className="neon-label">Branche</label>
-              <div className="neon-input-wrapper">
-                <select name="industry" required className="neon-select" value={formData.industry} onChange={handleChange} disabled={disabled}>
-                  <option value="">Bitte wählen …</option>
-                  <option>Handwerk / Bau</option>
-                  <option>Treuhand / Finanzen</option>
-                  <option>Immobilien</option>
-                  <option>Gesundheit</option>
-                  <option>Beratung / Dienstleistung</option>
+              <div className="dynamic-neon-wrapper">
+                <select 
+                  name="industry" 
+                  required 
+                  className="neon-select" 
+                  value={formData.industry} 
+                  onChange={handleChange} 
+                  disabled={disabled}
+                >
+                  <option value="">Bitte wählen ...</option>
+                  <option>Gastronomie / Restaurant</option>
+                  <option>Detailhandel / Retail</option>
+                  <option>Versicherung / Finanzdienstleister</option>
+                  <option>Immobilien / Makler / Verwaltung</option>
+                  <option>Fitness / Gesundheit</option>
+                  <option>Beauty / Kosmetik</option>
+                  <option>Agentur / Marketing</option>
+                  <option>Beratung / Coaching</option>
+                  <option>IT / Software / SaaS</option>
                   <option>Industrie / Produktion</option>
-                  <option>IT / Software</option>
-                  <option>Andere</option>
+                  <option>Dienstleistungen (allgemein)</option>
+                  <option>Öffentliche Hand / Bildung</option>
+                  <option>B2B / andere KMU</option>
+                  <option>Andere Branche</option>
                 </select>
               </div>
             </div>
 
             <div>
               <label className="neon-label">Ihre Herausforderung</label>
-              <div className="neon-input-wrapper">
-                <textarea name="message" required className="neon-textarea" value={formData.message} onChange={handleChange} disabled={disabled} />
+              <div className="dynamic-neon-wrapper">
+                <textarea 
+                  name="message" 
+                  required 
+                  className="neon-textarea" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  disabled={disabled} 
+                  placeholder="Beschreiben Sie kurz, wo Sie KI-Potenzial sehen..."
+                />
               </div>
             </div>
 
-            {/* Turnstile Widget mit Client-Check */}
+            {/* Turnstile Widget */}
             <div className="pt-4 flex flex-col items-center min-h-[80px]">
-              <p className="mb-2 text-sm text-slate-300">Kurze Sicherheitsprüfung:</p>
+              <p className="mb-2 text-sm text-slate-400 uppercase tracking-widest">Sicherheitsprüfung</p>
               {isClient && (
                 <Turnstile
                   siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
@@ -151,11 +185,11 @@ export default function Anfrage() {
               )}
             </div>
 
-            {status === "success" && <div className="badge-success text-center">✅ Vielen Dank. Ihre Anfrage wurde übermittelt.</div>}
+            {status === "success" && <div className="badge-success text-center">✅ Vielen Dank! Wir haben Ihre Anfrage erhalten.</div>}
             {status === "error" && <div className="badge-error text-center">⚠️ {errorMsg}</div>}
 
             <div className="text-center">
-              <button type="submit" disabled={disabled} className="neon-border">
+              <button type="submit" disabled={disabled} className="neon-border w-full">
                 <span className="neon-border-inner">
                   {status === "loading" ? "Wird gesendet …" : "Gespräch anfragen"}
                 </span>
