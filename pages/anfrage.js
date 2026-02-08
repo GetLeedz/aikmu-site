@@ -5,10 +5,6 @@ import dynamic from "next/dynamic";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
 
-// Tracking + Consent
-import { track } from "../components/lib/fbpixel";
-import { hasMarketingConsent } from "../components/lib/consent";
-
 const Turnstile = dynamic(() => import("react-turnstile"), { ssr: false });
 
 const initialState = {
@@ -23,16 +19,13 @@ const initialState = {
 
 export default function Anfrage() {
   const [formData, setFormData] = useState(initialState);
-  const [status, setStatus] = useState(null); // loading | success | error
+  const [status, setStatus] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [cfToken, setCfToken] = useState("");
-  const [tsKey, setTsKey] = useState(0);
-
-  const disabled = status === "loading";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((p) => ({ ...p, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -56,32 +49,16 @@ export default function Anfrage() {
         body: JSON.stringify({ ...formData, cfToken }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Fehler beim Absenden.");
-      }
+      if (!res.ok) throw new Error("Senden fehlgeschlagen");
 
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
-      setTsKey((k) => k + 1);
-
-      if (hasMarketingConsent()) {
-        track("Lead", {
-          content_name: "AiKMU Anfrage",
-          content_category: "KI-Beratung",
-          value: 1,
-          currency: "CHF",
-        });
-      }
-    } catch (err) {
+    } catch {
       setStatus("error");
       setErrorMsg(
-        err.message ||
-          "Es ist ein technischer Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+        "Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie es später erneut."
       );
-    } finally {
-      setTimeout(() => setStatus(null), 6000);
     }
   };
 
@@ -91,148 +68,118 @@ export default function Anfrage() {
         <title>Anfrage | AiKMU</title>
         <meta
           name="description"
-          content="Besprechen Sie Ihr KI-Potenzial mit AiKMU – ehrlich, strukturiert und auf Schweizer Qualitätsniveau."
+          content="Unverbindliches Gespräch zur KI-Nutzung in Ihrem Unternehmen."
         />
       </Head>
 
       <NavBar />
 
-      <main className="min-h-screen pt-[160px] pb-[80px]">
-        <section>
-          <div className="container m-auto max-w-3xl px-4 text-white">
-            <div className="mb-10 text-center">
-              <h1 className="text-3xl md:text-4xl font-semibold">
-                Anfrage für ein unverbindliches Gespräch
-              </h1>
-              <p className="mt-4 text-lg text-slate-200">
-                Bitte schildern Sie kurz Ihre Situation.  
-                Wir melden uns mit einer ehrlichen Einschätzung, ob und wie KI in
-                Ihrem Unternehmen sinnvoll eingesetzt werden kann.
-              </p>
-            </div>
+      <main className="min-h-screen pt-[160px] pb-[100px]">
+        <div className="container m-auto max-w-3xl px-4 text-white">
+          <h1 className="text-3xl md:text-4xl font-semibold text-center">
+            Gespräch anfragen
+          </h1>
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 rounded-2xl bg-black/40 p-6 backdrop-blur"
-            >
-              {/* Honeypot */}
-              <input
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleChange}
-                className="hidden"
-                tabIndex="-1"
-                autoComplete="off"
-              />
+          <p className="mt-4 text-center text-slate-300">
+            Kurz ausfüllen – wir melden uns persönlich bei Ihnen.
+          </p>
 
-              {[
-                ["name", "Ihr Name"],
-                ["email", "E-Mail-Adresse", "email"],
-                ["company", "Unternehmen"],
-                ["phone", "Telefonnummer"],
-              ].map(([name, label, type]) => (
-                <div key={name}>
-                  <label className="neon-label">{label}</label>
-                  <div className="neon-input-wrapper">
-                    <input
-                      name={name}
-                      type={type || "text"}
-                      required={name !== "phone"}
-                      className="neon-input"
-                      value={formData[name]}
-                      onChange={handleChange}
-                      disabled={disabled}
-                    />
-                  </div>
-                </div>
-              ))}
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 space-y-6 rounded-2xl bg-black/40 p-6 backdrop-blur"
+          >
+            <input
+              type="text"
+              name="website"
+              value={formData.website}
+              onChange={handleChange}
+              className="hidden"
+            />
 
-              {/* Branche */}
-              <div>
-                <label className="neon-label">Branche</label>
+            {[
+              ["name", "Ihr Name"],
+              ["email", "E-Mail-Adresse", "email"],
+              ["company", "Unternehmen"],
+              ["phone", "Telefonnummer"],
+            ].map(([name, label, type]) => (
+              <div key={name}>
+                <label className="neon-label">{label}</label>
                 <div className="neon-input-wrapper">
-                  <select
-                    name="industry"
-                    required
-                    className="neon-select"
-                    value={formData.industry}
+                  <input
+                    name={name}
+                    type={type || "text"}
+                    required={name !== "phone"}
+                    className="neon-input"
+                    value={formData[name]}
                     onChange={handleChange}
-                    disabled={disabled}
-                  >
-                    <option value="">Bitte auswählen …</option>
-                    <option>Handwerk / Bau</option>
-                    <option>Treuhand / Finanzen</option>
-                    <option>Immobilien</option>
-                    <option>Gesundheit</option>
-                    <option>Beratung / Dienstleistung</option>
-                    <option>Industrie / Produktion</option>
-                    <option>IT / Software</option>
-                    <option>Andere Branche</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Nachricht */}
-              <div>
-                <label className="neon-label">
-                  Was ist aktuell Ihre grösste Herausforderung?
-                </label>
-                <div className="neon-input-wrapper">
-                  <textarea
-                    name="message"
-                    required
-                    className="neon-textarea"
-                    value={formData.message}
-                    onChange={handleChange}
-                    disabled={disabled}
                   />
                 </div>
               </div>
+            ))}
 
-              {/* Turnstile */}
-              <div className="pt-4 text-center">
-                <p className="text-sm text-slate-300 mb-2">
-                  Kurze Sicherheitsprüfung:
-                </p>
-                <Turnstile
-                  key={tsKey}
-                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-                  onVerify={(token) => setCfToken(token)}
+            <div>
+              <label className="neon-label">Branche</label>
+              <div className="neon-input-wrapper">
+                <select
+                  name="industry"
+                  required
+                  className="neon-select"
+                  value={formData.industry}
+                  onChange={handleChange}
+                >
+                  <option value="">Bitte wählen …</option>
+                  <option>Handwerk / Bau</option>
+                  <option>Treuhand / Finanzen</option>
+                  <option>Beratung / Dienstleistung</option>
+                  <option>IT / Software</option>
+                  <option>Andere</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="neon-label">
+                Was ist aktuell Ihre grösste Herausforderung?
+              </label>
+              <div className="neon-input-wrapper">
+                <textarea
+                  name="message"
+                  required
+                  className="neon-textarea"
+                  value={formData.message}
+                  onChange={handleChange}
                 />
               </div>
+            </div>
 
-              {status === "success" && (
-                <div className="badge-success text-center">
-                  ✅ Vielen Dank. Ihre Anfrage wurde erfolgreich übermittelt.
-                </div>
-              )}
+            <div className="turnstile-wrapper">
+              <Turnstile
+                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                onVerify={(token) => setCfToken(token)}
+              />
+            </div>
 
-              {status === "error" && (
-                <div className="badge-error text-center">
-                  ⚠️ {errorMsg}
-                </div>
-              )}
+            {status === "error" && (
+              <p className="text-red-400 text-center">{errorMsg}</p>
+            )}
 
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={disabled}
-                className="neon-border w-full mt-2"
-              >
-                <span className="neon-border-inner">
-                  {status === "loading"
-                    ? "Wird gesendet …"
-                    : "Gespräch anfragen"}
-                </span>
-              </button>
-
-              <p className="text-sm text-slate-300 text-center">
-                Ihre Angaben werden vertraulich behandelt. Kein Spam.
+            {status === "success" && (
+              <p className="text-green-400 text-center">
+                Vielen Dank. Ihre Anfrage wurde übermittelt.
               </p>
-            </form>
-          </div>
-        </section>
+            )}
+
+            <button type="submit" className="neon-border">
+              <span className="neon-border-inner">
+                Gespräch anfragen
+              </span>
+            </button>
+
+            <p className="text-center text-sm text-slate-400">
+              Ihre Angaben werden vertraulich behandelt. Kein Spam.
+            </p>
+          </form>
+        </div>
       </main>
 
       <Footer />

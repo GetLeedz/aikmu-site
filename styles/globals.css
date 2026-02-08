@@ -21,7 +21,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Chakra Petch";
+  font-family: "Chakra Petch", system-ui, sans-serif;
 
   background:
     radial-gradient(1100px circle at 25% 25%, rgba(255, 140, 60, 0.22), transparent 60%),
@@ -30,7 +30,7 @@ body {
     linear-gradient(180deg, #020617 0%, #040a1a 55%, #020617 100%);
 
   font-size: 19px;
-  line-height: 32px;
+  line-height: 1.7;
   color: #ffffff;
   scroll-behavior: smooth;
 }
@@ -47,15 +47,14 @@ body {
   background:
     radial-gradient(800px circle at 50% 40%, rgba(255, 140, 60, 0.22), transparent 60%),
     radial-gradient(900px circle at 70% 55%, rgba(255, 0, 170, 0.18), transparent 65%),
-    radial-gradient(900px circle at 30% 60%, rgba(0, 229, 255, 0.12), transparent 70%),
-    url("./../public/images/bg-middle.png");
+    radial-gradient(900px circle at 30% 60%, rgba(0, 229, 255, 0.12), transparent 70%);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   padding-top: 6.5rem;
 }
 
-/* ================= NEON LABEL ================= */
+/* ================= LABEL ================= */
 .neon-label {
   display: block;
   margin-bottom: 8px;
@@ -65,13 +64,11 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* ================= NEON INPUT WRAPPER ================= */
+/* ================= INPUT WRAPPER ================= */
 .neon-input-wrapper {
   position: relative;
-  z-index: 0;
   padding: 3px;
-  border-radius: 0.9rem;
-  overflow: hidden;
+  border-radius: 1rem;
   background: linear-gradient(
     120deg,
     #ec4899,
@@ -84,32 +81,25 @@ body {
   animation: neonGradient 6s linear infinite;
 }
 
-/* ================= INPUT / SELECT / TEXTAREA ================= */
+/* ================= INPUTS ================= */
 .neon-input,
 .neon-select,
 .neon-textarea {
-  position: relative;
-  z-index: 1;
   width: 100%;
-  min-height: 56px;
-  border-radius: 0.8rem;
+  border-radius: 0.85rem;
   background: #050816;
   border: none;
   color: #ffffff;
   font-size: 1.05rem;
-  padding: 1.2rem 1.3rem;
-  line-height: 1.45;
+  padding: 1.1rem 1.25rem;
+  line-height: 1.5;
   outline: none;
+  -webkit-appearance: none;
 }
 
-.neon-select {
-  appearance: none;
-  cursor: pointer;
-}
-
-.neon-textarea {
-  min-height: 170px;
-  resize: vertical;
+.neon-input::placeholder,
+.neon-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .neon-input:focus,
@@ -121,11 +111,24 @@ body {
     0 0 18px rgba(168, 85, 247, 0.75);
 }
 
-/* ================= NEON BUTTONS ================= */
+/* ================= SELECT ================= */
+.neon-select {
+  height: 56px;
+  cursor: pointer;
+}
+
+/* ================= TEXTAREA ================= */
+.neon-textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* ================= BUTTON ================= */
 .neon-border {
+  width: 100%;
   display: inline-flex;
   border-radius: 9999px;
-  padding: 6px;
+  padding: 5px;
   background: linear-gradient(
     120deg,
     #ec4899,
@@ -139,16 +142,22 @@ body {
 }
 
 .neon-border-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  min-width: 340px;
-  padding: 1.05rem 2.8rem;
+  padding: 1.1rem 2rem;
   border-radius: 9999px;
   background: #050816;
   color: #ffffff;
   font-weight: 600;
+  text-align: center;
+}
+
+/* ================= TURNSTILE ================= */
+.turnstile-wrapper {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 /* ================= FOOTER ================= */
@@ -163,52 +172,13 @@ footer {
 
 .footer-copy {
   font-size: 1rem;
-  text-align: center;
   opacity: 0.85;
-}
-
-/* ================= SWISS FLAG ================= */
-.swiss-flag {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  margin-left: 10px;
-  vertical-align: middle;
-  background-color: #d52b1e;
-  position: relative;
-  border-radius: 3px;
-}
-
-.swiss-flag::before,
-.swiss-flag::after {
-  content: "";
-  position: absolute;
-  background-color: #ffffff;
-}
-
-.swiss-flag::before {
-  width: 12px;
-  height: 4px;
-  top: 9px;
-  left: 5px;
-}
-
-.swiss-flag::after {
-  width: 4px;
-  height: 12px;
-  top: 5px;
-  left: 9px;
+  text-align: center;
 }
 
 /* ================= ANIMATIONS ================= */
 @keyframes neonGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
