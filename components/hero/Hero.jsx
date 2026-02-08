@@ -211,16 +211,18 @@ const Hero = () => {
 
           {/* FOTO + ZITAT */}
           <div className="mt-14 flex flex-col items-center gap-6 text-center">
-            <div className="w-24 h-24 rounded-full overflow-hidden border border-white/20">
+            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border border-white/30">
               <Image
                 src={arthurImg}
                 alt="Arthur Ergen"
-                width={96}
-                height={96}
+                fill
+                className="object-cover"
+                sizes="128px"
               />
             </div>
 
-            <blockquote className="max-w-2xl text-base sm:text-lg text-white leading-relaxed opacity-90">
+
+            <blockquote className="max-w-2xl text-[1.05rem] sm:text-[1.15rem] text-white leading-[1.7] opacity-95">
               „In vier Jahren gibt es zwei Arten von KMU:  
               Diejenigen, die als Architekten ihre KI steuern und kontrollieren –  
               und diejenigen, deren Team für die KI arbeitet und seinen Lohn
