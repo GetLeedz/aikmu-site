@@ -47,7 +47,7 @@ body {
 .hero-frame-5 { width: 150px; top: 42%; right: 9%; transform: rotate(11deg); }
 .hero-frame-6 { width: 220px; top: 70%; right: 5%; }
 
-/* ================= FORM STYLING (GETLEEDZ LOOK) ================= */
+/* ================= FORM STYLING ================= */
 form.space-y-6 {
   background: rgba(5, 8, 22, 0.7) !important;
   backdrop-filter: blur(12px);
@@ -57,7 +57,6 @@ form.space-y-6 {
   z-index: 10;
 }
 
-/* Labels */
 .neon-label {
   display: block;
   margin-bottom: 8px;
@@ -67,7 +66,6 @@ form.space-y-6 {
   letter-spacing: 0.3px;
 }
 
-/* Gradient Wrapper */
 .dynamic-neon-wrapper {
   position: relative;
   padding: 1.5px;
@@ -77,7 +75,6 @@ form.space-y-6 {
   display: flex;
 }
 
-/* Rotierender Neon Hintergrund */
 .dynamic-neon-wrapper::before {
   content: "";
   position: absolute;
@@ -86,7 +83,6 @@ form.space-y-6 {
   animation: rotateNeon 6s linear infinite;
 }
 
-/* Inputs */
 .neon-input,
 .neon-select,
 .neon-textarea {
@@ -107,7 +103,6 @@ form.space-y-6 {
   resize: none;
 }
 
-/* Select Arrow */
 .neon-select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
@@ -137,7 +132,6 @@ form.space-y-6 {
   text-align: center;
 }
 
-/* Alerts */
 .badge-success {
   background: rgba(124, 255, 0, 0.1);
   border: 1px solid #7cff00;
@@ -149,15 +143,12 @@ form.space-y-6 {
 }
 
 /* ================= FOOTER ================= */
-
-/* Footer Text */
 .footer-text {
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
-  opacity: 0.85;
+  color: #ffffff;
 }
 
-/* Footer Links */
 .footer-link {
   color: white;
   opacity: 0.85;
@@ -166,26 +157,15 @@ form.space-y-6 {
 
 .footer-link:hover {
   opacity: 1;
-  text-shadow:
-    0 0 6px rgba(122, 255, 0, 0.6),
-    0 0 12px rgba(248, 0, 255, 0.5);
+  text-shadow: 0 0 6px rgba(122, 255, 0, 0.6);
 }
 
-/* Footer Contact */
 .footer-contact {
   color: white;
-  opacity: 0.9;
+  opacity: 1;
   transition: all 0.25s ease;
 }
 
-.footer-contact:hover {
-  opacity: 1;
-  text-shadow:
-    0 0 6px rgba(122, 255, 0, 0.6),
-    0 0 14px rgba(248, 0, 255, 0.6);
-}
-
-/* Social Icons */
 .footer-social {
   width: 52px;
   height: 52px;
@@ -202,38 +182,30 @@ form.space-y-6 {
 
 .footer-social:hover {
   transform: translateY(-2px) scale(1.08);
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 0 12px rgba(122, 255, 0, 0.6),
-    0 0 24px rgba(248, 0, 255, 0.6);
+  box-shadow: 0 0 12px rgba(122, 255, 0, 0.6);
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE OPTIMIZATION ================= */
 @media (max-width: 640px) {
-  .hero-frame-1,
-  .hero-frame-2,
-  .hero-frame-3,
-  .hero-frame-4,
-  .hero-frame-5,
-  .hero-frame-6 {
+  .hero-frame-1, .hero-frame-2, .hero-frame-3, 
+  .hero-frame-4, .hero-frame-5, .hero-frame-6 {
     opacity: 0.25;
     transform: scale(0.7);
+  }
+
+  /* Grössere Schrift im Footer auf Mobile */
+  .footer-text {
+    font-size: 1.15rem;
+    color: #ffffff !important;
+  }
+  
+  .footer-link, .footer-contact {
+    font-size: 1.1rem;
+    opacity: 1 !important;
   }
 }
 
 /* ================= ANIMATIONS ================= */
-@keyframes rotateNeon {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes neonGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes rotateNeon { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes neonGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

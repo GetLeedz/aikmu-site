@@ -18,15 +18,18 @@ const Footer = () => {
         </div>
 
         {/* Positionierung */}
-        <div className="text-center footer-text max-w-xl">
+        <div className="text-center footer-text max-w-xl text-white">
           KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau –<br />
           klar geführt, verantwortungsvoll umgesetzt.
           <br />
-          <span className="opacity-80 mt-1 inline-block">Swiss prompted.</span>
+          <div className="flex flex-col items-center mt-4">
+            <span className="text-3xl mb-1">🇨🇭</span>
+            <span className="opacity-100 inline-block font-medium">Swiss prompted.</span>
+          </div>
         </div>
 
         {/* Adresse & Kontakt */}
-        <div className="text-center footer-text flex flex-col gap-2">
+        <div className="text-center footer-text flex flex-col gap-3 text-white">
           <div>4102 Binningen, Schweiz</div>
 
           <a
@@ -45,13 +48,13 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <p className="text-sm opacity-60">
+        <p className="text-sm opacity-60 text-white">
           © 2026 AiKMU. Alle Rechte vorbehalten.
         </p>
 
         {/* Social */}
         <div className="flex flex-col items-center gap-4 pt-4">
-          <span className="text-sm tracking-widest opacity-70">
+          <span className="text-sm tracking-widest opacity-70 text-white">
             FOLGEN SIE UNS
           </span>
 
