@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { hasMarketingConsent, setMarketingConsent } from "../lib/consent";
+import { hasMarketingConsent, setMarketingConsent } from "../../lib/consent";
 
 const Footer = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -15,15 +15,15 @@ const Footer = () => {
   }, []);
 
   const handleAccept = () => {
-    setMarketingConsent(true); // Nutzt deine lib Funktion
+    setMarketingConsent(true);
     setShowBanner(false);
     if (typeof window !== "undefined") {
-      window.location.reload(); 
+      window.location.reload();
     }
   };
 
   const handleDecline = () => {
-    setMarketingConsent(false); // Speichert "false" über deine lib
+    setMarketingConsent(false);
     setShowBanner(false);
   };
 
@@ -126,7 +126,7 @@ const Footer = () => {
               <h3 className="text-xs font-bold tracking-widest uppercase text-white">Privacy Settings</h3>
             </div>
             <p className="text-[11px] text-white/60 mb-6 leading-relaxed">
-              Wir verwenden Cookies, um die Nutzung unserer Website zu analysieren und Ihnen ein besseres Erlebnis zu bieten. Durch Klicken auf "Akzeptieren" stimmen Sie der Verwendung zu.
+              Wir verwenden Cookies, um die Nutzung unserer Website zu analysieren und Ihnen ein besseres Erlebnis zu bieten. Durch Klicken auf &quot;Akzeptieren&quot; stimmen Sie der Verwendung zu.
             </p>
             <div className="flex gap-3">
               <button 
