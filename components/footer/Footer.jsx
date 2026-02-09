@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { hasMarketingConsent, setMarketingConsent } from "../../lib/consent";
+import { hasMarketingConsent, setMarketingConsent } from "../lib/consent";
 
 const Footer = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Prüfen, ob bereits eine Entscheidung im localStorage liegt
-    const consent = localStorage.getItem("getleedz_consent_marketing");
-    if (consent === null) {
-      setShowBanner(true);
+    // 1. Prüfen, ob wir im Browser sind
+    if (typeof window !== "undefined") {
+      // 2. Den Key direkt abfragen (wie in deiner consent.js definiert)
+      const consent = localStorage.getItem("getleedz_consent_marketing");
+      
+      // Wenn noch nie eine Entscheidung getroffen wurde (null), Banner zeigen
+      if (consent === null) {
+        setShowBanner(true);
+      }
     }
   }, []);
 
@@ -18,7 +23,7 @@ const Footer = () => {
     setMarketingConsent(true);
     setShowBanner(false);
     if (typeof window !== "undefined") {
-      window.location.reload();
+      window.location.reload(); 
     }
   };
 
@@ -43,7 +48,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Positionierung mit Schweizer Flagge */}
+          {/* Positionierung (aus deinem Original-Code) */}
           <div className="text-center footer-text max-w-xl text-white">
             KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau –<br />
             klar geführt, verantwortungsvoll umgesetzt.
@@ -54,21 +59,15 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Adresse & Kontakt */}
+          {/* Adresse & Kontakt (exakt wie im Screenshot) */}
           <div className="text-center footer-text flex flex-col gap-3 text-white">
             <div>4102 Binningen, Schweiz</div>
 
-            <a
-              href="tel:+41615251810"
-              className="footer-contact"
-            >
+            <a href="tel:+41615251810" className="footer-contact">
               Tel. +41&nbsp;61&nbsp;525&nbsp;18&nbsp;10
             </a>
 
-            <a
-              href="mailto:info@aikmu.ch"
-              className="footer-contact"
-            >
+            <a href="mailto:info@aikmu.ch" className="footer-contact">
               info@aikmu.ch
             </a>
           </div>
@@ -80,35 +79,18 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex flex-col items-center gap-4 pt-4">
-            <span className="text-sm tracking-widest opacity-70 text-white">
-              FOLGEN SIE UNS
+            <span className="text-sm tracking-widest opacity-70 text-white uppercase">
+              Folgen Sie uns
             </span>
 
             <div className="flex gap-8">
-              <a
-                href="https://www.instagram.com/aikmu.ch"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social"
-              >
+              <a href="https://www.instagram.com/aikmu.ch" target="_blank" rel="noopener noreferrer" className="footer-social">
                 <FaInstagram />
               </a>
-
-              <a
-                href="https://www.facebook.com/profile.php?id=61587440278928"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social"
-              >
+              <a href="https://www.facebook.com/profile.php?id=61587440278928" target="_blank" rel="noopener noreferrer" className="footer-social">
                 <FaFacebookF />
               </a>
-
-              <a
-                href="https://www.linkedin.com/company/aikmu/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social"
-              >
+              <a href="https://www.linkedin.com/company/aikmu/" target="_blank" rel="noopener noreferrer" className="footer-social">
                 <FaLinkedinIn />
               </a>
             </div>
@@ -117,7 +99,7 @@ const Footer = () => {
         </div>
       </footer>
 
-      {/* Cookie Banner Logik (GetLeedz Style) */}
+      {/* Der Cookie Banner */}
       {showBanner && (
         <div className="fixed bottom-6 left-6 right-6 md:right-8 md:left-auto md:max-w-sm z-[100] animate-fadeInUp">
           <div className="bg-[#050816]/95 backdrop-blur-2xl border border-white/10 p-6 rounded-2xl shadow-2xl">
@@ -126,7 +108,7 @@ const Footer = () => {
               <h3 className="text-xs font-bold tracking-widest uppercase text-white">Privacy Settings</h3>
             </div>
             <p className="text-[11px] text-white/60 mb-6 leading-relaxed">
-              Wir verwenden Cookies, um die Nutzung unserer Website zu analysieren und Ihnen ein besseres Erlebnis zu bieten. Durch Klicken auf &quot;Akzeptieren&quot; stimmen Sie der Verwendung zu.
+              Wir verwenden Cookies, um die Nutzung unserer Website zu analysieren. Durch Klicken auf &quot;Akzeptieren&quot; stimmen Sie der Verwendung zu.
             </p>
             <div className="flex gap-3">
               <button 
