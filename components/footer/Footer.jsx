@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { setMarketingConsent } from "../../lib/consent";
+import { setMarketingConsent } from "../lib/consent"; // Pfad basierend auf deinem Struktur-Screenshot
 
 const Footer = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -27,12 +27,13 @@ const Footer = () => {
   return (
     <>
       <footer className="footer-main mt-20">
+        {/* Neon-Trennlinie oben */}
         <div className="footer-glow-line" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             
-            {/* 1. BRAND SECTION */}
+            {/* 1. BRAND SECTION: Logo & Slogan */}
             <div className="md:col-span-2 space-y-6">
               <Link href="/" className="inline-block transition-transform duration-300 hover:scale-105">
                 <Image 
@@ -54,7 +55,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* 2. NAVIGATION SECTION */}
+            {/* 2. NAVIGATION SECTION: Rechtliches */}
             <div>
               <h4 className="footer-heading">Rechtliches</h4>
               <ul className="space-y-4">
@@ -71,7 +72,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* 3. KONTAKT SECTION */}
+            {/* 3. KONTAKT SECTION: Adresse & Tel */}
             <div>
               <h4 className="footer-heading">Kontakt</h4>
               <div className="space-y-4">
@@ -92,7 +93,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 4. BOTTOM BAR */}
+          {/* 4. BOTTOM BAR: Copyright & Socials */}
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[10px] text-white/30 uppercase tracking-[0.3em]">
               © 2026 AiKMU. Alle Rechte vorbehalten.
@@ -116,7 +117,7 @@ const Footer = () => {
         </div>
       </footer>
 
-      {/* COOKIE BANNER */}
+      {/* COOKIE BANNER (Next Level Glassmorphism) */}
       {showBanner && (
         <div className="fixed bottom-10 left-0 right-0 z-[100] px-4 animate-fadeInUp">
           <div className="max-w-4xl mx-auto bg-[#020617]/95 backdrop-blur-2xl border border-white/10 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-6">
