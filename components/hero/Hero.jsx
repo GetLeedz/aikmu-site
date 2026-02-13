@@ -9,6 +9,7 @@ import hero2 from "../../public/images/hero/hero2.png";
 import hero3 from "../../public/images/hero/hero3.png";
 import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
+import hero6 from "../../public/images/hero/hero6.png";
 
 const Hero = () => {
   const calendlyUrl =
@@ -182,6 +183,35 @@ Eine KI braucht keinen Ersatz.
       id="hero"
       className="relative min-h-screen w-full overflow-hidden flex flex-col items-center"
     >
+      {/* Subtile Background Icons */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+
+        <div className="absolute top-[12%] left-[6%] opacity-10">
+          <Image src={hero1} alt="" width={120} height={120} />
+        </div>
+
+        <div className="absolute top-[18%] right-[8%] opacity-10">
+          <Image src={hero2} alt="" width={140} height={140} />
+        </div>
+
+        <div className="absolute bottom-[25%] left-[10%] opacity-10">
+          <Image src={hero3} alt="" width={110} height={110} />
+        </div>
+
+        <div className="absolute top-[45%] right-[5%] opacity-10">
+          <Image src={hero4} alt="" width={130} height={130} />
+        </div>
+
+        <div className="absolute bottom-[15%] right-[15%] opacity-10">
+          <Image src={hero5} alt="" width={100} height={100} />
+        </div>
+
+        <div className="absolute top-[55%] left-[15%] opacity-10">
+          <Image src={hero6} alt="" width={90} height={90} />
+        </div>
+
+      </div>
+
       <div className="container m-auto pt-[160px] pb-[120px] relative z-10 text-center">
         <div className="w-11/12 md:w-9/12 m-auto">
 
@@ -197,9 +227,7 @@ Eine KI braucht keinen Ersatz.
             wo heute Zeit, Geld und Energie verloren gehen.
           </p>
 
-          {/* BUTTONS FIXED */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-16">
-
             <Link href="/anfrage">
               <a className="home-btn group">
                 KI-Potenzial analysieren
@@ -216,7 +244,6 @@ Eine KI braucht keinen Ersatz.
               Rückruf vereinbaren
               <FaCalendarAlt className="ml-3 transition-transform duration-300 group-hover:translate-x-2" />
             </a>
-
           </div>
 
           <div className="mt-32 max-w-3xl mx-auto space-y-4 text-left">
