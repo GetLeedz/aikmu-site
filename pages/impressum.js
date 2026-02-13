@@ -1,6 +1,15 @@
 import Head from "next/head";
 import NavBar from "../components/navBar/NavBar";
 import Footer from "../components/footer/Footer";
+import Image from "next/image";
+
+// HERO ICONS
+import hero1 from "../public/images/hero/hero1.png";
+import hero2 from "../public/images/hero/hero2.png";
+import hero3 from "../public/images/hero/hero3.png";
+import hero4 from "../public/images/hero/hero4.png";
+import hero5 from "../public/images/hero/hero5.png";
+import hero6 from "../public/images/hero/hero6.png";
 
 const Impressum = () => {
   return (
@@ -9,23 +18,53 @@ const Impressum = () => {
         <title>Impressum – AiKMU</title>
         <meta
           name="description"
-          content="Impressum der AiKMU – rechtliche Angaben, Handelsregister, MWST, Kontaktinformationen und Haftungshinweise."
+          content="Impressum und rechtliche Angaben der AiKMU. Kontaktinformationen, Handelsregister, MWST, Bankverbindung und rechtliche Hinweise."
         />
       </Head>
 
       <NavBar />
 
-      <main className="legal-wrapper min-h-screen pt-[160px] pb-24">
-        <section className="legal-container">
+      <main className="relative min-h-screen overflow-hidden text-white pt-[160px] pb-20">
 
-          <h1 className="legal-heading">
+        {/* Subtile Background Icons */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+
+          <div className="absolute top-[12%] left-[8%] opacity-6">
+            <Image src={hero1} alt="" width={110} height={110} />
+          </div>
+
+          <div className="absolute top-[20%] right-[10%] opacity-5">
+            <Image src={hero2} alt="" width={120} height={120} />
+          </div>
+
+          <div className="absolute bottom-[30%] left-[12%] opacity-5">
+            <Image src={hero3} alt="" width={100} height={100} />
+          </div>
+
+          <div className="absolute top-[55%] right-[6%] opacity-5">
+            <Image src={hero4} alt="" width={110} height={110} />
+          </div>
+
+          <div className="absolute bottom-[15%] right-[18%] opacity-4">
+            <Image src={hero5} alt="" width={90} height={90} />
+          </div>
+
+          <div className="absolute top-[65%] left-[20%] opacity-4">
+            <Image src={hero6} alt="" width={85} height={85} />
+          </div>
+
+        </div>
+
+        <section className="container m-auto px-4 max-w-3xl relative z-10">
+
+          <h1 className="text-4xl md:text-5xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] to-[#a855f7]">
             Impressum
           </h1>
 
-          <div className="legal-content">
+          <div className="space-y-10 text-white/90 leading-relaxed">
 
-            <div className="legal-section-block">
-              <h2>Verantwortlich für den Inhalt dieser Website</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Verantwortlich für den Inhalt</h2>
               <p>
                 AiKMU<br />
                 GetLeedz GmbH<br />
@@ -34,81 +73,52 @@ const Impressum = () => {
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Kontakt</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Kontakt</h2>
               <p>
-                E-Mail:{" "}
-                <a href="mailto:info@aikmu.ch" className="legal-link">
-                  info@aikmu.ch
-                </a>
-                <br />
-                Telefon:{" "}
-                <a href="tel:+41615251810" className="legal-link">
-                  +41&nbsp;61&nbsp;525&nbsp;18&nbsp;10
-                </a>
-                <br />
-                Website:{" "}
-                <a
-                  href="https://www.aikmu.ch"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="legal-link"
-                >
-                  www.aikmu.ch
-                </a>
+                E-Mail: <a href="mailto:info@aikmu.ch" className="text-[#00f2fe]">info@aikmu.ch</a><br />
+                Telefon: <a href="tel:+41615251810" className="text-[#00f2fe]">+41 61 525 18 10</a><br />
+                Web: <a href="https://www.aikmu.ch" className="text-[#00f2fe]">www.aikmu.ch</a>
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Unternehmensform</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Unternehmensform</h2>
               <p>
                 GetLeedz GmbH<br />
                 Gesellschaft mit beschränkter Haftung (GmbH) nach Schweizer Recht.
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Handelsregister</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Handelsregister</h2>
               <p>
                 Eingetragen im Handelsregister des Kantons Basel-Landschaft<br />
-                Handelsregister-Nummer: CHE-339.044.174
+                CHE-339.044.174
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Mehrwertsteuer (MWST)</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Mehrwertsteuer</h2>
               <p>
                 MWST-Nummer: CHE-339.044.174
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Bankverbindung</h2>
-              <p>
-                Bank Cler AG<br />
-                Aeschenplatz 3<br />
-                4052 Basel, Schweiz<br /><br />
-                BIC / SWIFT: BCLRCHBBXXX<br />
-                IBAN: CH60&nbsp;0844&nbsp;0258&nbsp;4872&nbsp;6200&nbsp;1
-              </p>
-            </div>
-
-            <div className="legal-section-block">
-              <h2>Haftungsausschluss</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Haftungsausschluss</h2>
               <p>
                 Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt.
-                Für die Richtigkeit, Vollständigkeit und Aktualität übernehmen
-                wir jedoch keine Gewähr, soweit gesetzlich zulässig.
+                Für die Richtigkeit, Vollständigkeit und Aktualität übernehmen wir
+                jedoch keine Gewähr, soweit gesetzlich zulässig.
               </p>
             </div>
 
-            <div className="legal-section-block">
-              <h2>Urheberrechte</h2>
+            <div>
+              <h2 className="font-semibold text-lg mb-2">Urheberrechte</h2>
               <p>
-                Die Inhalte und Werke auf dieser Website unterliegen dem
-                schweizerischen Urheberrecht. Jede Verwendung ausserhalb der
-                gesetzlichen Grenzen bedarf der schriftlichen Zustimmung des
-                jeweiligen Rechteinhabers.
+                Inhalte und Werke unterliegen dem schweizerischen Urheberrecht.
+                Vervielfältigung oder Verbreitung bedarf der schriftlichen Zustimmung.
               </p>
             </div>
 
