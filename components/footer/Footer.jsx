@@ -28,12 +28,12 @@ const Footer = () => {
         
         <div className="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           
-          {/* LOGO - Neues File, zentriert und hell */}
+          {/* LOGO - Pfad korrigiert auf /images/ + Dateiname aus deinem Screenshot */}
           <div className="mb-10 transition-transform duration-500 hover:scale-105">
             <Link href="/">
               <a>
                 <Image 
-                  src="/logo-aikmu-transparent_white_transparent_footer.png" 
+                  src="/images/logo-aikmu-transparent_white_transparent_footer.png" 
                   alt="AiKMU Logo" 
                   width={240} 
                   height={80} 
@@ -69,7 +69,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* RECHTLICHES (Impressum / Datenschutz) */}
+          {/* RECHTLICHES (Zentriert mit Mouse-Over Effekt) */}
           <div className="flex justify-center gap-12 mb-16 border-t border-white/5 pt-12 w-full max-w-lg">
             <Link href="/impressum">
               <a className="footer-link-centered font-bold">Impressum</a>
@@ -95,7 +95,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* COPYRIGHT BAR */}
+          {/* COPYRIGHT */}
           <div className="w-full pt-10 border-t border-white/5">
             <p className="text-[11px] text-white/20 uppercase tracking-[0.5em] font-medium">
               © 2026 AiKMU. Precision & Intelligence.
@@ -104,7 +104,7 @@ const Footer = () => {
         </div>
       </footer>
 
-      {/* COOKIE BANNER (Zentriert & Gross) */}
+      {/* COOKIE BANNER */}
       {showBanner && (
         <div className="fixed bottom-10 left-0 right-0 z-[100] px-4 animate-fadeInUp">
           <div className="max-w-2xl mx-auto bg-[#020617]/95 backdrop-blur-3xl border border-white/10 p-10 rounded-[40px] shadow-[0_30px_70px_rgba(0,0,0,0.8)] text-center">
