@@ -11,7 +11,6 @@ import hero2 from "../public/images/hero/hero2.png";
 import hero3 from "../public/images/hero/hero3.png";
 import hero4 from "../public/images/hero/hero4.png";
 import hero5 from "../public/images/hero/hero5.png";
-import hero6 from "../public/images/hero/hero6.png";
 
 const initialState = {
   name: "",
@@ -20,12 +19,12 @@ const initialState = {
   phone: "",
   industry: "",
   message: "",
-  website: "", 
+  website: "",
 };
 
 export default function Anfrage() {
   const [formData, setFormData] = useState(initialState);
-  const [status, setStatus] = useState(null); 
+  const [status, setStatus] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [cfToken, setCfToken] = useState("");
   const [isClient, setIsClient] = useState(false);
@@ -44,20 +43,25 @@ export default function Anfrage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+
     if (!cfToken) {
       setStatus("error");
       setErrorMsg("Bitte bestätigen Sie kurz die Sicherheitsprüfung.");
       return;
     }
+
     setStatus("loading");
+
     try {
       const res = await fetch("/api/anfrage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, cfToken }),
       });
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Fehler beim Absenden.");
+
       setStatus("success");
       setFormData(initialState);
       setCfToken("");
@@ -77,30 +81,51 @@ export default function Anfrage() {
 
       <NavBar />
 
-      <main className="hero-spotlight-bg relative min-h-screen pt-[160px] pb-[80px] overflow-hidden">
-        
+      <main className="anfrage-section relative min-h-screen pt-[160px] pb-[100px] overflow-hidden">
+
         {/* Background Icons */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-          <div className="absolute top-[10%] left-[5%] animate-pulse-slow"><Image src={hero1} alt="" width={150} height={150} /></div>
-          <div className="absolute top-[20%] right-[10%] animate-pulse-slow"><Image src={hero2} alt="" width={180} height={180} /></div>
-          <div className="absolute bottom-[20%] left-[8%] animate-pulse-slow"><Image src={hero3} alt="" width={140} height={140} /></div>
-          <div className="absolute top-[45%] right-[5%] animate-pulse-slow"><Image src={hero4} alt="" width={160} height={160} /></div>
-          <div className="absolute bottom-[10%] right-[15%] animate-pulse-slow"><Image src={hero5} alt="" width={140} height={140} /></div>
+          <div className="absolute top-[10%] left-[5%] animate-pulse-slow">
+            <Image src={hero1} alt="" width={150} height={150} />
+          </div>
+          <div className="absolute top-[20%] right-[10%] animate-pulse-slow">
+            <Image src={hero2} alt="" width={180} height={180} />
+          </div>
+          <div className="absolute bottom-[20%] left-[8%] animate-pulse-slow">
+            <Image src={hero3} alt="" width={140} height={140} />
+          </div>
+          <div className="absolute top-[45%] right-[5%] animate-pulse-slow">
+            <Image src={hero4} alt="" width={160} height={160} />
+          </div>
+          <div className="absolute bottom-[10%] right-[15%] animate-pulse-slow">
+            <Image src={hero5} alt="" width={140} height={140} />
+          </div>
         </div>
 
         <div className="container mx-auto max-w-3xl px-4 relative z-10">
+
           <div className="mb-12 text-center">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white fade-in-up">
-              Anfrage für ein <br className="hidden md:block" /> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] to-[#a855f7]">unverbindliches Gespräch</span>
+              Anfrage für ein <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] to-[#a855f7]">
+                unverbindliches Gespräch
+              </span>
             </h1>
           </div>
 
           <div className="form-container fade-in-up">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input type="text" name="website" value={formData.website} onChange={handleChange} className="hidden" tabIndex="-1" />
+            <form onSubmit={handleSubmit} className="space-y-6">
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                className="hidden"
+                tabIndex="-1"
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   ["name", "Ihr Name"],
                   ["email", "E-Mail-Adresse", "email"],
@@ -123,49 +148,85 @@ export default function Anfrage() {
                 ))}
               </div>
 
+              {/* BRANCHE – VOLLSTÄNDIG */}
               <div>
                 <label className="form-label">Branche</label>
-                <select name="industry" required className="form-input" value={formData.industry} onChange={handleChange} disabled={disabled}>
-                  <option value="" className="text-gray-900">Bitte wählen ...</option>
-                  <option className="text-gray-900">Gastronomie / Restaurant</option>
-                  <option className="text-gray-900">Detailhandel / Retail</option>
-                  <option className="text-gray-900">Versicherung / Finanzdienstleister</option>
-                  <option className="text-gray-900">Immobilien / Makler / Verwaltung</option>
-                  <option className="text-gray-900">Fitness / Gesundheit</option>
-                  <option className="text-gray-900">Beauty / Kosmetik</option>
-                  <option className="text-gray-900">Agentur / Marketing</option>
-                  <option className="text-gray-900">Beratung / Coaching</option>
-                  <option className="text-gray-900">IT / Software / SaaS</option>
-                  <option className="text-gray-900">Industrie / Produktion</option>
-                  <option className="text-gray-900">Dienstleistungen (allgemein)</option>
-                  <option className="text-gray-900">Öffentliche Hand / Bildung</option>
-                  <option className="text-gray-900">B2B / andere KMU</option>
-                  <option className="text-gray-900">Andere Branche</option>
+                <select
+                  name="industry"
+                  required
+                  className="form-input"
+                  value={formData.industry}
+                  onChange={handleChange}
+                  disabled={disabled}
+                >
+                  <option value="">Bitte wählen ...</option>
+                  <option>Gastronomie / Restaurant</option>
+                  <option>Detailhandel / Retail</option>
+                  <option>Versicherung / Finanzdienstleister</option>
+                  <option>Immobilien / Makler / Verwaltung</option>
+                  <option>Fitness / Gesundheit</option>
+                  <option>Beauty / Kosmetik</option>
+                  <option>Agentur / Marketing</option>
+                  <option>Beratung / Coaching</option>
+                  <option>IT / Software / SaaS</option>
+                  <option>Industrie / Produktion</option>
+                  <option>Dienstleistungen (allgemein)</option>
+                  <option>Öffentliche Hand / Bildung</option>
+                  <option>B2B / andere KMU</option>
+                  <option>Andere Branche</option>
                 </select>
               </div>
 
               <div>
                 <label className="form-label">Ihre Herausforderung</label>
-                <textarea name="message" required className="form-input min-h-[120px]" value={formData.message} onChange={handleChange} disabled={disabled} placeholder="Beschreiben Sie kurz, wo Sie KI-Potenzial sehen..." />
+                <textarea
+                  name="message"
+                  required
+                  className="form-input min-h-[140px]"
+                  value={formData.message}
+                  onChange={handleChange}
+                  disabled={disabled}
+                  placeholder="Beschreiben Sie kurz, wo Sie KI-Potenzial sehen..."
+                />
               </div>
 
               <div className="pt-6 flex flex-col items-center">
-                <p className="mb-3 text-[10px] text-white/40 uppercase tracking-[0.2em]">Sicherheitsprüfung</p>
+                <p className="mb-3 text-[10px] text-white/40 uppercase tracking-[0.2em]">
+                  Sicherheitsprüfung
+                </p>
                 {isClient && (
-                  <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} onSuccess={(token) => setCfToken(token)} theme="dark" />
+                  <Turnstile
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    onSuccess={(token) => setCfToken(token)}
+                    theme="dark"
+                  />
                 )}
               </div>
 
-              {status === "success" && <div className="badge-success">✅ Vielen Dank! Wir haben Ihre Anfrage erhalten.</div>}
-              {status === "error" && <div className="badge-error">⚠️ {errorMsg}</div>}
+              {status === "success" && (
+                <div className="badge-success">
+                  ✅ Vielen Dank! Wir haben Ihre Anfrage erhalten.
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="badge-error">
+                  ⚠️ {errorMsg}
+                </div>
+              )}
 
               <button type="submit" disabled={disabled} className="btn-submit">
-                {status === "loading" ? "Wird gesendet …" : "Gespräch anfragen"}
+                {status === "loading"
+                  ? "Wird gesendet …"
+                  : "Gespräch anfragen"}
               </button>
+
             </form>
           </div>
+
         </div>
       </main>
+
       <Footer />
     </>
   );
