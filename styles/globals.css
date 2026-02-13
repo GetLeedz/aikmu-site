@@ -4,206 +4,198 @@
 
 :root {
   --neon-cyan: #00f2fe;
+  --neon-green: #18ffc9;
   --neon-purple: #a855f7;
   --bg-dark: #020617;
 }
 
 /* ================= BASE ================= */
+
 @layer base {
-  body {
+  html, body {
     @apply bg-[#020617] text-white antialiased;
     margin: 0;
     padding: 0;
   }
 }
 
-/* =========================================================
-   COMPONENTS
-   ========================================================= */
+/* ================= HOME (NUR HERO) ================= */
 
 @layer components {
 
-  /* =========================================================
-     HOME SECTION
-     ========================================================= */
-
-  .home-section {
+  /* HERO Background */
+  #hero {
     background: radial-gradient(
       circle at 50% 35%,
       #1a3a6d 0%,
-      #061633 45%,
+      #0a1e3a 40%,
       #020617 100%
     );
-    @apply min-h-screen w-full relative px-4;
   }
 
-  /* Buttons Layout */
-  .home-section .home-cta-row {
-    @apply flex flex-col gap-4 mt-12 items-center;
-  }
-
-  @screen sm {
-    .home-section .home-cta-row {
-      @apply flex-row gap-6 mt-16;
-    }
-  }
-
-  /* Buttons */
-  .home-section .btn-neon-gradient {
+  /* HOME Buttons */
+  #hero .home-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 320px;
-
-    padding: 16px 28px;
+    padding: 18px 36px;
     border-radius: 9999px;
     font-weight: 700;
-    font-size: 15px;
-
+    font-size: 16px;
     color: white;
-    background: rgba(2, 6, 23, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.08);
-
+    background: #020617;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
     transition: all 0.3s ease;
   }
 
-  @screen sm {
-    .home-section .btn-neon-gradient {
-      width: auto;
-      max-width: none;
-      font-size: 16px;
-      padding: 18px 36px;
-    }
-  }
-
-  .home-section .btn-neon-gradient::before {
+  #hero .home-btn::before {
     content: "";
     position: absolute;
     inset: -2px;
     border-radius: 9999px;
+    background: linear-gradient(
+      90deg,
+      var(--neon-cyan),
+      var(--neon-green),
+      var(--neon-cyan)
+    );
     z-index: -1;
-    background: linear-gradient(90deg, #00f2fe, #18ffc9, #00f2fe);
   }
 
-  .home-section .btn-neon-gradient::after {
+  #hero .home-btn::after {
     content: "";
     position: absolute;
     inset: 2px;
     border-radius: 9999px;
-    z-index: -1;
     background: #020617;
+    z-index: -1;
   }
 
-  .home-section .btn-neon-gradient:hover {
+  #hero .home-btn:hover {
     transform: translateY(-2px);
     box-shadow:
       0 20px 60px rgba(0,0,0,0.5),
-      0 0 30px rgba(0,242,254,0.4);
+      0 0 25px rgba(0,242,254,0.5),
+      0 0 60px rgba(24,255,201,0.3);
   }
 
-  /* =========================================================
-     ANFRAGE SECTION
-     ========================================================= */
+  /* Accordion HOME */
+  #hero .accordion-box {
+    @apply border border-white/10 rounded-2xl overflow-hidden transition-all duration-300;
+  }
+
+  #hero .accordion-box button {
+    @apply p-6 w-full flex justify-between items-center text-white;
+  }
+
+  #hero .accordion-box .accordion-content {
+    @apply px-6 pb-6 text-white whitespace-pre-line leading-relaxed;
+  }
+
+}
+
+/* ================= ANFRAGE (ISOLIERT) ================= */
+
+@layer components {
 
   .anfrage-section {
     background: radial-gradient(
       circle at 50% 35%,
       #1a3a6d 0%,
-      #061633 45%,
+      #0a1e3a 40%,
       #020617 100%
     );
-    @apply px-4;
   }
 
-  .anfrage-section .form-container {
-    @apply mx-auto p-6 rounded-3xl
-           shadow-[0_20px_50px_rgba(0,0,0,0.3)]
-           border border-white/20;
-    max-width: 100%;
-    background: rgba(255, 255, 255, 0.06);
+  .form-container {
+    @apply max-w-2xl mx-auto p-8 rounded-3xl
+           border border-white/20
+           shadow-[0_20px_50px_rgba(0,0,0,0.3)];
+    background: rgba(255,255,255,0.08);
     backdrop-filter: blur(20px);
   }
 
-  @screen sm {
-    .anfrage-section .form-container {
-      max-width: 600px;
-      padding: 2.5rem;
-    }
+  .form-container label {
+    @apply block text-sm text-white/80 mb-2;
   }
 
-  .anfrage-section .form-input {
-    @apply w-full rounded-2xl px-4 py-3 text-white text-sm;
+  .form-container input,
+  .form-container textarea,
+  .form-container select {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 16px;
+    padding: 14px 18px;
+    width: 100%;
     transition: all 0.2s ease;
   }
 
-  @screen sm {
-    .anfrage-section .form-input {
-      @apply px-5 py-4 text-base;
-    }
+  .form-container input::placeholder,
+  .form-container textarea::placeholder {
+    color: rgba(255,255,255,0.4);
   }
 
-  .anfrage-section .form-input:focus {
+  .form-container input:focus,
+  .form-container textarea:focus,
+  .form-container select:focus {
+    border-color: var(--neon-cyan);
     outline: none;
-    border-color: #00f2fe;
     box-shadow: 0 0 15px rgba(0,242,254,0.3);
   }
 
-  .anfrage-section .btn-submit {
-    @apply w-full py-4 mt-6 rounded-2xl font-bold text-white text-sm
-           bg-gradient-to-r from-[#00f2fe] to-[#a855f7]
-           transition-all duration-300;
+  /* Dropdown Fix */
+  .form-container select option {
+    color: #111827;
+    background: white;
   }
 
-  @screen sm {
-    .anfrage-section .btn-submit {
-      @apply text-base;
-    }
-  }
-
-  /* =========================================================
-     FOOTER
-     ========================================================= */
-
-  .centered-footer-main {
-    @apply relative bg-[#020617] pt-16 pb-10
-           border-t border-white/5 flex flex-col items-center text-center px-4;
-  }
-
-  @screen sm {
-    .centered-footer-main {
-      @apply pt-20 pb-12;
-    }
+  .btn-submit {
+    @apply w-full py-4 mt-6 rounded-2xl font-bold text-white transition-all duration-500;
+    background: linear-gradient(
+      90deg,
+      var(--neon-cyan),
+      var(--neon-purple)
+    );
+    box-shadow: 0 10px 25px rgba(0,242,254,0.4);
   }
 
 }
 
-/* =========================================================
-   UTILITIES
-   ========================================================= */
+/* ================= FOOTER ================= */
 
-@layer utilities {
+@layer components {
 
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
+  .centered-footer-main {
+    @apply relative bg-[#020617] pt-20 pb-12 border-t border-white/5 flex flex-col items-center text-center;
   }
 
-  .animate-pulse-slow {
-    animation: pulseSlow 6s infinite ease-in-out;
+  .centered-footer-link {
+    @apply text-white/60 hover:text-[#00f2fe] transition-all duration-300 text-sm relative pb-1 inline-block;
+  }
+
+  .centered-footer-link::after {
+    content: '';
+    @apply absolute left-1/2 bottom-0 w-0 h-px bg-[#00f2fe] transition-all duration-300 -translate-x-1/2;
+  }
+
+  .centered-footer-link:hover::after {
+    @apply w-full;
+  }
+
+}
+
+/* ================= UTILITIES ================= */
+
+@layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
   }
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes pulseSlow {
-    0% { opacity: 0.15; transform: scale(1); }
-    50% { opacity: 0.25; transform: scale(1.05); }
-    100% { opacity: 0.15; transform: scale(1); }
   }
 }

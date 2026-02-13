@@ -9,7 +9,6 @@ import hero2 from "../../public/images/hero/hero2.png";
 import hero3 from "../../public/images/hero/hero3.png";
 import hero4 from "../../public/images/hero/hero4.png";
 import hero5 from "../../public/images/hero/hero5.png";
-import arthur from "../../public/images/arthurergen_square_tiny.png";
 
 const Hero = () => {
   const calendlyUrl =
@@ -180,8 +179,8 @@ Eine KI braucht keinen Ersatz.
 
   return (
     <section
-      className="hero-spotlight-bg relative min-h-screen w-full overflow-hidden flex flex-col items-center"
       id="hero"
+      className="relative min-h-screen w-full overflow-hidden flex flex-col items-center"
     >
       <div className="container m-auto pt-[160px] pb-[120px] relative z-10 text-center">
         <div className="w-11/12 md:w-9/12 m-auto">
@@ -198,11 +197,13 @@ Eine KI braucht keinen Ersatz.
             wo heute Zeit, Geld und Energie verloren gehen.
           </p>
 
-          <div className="home-cta-row">
+          {/* BUTTONS FIXED */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-16">
+
             <Link href="/anfrage">
-              <a className="btn-neon-gradient group">
+              <a className="home-btn group">
                 KI-Potenzial besprechen
-                <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-2" />
+                <FaArrowRight className="ml-3 transition-transform duration-300 group-hover:translate-x-2" />
               </a>
             </Link>
 
@@ -210,11 +211,12 @@ Eine KI braucht keinen Ersatz.
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-neon-gradient secondary group"
+              className="home-btn group"
             >
               Direktes Gespräch buchen
-              <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:translate-x-2" />
+              <FaCalendarAlt className="ml-3 transition-transform duration-300 group-hover:translate-x-2" />
             </a>
+
           </div>
 
           <div className="mt-32 max-w-3xl mx-auto space-y-4 text-left">
@@ -236,7 +238,9 @@ Eine KI braucht keinen Ersatz.
 
                 <div
                   className={`transition-all duration-500 ${
-                    open === item.id ? "max-h-[600px] p-6" : "max-h-0 overflow-hidden"
+                    open === item.id
+                      ? "max-h-[600px] p-6"
+                      : "max-h-0 overflow-hidden"
                   }`}
                 >
                   <div className="text-white whitespace-pre-line leading-relaxed">
