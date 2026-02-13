@@ -7,8 +7,8 @@
 
 /* ================= ROOT & GLOBAL ================= */
 :root {
-  --color-primary: #020617;
-  --dark-bg: #020617;
+  --neon-cyan: #00f2fe;
+  --dark-navy: #020617;
 }
 
 html,
@@ -16,11 +16,10 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Chakra Petch", sans-serif;
-  /* Stärkeres Neon-Türkis und Cyan */
   background: 
-    radial-gradient(1200px circle at 15% 25%, rgba(0, 255, 242, 0.2), transparent 65%),
-    radial-gradient(1000px circle at 85% 35%, rgba(0, 183, 255, 0.18), transparent 65%),
-    radial-gradient(1100px circle at 50% 70%, rgba(20, 100, 255, 0.15), transparent 70%),
+    radial-gradient(1200px circle at 15% 25%, rgba(0, 242, 254, 0.15), transparent 65%),
+    radial-gradient(1000px circle at 85% 35%, rgba(0, 150, 255, 0.12), transparent 65%),
+    radial-gradient(1100px circle at 50% 75%, rgba(30, 64, 175, 0.15), transparent 70%),
     linear-gradient(180deg, #020617 0%, #08122d 50%, #020617 100%);
   color: white;
   min-height: 100vh;
@@ -29,17 +28,21 @@ body {
   background-attachment: fixed;
 }
 
-/* ================= BACKGROUND ICONS ================= */
-.hero-frame-1,
-.hero-frame-2,
-.hero-frame-3,
-.hero-frame-4,
-.hero-frame-5,
-.hero-frame-6 {
+/* ================= NAVIGATION & GLASS-LOOK ================= */
+header, nav {
+  background: rgba(2, 6, 23, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ================= BACKGROUND ICONS (COMPACT) ================= */
+[class^="hero-frame-"] {
   position: absolute;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
+  opacity: 0.4;
+  filter: hue-rotate(160deg) brightness(1.1);
 }
 
 .hero-frame-1 { width: 130px; top: 16%; left: 6%; transform: rotate(-24deg); }
@@ -49,30 +52,19 @@ body {
 .hero-frame-5 { width: 150px; top: 42%; right: 9%; transform: rotate(11deg); }
 .hero-frame-6 { width: 220px; top: 70%; right: 5%; }
 
-/* ================= FORM STYLING ================= */
+/* ================= FORMS & INPUTS ================= */
 form.space-y-6 {
-  background: rgba(5, 8, 22, 0.7) !important;
+  background: rgba(5, 8, 22, 0.6) !important;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 10;
-}
-
-.neon-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.3px;
+  border-radius: 1.5rem;
 }
 
 .dynamic-neon-wrapper {
   position: relative;
   padding: 1.5px;
   border-radius: 14px;
-  background: linear-gradient(90deg, #44bcff, #ff44ec, #ff675e);
+  background: linear-gradient(90deg, #00f2fe, #4facfe, #00f2fe);
   overflow: hidden;
   display: flex;
 }
@@ -81,130 +73,42 @@ form.space-y-6 {
   content: "";
   position: absolute;
   inset: -50%;
-  background: conic-gradient(from 0deg, #44bcff, #ff44ec, #ff675e, #44bcff);
+  background: conic-gradient(from 0deg, #00f2fe, #4facfe, #00f2fe, #00f2fe);
   animation: rotateNeon 6s linear infinite;
 }
 
-.neon-input,
-.neon-select,
-.neon-textarea {
+.neon-input, .neon-select, .neon-textarea {
   position: relative;
   z-index: 10;
   width: 100%;
   background: #050816 !important;
-  border: none !important;
-  outline: none !important;
   color: white !important;
   padding: 16px 20px;
+  border: none !important;
   border-radius: 13px;
-  font-size: 1rem;
 }
 
-.neon-textarea {
-  min-height: 120px;
-  resize: none;
-}
-
-.neon-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 18px;
-}
-
-/* ================= BUTTONS ================= */
+/* ================= BUTTONS & NEON ================= */
 .neon-border {
   display: inline-flex;
-  width: 100%;
   padding: 2px;
   border-radius: 9999px;
-  background: linear-gradient(120deg, #ec4899, #a855f7, #22d3ee, #f97316);
+  background: linear-gradient(120deg, #00f2fe, #00c6ff, #4facfe, #00f2fe);
   background-size: 300% 300%;
   animation: neonGradient 4s linear infinite;
 }
 
 .neon-border-inner {
-  width: 100%;
   padding: 1rem;
   border-radius: 9999px;
   background: #050816;
   color: white;
   font-weight: 700;
-  text-align: center;
+  transition: background 0.3s ease;
 }
 
-.badge-success {
-  background: rgba(124, 255, 0, 0.1);
-  border: 1px solid #7cff00;
-  color: #7cff00;
-  padding: 16px;
-  border-radius: 12px;
-  margin-top: 10px;
-  animation: fadeIn 0.4s ease-out;
-}
-
-/* ================= FOOTER ================= */
-.footer-text {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #ffffff;
-}
-
-.footer-link {
-  color: white;
-  opacity: 0.85;
-  transition: all 0.3s ease;
-}
-
-.footer-link:hover {
-  opacity: 1;
-  text-shadow: 0 0 6px rgba(122, 255, 0, 0.6);
-}
-
-.footer-contact {
-  color: white;
-  opacity: 1;
-  transition: all 0.25s ease;
-}
-
-.footer-social {
-  width: 52px;
-  height: 52px;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: white;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
-}
-
-.footer-social:hover {
-  transform: translateY(-2px) scale(1.08);
-  box-shadow: 0 0 12px rgba(122, 255, 0, 0.6);
-}
-
-/* ================= MOBILE OPTIMIZATION ================= */
-@media (max-width: 640px) {
-  .hero-frame-1, .hero-frame-2, .hero-frame-3, 
-  .hero-frame-4, .hero-frame-5, .hero-frame-6 {
-    opacity: 0.25;
-    transform: scale(0.7);
-  }
-
-  /* Grössere Schrift im Footer auf Mobile */
-  .footer-text {
-    font-size: 1.15rem;
-    color: #ffffff !important;
-  }
-  
-  .footer-link, .footer-contact {
-    font-size: 1.1rem;
-    opacity: 1 !important;
-  }
+.neon-border:hover .neon-border-inner {
+  background: #08122d;
 }
 
 /* ================= ANIMATIONS ================= */
@@ -212,17 +116,10 @@ form.space-y-6 {
 @keyframes neonGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ================= COOKIE BANNER SPECIFIC ================= */
-.animate-fadeInUp {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+.animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.bg-blue-500 {
-  background-color: #3b82f6;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+/* ================= MOBILE ================= */
+@media (max-width: 640px) {
+  h1 { letter-spacing: -0.02em !important; line-height: 1.2 !important; }
+  [class^="hero-frame-"] { opacity: 0.2; transform: scale(0.7); }
 }
