@@ -21,7 +21,7 @@ const Hero = () => {
 
   return (
     <section className="hero relative overflow-hidden" id="hero">
-      {/* Decorative Frames - Opacity leicht angepasst für den neuen Hintergrund */}
+      {/* Decorative Frames */}
       <div className="hero-frame-1 animate-pulse"><Image src={hero1} alt="" /></div>
       <div className="hero-frame-2 animate-pulse"><Image src={hero2} alt="" /></div>
       <div className="hero-frame-3 animate-pulse"><Image src={hero3} alt="" /></div>
@@ -33,7 +33,7 @@ const Hero = () => {
       <div className="container m-auto pt-[140px] pb-[100px] md:pt-[180px] xl:pt-[240px] relative z-[1] hero-content">
         <div className="w-11/12 md:w-10/12 lg:w-9/12 text-center m-auto">
 
-          {/* HEADLINE: Optimiert auf Neon-Türkis & Spacing */}
+          {/* HEADLINE */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.15] text-white tracking-tight">
             Wir integrieren Corporate KI <br className="hidden md:block" /> in Ihr KMU
             <span className="block mt-3 text-[#00f2fe] drop-shadow-[0_0_15px_rgba(0,242,254,0.4)]">
@@ -41,7 +41,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* SUBLINE: Kontrast verbessert */}
+          {/* SUBLINE */}
           <p className="mt-8 text-lg sm:text-xl text-gray-300 max-w-3xl m-auto leading-relaxed">
             Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten,
             KI dort einzusetzen, wo Zeit verloren geht,
@@ -49,26 +49,29 @@ const Hero = () => {
             <span className="text-white font-medium italic"> strategisch geführt, professionell umgesetzt.</span>
           </p>
 
-          {/* CTA: Jetzt nebeneinander auf Desktop & Neon-Style */}
+          {/* CTA: Optimierte Button-Struktur gegen Border-Issues */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-12">
-            <Link href="/anfrage">
-              <a className="group neon-border w-full sm:w-80">
-                <span className="neon-border-inner flex justify-center items-center py-4 text-lg">
+            
+            {/* Button 1 */}
+            <Link href="/anfrage" legacyBehavior>
+              <a className="group neon-border w-full sm:w-80 cursor-pointer">
+                <span className="neon-border-inner flex justify-center items-center py-4 text-lg font-bold transition-all group-hover:bg-[#0a1128]">
                   KI-Potenzial besprechen
-                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:text-[#00f2fe]" />
                 </span>
               </a>
             </Link>
 
+            {/* Button 2: Jetzt mit vollständigem Hover-Effekt */}
             <a
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group neon-border w-full sm:w-80"
+              className="group neon-border w-full sm:w-80 cursor-pointer"
             >
-              <span className="neon-border-inner flex justify-center items-center py-4 text-lg">
+              <span className="neon-border-inner flex justify-center items-center py-4 text-lg font-bold transition-all group-hover:bg-[#0a1128]">
                 Direktes Gespräch buchen
-                <FaCalendarAlt className="ml-2 opacity-80" />
+                <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:scale-110 group-hover:text-[#00f2fe]" />
               </span>
             </a>
           </div>
@@ -79,22 +82,23 @@ const Hero = () => {
             wirtschaftlichen Hebel für KMUs bringt:
           </p>
 
-          {/* ACCORDION: Mit Glass-Effekt Design */}
+          {/* ACCORDION */}
           <div className="mt-8 max-w-3xl mx-auto space-y-4 text-left">
             {[
-              { id: 0, title: "1. Recruiting & Instant Onboarding", content: "Wertvolle Management-Zeit fliesst oft in die Sichtung unpassender Dossiers. KI filtert CVs nach echtem Match und übernimmt das Onboarding neuer Talente per interaktivem Wissens-Chat." },
-              { id: 1, title: "2. E-Mail-Management & Führungs-Fokus", content: "Gewinnen Sie bis zu 5 Stunden pro Woche zurück. KI priorisiert Ihren Posteingang nach strategischer Relevanz und formuliert komplexe Antwortentwürfe vor." },
-              { id: 2, title: "3. Marketing & KI-gestützte Lead-Gen", content: "Schluss mit vagen Kampagnen. KI identifiziert High-Value-Leads und skaliert personalisierten Content, der Ihre Zielgruppe dort abholt, wo der Schmerz sitzt." },
-              { id: 3, title: "4. Finanzen & Echtzeit-Controlling", content: "Verwandeln Sie trockene Zahlen in strategische Insights. KI liefert Prognosen, erkennt Anomalien in der Buchhaltung und erstellt Berichte für den Verwaltungsrat auf Knopfdruck." },
-              { id: 4, title: "5. Kundenservice & Experten-Entlastung", content: "Ihre teuersten Experten sollten nicht 80% ihrer Zeit Standardfragen beantworten. KI-Agenten lösen Kundenanfragen sofort und mit dem Wissen Ihres gesamten Unternehmens." },
-              { id: 5, title: "6. Offertstellung & Sales-Backoffice", content: "Wer schneller antwortet, gewinnt. KI erstellt präzise Offerten und technische Dokumentationen basierend auf Ihren Daten – in Minuten statt Tagen." },
-              { id: 6, title: "7. Prozess-Automatisierung & Skalierung", content: "Skalieren Sie Ihren Umsatz, ohne die Fixkosten durch Personal linear zu steigern. Wir automatisieren repetitive Workflows direkt in Ihren bestehenden Systemen." },
-              { id: 7, title: "8. Governance, Sicherheit & Datenschutz", content: "Schützen Sie Ihr geistiges Eigentum. Wir implementieren sichere KI-Frameworks, die Compliance-Anforderungen (CH/EU) erfüllen und Wildwuchs im Team verhindern." }
+              { id: 0, title: "1. Recruiting & Instant Onboarding", content: "..." },
+              { id: 1, title: "2. E-Mail-Management & Führungs-Fokus", content: "..." },
+              { id: 2, title: "3. Marketing & KI-gestützte Lead-Gen", content: "..." },
+              { id: 3, title: "4. Finanzen & Echtzeit-Controlling", content: "..." },
+              { id: 4, title: "5. Kundenservice & Experten-Entlastung", content: "..." },
+              { id: 5, title: "6. Offertstellung & Sales-Backoffice", content: "..." },
+              { id: 6, title: "7. Prozess-Automatisierung & Skalierung", content: "..." },
+              { id: 7, title: "8. Governance, Sicherheit & Datenschutz", content: "..." }
             ].map((item) => (
-              <button key={item.id} onClick={() => toggle(item.id)} className="w-full text-left transition-all duration-300">
-                <div className={`p-5 rounded-xl border border-white/10 transition-all ${open === item.id ? 'bg-white/10 backdrop-blur-md' : 'bg-[#020617]/40 hover:bg-white/5'}`}>
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
+              <button key={item.id} onClick={() => toggle(item.id)} className="w-full text-left transition-all duration-300 focus:outline-none">
+                <div className={`p-5 rounded-xl border border-white/10 transition-all ${open === item.id ? 'bg-white/10 backdrop-blur-md border-[#00f2fe]/30' : 'bg-[#020617]/40 hover:bg-white/5'}`}>
+                  <h3 className="text-lg sm:text-xl font-semibold text-white flex justify-between items-center">
                     {item.title}
+                    <span className={`transition-transform duration-300 ${open === item.id ? 'rotate-180 text-[#00f2fe]' : 'text-white/30'}`}>▾</span>
                   </h3>
                   {open === item.id && (
                     <div className="mt-3 text-gray-200 leading-relaxed animate-fadeIn">
@@ -127,7 +131,6 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* SEO - Hidden */}
           <div className="sr-only">
             <p>AiKMU integriert Corporate KI für KMUs. Fokus auf Governance, Effizienz und Sicherheit.</p>
           </div>
