@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
+import { FaArrowRight, FaCalendarAlt, FaChevronDown } from "react-icons/fa";
 
 // Images
 import hero1 from "../../public/images/hero/hero1.png";
@@ -18,17 +18,16 @@ const Hero = () => {
   const toggle = (id) => setOpen(open === id ? null : id);
 
   const accordionItems = [
-    { id: 0, title: "1. Recruiting & Instant Onboarding", content: "..." },
-    { id: 1, title: "2. E-Mail-Management & Führungs-Fokus", content: "..." },
-    { id: 2, title: "3. Marketing & KI-gestützte Lead-Gen", content: "..." },
-    { id: 3, title: "4. Finanzen & Echtzeit-Controlling", content: "..." },
-    { id: 4, title: "5. Kundenservice & Experten-Entlastung", content: "..." },
-    { id: 5, title: "6. Offertstellung & Sales-Backoffice", content: "..." },
-    { id: 6, title: "7. Prozess-Automatisierung & Skalierung", content: "..." },
-    { id: 7, title: "8. Governance, Sicherheit & Datenschutz", content: "..." }
+    { id: 0, title: "1. Recruiting & Instant Onboarding", content: "KI-gestützte Vorauswahl von Talenten und automatisierte Einarbeitungsprozesse, die neue Mitarbeiter in Rekordzeit produktiv machen." },
+    { id: 1, title: "2. E-Mail-Management & Führungs-Fokus", content: "Intelligente Sortierung und Entwurfserstellung für Ihre Inbox, damit Sie sich auf strategische Entscheidungen konzentrieren können." },
+    { id: 2, title: "3. Marketing & KI-gestützte Lead-Gen", content: "Automatisierte Erstellung von Inhalten und präzises Targeting für messbar mehr qualifizierte Anfragen." },
+    { id: 3, title: "4. Finanzen & Echtzeit-Controlling", content: "Automatisierte Buchhaltungsprozesse und KI-Analysen für tagesaktuelle finanzielle Transparenz." },
+    { id: 4, title: "5. Kundenservice & Experten-Entlastung", content: "KI-Chatbots, die komplexe Anfragen vorqualifizieren und Standardaufgaben sofort lösen." },
+    { id: 5, title: "6. Offertstellung & Sales-Backoffice", content: "Blitzschnelle Erstellung von Angeboten basierend auf Ihren Daten und CRM-Integration." },
+    { id: 6, title: "7. Prozess-Automatisierung & Skalierung", content: "Verknüpfung Ihrer bestehenden Software-Tools zu einem nahtlosen, autonomen Workflow." },
+    { id: 7, title: "8. Governance, Sicherheit & Datenschutz", content: "Sicherstellung, dass Ihre KI-Nutzung DSGVO-konform bleibt und Ihre Betriebsgeheimnisse geschützt sind." }
   ];
 
-  // Neon Multi-Gradient Style für beide Buttons
   const buttonBaseClass = `
     group relative flex items-center justify-center 
     w-full sm:w-80 h-[64px] rounded-full 
@@ -44,13 +43,11 @@ const Hero = () => {
   return (
     <section 
       className="hero relative min-h-screen w-full overflow-hidden flex flex-col items-center" 
-      style={{
-        background: "radial-gradient(circle at center, #0a1e3d 0%, #041026 40%, #020617 100%)"
-      }}
+      style={{ background: "radial-gradient(circle at center, #0a1e3d 0%, #041026 40%, #020617 100%)" }}
       id="hero"
     >
       
-      {/* BACKGROUND ICONS (Floating) */}
+      {/* BACKGROUND ELEMENTS */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[15%] left-[5%] animate-pulse opacity-30"><Image src={hero1} alt="" width={180} height={180} /></div>
         <div className="absolute top-[20%] right-[8%] animate-pulse opacity-25"><Image src={hero2} alt="" width={220} height={220} /></div>
@@ -60,7 +57,7 @@ const Hero = () => {
         <div className="absolute bottom-[5%] left-[15%] animate-pulse opacity-15"><Image src={hero6} alt="" width={140} height={140} /></div>
       </div>
 
-      <div className="container m-auto pt-[140px] pb-[100px] md:pt-[180px] xl:pt-[220px] relative z-10 hero-content text-center">
+      <div className="container m-auto pt-[140px] pb-[100px] md:pt-[180px] xl:pt-[220px] relative z-10 text-center">
         <div className="w-11/12 md:w-10/12 lg:w-9/12 m-auto">
 
           {/* HEADLINE */}
@@ -71,12 +68,8 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* SUBLINE */}
           <p className="mt-8 text-lg sm:text-xl text-gray-300 max-w-3xl m-auto leading-relaxed">
-            Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten,
-            KI dort einzusetzen, wo Zeit verloren geht,
-            Umsatz liegen bleibt oder Kontrolle fehlt – 
-            <span className="text-white font-medium italic"> strategisch geführt, professionell umgesetzt.</span>
+            Wir helfen CEOs, Geschäftsleitungen und Verwaltungsräten, KI dort einzusetzen, wo Zeit verloren geht oder Kontrolle fehlt.
           </p>
 
           {/* CTA SECTION */}
@@ -98,36 +91,46 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* ACCORDION */}
-          <div className="mt-32 max-w-3xl mx-auto space-y-4 text-left">
+          {/* OPTIMIERTE ACCORDION BOXEN */}
+          <div className="mt-32 max-w-3xl mx-auto space-y-5 text-left">
             {accordionItems.map((item) => (
-              <button key={item.id} onClick={() => toggle(item.id)} className="w-full text-left focus:outline-none">
-                <div className={`p-5 rounded-xl border transition-all duration-500 ${open === item.id ? 'bg-white/10 backdrop-blur-md border-[#00f2fe]/50' : 'bg-[#020617]/40 border-white/10 hover:border-white/20'}`}>
-                  <h3 className="text-lg sm:text-xl font-semibold text-white flex justify-between items-center">
+              <div 
+                key={item.id} 
+                className={`relative group rounded-2xl transition-all duration-500 overflow-hidden border ${open === item.id ? 'border-[#00f2fe]/50 bg-white/10 shadow-[0_0_30px_rgba(0,242,254,0.1)]' : 'border-white/10 bg-[#020617]/60 hover:border-white/30'}`}
+              >
+                {/* Neon-Indikator an der Seite */}
+                <div className={`absolute left-0 top-0 bottom-0 w-[4px] transition-opacity duration-500 ${open === item.id ? 'opacity-100' : 'opacity-0'} bg-gradient-to-b from-[#00f2fe] to-[#a855f7]`} />
+                
+                <button 
+                  onClick={() => toggle(item.id)} 
+                  className="w-full p-6 flex justify-between items-center focus:outline-none"
+                >
+                  <h3 className={`text-lg sm:text-xl font-semibold transition-colors duration-300 ${open === item.id ? 'text-[#00f2fe]' : 'text-white'}`}>
                     {item.title}
-                    <span className={`transition-transform duration-300 ${open === item.id ? 'rotate-180 text-[#00f2fe]' : 'text-white/30'}`}>▾</span>
                   </h3>
-                  {open === item.id && (
-                    <div className="mt-3 text-gray-300 leading-relaxed animate-in fade-in slide-in-from-top-1">
-                      <p>{item.content}</p>
-                    </div>
-                  )}
+                  <div className={`p-2 rounded-full bg-white/5 transition-all duration-300 ${open === item.id ? 'bg-[#00f2fe]/20 rotate-180' : ''}`}>
+                    <FaChevronDown className={`w-4 h-4 transition-colors ${open === item.id ? 'text-[#00f2fe]' : 'text-white/40'}`} />
+                  </div>
+                </button>
+                
+                <div className={`transition-all duration-500 ease-in-out ${open === item.id ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 pb-6 text-gray-300 leading-relaxed border-t border-white/5 pt-4">
+                    {item.content}
+                  </div>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
 
-          {/* ZITAT */}
+          {/* FOOTER ZITAT */}
           <div className="mt-32 flex flex-col items-center">
             <div className="w-[140px] h-[140px] rounded-full overflow-hidden border-2 border-[#a855f7]/40 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
               <Image src={arthur} alt="Arthur Ergen" width={140} height={140} className="object-cover" />
             </div>
-            <blockquote className="mt-8 max-w-2xl text-xl sm:text-2xl text-white leading-relaxed italic font-light">
-              &bdquo;In 4 Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern und kontrollieren und diejenigen, deren Team Befehle der KI ausführt.&ldquo;
+            <blockquote className="mt-8 max-w-2xl text-xl sm:text-2xl text-white italic font-light">
+              &bdquo;In 4 Jahren gibt es zwei Arten von KMU: Diejenigen, die als Architekten ihre KI steuern...&ldquo;
             </blockquote>
-            <p className="mt-4 text-base text-[#00f2fe] font-semibold uppercase tracking-[0.2em]">
-              Arthur Ergen, CEO
-            </p>
+            <p className="mt-4 text-[#00f2fe] font-semibold uppercase tracking-[0.2em]">Arthur Ergen, CEO</p>
           </div>
 
         </div>
