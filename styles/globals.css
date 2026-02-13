@@ -17,13 +17,13 @@
 }
 
 @layer components {
-  /* --- HINTERGRUND & SPOTLIGHT --- */
+  /* --- HINTERGRUND & SPOTLIGHT (HOME) --- */
   .hero-spotlight-bg {
     background: radial-gradient(circle at 50% 35%, #1a3a6d 0%, #061633 45%, #020617 100%);
     @apply min-h-screen w-full relative;
   }
 
-  /* --- FORMULAR DESIGN --- */
+  /* --- ANFRAGE FORMULAR (Glassmorphism) --- */
   .form-container {
     @apply max-w-2xl mx-auto p-6 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20;
     background: rgba(255, 255, 255, 0.12); 
@@ -50,48 +50,56 @@
            shadow-[0_10px_25px_rgba(0,242,254,0.4)];
   }
 
-  /* --- ZENTRIERTES FOOTER DESIGN --- */
-  .footer-main {
-    @apply relative bg-[#020617] pt-20 pb-12 overflow-hidden border-t border-white/5;
+  /* --- ISOLIERTE FOOTER STYLES (Sicher vor Überschreibungen) --- */
+  .centered-footer-main {
+    @apply relative bg-[#020617] pt-20 pb-12 overflow-hidden border-t border-white/5 flex flex-col items-center text-center;
   }
 
-  .footer-glow-line {
+  .centered-footer-glow {
     @apply absolute top-0 left-0 w-full h-px;
     background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.4), transparent);
   }
 
-  /* Social Icons: Gross, Hell, Zentriert */
-  .footer-social-icon {
-    @apply w-14 h-14 rounded-full border border-white/20 flex items-center justify-center 
+  /* Social Icons: Gross & Hell */
+  .centered-footer-social-icon {
+    @apply w-12 h-12 rounded-full border border-white/20 flex items-center justify-center 
            text-white/80 hover:bg-white/10 hover:border-[#00f2fe] hover:text-[#00f2fe] 
-           transition-all duration-300 shadow-lg;
+           transition-all duration-300;
   }
 
-  .footer-social-icon svg {
-    @apply w-7 h-7;
+  /* Text-Links mit Mouse-over Effekt */
+  .centered-footer-link {
+    @apply text-white/60 hover:text-[#00f2fe] transition-all duration-300 text-sm relative pb-1 inline-block;
   }
 
-  /* Mouse-over Effekt für Text-Links */
-  .footer-link-centered {
-    @apply text-white/60 hover:text-[#00f2fe] transition-all duration-300 text-base relative pb-1 font-medium;
-  }
-
-  .footer-link-centered::after {
+  .centered-footer-link::after {
     content: '';
     @apply absolute left-1/2 bottom-0 w-0 h-px bg-[#00f2fe] transition-all duration-300 -translate-x-1/2;
   }
 
-  .footer-link-centered:hover::after {
+  .centered-footer-link:hover::after {
     @apply w-full;
   }
 
-  .swiss-badge-centered {
-    @apply flex items-center gap-3 text-white/90 font-medium bg-white/5 mx-auto px-6 py-2 
-           rounded-full border border-white/10 w-fit mb-8 shadow-sm;
+  .centered-footer-swiss-badge {
+    @apply flex items-center gap-3 text-white/90 font-medium bg-white/5 mx-auto px-5 py-2 
+           rounded-full border border-white/10 w-fit mb-8;
   }
+
+  /* Status Badges für Formulare */
+  .badge-success { @apply mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-300 text-center; }
+  .badge-error { @apply mt-4 p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-300 text-center; }
 }
 
 @layer utilities {
+  .animate-pulse-slow { 
+    animation: pulseCustom 8s ease-in-out infinite; 
+  }
+  @keyframes pulseCustom {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(1.05); }
+  }
+
   .animate-fadeInUp {
     animation: fadeInUp 0.8s ease-out forwards;
   }
