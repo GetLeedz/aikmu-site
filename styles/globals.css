@@ -17,20 +17,25 @@
 }
 
 @layer components {
-  /* --- HOME & ALLGEMEIN (Unverändert) --- */
+  /* --- 1. HOME DESIGN (Buttons & Spotlight) --- */
   .hero-spotlight-bg {
     background: radial-gradient(circle at 50% 35%, #1a3a6d 0%, #061633 45%, #020617 100%);
     @apply min-h-screen w-full relative;
   }
 
-  /* Diese Klasse bleibt exakt so, wie sie für deine Home-Buttons war */
-  .btn-submit {
-    @apply w-full py-4 mt-6 rounded-2xl font-bold text-white transition-all duration-500
-           bg-gradient-to-r from-[#00f2fe] to-[#a855f7] hover:brightness-110 hover:scale-[1.01]
-           shadow-[0_10px_25px_rgba(0,242,254,0.4)];
+  /* Deine Original-Links auf der Startseite */
+  .home-btn-link {
+    @apply flex items-center gap-2 text-white hover:text-[#00f2fe] transition-all duration-300 font-medium cursor-pointer;
   }
 
-  /* Formular-Stile (Anfrage-Seite) */
+  /* --- 2. ACCORDIONS (Text-Sichtbarkeit) --- */
+  /* Das sorgt dafür, dass die Texte beim Aufklappen weiß und lesbar sind */
+  .accordion-content-text {
+    @apply text-white/90 leading-relaxed py-4 text-base;
+    display: block !important;
+  }
+
+  /* --- 3. ANFRAGE FORMULAR & BUTTONS --- */
   .form-container {
     @apply max-w-2xl mx-auto p-6 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20;
     background: rgba(255, 255, 255, 0.12); 
@@ -51,8 +56,14 @@
     @apply block text-sm font-bold text-white/90 mb-2 ml-1 tracking-wide;
   }
 
-  /* --- ISOLIERTE FOOTER-SEKTION (KEIN IMPACT AUF HOME) --- */
-  
+  /* Der große Submit-Button */
+  .btn-submit {
+    @apply w-full py-4 mt-6 rounded-2xl font-bold text-white transition-all duration-500
+           bg-gradient-to-r from-[#00f2fe] to-[#a855f7] hover:brightness-110 hover:scale-[1.01]
+           shadow-[0_10px_25px_rgba(0,242,254,0.4)];
+  }
+
+  /* --- 4. ISOLIERTER FOOTER (Kein Impact auf Home) --- */
   .centered-footer-main {
     @apply relative bg-[#020617] pt-20 pb-12 overflow-hidden border-t border-white/5 flex flex-col items-center text-center;
   }
@@ -86,7 +97,7 @@
            rounded-full border border-white/10 w-fit mb-8;
   }
 
-  /* Cookie-Button (Isoliert vom btn-submit) */
+  /* Spezifischer Cookie-Button */
   .footer-cookie-btn {
     @apply bg-gradient-to-r from-[#00f2fe] to-[#a855f7] px-10 py-3 rounded-xl text-white font-bold text-sm transition-transform hover:scale-105;
   }
@@ -97,14 +108,6 @@
 }
 
 @layer utilities {
-  .animate-pulse-slow { 
-    animation: pulseCustom 8s ease-in-out infinite; 
-  }
-  @keyframes pulseCustom {
-    0%, 100% { opacity: 0.15; transform: scale(1); }
-    50% { opacity: 0.35; transform: scale(1.05); }
-  }
-
   .animate-fadeInUp {
     animation: fadeInUp 0.8s ease-out forwards;
   }
