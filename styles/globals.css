@@ -17,25 +17,34 @@
 }
 
 @layer components {
-  /* --- 1. HOME DESIGN (Buttons & Spotlight) --- */
+  /* --- 1. STARTSEITE (HOME) REPARATUR --- */
   .hero-spotlight-bg {
     background: radial-gradient(circle at 50% 35%, #1a3a6d 0%, #061633 45%, #020617 100%);
     @apply min-h-screen w-full relative;
   }
 
-  /* Deine Original-Links auf der Startseite */
+  /* REPARATUR: Buttons (KI-Potenzial besprechen) */
   .home-btn-link {
-    @apply flex items-center gap-2 text-white hover:text-[#00f2fe] transition-all duration-300 font-medium cursor-pointer;
+    @apply flex items-center gap-2 text-white hover:text-[#00f2fe] transition-all duration-300 font-medium cursor-pointer py-2;
+    display: inline-flex !important;
   }
 
-  /* --- 2. ACCORDIONS (Text-Sichtbarkeit) --- */
-  /* Das sorgt dafür, dass die Texte beim Aufklappen weiß und lesbar sind */
-  .accordion-content-text {
-    @apply text-white/90 leading-relaxed py-4 text-base;
+  /* REPARATUR: Accordions & Texte */
+  /* Dies stellt sicher, dass Texte beim Aufklappen weiß und sauber erscheinen */
+  .accordion-item {
+    @apply border-b border-white/10;
+  }
+
+  .accordion-content {
+    @apply overflow-hidden transition-all duration-300;
+  }
+
+  .accordion-text {
+    @apply text-white/80 leading-relaxed py-4 text-base;
     display: block !important;
   }
 
-  /* --- 3. ANFRAGE FORMULAR & BUTTONS --- */
+  /* --- 2. ANFRAGE FORMULAR --- */
   .form-container {
     @apply max-w-2xl mx-auto p-6 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20;
     background: rgba(255, 255, 255, 0.12); 
@@ -43,27 +52,13 @@
     -webkit-backdrop-filter: blur(20px);
   }
 
-  .form-input {
-    @apply w-full bg-white/10 border border-white/20 text-white px-5 py-4 rounded-2xl transition-all duration-300 outline-none mb-2 placeholder-white/40;
-  }
-
-  .form-input:focus {
-    @apply border-[#00f2fe] bg-white/20;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-  }
-
-  .form-label {
-    @apply block text-sm font-bold text-white/90 mb-2 ml-1 tracking-wide;
-  }
-
-  /* Der große Submit-Button */
   .btn-submit {
     @apply w-full py-4 mt-6 rounded-2xl font-bold text-white transition-all duration-500
            bg-gradient-to-r from-[#00f2fe] to-[#a855f7] hover:brightness-110 hover:scale-[1.01]
            shadow-[0_10px_25px_rgba(0,242,254,0.4)];
   }
 
-  /* --- 4. ISOLIERTER FOOTER (Kein Impact auf Home) --- */
+  /* --- 3. ISOLIERTER FOOTER (Kein Einfluss auf Home) --- */
   .centered-footer-main {
     @apply relative bg-[#020617] pt-20 pb-12 overflow-hidden border-t border-white/5 flex flex-col items-center text-center;
   }
@@ -83,6 +78,7 @@
     @apply text-white/60 hover:text-[#00f2fe] transition-all duration-300 text-sm relative pb-1 inline-block;
   }
 
+  /* Mouse-over Linie nur für Footer */
   .centered-footer-link::after {
     content: '';
     @apply absolute left-1/2 bottom-0 w-0 h-px bg-[#00f2fe] transition-all duration-300 -translate-x-1/2;
@@ -97,14 +93,10 @@
            rounded-full border border-white/10 w-fit mb-8;
   }
 
-  /* Spezifischer Cookie-Button */
+  /* Spezifischer Button für Cookie Banner im Footer */
   .footer-cookie-btn {
     @apply bg-gradient-to-r from-[#00f2fe] to-[#a855f7] px-10 py-3 rounded-xl text-white font-bold text-sm transition-transform hover:scale-105;
   }
-
-  /* Status Badges */
-  .badge-success { @apply mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-300 text-center; }
-  .badge-error { @apply mt-4 p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-300 text-center; }
 }
 
 @layer utilities {
