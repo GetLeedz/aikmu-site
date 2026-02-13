@@ -14,6 +14,7 @@ import arthur from "../../public/images/arthurergen_square_tiny.png";
 const Hero = () => {
   const calendlyUrl =
     process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/getleedz";
+
   const [open, setOpen] = useState(null);
   const toggle = (id) => setOpen(open === id ? null : id);
 
@@ -21,53 +22,159 @@ const Hero = () => {
     {
       id: 0,
       title: "1. Recruiting & Instant Onboarding",
-      content:
-        "KI-gestützte Vorauswahl von Talenten und automatisierte Einarbeitungsprozesse.",
+      content: `
+Case: 180 Bewerbungen. 4 Monate Suche. HR am Limit.
+
+Unsere Lösung:
+KI filtert, bewertet und priorisiert Bewerbungen automatisch. 
+Onboarding-Prozesse laufen strukturiert und digitalisiert.
+
+Was es bringt:
+• Vorauswahl bis zu 20x schneller  
+• 60–80% weniger HR-Zeit  
+• Produktivität in Tagen statt Wochen  
+• Fehlbesetzungen drastisch reduziert  
+
+Recruiting wird vom Engpass zum Skalierungshebel.
+      `,
     },
     {
       id: 1,
       title: "2. E-Mail-Management & Führungs-Fokus",
-      content: "Intelligente Inbox-Steuerung für maximale Zeitersparnis.",
+      content: `
+Case: 2–3 Stunden täglich im Posteingang. Strategie bleibt liegen.
+
+Unsere Lösung:
+KI priorisiert, beantwortet Standardanfragen und fasst Inhalte zusammen.
+
+Was es bringt:
+• 70% weniger operative Inbox-Zeit  
+• Bis zu 15 Stunden pro Woche frei  
+• Kein Informationsverlust  
+• Kein Chaos bei Abwesenheit  
+
+Sie führen wieder. Sie verwalten nicht mehr.
+      `,
     },
     {
       id: 2,
-      title: "3. Marketing & KI-gestützte Lead-Gen",
-      content:
-        "Messbar mehr qualifizierte Anfragen durch automatisierte Content-Strategien.",
+      title: "3. Marketing & KI-gestützte Lead-Generierung",
+      content: `
+Case: Hoher Marketingaufwand. Unklarer ROI.
+
+Unsere Lösung:
+KI analysiert Daten, erstellt Varianten und optimiert Kampagnen in Echtzeit.
+
+Was es bringt:
+• Kampagnen bis zu 3x effizienter  
+• 30–50% geringere Lead-Kosten  
+• Skalierung ohne zusätzliches Marketingpersonal  
+
+Marketing wird berechenbar.
+      `,
     },
     {
       id: 3,
       title: "4. Finanzen & Echtzeit-Controlling",
-      content:
-        "Tagesaktuelle Transparenz durch KI-gestützte Buchhaltung.",
+      content: `
+Case: Monatsabschlüsse kommen verspätet. Entscheidungen basieren auf alten Zahlen.
+
+Unsere Lösung:
+KI analysiert Cashflow, Forecasts und Abweichungen in Echtzeit.
+
+Was es bringt:
+• Tagesaktuelle Liquiditätsübersicht  
+• 80% weniger manuelle Controlling-Arbeit  
+• Frühwarnsystem für Risiken  
+
+Sie steuern mit Zahlen. Nicht mit Hoffnung.
+      `,
     },
     {
       id: 4,
       title: "5. Kundenservice & Experten-Entlastung",
-      content:
-        "Vorqualifizierung komplexer Anfragen durch intelligente Systeme.",
+      content: `
+Case: Hochqualifizierte Mitarbeitende beantworten Standardfragen.
+
+Unsere Lösung:
+KI übernimmt 1st-Level-Kommunikation und qualifiziert Anfragen vor.
+
+Was es bringt:
+• 60–90% Entlastung im Support  
+• Schnellere Reaktionszeiten  
+• Experten arbeiten an Wertschöpfung  
+
+Sie zahlen keine Premium-Löhne für Routine.
+      `,
     },
     {
       id: 5,
       title: "6. Offertstellung & Sales-Backoffice",
-      content:
-        "Blitzschnelle Angebotserstellung mit CRM-Anbindung.",
+      content: `
+Case: Angebote dauern Tage. Leads gehen verloren.
+
+Unsere Lösung:
+KI generiert Offerten automatisch aus CRM-Daten und verfolgt Leads.
+
+Was es bringt:
+• Angebote bis zu 10x schneller  
+• Weniger Kalkulationsfehler  
+• Höhere Abschlussquote  
+
+Geschwindigkeit gewinnt Märkte.
+      `,
     },
     {
       id: 6,
       title: "7. Prozess-Automatisierung & Skalierung",
-      content: "Nahtlose Workflows zwischen all Ihren Software-Tools.",
+      content: `
+Case: Wachstum erhöht administrativen Aufwand.
+
+Unsere Lösung:
+KI verbindet Systeme und automatisiert Workflows vollständig.
+
+Was es bringt:
+• 40–70% weniger Prozesskosten  
+• Skalierung ohne proportionalen Personalaufbau  
+• Weniger Fehler  
+
+Sie wachsen. Ohne die Kosten zu verdoppeln.
+      `,
     },
     {
       id: 7,
       title: "8. Governance, Sicherheit & Datenschutz",
-      content: "DSGVO-konformer Schutz Ihrer Betriebsgeheimnisse.",
+      content: `
+Case: KI wird genutzt – aber ohne Kontrolle.
+
+Unsere Lösung:
+Corporate-KI-Struktur mit Governance, Zugriffskontrolle und Compliance.
+
+Was es bringt:
+• Schutz sensibler Daten  
+• Reduziertes Haftungsrisiko  
+• DSGVO-konforme Architektur  
+
+Innovation ohne Kontrollverlust.
+      `,
     },
     {
       id: 8,
       title: "9. KI-Support & 1st Level Automatisierung",
-      content:
-        "100% KI-gesteuerter Erstkontakt rund um die Uhr – schnell und präzise.",
+      content: `
+Case: Support läuft von 08:00–17:00. Danach warten Kunden.
+
+Unsere Lösung:
+KI beantwortet Anfragen 24/7 – ohne Ferien, Krankheit oder Backup.
+
+Was es bringt:
+• 24/7 Verfügbarkeit  
+• Reaktionszeit in Sekunden  
+• Ein Bruchteil der Personalkosten  
+• Skalierbar auf 1 oder 10'000 Anfragen gleichzeitig  
+
+Eine KI braucht keinen Ersatz.
+      `,
     },
   ];
 
@@ -76,49 +183,26 @@ const Hero = () => {
       className="hero-spotlight-bg relative min-h-screen w-full overflow-hidden flex flex-col items-center"
       id="hero"
     >
-      {/* Floating Background Icons */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[10%] left-[5%] animate-pulse opacity-20">
-          <Image src={hero1} alt="" width={180} height={180} />
-        </div>
-        <div className="absolute top-[15%] right-[8%] animate-pulse opacity-15">
-          <Image src={hero2} alt="" width={220} height={220} />
-        </div>
-        <div className="absolute bottom-[25%] left-[10%] animate-pulse opacity-10">
-          <Image src={hero3} alt="" width={150} height={150} />
-        </div>
-        <div className="absolute top-[40%] right-[3%] animate-pulse opacity-20">
-          <Image src={hero4} alt="" width={200} height={200} />
-        </div>
-        <div className="absolute bottom-[10%] right-[12%] animate-pulse opacity-15">
-          <Image src={hero5} alt="" width={180} height={180} />
-        </div>
-      </div>
+      <div className="container m-auto pt-[160px] pb-[120px] relative z-10 text-center">
+        <div className="w-11/12 md:w-9/12 m-auto">
 
-      <div className="container m-auto pt-[140px] pb-[100px] md:pt-[180px] xl:pt-[220px] relative z-10 text-center">
-        <div className="w-11/12 md:w-10/12 lg:w-9/12 m-auto">
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.15] text-white tracking-tight">
-            Wir integrieren Corporate KI <br className="hidden md:block" /> in
-            Ihr KMU
-            <span className="block mt-3 text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] via-[#a855f7] to-[#00f2fe] drop-shadow-[0_0_20px_rgba(0,242,254,0.6)]">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.15] text-white">
+            Wir integrieren Corporate KI in Ihr KMU
+            <span className="block mt-3 text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] via-[#a855f7] to-[#00f2fe]">
               professionell, sicher und messbar.
             </span>
           </h1>
 
-          <p className="mt-8 text-lg sm:text-xl text-gray-200 max-w-3xl m-auto leading-relaxed">
-            Wir helfen CEOs und Geschäftsleitungen, KI dort einzusetzen, wo Zeit
-            verloren geht.
+          <p className="mt-8 text-xl text-gray-200 max-w-3xl m-auto">
+            Wir helfen CEOs und Verwaltungsräten, KI dort einzusetzen,
+            wo heute Zeit, Geld und Energie verloren gehen.
           </p>
 
-          {/* Buttons */}
           <div className="home-cta-row">
-            <Link href="/anfrage" legacyBehavior>
+            <Link href="/anfrage">
               <a className="btn-neon-gradient group">
-                <span className="flex items-center">
-                  KI-Potenzial besprechen
-                  <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:text-[#00f2fe]" />
-                </span>
+                KI-Potenzial besprechen
+                <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-2" />
               </a>
             </Link>
 
@@ -128,63 +212,34 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="btn-neon-gradient secondary group"
             >
-              <span className="flex items-center">
-                Direktes Gespräch buchen
-                <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:text-[#00f2fe]" />
-              </span>
+              Direktes Gespräch buchen
+              <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:translate-x-2" />
             </a>
           </div>
 
-          {/* Accordion */}
           <div className="mt-32 max-w-3xl mx-auto space-y-4 text-left">
             {accordionItems.map((item) => (
-              <div
-                key={item.id}
-                className={`accordion-box ${
-                  open === item.id
-                    ? "accordion-box-active"
-                    : "accordion-box-inactive"
-                }`}
-              >
-                <div
-                  className={`absolute left-0 top-0 bottom-0 w-[5px] transition-opacity duration-500 ${
-                    open === item.id ? "opacity-100" : "opacity-0"
-                  } bg-gradient-to-b from-[#00f2fe] to-[#a855f7]`}
-                />
-
+              <div key={item.id} className="accordion-box">
                 <button
                   onClick={() => toggle(item.id)}
                   className="w-full p-6 flex justify-between items-center group"
-                  type="button"
                 >
-                  <h3
-                    className={`text-lg sm:text-xl font-bold transition-colors ${
-                      open === item.id ? "text-[#00f2fe]" : "text-white"
-                    }`}
-                  >
+                  <h3 className="text-xl font-bold text-white">
                     {item.title}
                   </h3>
-                  <div
-                    className={`p-2 rounded-full transition-all duration-300 ${
-                      open === item.id
-                        ? "bg-[#00f2fe] rotate-180"
-                        : "bg-white/10"
+                  <FaChevronDown
+                    className={`transition-transform duration-300 ${
+                      open === item.id ? "rotate-180 text-[#00f2fe]" : ""
                     }`}
-                  >
-                    <FaChevronDown
-                      className={`w-4 h-4 ${
-                        open === item.id ? "text-[#020617]" : "text-white"
-                      }`}
-                    />
-                  </div>
+                  />
                 </button>
 
                 <div
-                  className={`transition-all duration-500 ease-in-out ${
-                    open === item.id ? "max-h-[300px] opacity-100" : "max-h-0"
+                  className={`transition-all duration-500 ${
+                    open === item.id ? "max-h-[600px] p-6" : "max-h-0 overflow-hidden"
                   }`}
                 >
-                  <div className="px-6 pb-8 text-white text-lg leading-relaxed border-t border-white/10 pt-5">
+                  <div className="text-white whitespace-pre-line leading-relaxed">
                     {item.content}
                   </div>
                 </div>
@@ -192,24 +247,6 @@ const Hero = () => {
             ))}
           </div>
 
-          {/* Footer Zitat */}
-          <div className="mt-32 flex flex-col items-center">
-            <div className="w-[140px] h-[140px] rounded-full overflow-hidden border-2 border-[#a855f7]/60 shadow-[0_0_40px_rgba(168,85,247,0.4)]">
-              <Image
-                src={arthur}
-                alt="Arthur Ergen"
-                width={140}
-                height={140}
-                className="object-cover"
-              />
-            </div>
-            <p className="mt-8 max-w-2xl text-xl text-white italic">
-              &bdquo;In 4 Jahren gibt es zwei Arten von KMU...&ldquo;
-            </p>
-            <p className="mt-4 text-[#00f2fe] font-semibold uppercase tracking-widest">
-              Arthur Ergen, CEO
-            </p>
-          </div>
         </div>
       </div>
     </section>
