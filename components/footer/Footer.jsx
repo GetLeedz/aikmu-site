@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { setMarketingConsent } from "../lib/consent"; // Pfad basierend auf deinem Struktur-Screenshot
+import { setMarketingConsent } from "../lib/consent";
 
 const Footer = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -10,127 +10,93 @@ const Footer = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const consent = localStorage.getItem("getleedz_consent_marketing");
-      if (consent === null) {
-        setShowBanner(true);
-      }
+      if (consent === null) setShowBanner(true);
     }
   }, []);
 
   const handleAccept = () => {
     setMarketingConsent(true);
     setShowBanner(false);
-    if (typeof window !== "undefined") {
-      window.location.reload(); 
-    }
+    if (typeof window !== "undefined") window.location.reload(); 
   };
 
   return (
     <>
-      <footer className="footer-main mt-20">
-        {/* Neon-Trennlinie oben */}
+      <footer className="footer-main">
         <div className="footer-glow-line" />
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            
-            {/* 1. BRAND SECTION: Logo & Slogan */}
-            <div className="md:col-span-2 space-y-6">
-              <Link href="/" className="inline-block transition-transform duration-300 hover:scale-105">
-                <Image 
-                  src="/logo-aikmu-transparent_white_transparent.png" 
-                  alt="AiKMU Logo" 
-                  width={140} 
-                  height={50} 
-                  className="brightness-110" 
-                  priority
-                />
-              </Link>
-              <p className="text-white/60 max-w-sm leading-relaxed text-lg">
-                KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau – 
-                klar geführt, verantwortungsvoll umgesetzt.
-              </p>
-              <div className="swiss-badge">
-                <span className="text-xl">🇨🇭</span>
-                <span className="text-[11px] uppercase tracking-widest font-medium">Swiss prompted.</span>
-              </div>
-            </div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          
+          {/* Logo - Jetzt sichtbar durch korrekten Root-Pfad */}
+          <div className="mb-10 transition-transform duration-500 hover:scale-105">
+            <Link href="/">
+              <Image 
+                src="/logo-aikmu-transparent_white_transparent.png" 
+                alt="AiKMU Logo" 
+                width={180} 
+                height={65} 
+                className="mx-auto brightness-125"
+                priority
+              />
+            </Link>
+          </div>
 
-            {/* 2. NAVIGATION SECTION: Rechtliches */}
-            <div>
-              <h4 className="footer-heading">Rechtliches</h4>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="/impressum" className="footer-link-new">
-                    Impressum
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/datenschutz" className="footer-link-new">
-                    Datenschutz
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          {/* Slogan & Swiss Badge */}
+          <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+            KI-Beratung und Umsetzung auf Schweizer Qualitätsniveau – <br className="hidden md:block" />
+            klar geführt, verantwortungsvoll umgesetzt.
+          </p>
 
-            {/* 3. KONTAKT SECTION: Adresse & Tel */}
-            <div>
-              <h4 className="footer-heading">Kontakt</h4>
-              <div className="space-y-4">
-                <div className="flex flex-col">
-                  <span className="footer-label-small">Location</span>
-                  <span className="text-white/60">4102 Binningen, Schweiz</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="footer-label-small">Direkt</span>
-                  <a href="tel:+41615251810" className="footer-link-new">
-                    Tel. +41 61 525 18 10
-                  </a>
-                  <a href="mailto:info@aikmu.ch" className="footer-link-new">
-                    info@aikmu.ch
-                  </a>
-                </div>
-              </div>
+          <div className="swiss-badge-centered">
+            <span className="text-2xl">🇨🇭</span>
+            <span className="text-[12px] uppercase tracking-[0.2em]">Swiss prompted.</span>
+          </div>
+
+          {/* Kontakt Info zentriert */}
+          <div className="flex flex-col gap-2 mb-12 text-white/50">
+            <p className="text-white/80 font-medium">4102 Binningen, Schweiz</p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-2">
+              <a href="tel:+41615251810" className="footer-link-centered">Tel. +41 61 525 18 10</a>
+              <a href="mailto:info@aikmu.ch" className="footer-link-centered">info@aikmu.ch</a>
             </div>
           </div>
 
-          {/* 4. BOTTOM BAR: Copyright & Socials */}
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-white/30 uppercase tracking-[0.3em]">
-              © 2026 AiKMU. Alle Rechte vorbehalten.
-            </p>
-            
-            <div className="flex flex-col items-center md:items-end gap-4">
-              <span className="text-[10px] uppercase tracking-widest text-white/40">Folgen Sie uns</span>
-              <div className="flex gap-6">
-                <a href="https://www.instagram.com/aikmu.ch" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
-                  <FaInstagram size={20} />
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61587440278928" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
-                  <FaFacebookF size={20} />
-                </a>
-                <a href="https://www.linkedin.com/company/aikmu/" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
-                  <FaLinkedinIn size={20} />
-                </a>
-              </div>
+          {/* Navigation / Rechtliches zentriert mit Mouse-over */}
+          <div className="flex justify-center gap-8 mb-16 border-t border-white/5 pt-8">
+            <Link href="/impressum" className="footer-link-centered">Impressum</Link>
+            <Link href="/datenschutz" className="footer-link-centered">Datenschutz</Link>
+          </div>
+
+          {/* Social Icons - Größer & Heller */}
+          <div className="space-y-4 mb-12">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-white/30">Folgen Sie uns</span>
+            <div className="flex justify-center gap-6">
+              <a href="https://www.instagram.com/aikmu.ch" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                <FaInstagram />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61587440278928" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                <FaFacebookF />
+              </a>
+              <a href="https://www.linkedin.com/company/aikmu/" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                <FaLinkedinIn />
+              </a>
             </div>
           </div>
+
+          {/* Copyright */}
+          <p className="text-[10px] text-white/20 uppercase tracking-[0.4em] pt-8">
+            © 2026 AiKMU. Precision & Intelligence.
+          </p>
         </div>
       </footer>
 
-      {/* COOKIE BANNER (Next Level Glassmorphism) */}
+      {/* Cookie Banner */}
       {showBanner && (
         <div className="fixed bottom-10 left-0 right-0 z-[100] px-4 animate-fadeInUp">
-          <div className="max-w-4xl mx-auto bg-[#020617]/95 backdrop-blur-2xl border border-white/10 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-left">
-              <h3 className="text-white font-bold text-lg mb-1">Intelligence & Cookies.</h3>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Wir optimieren unsere KI-Services stetig für Sie. Alles im Sinne von Swiss Quality.
-              </p>
-            </div>
-            <button 
-              onClick={handleAccept} 
-              className="btn-submit !mt-0 !w-auto px-10 py-3 text-sm"
-            >
+          <div className="max-w-2xl mx-auto bg-[#020617]/95 backdrop-blur-3xl border border-white/10 p-8 rounded-[40px] shadow-[0_20px_60px_rgba(0,0,0,0.8)] text-center">
+            <h3 className="text-white font-bold text-xl mb-2">Intelligence & Cookies.</h3>
+            <p className="text-white/50 text-sm mb-6">Wir optimieren unsere KI-Services stetig für Sie. Alles im Sinne von Swiss Quality.</p>
+            <button onClick={handleAccept} className="btn-submit !mt-0 !w-auto px-12">
               Akzeptieren
             </button>
           </div>
