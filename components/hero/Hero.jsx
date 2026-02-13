@@ -28,15 +28,21 @@ const Hero = () => {
     { id: 7, title: "8. Governance, Sicherheit & Datenschutz", content: "..." }
   ];
 
+  // Gemeinsamer Style für beide Buttons
+  const buttonStyle = "group relative flex items-center justify-center w-full sm:w-80 h-[64px] rounded-full border-2 border-[#00f2fe] text-white font-bold text-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.3)] hover:shadow-[0_0_25px_rgba(0,242,254,0.6)] bg-transparent overflow-hidden";
+
   return (
-    <section className="hero relative overflow-hidden bg-[#020617]" id="hero">
-      {/* Decorative Frames */}
-      <div className="hero-frame-1 animate-pulse"><Image src={hero1} alt="" /></div>
-      <div className="hero-frame-2 animate-pulse"><Image src={hero2} alt="" /></div>
-      <div className="hero-frame-3 animate-pulse"><Image src={hero3} alt="" /></div>
-      <div className="hero-frame-4 animate-pulse"><Image src={hero4} alt="" /></div>
-      <div className="hero-frame-5 animate-pulse"><Image src={hero5} alt="" /></div>
-      <div className="hero-frame-6 animate-pulse"><Image src={hero6} alt="" /></div>
+    <section className="hero relative overflow-hidden bg-[#020617] min-h-screen" id="hero">
+      
+      {/* DEKORATIVE HINTERGRUND-ELEMENTE (Wieder da!) */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="hero-frame-1 animate-pulse absolute"><Image src={hero1} alt="" /></div>
+        <div className="hero-frame-2 animate-pulse absolute"><Image src={hero2} alt="" /></div>
+        <div className="hero-frame-3 animate-pulse absolute"><Image src={hero3} alt="" /></div>
+        <div className="hero-frame-4 animate-pulse absolute"><Image src={hero4} alt="" /></div>
+        <div className="hero-frame-5 animate-pulse absolute"><Image src={hero5} alt="" /></div>
+        <div className="hero-frame-6 animate-pulse absolute"><Image src={hero6} alt="" /></div>
+      </div>
 
       <div className="container m-auto pt-[140px] pb-[100px] md:pt-[180px] xl:pt-[240px] relative z-[1] hero-content">
         <div className="w-11/12 md:w-10/12 lg:w-9/12 text-center m-auto">
@@ -57,30 +63,30 @@ const Hero = () => {
             <span className="text-white font-medium italic"> strategisch geführt, professionell umgesetzt.</span>
           </p>
 
-          {/* CTA SECTION - FIXED BUTTONS */}
+          {/* CTA SECTION - BEIDE BUTTONS IDENTISCH */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-12">
             
-            {/* Button 1: Neon Primary */}
+            {/* Button 1 */}
             <Link href="/anfrage" legacyBehavior>
-              <a className="group relative flex items-center justify-center w-full sm:w-80 h-[64px] rounded-full border-2 border-[#00f2fe] text-white font-bold text-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.3)] hover:shadow-[0_0_25px_rgba(0,242,254,0.5)] bg-transparent">
+              <a className={buttonStyle}>
                 <span className="relative z-10 flex items-center">
                   KI-Potenzial besprechen
-                  <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:text-[#00f2fe]" />
+                  <FaArrowRight className="ml-3 transition-all duration-300 group-hover:translate-x-3 group-hover:text-[#00f2fe]" />
                 </span>
-                <div className="absolute inset-0 bg-[#0a1128] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-[#00f2fe]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
             </Link>
 
-            {/* Button 2: Secondary with Hover-Neon */}
+            {/* Button 2 */}
             <a
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex items-center justify-center w-full sm:w-80 h-[64px] rounded-full border-2 border-white/30 hover:border-[#00f2fe] text-white font-bold text-lg transition-all duration-300 bg-transparent overflow-hidden"
+              className={buttonStyle}
             >
               <span className="relative z-10 flex items-center">
                 Direktes Gespräch buchen
-                <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:text-[#00f2fe]" />
+                <FaCalendarAlt className="ml-3 transition-all duration-300 group-hover:translate-x-3 group-hover:text-[#00f2fe]" />
               </span>
               <div className="absolute inset-0 bg-[#00f2fe]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
@@ -102,7 +108,7 @@ const Hero = () => {
                     <span className={`transition-transform duration-300 ${open === item.id ? 'rotate-180 text-[#00f2fe]' : 'text-white/30'}`}>▾</span>
                   </h3>
                   {open === item.id && (
-                    <div className="mt-3 text-gray-200 leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="mt-3 text-gray-200 leading-relaxed overflow-hidden">
                       <p>{item.content}</p>
                     </div>
                   )}
@@ -130,10 +136,6 @@ const Hero = () => {
             <p className="mt-4 text-base text-[#00f2fe] font-semibold uppercase tracking-wider">
               Arthur Ergen, CEO
             </p>
-          </div>
-
-          <div className="sr-only">
-            <p>AiKMU integriert Corporate KI für KMUs. Fokus auf Governance, Effizienz und Sicherheit.</p>
           </div>
 
         </div>
