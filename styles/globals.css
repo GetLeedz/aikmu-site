@@ -17,7 +17,7 @@
 }
 
 @layer components {
-  /* DER HINTERGRUND: Spotlight-Effekt */
+  /* --- HINTERGRUND & LAYOUT --- */
   .hero-spotlight-bg {
     background: radial-gradient(
       circle at 50% 35%, 
@@ -30,17 +30,14 @@
     position: relative;
   }
 
-  /* NEON GRADIENT BUTTONS */
+  /* --- NEON BUTTONS (Hero & Global) --- */
   .btn-neon-gradient {
     @apply relative flex items-center justify-center w-full sm:w-80 h-[64px] 
            rounded-full text-white font-bold text-lg transition-all duration-300 bg-[#020617]
            shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_35px_rgba(0,242,254,0.6)];
     z-index: 1;
-    border: none;
-    outline: none;
   }
 
-  /* Der Gradient-Rahmen (Pseudo-Element) */
   .btn-neon-gradient::before {
     content: "";
     @apply absolute inset-[-2px] rounded-full transition-all duration-500;
@@ -53,7 +50,7 @@
     background-position: right center;
   }
 
-  /* ACCORDION STYLES */
+  /* --- ACCORDION STYLES --- */
   .accordion-box {
     @apply relative overflow-hidden rounded-2xl border transition-all duration-500;
   }
@@ -66,41 +63,70 @@
     @apply border-[#00f2fe] bg-white/20 shadow-[0_0_40px_rgba(0,242,254,0.2)];
   }
 
-  /* Icon-Glow innerhalb des Accordions */
-  .accordion-icon-active {
-    @apply bg-[#00f2fe] text-[#020617] shadow-[0_0_15px_rgba(0,242,254,0.5)];
+  /* --- ANFRAGE-FORMULAR (Die "schöne" Seite) --- */
+  .form-container {
+    @apply max-w-2xl mx-auto p-6 sm:p-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl;
+  }
+
+  .form-input {
+    @apply w-full bg-white/5 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/30 
+           focus:outline-none focus:border-[#00f2fe] focus:bg-white/10 transition-all duration-300;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-300 mb-2 ml-1;
+  }
+
+  .btn-submit {
+    @apply w-full py-4 rounded-xl font-bold text-white transition-all duration-300
+           bg-gradient-to-r from-[#00f2fe] to-[#a855f7] hover:opacity-90 hover:scale-[1.01]
+           shadow-[0_0_20px_rgba(0,242,254,0.2)];
+  }
+
+  /* --- MOBILE OPTIMIERUNGEN --- */
+  @media (max-width: 640px) {
+    .hero-spotlight-bg {
+      background: radial-gradient(
+        circle at 50% 30%, 
+        #1a3a6d 0%, 
+        #020617 70%
+      );
+    }
+    
+    .btn-neon-gradient {
+      @apply h-[56px] text-base px-6;
+    }
+
+    .form-container {
+      @apply p-5 rounded-2xl;
+    }
+
+    h1 {
+      @apply text-3xl leading-tight !important;
+    }
   }
 }
 
 @layer utilities {
-  /* Text-Glow für Headline */
   .text-glow-neon {
-    text-shadow: 0 0 15px rgba(0, 242, 254, 0.5), 0 0 5px rgba(168, 85, 247, 0.3);
+    text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
   }
 
-  /* Animation für sanftes Einblenden der Accordion-Inhalte */
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fadeIn {
-    animation: fadeInDown 0.4s ease-out forwards;
-  }
-
-  /* Custom Pulse für Hintergrund-Icons */
   .animate-pulse-slow {
     animation: pulseCustom 8s ease-in-out infinite;
   }
 
   @keyframes pulseCustom {
-    0%, 100% { opacity: 0.1; transform: scale(1); }
-    50% { opacity: 0.3; transform: scale(1.05); }
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(1.05); }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
