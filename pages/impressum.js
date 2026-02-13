@@ -4,30 +4,32 @@ import Footer from "../components/footer/Footer";
 
 const Impressum = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Impressum – AiKMU</title>
         <meta
           name="description"
-          content="Impressum und rechtliche Angaben der AiKMU. Kontaktinformationen, Handelsregister, MWST, Bankverbindung und rechtliche Hinweise."
+          content="Impressum der AiKMU – rechtliche Angaben, Handelsregister, MWST, Kontaktinformationen und Haftungshinweise."
         />
       </Head>
 
       <main className="min-h-screen bg-transparent text-white">
         <NavBar />
 
-        <section className="container m-auto px-4 pt-[160px] pb-16 max-w-3xl">
-          <h1 className="heading-2 mb-8">Impressum</h1>
+        <section className="container m-auto px-4 pt-[160px] pb-20 max-w-4xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            Impressum
+          </h1>
 
-          <div className="space-y-8 text-base text-white leading-relaxed">
+          <div className="space-y-12 text-white/90 leading-relaxed">
 
             {/* Verantwortlich */}
-            <div>
-              <h2 className="font-semibold mb-2">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
                 Verantwortlich für den Inhalt dieser Website
               </h2>
               <p>
-                AiKMU<br />
+                <strong>AiKMU</strong><br />
                 GetLeedz GmbH<br />
                 4102 Binningen<br />
                 Schweiz
@@ -35,8 +37,10 @@ const Impressum = () => {
             </div>
 
             {/* Kontakt */}
-            <div>
-              <h2 className="font-semibold mb-2">Kontakt</h2>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                Kontakt
+              </h2>
               <p>
                 E-Mail:{" "}
                 <a href="mailto:info@aikmu.ch" className="neon-link">
@@ -48,77 +52,69 @@ const Impressum = () => {
                   +41&nbsp;61&nbsp;525&nbsp;18&nbsp;10
                 </a>
                 <br />
-                Web:{" "}
+                Website:{" "}
                 <a
                   href="https://www.aikmu.ch"
-                  className="neon-link"
                   target="_blank"
                   rel="noreferrer"
+                  className="neon-link"
                 >
                   www.aikmu.ch
                 </a>
               </p>
             </div>
 
-            {/* Unternehmensform */}
-            <div>
-              <h2 className="font-semibold mb-2">Unternehmensform</h2>
+            {/* Unternehmensdaten */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                Unternehmensdaten
+              </h2>
               <p>
-                GetLeedz GmbH<br />
-                Gesellschaft mit beschränkter Haftung (GmbH) nach Schweizer Recht.
-              </p>
-            </div>
-
-            {/* Handelsregister */}
-            <div>
-              <h2 className="font-semibold mb-2">Handelsregistereintrag</h2>
-              <p>
-                Eingetragen im Handelsregister des Kantons Basel-Landschaft<br />
-                Handelsregister-Nummer: CHE-339.044.174
-              </p>
-            </div>
-
-            {/* MWST */}
-            <div>
-              <h2 className="font-semibold mb-2">Mehrwertsteuer (MWST)</h2>
-              <p>
-                MWST-Nummer: CHE-339.044.174
+                <strong>Gesellschaft:</strong> GetLeedz GmbH<br />
+                <strong>Rechtsform:</strong> Gesellschaft mit beschränkter Haftung (GmbH)<br />
+                <strong>Handelsregister:</strong> Kanton Basel-Landschaft<br />
+                <strong>Handelsregister-Nummer:</strong> CHE-339.044.174<br />
+                <strong>MWST-Nummer:</strong> CHE-339.044.174
               </p>
             </div>
 
             {/* Bankverbindung */}
-            <div>
-              <h2 className="font-semibold mb-2">Bankverbindung</h2>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                Bankverbindung
+              </h2>
               <p>
                 Bank Cler AG<br />
                 Aeschenplatz 3<br />
-                4052 Basel, Schweiz<br />
-                BIC / SWIFT: BCLRCHBBXXX<br />
-                IBAN: CH60&nbsp;0844&nbsp;0258&nbsp;4872&nbsp;6200&nbsp;1
+                4052 Basel, Schweiz<br /><br />
+                <strong>BIC / SWIFT:</strong> BCLRCHBBXXX<br />
+                <strong>IBAN:</strong> CH60&nbsp;0844&nbsp;0258&nbsp;4872&nbsp;6200&nbsp;1
               </p>
             </div>
 
             {/* Haftung */}
-            <div>
-              <h2 className="font-semibold mb-2">Haftungsausschluss</h2>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                Haftungsausschluss
+              </h2>
               <p>
                 Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt.
-                Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
-                übernehmen wir jedoch keine Gewähr. Haftungsansprüche gegen den
-                Betreiber wegen Schäden materieller oder immaterieller Art sind
-                ausgeschlossen, soweit dies gesetzlich zulässig ist.
+                Für die Richtigkeit, Vollständigkeit und Aktualität übernehmen
+                wir jedoch keine Gewähr. Haftungsansprüche sind – soweit gesetzlich
+                zulässig – ausgeschlossen.
               </p>
             </div>
 
             {/* Urheberrecht */}
-            <div>
-              <h2 className="font-semibold mb-2">Urheberrechte</h2>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                Urheberrechte
+              </h2>
               <p>
                 Die Inhalte und Werke auf dieser Website unterliegen dem
-                schweizerischen Urheberrecht. Beiträge Dritter sind als solche
-                gekennzeichnet. Die Vervielfältigung, Bearbeitung oder Verbreitung
-                ausserhalb der Grenzen des Urheberrechts bedarf der vorherigen
-                schriftlichen Zustimmung des jeweiligen Rechteinhabers.
+                schweizerischen Urheberrecht. Eine Vervielfältigung oder
+                Bearbeitung ausserhalb der gesetzlichen Grenzen bedarf der
+                vorherigen schriftlichen Zustimmung des jeweiligen Rechteinhabers.
               </p>
             </div>
 
@@ -127,7 +123,7 @@ const Impressum = () => {
 
         <Footer />
       </main>
-    </div>
+    </>
   );
 };
 
