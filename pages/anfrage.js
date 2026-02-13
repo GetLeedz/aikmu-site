@@ -83,7 +83,6 @@ export default function Anfrage() {
 
       <main className="anfrage-section relative min-h-screen pt-[160px] pb-[100px] overflow-hidden">
 
-        {/* Background Icons */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
           <div className="absolute top-[10%] left-[5%] animate-pulse-slow">
             <Image src={hero1} alt="" width={150} height={150} />
@@ -105,7 +104,7 @@ export default function Anfrage() {
         <div className="container mx-auto max-w-3xl px-4 relative z-10">
 
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white fade-in-up">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
               Anfrage für ein <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] to-[#a855f7]">
                 unverbindliches Gespräch
@@ -113,7 +112,7 @@ export default function Anfrage() {
             </h1>
           </div>
 
-          <div className="form-container fade-in-up">
+          <div className="form-container">
             <form onSubmit={handleSubmit} className="space-y-6">
 
               <input
@@ -148,33 +147,41 @@ export default function Anfrage() {
                 ))}
               </div>
 
-              {/* BRANCHE – VOLLSTÄNDIG */}
+              {/* BRANCHE MIT CUSTOM ARROW */}
               <div>
                 <label className="form-label">Branche</label>
-                <select
-                  name="industry"
-                  required
-                  className="form-input"
-                  value={formData.industry}
-                  onChange={handleChange}
-                  disabled={disabled}
-                >
-                  <option value="">Bitte wählen ...</option>
-                  <option>Gastronomie / Restaurant</option>
-                  <option>Detailhandel / Retail</option>
-                  <option>Versicherung / Finanzdienstleister</option>
-                  <option>Immobilien / Makler / Verwaltung</option>
-                  <option>Fitness / Gesundheit</option>
-                  <option>Beauty / Kosmetik</option>
-                  <option>Agentur / Marketing</option>
-                  <option>Beratung / Coaching</option>
-                  <option>IT / Software / SaaS</option>
-                  <option>Industrie / Produktion</option>
-                  <option>Dienstleistungen (allgemein)</option>
-                  <option>Öffentliche Hand / Bildung</option>
-                  <option>B2B / andere KMU</option>
-                  <option>Andere Branche</option>
-                </select>
+
+                <div className="relative">
+                  <select
+                    name="industry"
+                    required
+                    value={formData.industry}
+                    onChange={handleChange}
+                    disabled={disabled}
+                    className="form-input appearance-none pr-16"
+                  >
+                    <option value="">Bitte wählen ...</option>
+                    <option>Gastronomie / Restaurant</option>
+                    <option>Detailhandel / Retail</option>
+                    <option>Versicherung / Finanzdienstleister</option>
+                    <option>Immobilien / Makler / Verwaltung</option>
+                    <option>Fitness / Gesundheit</option>
+                    <option>Beauty / Kosmetik</option>
+                    <option>Agentur / Marketing</option>
+                    <option>Beratung / Coaching</option>
+                    <option>IT / Software / SaaS</option>
+                    <option>Industrie / Produktion</option>
+                    <option>Dienstleistungen (allgemein)</option>
+                    <option>Öffentliche Hand / Bildung</option>
+                    <option>B2B / andere KMU</option>
+                    <option>Andere Branche</option>
+                  </select>
+
+                  {/* Custom Arrow */}
+                  <div className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-white text-2xl">
+                    ▾
+                  </div>
+                </div>
               </div>
 
               <div>
