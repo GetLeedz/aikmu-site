@@ -1,125 +1,106 @@
-/* ================= FONT & TAILWIND ================= */
-@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ================= ROOT & GLOBAL ================= */
 :root {
   --neon-cyan: #00f2fe;
-  --dark-navy: #020617;
+  --neon-purple: #a855f7;
+  --bg-dark: #020617;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "Chakra Petch", sans-serif;
-  background: 
-    radial-gradient(1200px circle at 15% 25%, rgba(0, 242, 254, 0.15), transparent 65%),
-    radial-gradient(1000px circle at 85% 35%, rgba(0, 150, 255, 0.12), transparent 65%),
-    radial-gradient(1100px circle at 50% 75%, rgba(30, 64, 175, 0.15), transparent 70%),
-    linear-gradient(180deg, #020617 0%, #08122d 50%, #020617 100%);
-  color: white;
-  min-height: 100vh;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  background-attachment: fixed;
+@layer base {
+  body {
+    @apply bg-[#020617] text-white antialiased;
+    margin: 0;
+    padding: 0;
+  }
 }
 
-/* ================= NAVIGATION & GLASS-LOOK ================= */
-header, nav {
-  background: rgba(2, 6, 23, 0.45) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+@layer components {
+  /* DER HINTERGRUND: Spotlight-Effekt */
+  .hero-spotlight-bg {
+    background: radial-gradient(
+      circle at 50% 35%, 
+      #1a3a6d 0%, 
+      #061633 45%, 
+      #020617 100%
+    );
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+
+  /* NEON GRADIENT BUTTONS */
+  .btn-neon-gradient {
+    @apply relative flex items-center justify-center w-full sm:w-80 h-[64px] 
+           rounded-full text-white font-bold text-lg transition-all duration-300 bg-[#020617]
+           shadow-[0_0_20px_rgba(0,242,254,0.3)] hover:shadow-[0_0_35px_rgba(0,242,254,0.6)];
+    z-index: 1;
+    border: none;
+    outline: none;
+  }
+
+  /* Der Gradient-Rahmen (Pseudo-Element) */
+  .btn-neon-gradient::before {
+    content: "";
+    @apply absolute inset-[-2px] rounded-full transition-all duration-500;
+    background: linear-gradient(90deg, #00f2fe, #a855f7, #00f2fe);
+    background-size: 200% auto;
+    z-index: -1;
+  }
+
+  .btn-neon-gradient:hover::before {
+    background-position: right center;
+  }
+
+  /* ACCORDION STYLES */
+  .accordion-box {
+    @apply relative overflow-hidden rounded-2xl border transition-all duration-500;
+  }
+  
+  .accordion-box-inactive {
+    @apply border-white/30 bg-[#020617]/40 hover:border-white/60 hover:bg-[#020617]/70;
+  }
+
+  .accordion-box-active {
+    @apply border-[#00f2fe] bg-white/20 shadow-[0_0_40px_rgba(0,242,254,0.2)];
+  }
+
+  /* Icon-Glow innerhalb des Accordions */
+  .accordion-icon-active {
+    @apply bg-[#00f2fe] text-[#020617] shadow-[0_0_15px_rgba(0,242,254,0.5)];
+  }
 }
 
-/* ================= BACKGROUND ICONS (COMPACT) ================= */
-[class^="hero-frame-"] {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-  filter: hue-rotate(160deg) brightness(1.1);
-}
+@layer utilities {
+  /* Text-Glow für Headline */
+  .text-glow-neon {
+    text-shadow: 0 0 15px rgba(0, 242, 254, 0.5), 0 0 5px rgba(168, 85, 247, 0.3);
+  }
 
-.hero-frame-1 { width: 130px; top: 16%; left: 6%; transform: rotate(-24deg); }
-.hero-frame-2 { width: 140px; top: 38%; left: 9%; }
-.hero-frame-3 { width: 210px; top: 60%; left: 3%; transform: rotate(-18deg); }
-.hero-frame-4 { width: 190px; top: 14%; right: 2%; transform: rotate(19deg); }
-.hero-frame-5 { width: 150px; top: 42%; right: 9%; transform: rotate(11deg); }
-.hero-frame-6 { width: 220px; top: 70%; right: 5%; }
+  /* Animation für sanftes Einblenden der Accordion-Inhalte */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-/* ================= FORMS & INPUTS ================= */
-form.space-y-6 {
-  background: rgba(5, 8, 22, 0.6) !important;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-}
+  .animate-fadeIn {
+    animation: fadeInDown 0.4s ease-out forwards;
+  }
 
-.dynamic-neon-wrapper {
-  position: relative;
-  padding: 1.5px;
-  border-radius: 14px;
-  background: linear-gradient(90deg, #00f2fe, #4facfe, #00f2fe);
-  overflow: hidden;
-  display: flex;
-}
+  /* Custom Pulse für Hintergrund-Icons */
+  .animate-pulse-slow {
+    animation: pulseCustom 8s ease-in-out infinite;
+  }
 
-.dynamic-neon-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background: conic-gradient(from 0deg, #00f2fe, #4facfe, #00f2fe, #00f2fe);
-  animation: rotateNeon 6s linear infinite;
-}
-
-.neon-input, .neon-select, .neon-textarea {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  background: #050816 !important;
-  color: white !important;
-  padding: 16px 20px;
-  border: none !important;
-  border-radius: 13px;
-}
-
-/* ================= BUTTONS & NEON ================= */
-.neon-border {
-  display: inline-flex;
-  padding: 2px;
-  border-radius: 9999px;
-  background: linear-gradient(120deg, #00f2fe, #00c6ff, #4facfe, #00f2fe);
-  background-size: 300% 300%;
-  animation: neonGradient 4s linear infinite;
-}
-
-.neon-border-inner {
-  padding: 1rem;
-  border-radius: 9999px;
-  background: #050816;
-  color: white;
-  font-weight: 700;
-  transition: background 0.3s ease;
-}
-
-.neon-border:hover .neon-border-inner {
-  background: #08122d;
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes rotateNeon { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes neonGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
-
-/* ================= MOBILE ================= */
-@media (max-width: 640px) {
-  h1 { letter-spacing: -0.02em !important; line-height: 1.2 !important; }
-  [class^="hero-frame-"] { opacity: 0.2; transform: scale(0.7); }
+  @keyframes pulseCustom {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.05); }
+  }
 }
