@@ -202,7 +202,7 @@ Eine KI braucht keinen Ersatz.
 
             <Link href="/anfrage">
               <a className="home-btn group">
-                KI-Potenzial besprechen
+                KI-Potenzial analysieren
                 <FaArrowRight className="ml-3 transition-transform duration-300 group-hover:translate-x-2" />
               </a>
             </Link>
@@ -213,7 +213,7 @@ Eine KI braucht keinen Ersatz.
               rel="noopener noreferrer"
               className="home-btn group"
             >
-              Direktes Gespräch buchen
+              Rückruf vereinbaren
               <FaCalendarAlt className="ml-3 transition-transform duration-300 group-hover:translate-x-2" />
             </a>
 
