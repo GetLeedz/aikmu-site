@@ -90,13 +90,13 @@ export default function Anfrage() {
 
         <div className="container mx-auto max-w-3xl px-4 relative z-10">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white fade-in-up">
               Anfrage für ein <br className="hidden md:block" /> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f2fe] to-[#a855f7]">unverbindliches Gespräch</span>
             </h1>
           </div>
 
-          <div className="form-container">
+          <div className="form-container fade-in-up">
             <form onSubmit={handleSubmit} className="space-y-4">
               <input type="text" name="website" value={formData.website} onChange={handleChange} className="hidden" tabIndex="-1" />
 
@@ -131,9 +131,15 @@ export default function Anfrage() {
                   <option className="text-gray-900">Detailhandel / Retail</option>
                   <option className="text-gray-900">Versicherung / Finanzdienstleister</option>
                   <option className="text-gray-900">Immobilien / Makler / Verwaltung</option>
+                  <option className="text-gray-900">Fitness / Gesundheit</option>
+                  <option className="text-gray-900">Beauty / Kosmetik</option>
                   <option className="text-gray-900">Agentur / Marketing</option>
+                  <option className="text-gray-900">Beratung / Coaching</option>
                   <option className="text-gray-900">IT / Software / SaaS</option>
                   <option className="text-gray-900">Industrie / Produktion</option>
+                  <option className="text-gray-900">Dienstleistungen (allgemein)</option>
+                  <option className="text-gray-900">Öffentliche Hand / Bildung</option>
+                  <option className="text-gray-900">B2B / andere KMU</option>
                   <option className="text-gray-900">Andere Branche</option>
                 </select>
               </div>
@@ -150,7 +156,7 @@ export default function Anfrage() {
                 )}
               </div>
 
-              {status === "success" && <div className="badge-success">✅ Anfrage erfolgreich gesendet!</div>}
+              {status === "success" && <div className="badge-success">✅ Vielen Dank! Wir haben Ihre Anfrage erhalten.</div>}
               {status === "error" && <div className="badge-error">⚠️ {errorMsg}</div>}
 
               <button type="submit" disabled={disabled} className="btn-submit">
