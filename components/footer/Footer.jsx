@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { setMarketingConsent } from "../lib/consent";
-
-// WICHTIG: Pfad zum Original-Logo prüfen
-import Logo from "../public/images/logo/logo.png"; 
+import { setMarketingConsent } from "../../lib/consent";
 
 const Footer = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -30,21 +27,21 @@ const Footer = () => {
   return (
     <>
       <footer className="footer-main mt-20">
-        {/* Die leuchtende Trennlinie aus der globals.css */}
         <div className="footer-glow-line" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             
-            {/* BRAND SECTION: Logo & Slogan */}
+            {/* 1. BRAND SECTION */}
             <div className="md:col-span-2 space-y-6">
               <Link href="/" className="inline-block transition-transform duration-300 hover:scale-105">
                 <Image 
-                  src={Logo} 
+                  src="/logo-aikmu-transparent_white_transparent.png" 
                   alt="AiKMU Logo" 
                   width={140} 
                   height={50} 
                   className="brightness-110" 
+                  priority
                 />
               </Link>
               <p className="text-white/60 max-w-sm leading-relaxed text-lg">
@@ -57,7 +54,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* NAVIGATION: Rechtliches mit Mouse-Over Effekt */}
+            {/* 2. NAVIGATION SECTION */}
             <div>
               <h4 className="footer-heading">Rechtliches</h4>
               <ul className="space-y-4">
@@ -74,7 +71,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* KONTAKT SECTION */}
+            {/* 3. KONTAKT SECTION */}
             <div>
               <h4 className="footer-heading">Kontakt</h4>
               <div className="space-y-4">
@@ -85,7 +82,7 @@ const Footer = () => {
                 <div className="flex flex-col">
                   <span className="footer-label-small">Direkt</span>
                   <a href="tel:+41615251810" className="footer-link-new">
-                    +41 61 525 18 10
+                    Tel. +41 61 525 18 10
                   </a>
                   <a href="mailto:info@aikmu.ch" className="footer-link-new">
                     info@aikmu.ch
@@ -95,43 +92,31 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* BOTTOM BAR: Copyright & Socials */}
+          {/* 4. BOTTOM BAR */}
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[10px] text-white/30 uppercase tracking-[0.3em]">
-              © 2026 AiKMU. Precision & Intelligence.
+              © 2026 AiKMU. Alle Rechte vorbehalten.
             </p>
             
-            <div className="flex gap-4">
-              <a 
-                href="https://www.linkedin.com/company/aikmu/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="footer-social-icon"
-              >
-                <FaLinkedinIn size={18} />
-              </a>
-              <a 
-                href="https://www.instagram.com/aikmu.ch" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="footer-social-icon"
-              >
-                <FaInstagram size={18} />
-              </a>
-              <a 
-                href="https://www.facebook.com/profile.php?id=61587440278928" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="footer-social-icon"
-              >
-                <FaFacebookF size={18} />
-              </a>
+            <div className="flex flex-col items-center md:items-end gap-4">
+              <span className="text-[10px] uppercase tracking-widest text-white/40">Folgen Sie uns</span>
+              <div className="flex gap-6">
+                <a href="https://www.instagram.com/aikmu.ch" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                  <FaInstagram size={20} />
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61587440278928" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                  <FaFacebookF size={20} />
+                </a>
+                <a href="https://www.linkedin.com/company/aikmu/" target="_blank" rel="noopener noreferrer" className="footer-social-icon">
+                  <FaLinkedinIn size={20} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* COOKIE BANNER: Passend zum neuen Style */}
+      {/* COOKIE BANNER */}
       {showBanner && (
         <div className="fixed bottom-10 left-0 right-0 z-[100] px-4 animate-fadeInUp">
           <div className="max-w-4xl mx-auto bg-[#020617]/95 backdrop-blur-2xl border border-white/10 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-6">
