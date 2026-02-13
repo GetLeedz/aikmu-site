@@ -8,6 +8,7 @@
   --bg-dark: #020617;
 }
 
+/* ================= BASE ================= */
 @layer base {
   body {
     @apply bg-[#020617] text-white antialiased;
@@ -16,35 +17,109 @@
   }
 }
 
+/* ================= COMPONENTS ================= */
 @layer components {
-  /* --- 1. STARTSEITE (HOME) REPARATUR --- */
+
+  /* ---------- HERO BACKGROUND ---------- */
   .hero-spotlight-bg {
     background: radial-gradient(circle at 50% 35%, #1a3a6d 0%, #061633 45%, #020617 100%);
     @apply min-h-screen w-full relative;
   }
 
-  /* REPARATUR: Buttons (KI-Potenzial besprechen) */
-  .home-btn-link {
-    @apply flex items-center gap-2 text-white hover:text-[#00f2fe] transition-all duration-300 font-medium cursor-pointer py-2;
+  /* ================= HOME CTA BUTTONS ================= */
+
+  .home-cta-row {
+    @apply flex flex-col sm:flex-row justify-center items-center gap-6 mt-16;
+  }
+
+  .btn-neon-gradient {
+    position: relative;
+    isolation: isolate;
+    text-decoration: none;
+
     display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px 36px;
+    border-radius: 9999px;
+
+    font-weight: 700;
+    font-size: 16px;
+
+    color: white !important;
+
+    background: rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: all 0.3s ease;
   }
 
-  /* REPARATUR: Accordions & Texte */
-  /* Dies stellt sicher, dass Texte beim Aufklappen weiß und sauber erscheinen */
-  .accordion-item {
-    @apply border-b border-white/10;
+  /* Neon Frame */
+  .btn-neon-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    z-index: -1;
+
+    background: linear-gradient(
+      90deg,
+      #00f2fe,
+      #18ffc9,
+      #00f2fe
+    );
   }
 
-  .accordion-content {
-    @apply overflow-hidden transition-all duration-300;
+  /* Dark inner overlay */
+  .btn-neon-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 9999px;
+    z-index: -1;
+
+    background: #020617;
   }
 
-  .accordion-text {
-    @apply text-white/80 leading-relaxed py-4 text-base;
-    display: block !important;
+  .btn-neon-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(0,242,254,0.4),
+      0 0 60px rgba(24,255,201,0.25);
   }
 
-  /* --- 2. ANFRAGE FORMULAR --- */
+  /* Secondary softer */
+  .btn-neon-gradient.secondary::before {
+    opacity: 0.6;
+    background: linear-gradient(
+      90deg,
+      rgba(0,242,254,0.8),
+      rgba(168,85,247,0.6),
+      rgba(0,242,254,0.8)
+    );
+  }
+
+  /* ================= ACCORDION ================= */
+
+  .accordion-box {
+    @apply relative border border-white/10 rounded-2xl overflow-hidden transition-all duration-300;
+  }
+
+  .accordion-box-active {
+    @apply bg-white/5;
+  }
+
+  .accordion-box-inactive {
+    @apply bg-transparent;
+  }
+
+  /* ================= FORM ================= */
+
   .form-container {
     @apply max-w-2xl mx-auto p-6 sm:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20;
     background: rgba(255, 255, 255, 0.12); 
@@ -58,7 +133,8 @@
            shadow-[0_10px_25px_rgba(0,242,254,0.4)];
   }
 
-  /* --- 3. ISOLIERTER FOOTER (Kein Einfluss auf Home) --- */
+  /* ================= FOOTER ================= */
+
   .centered-footer-main {
     @apply relative bg-[#020617] pt-20 pb-12 overflow-hidden border-t border-white/5 flex flex-col items-center text-center;
   }
@@ -78,7 +154,6 @@
     @apply text-white/60 hover:text-[#00f2fe] transition-all duration-300 text-sm relative pb-1 inline-block;
   }
 
-  /* Mouse-over Linie nur für Footer */
   .centered-footer-link::after {
     content: '';
     @apply absolute left-1/2 bottom-0 w-0 h-px bg-[#00f2fe] transition-all duration-300 -translate-x-1/2;
@@ -93,16 +168,17 @@
            rounded-full border border-white/10 w-fit mb-8;
   }
 
-  /* Spezifischer Button für Cookie Banner im Footer */
   .footer-cookie-btn {
     @apply bg-gradient-to-r from-[#00f2fe] to-[#a855f7] px-10 py-3 rounded-xl text-white font-bold text-sm transition-transform hover:scale-105;
   }
 }
 
+/* ================= UTILITIES ================= */
 @layer utilities {
   .animate-fadeInUp {
     animation: fadeInUp 0.8s ease-out forwards;
   }
+
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
